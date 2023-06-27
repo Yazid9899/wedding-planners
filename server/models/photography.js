@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       Photography.hasMany(models.Product);
     }
   }
-  photography.init(
+  Photography.init(
     {
       name: DataTypes.STRING,
       price: DataTypes.INTEGER,
