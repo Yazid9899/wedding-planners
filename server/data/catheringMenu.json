@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Asian Food",
+        "description": "Asian cuisine is local, authentic, and traditional. It is rich in flavor and taste from the herbs and spices used in the preparations. Asian cuisine features multicultural dishes from diverse cultures and origins from southeast Asia, Europe, America, and around the globe.",
+        "price": 30000
+    },
+    {
+        "name": "Western Food",
+        "description": "In essence, Western Cuisine or Western Food derives its base from French cuisine. Auguste Escoffier's modernisation of classical French cooking techniques serves as the base of the culinary world today.",
+        "price": 25000
+    },
+    {
+        "name": "European Food",
+        "description": "European food also tends to have more meats flour and starchy ingredients. Bread, beef Lamb, noodles, butter potatoes are found in European dishes but are hardly seen in other countries. Salad is also a major part of the cuisine, as is the ordered meal.",
+        "price": 30000
+    }
+]

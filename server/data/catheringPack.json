@@ -1,0 +1,17 @@
+[
+    {
+        "quentity": 100
+    },
+    {
+        "quentity": 200,
+        "price": 15000000
+    },
+    {
+        "quentity": 300,
+        "price": 18000000
+    },
+    {
+        "quentity": 400,
+        "price": 20000000
+    }
+]
