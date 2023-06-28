@@ -1,0 +1,21 @@
+[{
+  "name": "Paket 1",
+  "price": 200000,
+  "description": "Contrast vasogram"
+}, {
+  "name": "Paket 2",
+  "price": 25000,
+  "description": "Other diagnostic procedures on bone marrow"
+}, {
+  "name": "Paket 3",
+  "price": 30000,
+  "description": "Other diagnostic procedures on urethra and periurethral tissue"
+}, {
+  "name": "Paket 4",
+  "price": 40000,
+  "description": "Closed [needle] biopsy of tongue"
+}, {
+  "name": "Paket 5",
+  "price": 50000,
+  "description": "Osteoclasis, femur"
+}]

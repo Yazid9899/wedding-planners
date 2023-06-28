@@ -1,0 +1,21 @@
+[{
+  "name": "Zontrax",
+  "CatheringMenuId": 1,
+  "description": "Ligation and stripping of varicose veins, other vessels of head and neck"
+}, {
+  "name": "Konklux",
+  "CatheringMenuId": 1,
+  "description": "Endarterectomy, lower limb arteries"
+}, {
+  "name": "Tres-Zap",
+  "CatheringMenuId": 1,
+  "description": "Repair of rectocele with graft or prosthesis"
+}, {
+  "name": "Voyatouch",
+  "CatheringMenuId": 1,
+  "description": "Hair transplant"
+}, {
+  "name": "Solarbreeze",
+  "CatheringMenuId": 1,
+  "description": "Laparoscopic ablation of renal lesion or tissue"
+}]

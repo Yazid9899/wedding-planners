@@ -1,0 +1,121 @@
+[{
+  "name": "Vitz",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 50000000,
+  "capacity": 600,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Linkbridge",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 70000000,
+  "capacity": 800,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Aimbu",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 50000000,
+  "capacity": 600,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Voolith",
+  "location":"(-6.2209389, 106.7822320)",
+  "price": 80000000,
+  "capacity": 900,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Brainbox",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 70000000,
+  "capacity": 800,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Gevee",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 750000000,
+  "capacity": 700,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Thoughtbeat",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 750000000,
+  "capacity": 700,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Browsezoom",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 750000000,
+  "capacity": 700,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Flashset",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 750000000,
+  "capacity": 700,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Mynte",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 750000000,
+  "capacity": 800,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Wikizz",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 750000000,
+  "capacity": 700,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Gabtype",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 750000000,
+  "capacity": 600,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Livepath",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 750000000,
+  "capacity": 500,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Katz",
+  "location": "(-6.2209389, 106.7822320)",
+  "price":750000000,
+  "capacity": 600,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Skippad",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 750000000,
+  "capacity": 700,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Gigazoom",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 80000000,
+  "capacity": 800,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Centidel",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 80000000,
+  "capacity": 700,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Chatterpoint",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 80000000,
+  "capacity": 600,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Lazzy",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 80000000,
+  "capacity": 700,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}, {
+  "name": "Podcat",
+  "location": "(-6.2209389, 106.7822320)",
+  "price": 80000000,
+  "capacity": 800,
+  "description": "Fluoroscopy of Left Pulmonary Vein using Other Contrast, Guidance"
+}]

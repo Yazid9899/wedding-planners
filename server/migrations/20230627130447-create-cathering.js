@@ -1,23 +1,16 @@
-"use strict";
+'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Catherings", {
+    await queryInterface.createTable('Catherings', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING,
-      },
-      CatheringPackId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "CatheringPacks",
-          key: "id",
-        },
+        type: Sequelize.STRING
       },
       CatheringMenuId: {
         type: Sequelize.INTEGER,
@@ -26,17 +19,20 @@ module.exports = {
           key: "id",
         },
       },
+      description: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Catherings");
-  },
+    await queryInterface.dropTable('Catherings');
+  }
 };

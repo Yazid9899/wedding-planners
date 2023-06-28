@@ -1,0 +1,21 @@
+[{
+  "name": "Jaya Photogarphy",
+  "price": 20000000,
+  "description": "Contrast vasogram"
+}, {
+  "name": "Berkah Photogarpyh",
+  "price": 2500000,
+  "description": "Other diagnostic procedures on bone marrow"
+}, {
+  "name": "Photogarpyh ajah",
+  "price": 3000000,
+  "description": "Other diagnostic procedures on urethra and periurethral tissue"
+}, {
+  "name": "Sinar Mulya",
+  "price": 4000000,
+  "description": "Closed [needle] biopsy of tongue"
+}, {
+  "name": "Jaya Abadi",
+  "price": 5000000,
+  "description": "Osteoclasis, femur"
+}]
