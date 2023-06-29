@@ -259,6 +259,7 @@ import HomeScreen from "./components/HomeScreen";
 import FilterScreen from "./components/FilterScreen";
 import LoginPage from "./components/LoginPage";
 import ChatScreen from "./components/ChatScreen";
+import HomeStack from "./screen/HomeStack";
 
 // Define sample data for EO and venue
 
@@ -296,7 +297,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
