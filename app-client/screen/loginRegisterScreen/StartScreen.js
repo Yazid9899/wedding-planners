@@ -4,6 +4,15 @@ import Logo from "../../components/loginRegisterComponent/Logo";
 import Header from "../../components/loginRegisterComponent/Header";
 import Button from "../../components/loginRegisterComponent/Button";
 import Paragraph from "../../components/loginRegisterComponent/Paragraph";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  FlatList,
+  ViewPropTypes,
+} from "react-native";
 
 export default function StartScreen({navigation}) {
   return (
@@ -21,11 +30,12 @@ export default function StartScreen({navigation}) {
         Login
       </Button>
       <Button
-        style={{color: "#00bce1"}}
+        // style={{color: "#00bce1"}}
+        // color="#00bce1"
         mode="outlined"
         onPress={() => navigation.navigate("RegisterScreen")}
       >
-        Sign Up
+        <Text style={{color: "#00bce1"}}>Sign Up</Text>
       </Button>
     </Background>
   );
