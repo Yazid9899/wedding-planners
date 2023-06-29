@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   BuildingPhoto.init(
     {
-      buildingId: DataTypes.INTEGER,
+      BuildingId: DataTypes.INTEGER,
       imageUrl: DataTypes.STRING,
     },
     {

@@ -2,9 +2,7 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class CatheringPack extends Model {
-    static associate(models) {
-      CatheringPack.hasMany(models.Cathering);
-    }
+    static associate(models) {}
   }
   CatheringPack.init(
     {
