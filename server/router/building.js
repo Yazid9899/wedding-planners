@@ -4,5 +4,6 @@ const router = express.Router();
 
 router.get("/", BuildingControllers.getAllBuildings);
 router.get("/:id", BuildingControllers.getBuildingById);
+router.post("/", BuildingControllers.createBuilding);
 
 module.exports = router;

@@ -3,11 +3,7 @@ class CatheringController {
   static async getAllCathering(req, res, next) {
     try {
       const data = await Cathering.findAll({
-        include: [
-          {
-            model: CatheringMenu,
-          },
-        ],
+        include: [{ model: CatheringMenu }],
       });
       res.status(200).json({
         statuscode: 200,

@@ -4,15 +4,9 @@ class ProductController {
     try {
       const data = await Product.findAll({
         include: [
-          {
-            model: Photography,
-          },
-          {
-            model: Cathering,
-          },
-          {
-            model: Building,
-          },
+          { model: Photography },
+          { model: Cathering },
+          { model: Building },
         ],
         order: [["id", "ASC"]],
       });
