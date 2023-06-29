@@ -4,15 +4,7 @@ import Logo from "../../components/loginRegisterComponent/Logo";
 import Header from "../../components/loginRegisterComponent/Header";
 import Button from "../../components/loginRegisterComponent/Button";
 import Paragraph from "../../components/loginRegisterComponent/Paragraph";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Image,
-  FlatList,
-  ViewPropTypes,
-} from "react-native";
+import {Text} from "react-native";
 
 export default function StartScreen({navigation}) {
   return (

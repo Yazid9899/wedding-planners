@@ -3,8 +3,10 @@ import Background from "../../components/loginRegisterComponent/Background";
 import Logo from "../../components/loginRegisterComponent/Logo";
 import TextInput from "../../components/loginRegisterComponent/TextInput";
 import Button from "../../components/loginRegisterComponent/Button";
+import BackButton from "../../components/loginRegisterComponent/BackButton";
 
 // import {emailValidator} from "../helpers/emailValidator";
+
 export default function ResetPasswordScreen({navigation}) {
   // const [email, setEmail] = useState({value: "", error: ""});
 
