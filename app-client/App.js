@@ -249,9 +249,9 @@ import {
   FlatList,
   ViewPropTypes,
 } from "react-native";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {NavigationContainer} from "@react-navigation/native";
-import {Ionicons} from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 import Carousel from "react-native-snap-carousel";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -260,6 +260,7 @@ import FilterScreen from "./components/FilterScreen";
 import LoginPage from "./components/LoginPage";
 import ChatScreen from "./components/ChatScreen";
 import LoginRegister from "./screen/LoginRegister";
+import HomeStack from "./screen/HomeStack";
 
 // Define sample data for EO and venue
 
@@ -297,9 +298,9 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
           ),
         }}
@@ -308,7 +309,7 @@ const TabNavigator = () => {
         name="Filter"
         component={FilterScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="options" color={color} size={size} />
           ),
         }}
@@ -317,7 +318,7 @@ const TabNavigator = () => {
         name="Cart"
         component={CartScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="cart" color={color} size={size} />
           ),
         }}
@@ -326,7 +327,7 @@ const TabNavigator = () => {
         name="Chat"
         component={ChatScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="chatbubble-ellipses" color={color} size={size} />
           ),
         }}
@@ -335,7 +336,7 @@ const TabNavigator = () => {
         name="Login"
         component={LoginRegister}
         options={{
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="chatbubble-ellipses" color={color} size={size} />
           ),
         }}

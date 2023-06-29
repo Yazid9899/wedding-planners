@@ -8,13 +8,15 @@ import {
   Image,
   FlatList,
   ViewPropTypes,
+  TouchableOpacity,
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import Carousel from "react-native-snap-carousel";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/Ionicons";
+import DetailVenue from "../screen/DetailVenue";
 
 // Define sample data for EO and venue
 const eoData = [
@@ -120,27 +122,107 @@ const venueData = [
 const photographers = [
   {
     id: 1,
-    name: "Photographer 1",
+    name: "Hifzul",
     image:
       "https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=858&q=80",
+    portofolio: [
+      {
+        judul: "Wedding Photoshoot",
+        deskripsi: "Memorable moments captured during weddings",
+        gambar:
+          "https://plus.unsplash.com/premium_photo-1661281280766-8b39804dfa77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+      },
+      {
+        judul: "Portrait Photography",
+        deskripsi: "Capturing beautiful portraits of individuals",
+        gambar:
+          "https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      },
+      {
+        judul: "Portrait Photography",
+        deskripsi: "Capturing beautiful portraits of individuals",
+        gambar:
+          "https://plus.unsplash.com/premium_photo-1675107358573-e059060d7006?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      },
+    ],
   },
   {
     id: 2,
-    name: "Photographer 2",
+    name: "Yazid",
     image:
       "https://images.unsplash.com/photo-1603574670812-d24560880210?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80",
+    portofolio: [
+      {
+        judul: "Wedding Photoshoot",
+        deskripsi: "Memorable moments captured during weddings",
+        gambar:
+          "https://plus.unsplash.com/premium_photo-1661281280766-8b39804dfa77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+      },
+      {
+        judul: "Portrait Photography",
+        deskripsi: "Capturing beautiful portraits of individuals",
+        gambar:
+          "https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      },
+      {
+        judul: "Portrait Photography",
+        deskripsi: "Capturing beautiful portraits of individuals",
+        gambar:
+          "https://plus.unsplash.com/premium_photo-1675107358573-e059060d7006?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      },
+    ],
   },
   {
     id: 3,
-    name: "Photographer 3",
+    name: "Franky",
     image:
       "https://images.unsplash.com/photo-1521856729154-7118f7181af9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
+    portofolio: [
+      {
+        judul: "Wedding Photoshoot",
+        deskripsi: "Memorable moments captured during weddings",
+        gambar:
+          "https://plus.unsplash.com/premium_photo-1661281280766-8b39804dfa77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+      },
+      {
+        judul: "Portrait Photography",
+        deskripsi: "Capturing beautiful portraits of individuals",
+        gambar:
+          "https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      },
+      {
+        judul: "Portrait Photography",
+        deskripsi: "Capturing beautiful portraits of individuals",
+        gambar:
+          "https://plus.unsplash.com/premium_photo-1675107358573-e059060d7006?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      },
+    ],
   },
   {
     id: 4,
-    name: "Photographer 4",
+    name: "Damar",
     image:
       "https://images.unsplash.com/photo-1625492922105-5914617fd869?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=415&q=80",
+    portofolio: [
+      {
+        judul: "Wedding Photoshoot",
+        deskripsi: "Memorable moments captured during weddings",
+        gambar:
+          "https://plus.unsplash.com/premium_photo-1661281280766-8b39804dfa77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+      },
+      {
+        judul: "Portrait Photography",
+        deskripsi: "Capturing beautiful portraits of individuals",
+        gambar:
+          "https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      },
+      {
+        judul: "Portrait Photography",
+        deskripsi: "Capturing beautiful portraits of individuals",
+        gambar:
+          "https://plus.unsplash.com/premium_photo-1675107358573-e059060d7006?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      },
+    ],
   },
 ];
 
@@ -176,79 +258,109 @@ const renderCarouselItem = ({ item }) => (
   </View>
 );
 
-const HomeScreen = () => (
-  <ScrollView contentContainerStyle={styles.screen}>
-    <Text style={styles.title}>Weddingku</Text>
-    <Text style={styles.promo}>
-      Book now discount <Text style={styles.promoDiscount}>5%</Text>
-    </Text>
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.cardList}
-    >
-      {venueData.map((venue) => (
-        <View key={venue.id} style={styles.cardVenue}>
-          <Image source={{ uri: venue.image }} style={styles.cardImage} />
-          <Text style={styles.cardTitle}>{venue.name}</Text>
-          <Text style={styles.cardDescription}>{venue.description}</Text>
-          <View style={styles.locationContainer}>
-            <Icon
-              name="location-outline"
-              size={16}
-              color="#000"
-              style={styles.locationIcon}
+const HomeScreen = () => {
+  const { navigate } = useNavigation();
+  const handlePressVenue = () => {
+    navigate("DetailVenue");
+  };
+  const handlePressFotografer = () => {
+    navigate("DetailFotografer");
+  };
+  const handlePressEO = () => {
+    navigate("DetailEventOrganizer");
+  };
+  return (
+    <ScrollView contentContainerStyle={styles.screen}>
+      <Text style={styles.title}>Weddingku</Text>
+      <Text style={styles.promo}>
+        Book now discount <Text style={styles.promoDiscount}>5%</Text>
+      </Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.cardList}
+      >
+        {venueData.map((venue) => (
+          // <View
+          //   onPress={() => handlePressVenue()}
+          //   // onPress={handlePressVenue}
+          //   key={venue.id}
+          //   style={styles.cardVenue}
+          // >
+          <TouchableOpacity
+            onPress={() => handlePressVenue()} // Perhatikan penyesuaian di sini
+            key={venue.id}
+            style={styles.cardVenue}
+          >
+            <Image
+              // onPress={() => handlePressVenue()}
+              source={{ uri: venue.image }}
+              style={styles.cardImage}
             />
-            <Text style={styles.locationText}>{venue.location}</Text>
-          </View>
-        </View>
-      ))}
+            <Text style={styles.cardTitle}>{venue.name}</Text>
+            <Text style={styles.cardDescription}>{venue.description}</Text>
+            <View style={styles.locationContainer}>
+              <Icon
+                name="location-outline"
+                size={16}
+                color="#000"
+                style={styles.locationIcon}
+              />
+              <Text style={styles.locationText}>{venue.location}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+      <Text style={styles.subtitle}>List of EO:</Text>
+      <FlatList
+        data={eoData}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={2} // Set number of columns to 2
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={handlePressEO} style={styles.card}>
+            <Image source={{ uri: item.image }} style={styles.cardImage} />
+            <Text style={styles.cardTitle}>{item.name}</Text>
+            <Text style={styles.cardDescription}>{item.description}</Text>
+            <Text style={styles.cardDescription}>{item.description}</Text>
+            <Text style={styles.cardDescription}>{item.description}</Text>
+          </TouchableOpacity>
+        )}
+      />
+
+      {/* Display the list of photographers */}
+      <Text style={styles.subtitle}>List of Photographers:</Text>
+      <View style={styles.photographerList}>
+        {/* Loop through the photographer data */}
+        {photographers.map((photographer) => (
+          <TouchableOpacity
+            key={photographer.id}
+            style={styles.photographerItem}
+            onPress={handlePressFotografer}
+          >
+            <Image
+              source={{ uri: photographer.image }}
+              style={styles.photographerImage}
+            />
+            <Text style={styles.photographerName}>{photographer.name}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* Display the success story carousel */}
+      <Text style={styles.subtitle}>Our Success Story:</Text>
+
+      <Carousel
+        data={successStories}
+        renderItem={renderCarouselItem}
+        sliderWidth={300}
+        itemWidth={200}
+      />
+      <Text style={styles.testimonial}>
+        Dengan Weddingku, gak perlu lagi deh pusing mikirin banyak hal
+      </Text>
     </ScrollView>
-    <Text style={styles.subtitle}>List of EO:</Text>
-    <FlatList
-      data={eoData}
-      keyExtractor={(item) => item.id.toString()}
-      numColumns={2} // Set number of columns to 2
-      renderItem={({ item }) => (
-        <View style={styles.card}>
-          <Image source={{ uri: item.image }} style={styles.cardImage} />
-          <Text style={styles.cardTitle}>{item.name}</Text>
-          <Text style={styles.cardDescription}>{item.description}</Text>
-          <Text style={styles.cardDescription}>{item.description}</Text>
-          <Text style={styles.cardDescription}>{item.description}</Text>
-        </View>
-      )}
-    />
-
-    {/* Display the list of photographers */}
-    <Text style={styles.subtitle}>List of Photographers:</Text>
-    <View style={styles.photographerList}>
-      {/* Loop through the photographer data */}
-      {photographers.map((photographer) => (
-        <View key={photographer.id} style={styles.photographerItem}>
-          <Image
-            source={{ uri: photographer.image }}
-            style={styles.photographerImage}
-          />
-          <Text style={styles.photographerName}>{photographer.name}</Text>
-        </View>
-      ))}
-    </View>
-
-    {/* Display the success story carousel */}
-    <Text style={styles.subtitle}>Our Success Story:</Text>
-
-    <Carousel
-      data={successStories}
-      renderItem={renderCarouselItem}
-      sliderWidth={300}
-      itemWidth={200}
-    />
-    <Text style={styles.testimonial}>
-      Dengan Weddingku, gak perlu lagi deh pusing mikirin banyak hal
-    </Text>
-  </ScrollView>
-);
+  );
+};
 
 // Create a bottom tab navigator
 const Tab = createBottomTabNavigator();
@@ -274,53 +386,53 @@ const ChatScreen = () => (
   </View>
 );
 
-const App = () => (
-  <NavigationContainer>
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: "#00bce1",
-        tabBarInactiveTintColor: "gray",
-      }}
-    >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Filter"
-        component={FilterScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="options" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Cart"
-        component={CartScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cart" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Chat"
-        component={ChatScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="chatbubble-ellipses" color={color} size={size} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  </NavigationContainer>
-);
+// const App = () => (
+//   <NavigationContainer>
+//     <Tab.Navigator
+//       screenOptions={{
+//         tabBarActiveTintColor: "#00bce1",
+//         tabBarInactiveTintColor: "gray",
+//       }}
+//     >
+//       <Tab.Screen
+//         name="Home"
+//         component={HomeScreen}
+//         options={{
+//           tabBarIcon: ({ color, size }) => (
+//             <Ionicons name="home" color={color} size={size} />
+//           ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="Filter"
+//         component={FilterScreen}
+//         options={{
+//           tabBarIcon: ({ color, size }) => (
+//             <Ionicons name="options" color={color} size={size} />
+//           ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="Cart"
+//         component={CartScreen}
+//         options={{
+//           tabBarIcon: ({ color, size }) => (
+//             <Ionicons name="cart" color={color} size={size} />
+//           ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="Chat"
+//         component={ChatScreen}
+//         options={{
+//           tabBarIcon: ({ color, size }) => (
+//             <Ionicons name="chatbubble-ellipses" color={color} size={size} />
+//           ),
+//         }}
+//       />
+//     </Tab.Navigator>
+//   </NavigationContainer>
+// );
 
 // Define the styles
 const styles = StyleSheet.create({
