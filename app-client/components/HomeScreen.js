@@ -25,7 +25,13 @@ const eoData = [
     name: "EO Wedding A",
     description: "Description of EO Wedding A",
     image:
-      "https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://plus.unsplash.com/premium_photo-1661771928377-3c0ad5a0e85a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    lokasi: "Jakarta",
+    contact: "+62-9999-9999",
+    experience: "7 years",
+    startingPrice: 15000000,
+    service: ["Planner", "Decoration", "Catering"],
+    rating: 4.6,
   },
   {
     id: 2,
@@ -74,6 +80,16 @@ const venueData = [
     image:
       "https://images.summitmedia-digital.com/preview/images/2019/04/26/cebu-wedding-venue-nm.jpg",
     location: "Jakarta",
+    capacity: 500,
+    facility: ["Stage, Ballroom, Parking Car"],
+    rating: 4.8,
+    price: 25000000,
+    type: "Ballroom",
+    portofolio: [
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80",
+      "https://images.unsplash.com/photo-1620735692151-26a7e0748429?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      "https://images.unsplash.com/photo-1625619080917-7d6ff39e0675?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    ],
   },
   {
     id: 2,
@@ -82,6 +98,16 @@ const venueData = [
     image:
       "https://cdn-2.tstatic.net/kaltim/foto/bank/images/venue-wedding-terbaik.jpg",
     location: "Medan",
+    capacity: 300,
+    facility: ["Stage, Ballroom"],
+    rating: 4.5,
+    price: 20000000,
+    type: "Garden",
+    portofolio: [
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80",
+      "https://images.unsplash.com/photo-1620735692151-26a7e0748429?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      "https://images.unsplash.com/photo-1625619080917-7d6ff39e0675?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    ],
   },
   {
     id: 3,
@@ -90,6 +116,16 @@ const venueData = [
     image:
       "https://images.summitmedia-digital.com/preview/images/2019/04/26/cebu-wedding-venue-nm.jpg",
     location: "Bandung",
+    capacity: 100,
+    facility: ["Stage, Ballroom, Parking Car"],
+    rating: 4.9,
+    price: 35000000,
+    type: "Beach",
+    portofolio: [
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80",
+      "https://images.unsplash.com/photo-1620735692151-26a7e0748429?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      "https://images.unsplash.com/photo-1625619080917-7d6ff39e0675?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    ],
   },
   {
     id: 4,
@@ -98,6 +134,16 @@ const venueData = [
     image:
       "https://medinacatering.id/wp-content/uploads/2019/10/Rekomendasi-Wedding-Venue-Terbaik-di-Jakarta-Selatan-menara-165.jpg",
     location: "Surabaya",
+    capacity: 400,
+    facility: ["Stage, Ballroom, Parking Car"],
+    rating: 4.9,
+    price: 35000000,
+    type: "Ballroom",
+    portofolio: [
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80",
+      "https://images.unsplash.com/photo-1620735692151-26a7e0748429?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      "https://images.unsplash.com/photo-1625619080917-7d6ff39e0675?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    ],
   },
   {
     id: 5,
@@ -106,6 +152,16 @@ const venueData = [
     image:
       "https://s3.ap-southeast-1.amazonaws.com/fab.thebridedept/2022/07/shutterstock_387640156-1658290895-828x552.jpg",
     location: "Jakarta",
+    capacity: 400,
+    facility: ["Stage, Ballroom, Parking Car"],
+    rating: 4.7,
+    price: 35000000,
+    type: "Ballroom",
+    portofolio: [
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80",
+      "https://images.unsplash.com/photo-1620735692151-26a7e0748429?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      "https://images.unsplash.com/photo-1625619080917-7d6ff39e0675?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    ],
   },
   {
     id: 6,
@@ -114,6 +170,16 @@ const venueData = [
     image:
       "https://assets.venuecrew.com/wp-content/uploads/2022/08/01233727/London-hotel-wedding-venue-The-Kimpton-Fitzroy-ballroom.jpg",
     location: "Jakarta",
+    capacity: 400,
+    facility: ["Stage, Ballroom, Parking Car"],
+    rating: 4.2,
+    price: 30000000,
+    type: "Ballroom",
+    portofolio: [
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80",
+      "https://images.unsplash.com/photo-1620735692151-26a7e0748429?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      "https://images.unsplash.com/photo-1625619080917-7d6ff39e0675?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    ],
   },
   // Add more venue data if needed
   // ...
