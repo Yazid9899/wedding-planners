@@ -252,7 +252,7 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import Carousel from "react-native-snap-carousel";
+// import Carousel from "react-native-snap-carousel";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/Ionicons";
 import HomeScreen from "./components/HomeScreen";
@@ -313,6 +313,8 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="options" color={color} size={size} />
           ),
+
+          headerShown: false,
         }}
       />
       <Tab.Screen
