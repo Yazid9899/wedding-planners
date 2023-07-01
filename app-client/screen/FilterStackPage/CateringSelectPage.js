@@ -58,29 +58,6 @@ const CateringSelectPage = ({ navigation }) => {
         keyExtractor={(item) => item?.id}
         numColumns={2}
       ></FlatList>
-      {/* <View style={styles.cardContainer}>
-          <View style={styles.cardRow}>
-            {SelectCateringCard(data)}
-            {SelectCateringCard(data)}
-          </View>
-          <View style={styles.cardRow}>
-            {SelectCateringCard(data)}
-            {SelectCateringCard(data)}
-          </View>
-          <View style={styles.cardRow}>
-            {SelectCateringCard(data)}
-            {SelectCateringCard(data)}
-          </View>
-        </View> */}
-
-      <View style={styles.containerButton}>
-        <TouchableOpacity style={styles.button} onPress={previousButton}>
-          <Text style={styles.buttonText}>Previous</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={nextButton}>
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
-      </View>
     </View>
     //  </ScrollView>
   );
@@ -126,3 +103,31 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+{
+  /* <View style={styles.cardContainer}>
+          <View style={styles.cardRow}>
+            {SelectCateringCard(data)}
+            {SelectCateringCard(data)}
+          </View>
+          <View style={styles.cardRow}>
+            {SelectCateringCard(data)}
+            {SelectCateringCard(data)}
+          </View>
+          <View style={styles.cardRow}>
+            {SelectCateringCard(data)}
+            {SelectCateringCard(data)}
+          </View>
+        </View> */
+}
+
+{
+  /* <View style={styles.containerButton}>
+        <TouchableOpacity style={styles.button} onPress={previousButton}>
+          <Text style={styles.buttonText}>Previous</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={nextButton}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+      </View> */
+}
