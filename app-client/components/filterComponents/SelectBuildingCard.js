@@ -2,7 +2,15 @@ import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { Button, Card } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 
-const SelectBuildingCard = () => {
+const SelectBuildingCard = ({ data, navigation }) => {
+  // NEXT PREV button
+  const nextButton = () => {
+    navigation.navigate("PhotoSelect");
+  };
+  const previousButton = () => {
+    navigation.navigate("MainFilter");
+  };
+  //
   const LocationText = () => (
     <View style={styles.locationContainer}>
       <Ionicons
@@ -34,7 +42,13 @@ const SelectBuildingCard = () => {
       <Card.Content style={styles.cardContent}>
         <View style={styles.rowContainer}>
           <Text style={styles.cardPrice}>IDR 350.000.000</Text>
-          <Button mode="contained" onPress={() => console.log("Add to Cart")}>
+          <Button
+            mode="contained"
+            onPress={() => {
+              console.log("Add to Cart");
+              nextButton();
+            }}
+          >
             Add to Cart
           </Button>
         </View>

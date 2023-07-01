@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,7 +11,19 @@ import { Searchbar } from "react-native-paper";
 
 import SelectPhotoCard from "../../components/filterComponents/SelectPhotoCard.js";
 
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPhotographData } from "../../features/PhotographData/photographSlice.js";
+
 const PhotoSelectPage = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  const photographStateData = useSelector((state) => state.photograph.data);
+
+  useEffect(() => {
+    dispatch(fetchPhotographData());
+  }, [dispatch]);
+  //
+
   const nextButton = () => {
     navigation.navigate("CateringSelect");
   };
@@ -28,28 +41,28 @@ const PhotoSelectPage = ({ navigation }) => {
     { label: "Item 3", value: "3" },
   ];
   return (
-    <ScrollView>
-      <View style={styles.screen}>
-        <Searchbar
-          placeholder="Search Photographer"
-          onChangeText={onChangeSearch}
-          value={searchQuery}
-          style={styles.searchStyle}
-        />
+    //  <ScrollView>
+    <View style={styles.screen}>
+      <Searchbar
+        placeholder="Search Photographer"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+        style={styles.searchStyle}
+      />
+      {/* <Text>{JSON.stringify(photographStateData)}</Text> */}
+      {/* {SelectPhotoCard(data)}
         {SelectPhotoCard(data)}
-        {SelectPhotoCard(data)}
-        {SelectPhotoCard(data)}
+        {SelectPhotoCard(data)} */}
 
-        <View style={styles.containerButton}>
-          <TouchableOpacity style={styles.button} onPress={previousButton}>
-            <Text style={styles.buttonText}>Previous</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={nextButton}>
-            <Text style={styles.buttonText}>Next</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </ScrollView>
+      <FlatList
+        data={photographStateData}
+        renderItem={({ item }) => (
+          <SelectPhotoCard data={item} navigation={navigation} />
+        )}
+        keyExtractor={(item) => item?.id}
+      ></FlatList>
+    </View>
+    //  </ScrollView>
   );
 };
 
@@ -86,3 +99,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+{
+  /* <View style={styles.containerButton}>
+        <TouchableOpacity style={styles.button} onPress={previousButton}>
+          <Text style={styles.buttonText}>Previous</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={nextButton}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+      </View> */
+}
