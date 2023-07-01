@@ -1,5 +1,7 @@
-import { useState } from "react";
+//
+import { useEffect, useState } from "react";
 import {
+  FlatList,
   ImageBackground,
   ScrollView,
   StyleSheet,
@@ -8,20 +10,29 @@ import {
   View,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { Card, Searchbar } from "react-native-paper";
+import { Searchbar } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
-
+import axios from "axios";
+//
 // Component
 // import vendorCard from "../../components/filterComponents/vendorCard";
 import SelectBuildingCard from "../../components/filterComponents/SelectBuildingCard";
 
+import { useDispatch, useSelector } from "react-redux";
+import { fetchVenueData } from "../../features/VenueData/venueSlice";
+
 const BuildingSelectPage = ({ navigation }) => {
-  const nextButton = () => {
-    navigation.navigate("PhotoSelect");
-  };
-  const previousButton = () => {
-    navigation.navigate("MainFilter");
-  };
+  const [venueData, setvenueData] = useState("");
+
+  const venueStateData = useSelector((state) => state.venue.data);
+
+  //   const venue = useSelector((state) => state.venue.value);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchVenueData());
+  }, [dispatch]);
 
   //   Search
   const [searchQuery, setSearchQuery] = useState("");
@@ -65,38 +76,44 @@ const BuildingSelectPage = ({ navigation }) => {
     />
   );
 
+  // NEXT PREV button
+  const nextButton = () => {
+    navigation.navigate("PhotoSelect");
+  };
+  const previousButton = () => {
+    navigation.navigate("MainFilter");
+  };
   //
   return (
-    <ScrollView>
-      <View style={styles.screen}>
-        <Searchbar
-          placeholder="Search Venue"
-          onChangeText={onChangeSearch}
-          value={searchQuery}
-        />
-        <View style={styles.dropdownContainer}>
-          {renderLocationDropdown("Location", Location)}
-        </View>
-        <View>
-          <SelectBuildingCard />
-          <SelectBuildingCard />
-          <SelectBuildingCard />
-        </View>
-        <View style={styles.showMoreContainer}>
-          <TouchableOpacity>
-            <Text>Show More</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.containerButton}>
-          <TouchableOpacity style={styles.button} onPress={previousButton}>
-            <Text style={styles.buttonText}>Previous</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={nextButton}>
-            <Text style={styles.buttonText}>Next</Text>
-          </TouchableOpacity>
-        </View>
+    //  <ScrollView>
+    <View style={styles.screen}>
+      <Searchbar
+        placeholder="Search Venue"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+      />
+      <View style={styles.dropdownContainer}>
+        {renderLocationDropdown("Location", Location)}
       </View>
-    </ScrollView>
+
+      <FlatList
+        data={venueStateData}
+        renderItem={({ item }) => (
+          <SelectBuildingCard data={item} navigation={navigation} />
+        )}
+        keyExtractor={(item) => item?.id}
+      ></FlatList>
+
+      {/* <View style={styles.containerButton}>
+        <TouchableOpacity style={styles.button} onPress={previousButton}>
+          <Text style={styles.buttonText}>Previous</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={nextButton}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+      </View> */}
+    </View>
+    //  </ScrollView>
   );
 };
 
@@ -292,4 +309,19 @@ const styles = StyleSheet.create({
               <Card.Actions></Card.Actions>
             </Card.Content>
           </Card> */
+}
+
+{
+  /* <View>
+        <Text>Tes</Text>
+        <Button onPress={() => dispatch(increment())}>Increment</Button>
+        <Button onPress={() => dispatch(decrement())}>Decrement</Button>
+
+        <Button onPress={() => dispatch(incrementByAmount({}))}>
+          Increment By 5
+        </Button>
+
+        <Text>{venue}</Text>
+        <Text>{JSON.stringify(venueStateData)}</Text>
+      </View> */
 }

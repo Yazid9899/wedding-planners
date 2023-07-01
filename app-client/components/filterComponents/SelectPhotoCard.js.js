@@ -2,7 +2,13 @@ import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Avatar, Button } from "react-native-paper";
 
-const SelectPhotoCard = ({ item }) => {
+const SelectPhotoCard = ({ item, navigation }) => {
+  const nextButton = () => {
+    navigation.navigate("CateringSelect");
+  };
+  const previousButton = () => {
+    navigation.navigate("BuildingSelect");
+  };
   return (
     <View style={styles.vendorCard}>
       <View style={styles.row}>
@@ -64,7 +70,10 @@ const SelectPhotoCard = ({ item }) => {
         <Button
           mode="contained"
           style={styles.button}
-          onPress={() => console.log("Add to Cart")}
+          onPress={() => {
+            console.log("Add to Cart");
+            nextButton();
+          }}
         >
           Add to Cart
         </Button>
