@@ -22,5 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Cart',
   });
+  Cart.beforeBulkCreate((cart) => {
+    cart.status = "pending"
+  })
   return Cart;
 };
