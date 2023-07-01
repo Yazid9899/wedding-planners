@@ -1,8 +1,9 @@
 'use strict';
-const data = require('../db/cathering.json');
-
+const data = require('../db/user.json');
+const { hashPassword } = require('../helpers/bcrypt');
 data.map((el) => {
   el.createdAt = el.updatedAt = new Date()
+  el.password = hashPassword(el.password)
 })
 
 /** @type {import('sequelize-cli').Migration} */
@@ -17,7 +18,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Catherings', data, {})
+    await queryInterface.bulkInsert('Users', data, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -27,6 +28,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Catherings', data, {})
+    await queryInterface.bulkDelete('Users', null, {});
   }
 };

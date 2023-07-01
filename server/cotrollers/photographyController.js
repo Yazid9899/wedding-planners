@@ -1,13 +1,17 @@
 const { Photography } = require("../models");
 class PhotographyController {
+
   static async getAllPhotographies(req, res, next) {
     try {
-      const data = await Photography.findAll();
-
-      res.status(200).json({
-        statusCode: 200,
-        data,
+      const data = await Photography.findAll({
+        order: [["id", "ASC"]]
       });
+
+      
+      if(data){
+        res.status(200).json(data);
+      }
+
     } catch (err) {
       next(err);
     }
@@ -17,10 +21,14 @@ class PhotographyController {
       const { id } = req.params;
       const data = await Photography.findOne({ where: { id } });
 
-      res.status(200).json({
-        statusCode: 200,
-        data,
-      });
+      if(!data){
+        throw{
+          name: "Photography Not Found"
+        }
+      }
+
+      res.status(200).json(data);
+      
     } catch (err) {
       next(err);
     }

@@ -1,6 +1,5 @@
 'use strict';
 const data = require('../db/product.json');
-
 data.map((el) => {
   el.createdAt = el.updatedAt = new Date()
 })
@@ -17,7 +16,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Products', data, {})
+    await queryInterface.bulkInsert('Products', data, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -27,6 +26,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Products', data, {})
+    await queryInterface.bulkDelete('Products', null, {});
   }
 };

@@ -1,4 +1,4 @@
-const { Product, Building, Cathering, Photography } = require("../models");
+const { Product, Cathering, Photography, Venue } = require("../models");
 class ProductController {
   static async getAllProducts(req, res, next) {
     try {
@@ -6,14 +6,15 @@ class ProductController {
         include: [
           { model: Photography },
           { model: Cathering },
-          { model: Building },
+          { model: Venue },
         ],
         order: [["id", "ASC"]],
       });
-      res.status(200).json({
-        statusCode: 200,
-        data,
-      });
+
+      if (data) {
+        res.status(200).json(data);
+      }
+
     } catch (err) {
       next(err);
     }
@@ -23,22 +24,19 @@ class ProductController {
       const { id } = req.params;
       const data = await Product.findOne({
         include: [
-          {
-            model: Photography,
-          },
-          {
-            model: Cathering,
-          },
-          {
-            model: Building,
-          },
+          { model: Photography },
+          { model: Cathering },
+          { model: Venue },
         ],
         where: { id },
       });
-      res.status(200).json({
-        statusCode: 200,
-        data,
-      });
+      if(!data){
+        throw{
+          name: "Product Not Found"
+        }
+      }
+      res.status(200).json(data);
+      
     } catch (err) {
       next(err);
     }

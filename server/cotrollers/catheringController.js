@@ -1,14 +1,16 @@
-const { Cathering, CatheringMenu } = require("../models");
+const { Cathering} = require("../models");
+
 class CatheringController {
   static async getAllCathering(req, res, next) {
     try {
       const data = await Cathering.findAll({
-        include: [{ model: CatheringMenu }],
+        order: [["id", "ASC"]]
       });
-      res.status(200).json({
-        statuscode: 200,
-        data,
-      });
+
+      if(data){
+        res.status(200).json(data);
+      }
+
     } catch (err) {
       next(err);
     }
@@ -16,18 +18,15 @@ class CatheringController {
   static async getCatheringById(req, res, next) {
     try {
       const { id } = req.params;
-      const data = await Cathering.findOne({
-        where: { id },
-        include: [
-          {
-            model: CatheringMenu,
-          },
-        ],
-      });
-      res.status(200).json({
-        statuscode: 200,
-        data,
-      });
+      const data = await Cathering.findOne({ where: { id }});
+
+      if(!data){
+        throw{
+          name: "Cathering Not Found"
+        }
+      }
+      res.status(200).json(data);
+
     } catch (err) {
       next(err);
     }

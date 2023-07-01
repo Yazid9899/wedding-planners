@@ -1,6 +1,5 @@
 'use strict';
-const data = require('../db/photography.json');
-
+const data = require('../db/cathering.json');
 data.map((el) => {
   el.createdAt = el.updatedAt = new Date()
 })
@@ -17,7 +16,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Photographies', data, {})
+    await queryInterface.bulkInsert('Catherings', data, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -27,6 +26,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Photographies', data, {})
+    await queryInterface.bulkDelete('Catherings', null, {});
   }
 };

@@ -18,21 +18,39 @@ const errorHandling = async (err, req, res, next) => {
         message: "Invalid email or password",
       });
       break;
-    case "unauthenticated":
+    case "AuthenticationError":
       res.status(401).json({
-        statusCode: 401,
-        message: "Error authentication",
-      });
+        message: "AuthenticationError"
+      })
       break;
     case "JsonWebTokenError":
       res.status(401).json({
-        statusCode: 401,
-        message: "Error authentication",
-      });
+        message: "Invalid token"
+      })
       break;
-    case "productNotFound":
+    case "Product Not Found":
       res.status(404).json({
         message: "Product not found",
+      });
+      break;
+    case "Venue Not Found":
+      res.status(404).json({
+        message: "Venue Not Found",
+      });
+      break;
+    case "Cathering Not Found":
+      res.status(404).json({
+        message: "Cathering Not Found",
+      });
+      break;
+    case "Photography Not Found":
+      res.status(404).json({
+        message: "Photography Not Found",
+      });
+      break;
+    case "Cart Not Found":
+      res.status(404).json({
+        message: "Cart Not Found",
       });
       break;
     default:

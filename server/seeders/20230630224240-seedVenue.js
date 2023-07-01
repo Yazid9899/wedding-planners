@@ -1,6 +1,5 @@
 'use strict';
-const data = require('../db/catheringMenu.json');
-
+const data = require('../db/venue.json');
 data.map((el) => {
   el.createdAt = el.updatedAt = new Date()
 })
@@ -17,7 +16,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('CatheringMenus', data, {})
+    await queryInterface.bulkInsert('Venues', data, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -27,6 +26,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('CatheringMenus', data, {})
+    await queryInterface.bulkDelete('Venues', null, {});
   }
 };

@@ -1,0 +1,357 @@
+[
+  {
+    "name": "The Ritz-Carlton Jakarta, Mega Kuningan",
+    "location": "Jakarta Selatan",
+    "locationGoogle": [
+      "-6.229064",
+      "106.827605"
+    ],
+    "price": 55000000,
+    "capacity": 600,
+    "description": "The Ritz-Carlton Jakarta, Mega Kuningan is a luxurious wedding venue that offers elegance and sophistication. With a capacity of 600 guests, our ballroom provides a stunning setting for your special day. Experience impeccable service, exquisite cuisine, and create unforgettable memories at The Ritz-Carlton Jakarta, Mega Kuningan.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1563911302283-d2bc129e7570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
+      "https://plus.unsplash.com/premium_photo-1678286769819-538a80c44baa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+    ]
+  },
+  {
+    "name": "Padma Hotel Bandung",
+    "location": "Jakarta Selatan",
+    "locationGoogle": [
+      "-6.231317",
+      "106.824981"
+    ],
+    "price": 72500000,
+    "capacity": 800,
+    "description": "Celebrate your love at Padma Hotel Bandung, a picturesque wedding venue nestled in the heart of Jakarta. With a capacity of 800 guests, our venue offers breathtaking views and a romantic ambiance for your celebration. Enjoy personalized service, delectable cuisine, and create cherished memories at Padma Hotel Bandung.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=449&q=80",
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1586611292717-f828b167408c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+    ]
+  },
+  {
+    "name": "The Mulia Bali",
+    "location": "Jakarta Selatan",
+    "locationGoogle": [
+      "-6.219152",
+      "106.837345"
+    ],
+    "price": 52000000,
+    "capacity": 600,
+    "description": "The Mulia Bali is a tropical paradise in the heart of Jakarta, offering an idyllic setting for your dream wedding. With a capacity of 600 guests, our beachfront venue provides a romantic and enchanting ambiance. Experience exceptional service, breathtaking views, and create unforgettable memories at The Mulia Bali.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+      "https://images.unsplash.com/photo-1615460549969-36fa19521a4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+    ]
+  },
+  {
+    "name": "Sheraton Mustika Yogyakarta Resort & Spa",
+    "location": "Jakarta Selatan",
+    "locationGoogle": [
+      "-6.227256",
+      "106.809839"
+    ],
+    "price": 57000000,
+    "capacity": 900,
+    "description": "Sheraton Mustika Yogyakarta Resort & Spa is a magnificent wedding venue that combines luxury and natural beauty. With a capacity of 900 guests, our resort offers lush gardens and elegant ballrooms for your celebration. Enjoy personalized service, exquisite cuisine, and create lifelong memories at Sheraton Mustika Yogyakarta Resort & Spa.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1596436889106-be35e843f974?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80"
+    ]
+  },
+  {
+    "name": "Shangri-La Hotel Surabaya",
+    "location": "Jakarta Selatan",
+    "locationGoogle": [
+      "-6.228708",
+      "106.804498"
+    ],
+    "price": 100000000,
+    "capacity": 800,
+    "description": "Experience a luxurious wedding at Shangri-La Hotel Surabaya, where opulence meets sophistication. With a capacity of 800 guests, our ballroom provides an exquisite setting for your celebration. Enjoy impeccable service, world-class amenities, and create unforgettable memories at Shangri-La Hotel Surabaya.",
+    "isBooked": false,
+    "photo": [
+      "https://plus.unsplash.com/premium_photo-1678286769888-ef3698e72a6c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1554009975-d74653b879f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=327&q=80",
+      "https://images.unsplash.com/photo-1535827841776-24afc1e255ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
+    ]
+  },
+  {
+    "name": "The Westin Jakarta",
+    "location": "Jakarta Utara",
+    "locationGoogle": [
+      "-6.238652",
+      "106.821727"
+    ],
+    "price": 75000000,
+    "capacity": 700,
+    "description": "Celebrate your special day at The Westin Jakarta, a prestigious venue offering breathtaking views of Jakarta's skyline. With a capacity of 700 guests, our ballroom combines elegance and modernity for an unforgettable wedding experience. Enjoy impeccable service, exquisite cuisine, and create cherished memories at The Westin Jakarta.",
+    "isBooked": false,
+    "photo": [
+      "https://plus.unsplash.com/premium_photo-1678286770016-6306ad61df9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80",
+      "https://plus.unsplash.com/premium_photo-1678286771082-4de8d1e4b649?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
+    ]
+  },
+  {
+    "name": "The Pallas",
+    "location": "Jakarta Utara",
+    "locationGoogle": [
+      "-6.214998",
+      "106.806938"
+    ],
+    "price": 70000000,
+    "capacity": 700,
+    "description": "The Pallas is a trendy and sophisticated wedding venue located in the heart of Jakarta. With a capacity of 700 guests, our stylish ballroom sets the stage for a memorable celebration. Experience exceptional service, contemporary cuisine, and create unforgettable moments at The Pallas.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1561501878-aabd62634533?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1580041065738-e72023775cdc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+    ]
+  },
+  {
+    "name": "The Trans Luxury Hotel",
+    "location": "Jakarta Utara",
+    "locationGoogle": [
+      "-6.217159",
+      "106.809261"
+    ],
+    "price": 770000000,
+    "capacity": 700,
+    "description": "Experience luxury and elegance at The Trans Luxury Hotel, an iconic wedding venue in Jakarta. With a capacity of 700 guests, our ballroom offers a glamorous setting for your special day. Enjoy personalized service, exquisite cuisine, and create unforgettable memories at The Trans Luxury Hotel.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1549895058-36748fa6c6a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+      "https://images.unsplash.com/photo-1584336991738-c4fca2b411ee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
+      "https://images.unsplash.com/photo-1565902628322-ef64d5cda571?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=409&q=80"
+    ]
+  },
+  {
+    "name": "Ayana Resort and Spa",
+    "location": "Jakarta Utara",
+    "locationGoogle": [
+      "-6.234912",
+      "106.814342"
+    ],
+    "price": 810000000,
+    "capacity": 700,
+    "description": "Ayana Resort and Spa is a tropical paradise nestled in the heart of Jakarta. With a capacity of 700 guests, our resort offers stunning gardens and luxurious venues for your wedding celebration. Experience world-class service, delectable cuisine, and create lifelong memories at Ayana Resort and Spa.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1586199574776-41143d41c70f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1633528760485-a4fa9ecd037b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=873&q=80",
+      "https://images.unsplash.com/photo-1579254216547-a90bea451479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+    ]
+  },
+  {
+    "name": "Sheraton Surabaya Hotel & Towers",
+    "location": "Jakarta Utara",
+    "locationGoogle": [
+      "-6.234491",
+      "106.804834"
+    ],
+    "price": 75000000,
+    "capacity": 800,
+    "description": "Sheraton Surabaya Hotel & Towers is a sophisticated wedding venue that exudes elegance and charm. With a capacity of 800 guests, our ballroom provides a stunning backdrop for your celebration. Enjoy personalized service, delectable cuisine, and create cherished memories at Sheraton Surabaya Hotel & Towers.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1549964336-96c968e00d5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=874&q=80",
+      "https://images.unsplash.com/photo-1524824267900-2fa9cbf7a506?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1542665952-14513db15293?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+    ]
+  },
+  {
+    "name": "The Phoenix Hotel Yogyakarta - MGallery",
+    "location": "Jakarta Timur",
+    "locationGoogle": [
+      "-6.228073",
+      "106.806243"
+    ],
+    "price": 68000000,
+    "capacity": 700,
+    "description": "Experience a wedding of timeless elegance at The Phoenix Hotel Yogyakarta - MGallery. With a capacity of 700 guests, our venue offers a combination of classic charm and modern sophistication. Enjoy personalized service, exquisite cuisine, and create unforgettable memories at The Phoenix Hotel Yogyakarta - MGallery.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1602081112620-4da569dda684?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80",
+      "https://images.unsplash.com/photo-1558998708-ed5f8eaf1af1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=852&q=80",
+      "https://images.unsplash.com/photo-1579254216656-3c0c16a3bdd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80"
+    ]
+  },
+  {
+    "name": "Hotel Deli River",
+    "location": "Jakarta Timur",
+    "locationGoogle": [
+      "-6.225413",
+      "106.813511"
+    ],
+    "price": 75000000,
+    "capacity": 600,
+    "description": "Hotel Deli River is a hidden gem in the heart of Jakarta, offering a serene and romantic setting for your wedding. With a capacity of 600 guests, our venue features lush gardens and a tranquil riverfront. Experience warm hospitality, delicious cuisine, and create unforgettable memories at Hotel Deli River.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=898&q=80",
+      "https://images.unsplash.com/photo-1524202503253-d461ec0ece86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80",
+      "https://images.unsplash.com/photo-1602081115720-72e5b0a254b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
+    ]
+  },
+  {
+    "name": "Four Points by Sheraton Makassar",
+    "location": "Jakarta Timur",
+    "locationGoogle": [
+      "-6.236477",
+      "106.802994"
+    ],
+    "price": 55000000,
+    "capacity": 500,
+    "description": "Celebrate your love at Four Points by Sheraton Makassar, a contemporary wedding venue in Jakarta. With a capacity of 500 guests, our ballroom offers a stylish and modern setting for your special day. Enjoy personalized service, delectable cuisine, and create unforgettable memories at Four Points by Sheraton Makassar.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1577058071107-96a5a1dbe120?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
+      "https://images.unsplash.com/photo-1568530873454-e4103a0b3c71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/flagged/photo-1564137008568-296d800b8389?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=829&q=80"
+    ]
+  },
+  {
+    "name": "Hotel Tentrem Semarang",
+    "location": "Jakarta Timur",
+    "locationGoogle": [
+      "-6.238441",
+      "106.807597"
+    ],
+    "price": 64000000,
+    "capacity": 600,
+    "description": "Hotel Tentrem Semarang is a luxurious wedding venue that blends elegance and modernity. With a capacity of 600 guests, our ballroom provides a sophisticated setting for your celebration. Experience impeccable service, exquisite cuisine, and create cherished memories at Hotel Tentrem Semarang.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1572085313466-6710de8d7ba3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
+      "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      "https://images.unsplash.com/photo-1597466609913-e47405096f86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
+    ]
+  },
+  {
+    "name": "Aryaduta Palembang",
+    "location": "Jakarta Timur",
+    "locationGoogle": [
+      "-6.236194",
+      "106.812976"
+    ],
+    "price": 710000000,
+    "capacity": 700,
+    "description": "Aryaduta Palembang is a stunning wedding venue located in the heart of Jakarta. With a capacity of 700 guests, our ballroom offers a grand and elegant setting for your special day. Enjoy personalized service, delectable cuisine, and create unforgettable memories at Aryaduta Palembang.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1530023367847-a683933f4172?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      "https://images.unsplash.com/photo-1645859931058-dd7001856e8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80",
+      "https://images.unsplash.com/photo-1533040144848-c9b885ea47de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=840&q=80"
+    ]
+  },
+  {
+    "name": "The Shalimar Boutique Hotel",
+    "location": "Jakarta Utara",
+    "locationGoogle": [
+      "-6.235045",
+      "106.815647"
+    ],
+    "price": 80000000,
+    "capacity": 800,
+    "description": "The Shalimar Boutique Hotel is a charming and intimate wedding venue nestled in the heart of Jakarta. With a capacity of 800 guests, our venue offers a romantic and cozy ambiance for your celebration. Experience warm hospitality, delightful cuisine, and create lifelong memories at The Shalimar Boutique Hotel.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1572040428263-14d4b4221d2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=943&q=80",
+      "https://images.unsplash.com/photo-1582379453827-25dbb38d8f5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1602081115720-72e5b0a254b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
+    ]
+  },
+  {
+    "name": "Grand Indonesia",
+    "location": "Jakarta Utara",
+    "locationGoogle": [
+      "-6.222178",
+      "106.809917"
+    ],
+    "price": 95000000,
+    "capacity": 700,
+    "description": "Celebrate your special day at Grand Indonesia, a prestigious venue in Jakarta. With a capacity of 700 guests, our ballroom offers elegance and sophistication for your wedding celebration. Enjoy impeccable service, exquisite cuisine, and create cherished memories at Grand Indonesia.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1572040428263-14d4b4221d2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=943&q=80",
+      "https://images.unsplash.com/photo-1582379453827-25dbb38d8f5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1602081115720-72e5b0a254b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
+    ]
+  },
+  {
+    "name": "Balai Sarbini",
+    "location": "Jakarta Utara",
+    "locationGoogle": [
+      "-6.226811",
+      "106.819194"
+    ],
+    "price": 80000000,
+    "capacity": 600,
+    "description": "Balai Sarbini is an iconic wedding venue in Jakarta, known for its timeless beauty and grandeur. With a capacity of 600 guests, our ballroom provides an exquisite setting for your celebration. Experience impeccable service, delectable cuisine, and create unforgettable memories at Balai Sarbini.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1554009975-d74653b879f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=327&q=80",
+      "https://images.unsplash.com/photo-1571930884060-d8f6b9cb05f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
+      "https://images.unsplash.com/photo-1585418694458-dc80a5c20294?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80"
+    ]
+  },
+  {
+    "name": "Istora Senayan",
+    "location": "Jakarta Pusat",
+    "locationGoogle": [
+      "-6.223677",
+      "106.802955"
+    ],
+    "price": 82500000,
+    "capacity": 700,
+    "description": "Istora Senayan is a prestigious wedding venue located in the heart of Jakarta. With a capacity of 700 guests, our grand ballroom offers elegance and opulence for your special day. Enjoy personalized service, exquisite cuisine, and create unforgettable memories at Istora Senayan.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1560624052-449f5ddf0c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+      "https://images.unsplash.com/photo-1613769073681-3a87c3d97858?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
+    ]
+  },
+  {
+    "name": "Gelora Bung Karno",
+    "location": "Jakarta Pusat",
+    "locationGoogle": [
+      "-6.221623",
+      "106.805254"
+    ],
+    "price": 86000000,
+    "capacity": 800,
+    "description": "Celebrate your love at Gelora Bung Karno, an iconic venue in Jakarta known for its historic significance. With a capacity of 800 guests, our ballroom provides a grand and majestic setting for your wedding. Enjoy impeccable service, delectable cuisine, and create cherished memories at Gelora Bung Karno.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1606787947151-1c54964042e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80",
+      "https://images.unsplash.com/photo-1581790373347-43284e878076?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80",
+      "https://images.unsplash.com/photo-1602081112620-4da569dda684?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
+    ]
+  },
+  {
+    "name": "The Dharmawangsa Jakarta",
+    "location": "Jakarta Pusat",
+    "locationGoogle": [
+      "-6.223233",
+      "106.823433"
+    ],
+    "price": 80000000,
+    "capacity": 700,
+    "description": "Experience luxury and sophistication at The Dharmawangsa Jakarta, a prestigious wedding venue in Jakarta. With a capacity of 700 guests, our ballroom offers an elegant setting for your celebration. Enjoy personalized service, exquisite cuisine, and create unforgettable memories at The Dharmawangsa Jakarta.",
+    "isBooked": false,
+    "photo": [
+      "https://images.unsplash.com/photo-1606787947151-1c54964042e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80",
+      "https://images.unsplash.com/photo-1581790373347-43284e878076?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80",
+      "https://images.unsplash.com/photo-1602081112620-4da569dda684?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
+    ]
+  }
+]
