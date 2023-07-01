@@ -274,7 +274,8 @@
 
 // export default EventOrganizerDetailScreen;
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import * as Location from "expo-location";
 import {
   View,
   Text,
@@ -284,6 +285,8 @@ import {
   TouchableOpacity,
   Modal,
   Dimensions,
+  Alert,
+  Linking,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -294,9 +297,37 @@ const EventOrganizerDetailScreen = ({ route }) => {
   const { eo } = route.params;
   const [selectedPax, setSelectedPax] = useState(200); // Nilai pax awal
   const [showModal, setShowModal] = useState(false); // Status modal
-
+  const paxOptions = [200, 300, 500, 700];
   const navigation = useNavigation();
-  const totalPrice = eo?.startingPrice + selectedPax * eo?.pricePerPax;
+  ///state lokasi device
+  const [currentLocation, setCurrentLocation] = useState(null);
+
+  /// function for redirect to google Maps
+  const openNavigation = () => {
+    console.log(eo.Venue, "hyvuyviuvyuyv");
+    const latitude = eo?.Venue.locationGoogle[0];
+    const longitude = eo?.Venue.locationGoogle[1];
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+    Alert.alert(
+      "Open Google Maps",
+      "Do you want to open Google Maps for directions?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Open",
+          onPress: () => Linking.openURL(url),
+        },
+      ],
+      { cancelable: true }
+    );
+  };
+
+  const startingPrice = eo?.price + +eo?.Venue.price;
+  const totalPrice =
+    eo?.price + +eo?.Venue.price + selectedPax * eo?.Cathering?.price;
   const handlePaxChange = (value) => {
     setSelectedPax(value);
   };
@@ -307,23 +338,82 @@ const EventOrganizerDetailScreen = ({ route }) => {
   const handleModalClose = () => {
     setShowModal(false);
   };
-  const handleConfirmation = (confirmation) => {
+  // const handleConfirmation = (confirmation) => {
+  //   setShowModal(false);
+  //   if (confirmation === "yes") {
+  //     navigation.navigate("Cart"); // Navigasi ke halaman keranjang
+  //     // Implementasikan logika navigasi ke halaman keranjang di sini
+  //   } else if (confirmation === "no") {
+  //     // Kembali ke halaman detail event organizer
+  //     // Implementasikan logika navigasi ke halaman detail event organizer di sini
+  //   }
+  // };
+
+  const handleConfirmation = async (confirmation) => {
     setShowModal(false);
+
     if (confirmation === "yes") {
-      navigation.navigate("Cart"); // Navigasi ke halaman keranjang
-      // Implementasikan logika navigasi ke halaman keranjang di sini
+      try {
+        const response = await fetch(
+          "https://3d30-2404-c0-5c20-00-e9b-840e.ngrok-free.app/carts",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              title: eo?.title,
+              PhotographyId: eo?.PhotographyId,
+              CatheringId: eo?.CatheringId,
+              VenueId: eo?.VenueId,
+              totalPrice: totalPrice,
+            }),
+          }
+        );
+
+        if (response.ok) {
+          // Cart successfully created
+          navigation.navigate("Cart"); // Navigasi ke halaman keranjang
+        } else {
+          // Handle error response
+          const errorData = await response.json();
+          console.log(errorData);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     } else if (confirmation === "no") {
       // Kembali ke halaman detail event organizer
       // Implementasikan logika navigasi ke halaman detail event organizer di sini
     }
   };
+
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const mapHeight = windowHeight * 0.3;
 
+  // use effect for permission for using GPS (current location)
+  useEffect(() => {
+    (async () => {
+      try {
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          console.log("Permission to access location was denied");
+          return;
+        }
+
+        const location = await Location.getCurrentPositionAsync({});
+        const { latitude, longitude } = location.coords;
+        setCurrentLocation({ latitude, longitude });
+      } catch (error) {
+        console.log("Error getting location", error);
+      }
+    })();
+  }, []);
+
   return (
     <ScrollView style={styles.container}>
-      <Image source={{ uri: eo?.image }} style={styles.image} />
+      <Image source={{ uri: eo?.imageUrl }} style={styles.image} />
 
       <View style={styles.contentContainer}>
         <Text style={styles.title}>{eo?.title}</Text>
@@ -332,22 +422,22 @@ const EventOrganizerDetailScreen = ({ route }) => {
         <View style={styles.detailsContainer}>
           <View style={styles.detailRow}>
             <MaterialIcons name="location-on" size={20} color="#555555" />
-            <Text style={styles.detailText}>{eo?.location}</Text>
+            <Text style={styles.detailText}>{eo?.Venue.location}</Text>
           </View>
-          <View style={styles.detailRow}>
+          {/* <View style={styles.detailRow}>
             <MaterialIcons name="access-time" size={20} color="#555555" />
             <Text style={styles.detailText}>Experience: {eo?.experience}</Text>
-          </View>
+          </View> */}
           <View style={styles.detailRow}>
             <MaterialIcons name="attach-money" size={20} color="#555555" />
             <Text style={styles.detailText}>
-              Starting Price: Rp.{eo?.startingPrice},00
+              Starting Price: Rp.{startingPrice},00
             </Text>
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="room-service" size={20} color="#555555" />
             <Text style={styles.detailText}>
-              Price/pax: Rp. {eo?.pricePerPax},00
+              Price/pax: Rp. {eo?.Cathering.price},00
             </Text>
           </View>
           <View style={styles.detailRow}>
@@ -356,21 +446,56 @@ const EventOrganizerDetailScreen = ({ route }) => {
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="location-city" size={20} color="#555555" />
-            <Text style={styles.detailText}>Venue: {eo?.venueName}</Text>
+            <Text style={styles.detailText}>Venue: {eo?.Venue.name}</Text>
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="person" size={20} color="#555555" />
             <Text style={styles.detailText}>
-              Photographer: {eo?.photographerName}
+              Photographer: {eo?.Photography.name}
             </Text>
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="restaurant" size={20} color="#555555" />
             <Text style={styles.detailText}>
-              Cathering: {eo?.catheringName}
+              Cathering: {eo?.Cathering.name}
             </Text>
           </View>
         </View>
+
+        {/* Venue */}
+        <Text style={styles.sectionTitle}>Venue</Text>
+        {eo?.Venue?.photo?.map((url, index) => (
+          <Image
+            key={`venue-image-${index}`}
+            source={{ uri: url }}
+            style={styles.sectionImage}
+          />
+        ))}
+        <Text style={styles.sectionDescription}>{eo?.Venue?.description}</Text>
+
+        {/* Cathering */}
+        <Text style={styles.sectionTitle}>Cathering</Text>
+        <Image
+          source={{ uri: eo?.Cathering?.imageUrl }}
+          style={styles.sectionImage}
+        />
+        <Text style={styles.sectionDescription}>
+          {eo?.Cathering.description}
+        </Text>
+
+        {/* Photographer */}
+        <Text style={styles.sectionTitle}>Photographer</Text>
+        {eo?.Photography?.photo?.map((url, index) => (
+          <Image
+            key={`photographer-image-${index}`}
+            source={{ uri: url }}
+            style={styles.sectionImage}
+          />
+        ))}
+        <Text style={styles.sectionDescription}>
+          {eo?.Photography.description}
+        </Text>
+
         <Text>Choose total pax you want order</Text>
         <View style={styles.detailRow}>
           <MaterialIcons name="group" size={20} color="#555555" />
@@ -380,7 +505,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
             selectedValue={selectedPax}
             onValueChange={handlePaxChange}
           >
-            {eo?.paxOptions.map((option) => (
+            {paxOptions?.map((option) => (
               <Picker.Item
                 key={option}
                 label={option.toString()}
@@ -424,19 +549,30 @@ const EventOrganizerDetailScreen = ({ route }) => {
       <MapView
         style={{ width: windowWidth, height: mapHeight, paddingRight: 20 }}
         initialRegion={{
-          latitude: eo?.googleMapsLocation.latitude,
-          longitude: eo?.googleMapsLocation.longitude,
+          latitude: +eo?.Venue.locationGoogle[0],
+          longitude: +eo?.Venue.locationGoogle[1],
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
+        onPress={openNavigation}
       >
         <Marker
           coordinate={{
-            latitude: eo?.googleMapsLocation.latitude,
-            longitude: eo?.googleMapsLocation.longitude,
+            latitude: +eo?.Venue.locationGoogle[0],
+            longitude: +eo?.Venue.locationGoogle[1],
           }}
           title={eo?.name}
         />
+        {currentLocation && (
+          <Marker
+            coordinate={{
+              latitude: currentLocation.latitude,
+              longitude: currentLocation.longitude,
+            }}
+            title="Current Location"
+            pinColor="blue" // Customize the pin color for the current location marker
+          />
+        )}
       </MapView>
       <Text style={styles.noteText}>
         note: click red sign of location and click direction on bottom right to
@@ -540,6 +676,20 @@ const styles = StyleSheet.create({
     color: "gray",
     marginTop: 5,
     fontStyle: "italic",
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 20,
+  },
+  sectionImage: {
+    width: "100%",
+    height: 200,
+    marginTop: 10,
+  },
+  sectionDescription: {
+    marginTop: 10,
+    marginBottom: 20,
   },
 });
 
