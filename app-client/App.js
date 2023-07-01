@@ -303,6 +303,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -321,6 +322,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="cart" color={color} size={size} />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -339,6 +341,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="chatbubble-ellipses" color={color} size={size} />
           ),
+          // headerShown: false,
         }}
       />
     </Tab.Navigator>
