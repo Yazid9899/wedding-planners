@@ -1,13 +1,33 @@
-const { Cathering} = require("../models");
+const { Cathering } = require("../models");
+const { Op } = require('sequelize');
 
 class CatheringController {
   static async getAllCathering(req, res, next) {
     try {
+      const { search, price } = req.query
+
+      let where = {};
+      if (search) {
+        where = {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        };
+      }
+      let filter = [["id", "ASC"]]
+      if (price) {
+        if (price === "lowest") {
+          filter = [["price", "ASC"]]
+        } else if (price === "higest") {
+          filter = [["price", "DESC"]]
+        }
+      }
       const data = await Cathering.findAll({
-        order: [["id", "ASC"]]
+        order: filter,
+        where
       });
 
-      if(data){
+      if (data) {
         res.status(200).json(data);
       }
 
@@ -18,10 +38,10 @@ class CatheringController {
   static async getCatheringById(req, res, next) {
     try {
       const { id } = req.params;
-      const data = await Cathering.findOne({ where: { id }});
+      const data = await Cathering.findOne({ where: { id } });
 
-      if(!data){
-        throw{
+      if (!data) {
+        throw {
           name: "Cathering Not Found"
         }
       }

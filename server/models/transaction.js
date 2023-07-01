@@ -19,5 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Transaction',
   });
+  Transaction.beforeCreate((trans) => {
+    trans.status = "pending"
+  })
   return Transaction;
 };

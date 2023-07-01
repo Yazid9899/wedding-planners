@@ -9,84 +9,68 @@ const i = new Invoice();
 
 
 class TransactionController {
-  // static async getAllTransactions(req, res, next) {
-  //   try {
-  //     const data = await Transaction.findAll({
-  //       include: [{ model: User }, { model: Product }],
-  //     });
-  //     res.status(200).json({
-  //       statusCode: 200,
-  //       data,
-  //     });
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // }
-  // static async getTransactionById(req, res, next) {
-  //   try {
-  //     const { id } = req.params;
-  //     const data = await Transaction.findOne({
-  //       include: [{ model: User }, { model: Product }],
-  //       where: { id },
-  //     });
-  //     res.status(200).json({
-  //       statusCode: 200,
-  //       data,
-  //     });
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // }
-  // static async createTransaction(req, res, next) {
-  //   try {
-  //     const { name, price, noTransaction } = req.body;
-  //     const { id } = req.additionalData
+  static async getTransactionById(req, res, next) {
+    try {
+      const { id } = req.additionalData
+      const data = await Transaction.findAll({
+        where: { id },
+      });
 
-  //     const data = await Transaction.create({
-  //       name,
-  //       price,
-  //       UserId: id,
-  //       noTransaction
-  //     });
+      if(!data){
+        throw{
+          name: "Transaction Not Found"
+        }
+      }
+      res.status(200).json(data);
 
+    } catch (err) {
+      next(err);
+    }
+  }
+  static async changeStatusTransaction(req, res, next) {
+    try {
+      const { id } = req.params;
 
-  //     res.status(200).json({
-  //       statusCode: 200,
-  //       data,
-  //     });
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // }
-  // static async changeStatusTransaction(req, res, next) {
-  //   try {
-  //     const { id } = req.params;
-  //     const data = await Transaction.findOne({ where: { id } });
-  //     await Transaction.update({ status: "Paid" }, { where: { id: id } });
+      await Transaction.update({ status: "Paid" }, { where: { id: id } });
+  
+      res.status(200).json({
+        message: "Transaction Paid",
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+  static async createTransaction(name, price, id, noTransaction) {
 
-  //     res.status(200).json({
-  //       statusCode: 200,
-  //       message: "Transaction Paid",
-  //     });
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // }
+    await Transaction.create({
+      name,
+      price,
+      UserId: id,
+      noTransaction
+    });
+  }
 
   static async payment(req, res, next) {
     try {
+      const { title, totalAmount, } = req.body
+      const { email, id } = req.additionalData
       const data = await i.createInvoice({
         externalID: "your-external-id",
-        payerEmail: "stanley@xendit.co",
-        description: "Invoice for Shoes Purchase",
-        amount: 100000,
+        payerEmail: email,
+        description: title,
+        amount: totalAmount,
       });
+      
+      const noTransaction = "TRANSACTION_" + data.id
+      
+      TransactionController.createTransaction(title, totalAmount, id, noTransaction)
 
       res.status(200).json({
         statusCode: 200,
         message: "paymentGateway",
         data,
       });
+
     } catch (err) {
       next(err);
     }

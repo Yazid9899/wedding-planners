@@ -1,14 +1,35 @@
 const { Photography } = require("../models");
+const { Op } = require('sequelize');
 class PhotographyController {
 
   static async getAllPhotographies(req, res, next) {
     try {
+      const { search, price } = req.query
+
+      let where = {};
+      if (search) {
+        where = {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        };
+      }
+      let filter = [["id", "ASC"]]
+      if (price) {
+        if (price === "lowest") {
+          filter = [["price", "ASC"]]
+        } else if (price === "higest") {
+          filter = [["price", "DESC"]]
+        }
+      }
+
       const data = await Photography.findAll({
-        order: [["id", "ASC"]]
+        order: filter,
+        where
+
       });
 
-      
-      if(data){
+      if (data) {
         res.status(200).json(data);
       }
 
@@ -21,14 +42,14 @@ class PhotographyController {
       const { id } = req.params;
       const data = await Photography.findOne({ where: { id } });
 
-      if(!data){
-        throw{
+      if (!data) {
+        throw {
           name: "Photography Not Found"
         }
       }
 
       res.status(200).json(data);
-      
+
     } catch (err) {
       next(err);
     }
