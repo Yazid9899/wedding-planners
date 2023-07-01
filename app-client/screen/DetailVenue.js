@@ -6,8 +6,16 @@
 // export default DetailVenue;
 
 import React from "react";
-import { View, Text, Image, ScrollView, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import MapView, { Marker } from "react-native-maps";
 
 const VenueDetailScreen = ({ route }) => {
   // const { name, description, image, location, capacity, facility, rating, price, type, portofolio } = route.params;
@@ -31,7 +39,14 @@ const VenueDetailScreen = ({ route }) => {
       "https://images.unsplash.com/photo-1625619080917-7d6ff39e0675?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
       "https://plus.unsplash.com/premium_photo-1664790560217-f9d1b375b7eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
     ],
+    googleMapsLocation: {
+      latitude: -6.2088,
+      longitude: 106.8456,
+    },
   };
+  const windowWidth = Dimensions.get("window").width;
+  const windowHeight = Dimensions.get("window").height;
+  const mapHeight = windowHeight * 0.3;
 
   return (
     <ScrollView style={styles.container}>
@@ -62,7 +77,9 @@ const VenueDetailScreen = ({ route }) => {
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="attach-money" size={20} color="#555555" />
-            <Text style={styles.detailText}>Price: {venue.price}</Text>
+            <Text style={styles.detailText}>
+              Price: Start from Rp.{venue.price}
+            </Text>
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="category" size={20} color="#555555" />
@@ -80,7 +97,43 @@ const VenueDetailScreen = ({ route }) => {
             />
           ))}
         </ScrollView>
+        {/* <MapView
+          style={{ width: "100%", height: 200 }}
+          initialRegion={{
+            latitude: venue.googleMapsLocation.latitude,
+            longitude: venue.googleMapsLocation.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          <Marker
+            coordinate={{
+              latitude: venue.googleMapsLocation.latitude,
+              longitude: venue.googleMapsLocation.longitude,
+            }}
+            title={venue.name}
+          />
+        </MapView> */}
+
+        <Text style={styles.portofolioTitle}>Google Maps:</Text>
       </View>
+      <MapView
+        style={{ width: windowWidth, height: mapHeight, paddingRight: 20 }}
+        initialRegion={{
+          latitude: venue.googleMapsLocation.latitude,
+          longitude: venue.googleMapsLocation.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      >
+        <Marker
+          coordinate={{
+            latitude: venue.googleMapsLocation.latitude,
+            longitude: venue.googleMapsLocation.longitude,
+          }}
+          title={venue.name}
+        />
+      </MapView>
     </ScrollView>
   );
 };
