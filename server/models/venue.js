@@ -3,21 +3,25 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Photography extends Model {
+  class Venue extends Model {
 
     static associate(models) {
-      Photography.hasMany(models.Cart);
-      Photography.hasMany(models.Product);
+      Venue.hasMany(models.Cart);
+      Venue.hasMany(models.Product);
     }
   }
-  Photography.init({
+  Venue.init({
     name: DataTypes.STRING,
+    location: DataTypes.STRING,
+    locationGoogle: DataTypes.ARRAY(DataTypes.STRING),
     price: DataTypes.INTEGER,
+    capacity: DataTypes.INTEGER,
     description: DataTypes.TEXT,
+    isBooked: DataTypes.BOOLEAN,
     photo: DataTypes.ARRAY(DataTypes.STRING)
   }, {
     sequelize,
-    modelName: 'Photography',
+    modelName: 'Venue',
   });
-  return Photography;
+  return Venue;
 };
