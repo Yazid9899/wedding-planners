@@ -53,6 +53,11 @@ const errorHandling = async (err, req, res, next) => {
         message: "Cart Not Found",
       });
       break;
+    case "Transaction Not Found":
+      res.status(404).json({
+        message: "Transaction Not Found",
+      });
+      break;
     default:
       res.status(500).json({
         message: "Internal Server Error",
