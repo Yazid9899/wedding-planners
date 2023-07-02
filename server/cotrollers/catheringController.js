@@ -4,11 +4,16 @@ const { Op } = require('sequelize');
 class CatheringController {
   static async getAllCathering(req, res, next) {
     try {
-      const { search, price } = req.query
+      const { search, price, belowPrice } = req.query
 
-      let where = {};
+      let where = {
+        price: {
+          [Op.lt]: belowPrice,
+        }
+      } 
       if (search) {
         where = {
+          ...where,
           name: {
             [Op.iLike]: `%${search}%`,
           },
