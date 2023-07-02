@@ -25,7 +25,7 @@ const HomeScreen = () => {
     try {
       const { data } = await axios({
         method: "GET",
-        url: `https://b897-103-138-68-174.ngrok-free.app/products`,
+        url: `https://dc75-36-70-44-144.ngrok-free.app/products`,
       });
       setProduct(data);
       // console.log(data);

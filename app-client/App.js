@@ -24,18 +24,19 @@ import LoginPage from "./components/LoginPage";
 import ChatScreen from "./components/ChatScreen";
 import LoginRegister from "./screen/LoginRegister";
 import HomeStack from "./screen/HomeStack";
+import CartScreen from "./components/CartScreen.js";
 
 // Define sample data for EO and venue
 
 // Create a bottom tab navigator
 const Tab = createBottomTabNavigator();
 
-const CartScreen = () => (
-  <View style={styles.screen}>
-    <Text style={styles.title}>Cart</Text>
-    {/* Add cart items */}
-  </View>
-);
+// const CartScreen = () => (
+//   <View style={styles.screen}>
+//     <Text style={styles.title}>Cart</Text>
+//     {/* Add cart items */}
+//   </View>
+// );
 
 const TabNavigator = () => {
   return (
