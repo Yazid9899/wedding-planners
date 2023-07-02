@@ -5,11 +5,17 @@ class VenueControllers {
 
   static async getAll(req, res, next) {
     try {
-      const { location, search, price } = req.query
+      const { location, search, price, belowPrice } = req.query
 
-      let where = {};
+      let where = {
+        price: {
+          [Op.lt]: belowPrice,
+        }
+      } 
+      
       if (location) {
         where = {
+          ...where,
           location: location,
         };
       }

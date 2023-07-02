@@ -1,10 +1,12 @@
-const { Cart } = require("../models");
+const { Cart,Photography, Venue, Cathering} = require("../models");
 
 class CartControllers{
   static async createCart(req, res, next){
     try{
       const {id} = req.additionalData
-      const {title,PhotographyId, CatheringId,  VenueId, totalPrice} = req.body
+      const {title,PhotographyId, CatheringId,  VenueId, totalPrice, pax} = req.body
+
+      console.log(pax, "<<<<<<<<<<<<");
 
       const create = await Cart.create({
         title,
@@ -12,7 +14,8 @@ class CartControllers{
         PhotographyId, 
         CatheringId,  
         VenueId, 
-        totalPrice
+        pax,
+        totalPrice,
       })
 
       if(create){
@@ -30,6 +33,11 @@ class CartControllers{
     try{
       const {id} = req.additionalData
       const data = await Cart.findAll({
+        include: [
+          { model: Photography },
+          { model: Cathering },
+          { model: Venue },
+        ],
         where:{
           UserId:id
         }
