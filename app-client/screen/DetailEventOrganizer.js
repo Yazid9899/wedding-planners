@@ -48,8 +48,14 @@ const EventOrganizerDetailScreen = ({ route }) => {
       { cancelable: true }
     );
   };
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(value);
+  };
 
-  const startingPrice = eo?.price + +eo?.Venue.price;
+  const startingPrice = formatCurrency(eo?.price + +eo?.Venue.price);
   const totalPrice =
     eo?.price + +eo?.Venue.price + selectedPax * eo?.Cathering?.price;
   const handlePaxChange = (value) => {
@@ -69,7 +75,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
     if (confirmation === "yes") {
       try {
         const response = await fetch(
-          "https://3d30-2404-c0-5c20-00-e9b-840e.ngrok-free.app/carts",
+          "https://c9d4-103-138-68-174.ngrok-free.app/carts",
           {
             method: "POST",
             headers: {
@@ -87,7 +93,9 @@ const EventOrganizerDetailScreen = ({ route }) => {
 
         if (response.ok) {
           // Cart successfully created
-          navigation.navigate("Cart"); // Navigasi ke halaman keranjang
+          navigation.navigate("Cart", {
+            eo: { ...eo, totalPrice: totalPrice },
+          }); // Navigasi ke halaman keranjang
         } else {
           // Handle error response
           const errorData = await response.json();
@@ -145,13 +153,13 @@ const EventOrganizerDetailScreen = ({ route }) => {
           <View style={styles.detailRow}>
             <MaterialIcons name="attach-money" size={20} color="#555555" />
             <Text style={styles.detailText}>
-              Starting Price: Rp.{startingPrice},00
+              Starting Price: {startingPrice}
             </Text>
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="room-service" size={20} color="#555555" />
             <Text style={styles.detailText}>
-              Price/pax: Rp. {eo?.Cathering.price},00
+              Price/pax: {formatCurrency(eo?.Cathering.price)}
             </Text>
           </View>
           <View style={styles.detailRow}>
@@ -229,7 +237,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
           </Picker>
         </View>
         <Text style={styles.totalPriceText}>
-          Total price for this order is Rp {totalPrice}
+          Total price for this order is {formatCurrency(totalPrice)}
         </Text>
         <TouchableOpacity style={styles.addButton} onPress={handleAddToCart}>
           <Text style={styles.addButtonText}>Add this order to cart</Text>

@@ -15,8 +15,6 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-// import Carousel from "react-native-snap-carousel";
-// import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/Ionicons";
 import HomeScreen from "./components/HomeScreen";
 import FilterScreen from "./components/FilterScreen";

@@ -18,7 +18,7 @@ class CartControllers {
 
       if (create) {
         res.status(201).json({
-          message: `cart with id:${create.id} and userId:${id} was successfully created`,
+          message: `cart with id:${create.id} and userId:${create.UserId} was successfully created`,
         });
       }
     } catch (err) {

@@ -18,6 +18,13 @@ import axios from "axios";
 import Icon from "react-native-vector-icons/Ionicons";
 import DetailVenue from "../screen/DetailVenue";
 
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(value);
+};
+
 const HomeScreen = () => {
   const [product, setProduct] = useState([]);
 
@@ -25,7 +32,7 @@ const HomeScreen = () => {
     try {
       const { data } = await axios({
         method: "GET",
-        url: `https://dc75-36-70-44-144.ngrok-free.app/products`,
+        url: `https://c9d4-103-138-68-174.ngrok-free.app/products`,
       });
       setProduct(data);
       // console.log(data);
@@ -81,9 +88,9 @@ const HomeScreen = () => {
               </View>
               <View style={styles.cardInfo}>
                 <Ionicons name="pricetag-outline" size={16} color="#00bce1" />
-                <Text style={styles.cardInfoText}>{`Rp. ${
-                  item?.Venue.price + item?.price
-                }`}</Text>
+                <Text style={styles.cardInfoText}>
+                  {formatCurrency(item?.Venue.price + item?.price)}
+                </Text>
               </View>
               <View style={styles.cardInfo}>
                 <Ionicons name="star" size={16} color="#FFD700" />
