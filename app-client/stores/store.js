@@ -12,6 +12,7 @@ import userRegisterReducer from "../features/RegisterData/registerSlice";
 
 import inputDateBudgetReducer from "../features/inputDateBudget/dateBudgetSlice";
 
+import addCartReducer from "../features/CartData/AddCart";
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +26,6 @@ export const store = configureStore({
     users: usersReducer,
     register: userRegisterReducer,
     inputDateBudget: inputDateBudgetReducer,
-
+    addCart: addCartReducer,
   },
 });

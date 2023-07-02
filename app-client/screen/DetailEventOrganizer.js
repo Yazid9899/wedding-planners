@@ -18,6 +18,7 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailProductsData } from "../features/PackageData/PackageDetail";
+import { addCartData } from "../features/CartData/AddCart";
 
 const EventOrganizerDetailScreen = ({ route }) => {
   // const { id } = route.params;
@@ -34,7 +35,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
   const dispatch = useDispatch();
 
   const productStateData = useSelector((state) => state.detailProduct.data);
-  console.log(productStateData.Venue, "============");
+  // console.log(productStateData.Venue, "============");
 
   // const id = route.params();
   useEffect(() => {
@@ -71,6 +72,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
     }).format(value);
   };
 
+  const { status, error } = useSelector((state) => state.addCart);
   const startingPrice = formatCurrency(
     productStateData?.price + +productStateData?.Venue?.price
   );
@@ -93,41 +95,48 @@ const EventOrganizerDetailScreen = ({ route }) => {
     setShowModal(false);
 
     if (confirmation === "yes") {
-      try {
-        const response = await fetch(
-          "https://c9d4-103-138-68-174.ngrok-free.app/carts",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              title: productStateData?.title,
-              PhotographyId: productStateData?.PhotographyId,
-              CatheringId: productStateData?.CatheringId,
-              VenueId: productStateData?.VenueId,
-              totalPrice: totalPrice,
-            }),
-          }
-        );
-
-        if (response.ok) {
-          // Cart successfully created
-          navigation.navigate("Cart", {
-            productStateData: { ...productStateData, totalPrice: totalPrice },
-          }); // Navigasi ke halaman keranjang
-        } else {
-          // Handle error response
-          const errorData = await response.json();
-          console.log(errorData);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else if (confirmation === "no") {
-      // Kembali ke halaman detail event organizer
-      // Implementasikan logika navigasi ke halaman detail event organizer di sini
+      // dispatch(addCartData({ eoId, selectedPax }));
+      dispatch(addCartData(productStateData));
+      Alert.alert(
+        "Success",
+        "The product has been added to the cart successfully."
+      );
     }
+    // if (confirmation === "yes") {
+    //   try {
+    //     const response = await fetch(
+    //       "https://c9d4-103-138-68-174.ngrok-free.app/carts",
+    //       {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //           title: productStateData?.title,
+    //           PhotographyId: productStateData?.PhotographyId,
+    //           CatheringId: productStateData?.CatheringId,
+    //           VenueId: productStateData?.VenueId,
+    //           totalPrice: totalPrice,
+    //         }),
+    //       }
+    //     );
+
+    //     if (response.ok) {
+    //       // Cart successfully created
+    //       // navigation.navigate("Cart", {
+    //       //   productStateData: { ...productStateData, totalPrice: totalPrice },
+    //       // });
+    //       navigation.navigate("Cart");
+    //     } else {
+    //       // Handle error response
+    //       const errorData = await response.json();
+    //       console.log(errorData);
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // } else if (confirmation === "no") {
+    // }
   };
 
   const windowWidth = Dimensions.get("window").width;

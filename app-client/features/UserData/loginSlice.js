@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {BASE_URL} from "../../config/api";
+import { BASE_URL } from "../../config/api";
 
 export const loginData = createAsyncThunk("login/fetchData", async (data) => {
   // console.log(data);
