@@ -31,8 +31,11 @@
   {
     "name": "Jessica Martinez",
     "price": 6500000,
-    "description": "Kami adalah fotografer pernikahan yang berdedikasi untuk menciptakan kisah visual yang menakjubkan dari momen-momen berharga dalam pernikahan Anda. Dengan kepekaan artistik dan kemampuan teknis yang solid, Kami akan mengabadikan setiap detail, kebahagiaan, dan cinta yang terpancar dalam perayaan Anda. Dari detik-detik emosional hingga momen-momen puncak, Kami akan menggambarkan cerita Anda dengan indah dan autentik. Percayakan kepada Kami untuk menciptakan kenangan yang abadi dari hari pernikahan Anda."
-  
+    "description": "Kami adalah fotografer pernikahan yang berdedikasi untuk menciptakan kisah visual yang menakjubkan dari momen-momen berharga dalam pernikahan Anda. Dengan kepekaan artistik dan kemampuan teknis yang solid, Kami akan mengabadikan setiap detail, kebahagiaan, dan cinta yang terpancar dalam perayaan Anda. Dari detik-detik emosional hingga momen-momen puncak, Kami akan menggambarkan cerita Anda dengan indah dan autentik. Percayakan kepada Kami untuk menciptakan kenangan yang abadi dari hari pernikahan Anda.",
+    "photo": [
+      "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+      "https://images.unsplash.com/photo-1615460549969-36fa19521a4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+    ]
   },
   {
     "name": "Matthew Wilson",
