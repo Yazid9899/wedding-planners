@@ -8,11 +8,12 @@ import axios from "axios";
 
 // First screen - Budget and Date
 const initialState = {
-  budget: null,
+  budget: 0,
   date: null,
   venueId: null,
   photographerId: null,
   cateringId: null,
+  guestPax: 0,
 };
 
 const inputDateBudgetSlice = createSlice({
@@ -39,6 +40,10 @@ const inputDateBudgetSlice = createSlice({
       state.cateringId = action.payload;
       console.log("Catering ID:", state.cateringId);
     },
+    setGuestPax: (state, action) => {
+      state.guestPax = action.payload;
+      console.log("Guest Pax:", state.guestPax);
+    },
   },
 });
 
@@ -48,6 +53,7 @@ export const {
   setVenueId,
   setPhotographerId,
   setCateringId,
+  setGuestPax,
 } = inputDateBudgetSlice.actions;
 
 export default inputDateBudgetSlice.reducer;

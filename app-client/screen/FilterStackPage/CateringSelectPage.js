@@ -13,33 +13,64 @@ import SelectCateringCard from "../../components/filterComponents/SelectCatering
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchCatheringsData } from "../../features/CateringData/cateringSlice.js";
+import { Dropdown } from "react-native-element-dropdown";
 
 const CateringSelectPage = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const cateringStateData = useSelector((state) => state.catering.data);
 
-  useEffect(() => {
-    dispatch(fetchCatheringsData());
-  }, [dispatch]);
-
-  //
-  const nextButton = () => {
-    navigation.navigate("MenuPaxSelect");
-  };
-  const previousButton = () => {
-    navigation.navigate("PhotoSelect");
-  };
+  const budgetData = useSelector((state) => state.inputDateBudget.budget);
 
   //   Search
   const [searchQuery, setSearchQuery] = useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
+  //   Price
+  const [valuePrice, setValuePrice] = useState(null);
+  const [isFocusPrice, setIsFocusPrice] = useState(false);
+
+  useEffect(() => {
+    dispatch(
+      fetchCatheringsData({
+        belowPrice: budgetData,
+        search: searchQuery,
+        price: valuePrice,
+      })
+    );
+  }, [dispatch, searchQuery, valuePrice]);
   //
-  const data = [
-    { label: "Item 1", value: "1" },
-    { label: "Item 2", value: "2" },
-    { label: "Item 3", value: "3" },
+
+  //
+  const Price = [
+    { label: "All", value: null },
+    { label: "Lowest Price", value: "lowest" },
+    { label: "Highest Price", value: "higest" },
   ];
+  const renderPriceDropdown = (text, dataDrop) => (
+    <Dropdown
+      style={[styles.dropdown, isFocusPrice && { borderColor: "blue" }]}
+      placeholderStyle={styles.placeholderStyle}
+      selectedTextStyle={styles.selectedTextStyle}
+      inputSearchStyle={styles.inputSearchStyle}
+      iconStyle={styles.iconStyle}
+      data={dataDrop}
+      search
+      maxHeight={300}
+      labelField="label"
+      valueField="value"
+      placeholder={`${text}`}
+      // placeholder={!isFocus ? `${text}` : "..."}
+      searchPlaceholder="Search..."
+      value={valuePrice}
+      onFocus={() => setIsFocusPrice(true)}
+      onBlur={() => setIsFocusPrice(false)}
+      onChange={(item) => {
+        console.log(item);
+        setValuePrice(item.value);
+        setIsFocusPrice(false);
+      }}
+    />
+  );
   return (
     //  <ScrollView>
     <View style={styles.screen}>
@@ -49,6 +80,9 @@ const CateringSelectPage = ({ navigation }) => {
         value={searchQuery}
         style={styles.searchStyle}
       />
+      <View style={styles.dropdownContainer}>
+        {renderPriceDropdown("Price", Price)}
+      </View>
 
       <FlatList
         data={cateringStateData}
@@ -102,6 +136,37 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  //
+  dropdownContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 1,
+    marginVertical: 20,
+  },
+  dropdown: {
+    flex: 1,
+    height: 35,
+    //  borderColor: "gray",
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 20,
+    marginHorizontal: 2,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+  },
+  //
 });
 
 {
@@ -131,3 +196,11 @@ const styles = StyleSheet.create({
         </TouchableOpacity>
       </View> */
 }
+
+//
+//   const nextButton = () => {
+//    navigation.navigate("MenuPaxSelect");
+//  };
+//  const previousButton = () => {
+//    navigation.navigate("PhotoSelect");
+//  };

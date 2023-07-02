@@ -12,34 +12,71 @@ import { Searchbar } from "react-native-paper";
 import SelectPhotoCard from "../../components/filterComponents/SelectPhotoCard.js";
 
 import { useDispatch, useSelector } from "react-redux";
+
 import { fetchPhotographData } from "../../features/PhotographData/photographSlice.js";
+import { Dropdown } from "react-native-element-dropdown";
 
 const PhotoSelectPage = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const photographStateData = useSelector((state) => state.photograph.data);
 
-  useEffect(() => {
-    dispatch(fetchPhotographData());
-  }, [dispatch]);
-  //
-
-  const nextButton = () => {
-    navigation.navigate("CateringSelect");
-  };
-  const previousButton = () => {
-    navigation.navigate("BuildingSelect");
-  };
+  const budgetData = useSelector((state) => state.inputDateBudget.budget);
 
   //   Search
   const [searchQuery, setSearchQuery] = useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
   //
-  const data = [
-    { label: "Item 1", value: "1" },
-    { label: "Item 2", value: "2" },
-    { label: "Item 3", value: "3" },
+  //   Price
+  const [valuePrice, setValuePrice] = useState(null);
+  const [isFocusPrice, setIsFocusPrice] = useState(false);
+
+  console.log(budgetData, searchQuery, "di select photo"); // Display the budget value
+
+  useEffect(() => {
+    dispatch(
+      fetchPhotographData({
+        belowPrice: budgetData,
+        search: searchQuery,
+        price: valuePrice,
+      })
+    );
+  }, [dispatch, searchQuery, valuePrice]);
+  //
+
+  //
+
+  const Price = [
+    { label: "All", value: null },
+    { label: "Lowest Price", value: "lowest" },
+    { label: "Highest Price", value: "higest" },
   ];
+  const renderPriceDropdown = (text, dataDrop) => (
+    <Dropdown
+      style={[styles.dropdown, isFocusPrice && { borderColor: "blue" }]}
+      placeholderStyle={styles.placeholderStyle}
+      selectedTextStyle={styles.selectedTextStyle}
+      inputSearchStyle={styles.inputSearchStyle}
+      iconStyle={styles.iconStyle}
+      data={dataDrop}
+      search
+      maxHeight={300}
+      labelField="label"
+      valueField="value"
+      placeholder={`${text}`}
+      // placeholder={!isFocus ? `${text}` : "..."}
+      searchPlaceholder="Search..."
+      value={valuePrice}
+      onFocus={() => setIsFocusPrice(true)}
+      onBlur={() => setIsFocusPrice(false)}
+      onChange={(item) => {
+        console.log(item);
+        setValuePrice(item.value);
+        setIsFocusPrice(false);
+      }}
+    />
+  );
+
   return (
     //  <ScrollView>
     <View style={styles.screen}>
@@ -49,10 +86,10 @@ const PhotoSelectPage = ({ navigation }) => {
         value={searchQuery}
         style={styles.searchStyle}
       />
-      {/* <Text>{JSON.stringify(photographStateData)}</Text> */}
-      {/* {SelectPhotoCard(data)}
-        {SelectPhotoCard(data)}
-        {SelectPhotoCard(data)} */}
+
+      <View style={styles.dropdownContainer}>
+        {renderPriceDropdown("Price", Price)}
+      </View>
 
       <FlatList
         data={photographStateData}
@@ -98,6 +135,37 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  //
+  dropdownContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 1,
+    marginVertical: 20,
+  },
+  dropdown: {
+    flex: 1,
+    height: 35,
+    //  borderColor: "gray",
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 20,
+    marginHorizontal: 2,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+  },
+  //
 });
 
 {
@@ -110,3 +178,10 @@ const styles = StyleSheet.create({
         </TouchableOpacity>
       </View> */
 }
+
+// const nextButton = () => {
+//     navigation.navigate("CateringSelect");
+//   };
+//   const previousButton = () => {
+//     navigation.navigate("BuildingSelect");
+//   };
