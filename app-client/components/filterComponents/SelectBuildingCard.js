@@ -2,14 +2,22 @@ import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { Button, Card } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { setVenueId } from "../../features/inputDateBudget/dateBudgetSlice";
+
 const SelectBuildingCard = ({ data, navigation }) => {
+  const dispatch = useDispatch();
+
   // NEXT PREV button
   const nextButton = () => {
+    dispatch(setVenueId(data));
+
     navigation.navigate("PhotoSelect");
   };
-  const previousButton = () => {
-    navigation.navigate("MainFilter");
-  };
+  //   const previousButton = () => {
+  //     navigation.navigate("MainFilter");
+  //   };
   //
   const LocationText = () => (
     <View style={styles.locationContainer}>

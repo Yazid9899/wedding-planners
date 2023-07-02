@@ -13,6 +13,7 @@ const initialState = {
   venueId: null,
   photographerId: null,
   cateringId: null,
+  guestPax: 0,
 };
 
 const inputDateBudgetSlice = createSlice({
@@ -39,6 +40,10 @@ const inputDateBudgetSlice = createSlice({
       state.cateringId = action.payload;
       console.log("Catering ID:", state.cateringId);
     },
+    setGuestPax: (state, action) => {
+      state.guestPax = action.payload;
+      console.log("Guest Pax:", state.guestPax);
+    },
   },
 });
 
@@ -48,6 +53,7 @@ export const {
   setVenueId,
   setPhotographerId,
   setCateringId,
+  setGuestPax,
 } = inputDateBudgetSlice.actions;
 
 export default inputDateBudgetSlice.reducer;

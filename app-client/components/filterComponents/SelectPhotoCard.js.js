@@ -2,8 +2,16 @@ import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Avatar, Button } from "react-native-paper";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { setPhotographerId } from "../../features/inputDateBudget/dateBudgetSlice";
+
 const SelectPhotoCard = ({ data, navigation }) => {
+  const dispatch = useDispatch();
+
   const nextButton = () => {
+    dispatch(setPhotographerId(data));
+
     navigation.navigate("CateringSelect");
   };
 
