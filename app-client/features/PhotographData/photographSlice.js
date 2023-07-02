@@ -3,10 +3,30 @@ import axios from "axios";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
 export const fetchPhotographData = createAsyncThunk(
   "photographies/fetchData",
-  async () => {
-    const response = await axios.get(
-      "https://fde2-103-138-68-174.ngrok-free.app/photographies"
-    );
+  async ({ search, price, belowPrice = 1000000000 }) => {
+    let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/photographies";
+
+    belowPrice = belowPrice * 0.1;
+
+    console.log(belowPrice, search, price, "photo slice<<<<<<");
+
+    const queryParams = [];
+    if (search) {
+      queryParams.push(`search=${search}`);
+    }
+    if (price) {
+      queryParams.push(`price=${price}`);
+    }
+    if (belowPrice !== 0) {
+      queryParams.push(`belowPrice=${belowPrice}`);
+    }
+
+    if (queryParams.length > 0) {
+      baseUrl += `?${queryParams.join("&")}`;
+    }
+
+    console.log(baseUrl);
+    const response = await axios.get(baseUrl);
     //  console.log(response.data, ">>>>>di slice photo>>>>>>>>>>>>>>>>>>>>.");
     return response.data;
   }

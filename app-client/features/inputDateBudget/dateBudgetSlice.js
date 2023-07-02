@@ -8,7 +8,7 @@ import axios from "axios";
 
 // First screen - Budget and Date
 const initialState = {
-  budget: null,
+  budget: 0,
   date: null,
   venueId: null,
   photographerId: null,

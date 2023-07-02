@@ -3,8 +3,14 @@ import axios from "axios";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
 export const fetchVenueData = createAsyncThunk(
   "venue/fetchData",
-  async ({ search, location, price }) => {
+  async ({ search, location, price, belowPrice = 1000000000 }) => {
     let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/venues";
+
+    //  console.log(belowPrice, ">>>>");
+
+    belowPrice = belowPrice * 0.6;
+
+    //  console.log(belowPrice, "<<<<<<");
 
     const queryParams = [];
     if (search) {
@@ -15,6 +21,9 @@ export const fetchVenueData = createAsyncThunk(
     }
     if (price) {
       queryParams.push(`price=${price}`);
+    }
+    if (belowPrice !== 0) {
+      queryParams.push(`belowPrice=${belowPrice}`);
     }
 
     if (queryParams.length > 0) {

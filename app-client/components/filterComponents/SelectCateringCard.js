@@ -2,31 +2,27 @@ import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Avatar, Button } from "react-native-paper";
 
-const SelectCateringCard = ({ item, navigation }) => {
+const SelectCateringCard = ({ data, navigation }) => {
   const nextButton = () => {
     navigation.navigate("MenuPaxSelect");
   };
-  const previousButton = () => {
-    navigation.navigate("PhotoSelect");
-  };
+
+  const slicedDescription = data?.description?.slice(0, 500);
+
   return (
     <View style={styles.vendorCard}>
       <View style={styles.avatarContainer}>
         <Avatar.Image
           size={50}
           source={{
-            uri: "https://areatopik.com/wp-content/uploads/2022/10/Kobo-Nangis.jpg",
+            uri: data?.imageUrl,
           }}
         />
       </View>
 
       <View style={styles.titleContainer}>
-        <Text style={styles.vendorCardTextHead}>
-          Double Happiness Wedding Organizer
-        </Text>
-        <Text style={styles.vendorCardTextSubtitle}>
-          Event Organizer - Jakarta
-        </Text>
+        <Text style={styles.vendorCardTextHead}>{data?.name}</Text>
+        <Text style={styles.vendorCardTextSubtitle}>{slicedDescription}</Text>
       </View>
 
       {/* Second Row */}
@@ -37,25 +33,25 @@ const SelectCateringCard = ({ item, navigation }) => {
             <Image
               style={styles.imageListVendorBackground}
               source={{
-                uri: "https://img.freepik.com/free-photo/bride-groom-having-their-wedding-beach_23-2149043964.jpg?w=2000",
+                uri: data?.imageUrl,
               }}
             />
             <Image
               style={styles.imageListVendorBackground}
               source={{
-                uri: "https://img.freepik.com/free-photo/bride-groom-having-their-wedding-beach_23-2149043964.jpg?w=2000",
+                uri: data?.imageUrl,
               }}
             />
             <Image
               style={styles.imageListVendorBackground}
               source={{
-                uri: "https://img.freepik.com/free-photo/bride-groom-having-their-wedding-beach_23-2149043964.jpg?w=2000",
+                uri: data?.imageUrl,
               }}
             />
             <Image
               style={styles.imageListVendorBackground}
               source={{
-                uri: "https://img.freepik.com/free-photo/bride-groom-having-their-wedding-beach_23-2149043964.jpg?w=2000",
+                uri: data?.imageUrl,
               }}
             />
           </View>
@@ -64,8 +60,8 @@ const SelectCateringCard = ({ item, navigation }) => {
 
       {/* Third Row */}
       <View style={styles.priceContainer}>
-        <Text>per @200 pax</Text>
-        <Text style={styles.priceText}>IDR 5.000.000</Text>
+        <Text style={styles.priceText}>IDR {data?.price}</Text>
+        <Text>per @Pax</Text>
         <Button
           mode="contained"
           style={styles.button}

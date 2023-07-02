@@ -14,8 +14,6 @@ import { Searchbar, TextInput } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 //
-// Component
-// import vendorCard from "../../components/filterComponents/vendorCard";
 import SelectBuildingCard from "../../components/filterComponents/SelectBuildingCard";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -24,11 +22,14 @@ import { fetchVenueData } from "../../features/VenueData/venueSlice";
 
 const BuildingSelectPage = ({ navigation }) => {
   const dispatch = useDispatch();
+
   const venueStateData = useSelector((state) => state.venue.data);
 
   const budgetData = useSelector((state) => state.inputDateBudget.budget);
 
   console.log(budgetData, "di select building"); // Display the budget value
+
+  console.log(venueStateData, "di select building"); // Display the budget value
 
   //   Search
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,6 +50,7 @@ const BuildingSelectPage = ({ navigation }) => {
         search: searchQuery,
         location: valueLoc,
         price: valuePrice,
+        belowPrice: budgetData,
       })
     );
   }, [dispatch, searchQuery, valueLoc, valuePrice]);
@@ -274,6 +276,7 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 16,
   },
+  //
   flatListContainer: {
     marginTop: 20,
   },
