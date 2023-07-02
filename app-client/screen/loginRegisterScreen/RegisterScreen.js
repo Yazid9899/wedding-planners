@@ -10,6 +10,7 @@ import BackButton from "../../components/loginRegisterComponent/BackButton";
 import {theme} from "../../core/theme";
 import {useDispatch, useSelector} from "react-redux";
 import {registerData} from "../../features/RegisterData/registerSlice";
+import {Alert} from "react-native";
 
 export default function RegisterScreen({navigation}) {
   const dispatch = useDispatch();
@@ -31,7 +32,13 @@ export default function RegisterScreen({navigation}) {
   };
 
   const onSubmit = async () => {
+    if (dataUser.email === "" || dataUser.password === "") {
+      Alert.alert("Error", "Email dan password harus diisi");
+      return;
+    }
+
     await dispatch(registerData(dataUser));
+
     if (status === "failed") {
       Alert.alert("Register Failed", error);
     } else {

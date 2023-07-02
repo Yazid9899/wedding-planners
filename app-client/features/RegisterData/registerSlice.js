@@ -5,11 +5,14 @@ import {BASE_URL} from "../../config/api";
 export const registerData = createAsyncThunk(
   "register/fetchData",
   async (data) => {
-    // console.log(data);
-    const response = await axios.post(`${BASE_URL}/users/register`, data);
-    //   AsyncStorage.setItem("access_token", response.data.access_token);
-    console.log(response.data, ">>>>>di slice register>>>>>>>>>>>>>>>>>>>>.");
-    return response.data;
+    try {
+      const response = await axios.post(`${BASE_URL}/users/register`, data);
+      console.log(response.data, ">>>>>di slice register>>>>>>>>>>>>>>>>>>>>.");
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 );
 

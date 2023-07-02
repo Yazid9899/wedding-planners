@@ -1,5 +1,5 @@
 // Import React and React Native components
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   View,
   Text,
@@ -10,9 +10,9 @@ import {
   ViewPropTypes,
   TouchableOpacity,
 } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {NavigationContainer, useNavigation} from "@react-navigation/native";
+import {Ionicons} from "@expo/vector-icons";
 import axios from "axios";
 
 import Icon from "react-native-vector-icons/Ionicons";
@@ -26,17 +26,19 @@ const formatCurrency = (value) => {
 };
 
 // import SelectCateringCard from "../../components/filterComponents/SelectCateringCard.js";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
-import { fetchProductsData } from "../features/PackageData/packageSlice";
+import {fetchProductsData} from "../features/PackageData/packageSlice";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
 
   const productStateData = useSelector((state) => state.product.data);
+  // console.log(productStateData);
 
   useEffect(() => {
     dispatch(fetchProductsData());
+    // console.log(fetchProductsData);
   }, [dispatch]);
 
   // const [product, setProduct] = useState([]);
@@ -53,7 +55,7 @@ const HomeScreen = () => {
   //   }
   // };
 
-  const { navigate } = useNavigation();
+  const {navigate} = useNavigation();
   const handlePressVenue = () => {
     navigate("DetailVenue");
   };
@@ -61,7 +63,7 @@ const HomeScreen = () => {
     navigate("DetailFotografer");
   };
   const handlePressEO = (id) => {
-    navigate("DetailEventOrganizer", { eoId: id });
+    navigate("DetailEventOrganizer", {eoId: id});
   };
   // useEffect(() => {
   //   getProduct();
@@ -79,12 +81,12 @@ const HomeScreen = () => {
         data={productStateData}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2} // Set number of columns to 2
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <TouchableOpacity
             onPress={() => handlePressEO(item.id)}
             style={styles.card}
           >
-            <Image source={{ uri: item?.imageUrl }} style={styles.cardImage} />
+            <Image source={{uri: item?.imageUrl}} style={styles.cardImage} />
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>{item?.title}</Text>
               <View style={styles.cardInfo}>

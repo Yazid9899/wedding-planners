@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {TouchableOpacity, StyleSheet, View, Alert} from "react-native";
 import {Text} from "react-native-paper";
 import Background from "../../components/loginRegisterComponent/Background";
@@ -14,7 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen({navigation}) {
   const dispatch = useDispatch();
-  const {status, error} = useSelector((state) => state.users);
+  const {access_token, status, error} = useSelector((state) => state.users);
 
   const [dataUser, setDataUser] = useState({
     email: "",
@@ -28,16 +28,31 @@ export default function LoginScreen({navigation}) {
     });
   };
 
-  const onSubmit = async () => {
-    await dispatch(loginData(dataUser));
-    const access_token = await AsyncStorage.getItem("access_token");
-    console.log(access_token, "access_token");
-    if (status === "failed") {
-      Alert.alert("Login Failed", error);
-    } else {
-      navigation.navigate("Home");
-    }
+  const onSubmit = () => {
+    dispatch(loginData(dataUser));
+    setDataUser({
+      email: "",
+      password: "",
+    });
   };
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const token = await AsyncStorage.getItem("access_token");
+      if (token) {
+        navigation.navigate("Home");
+        Alert.alert("Login Success");
+      } else {
+        Alert.alert("Login Failed");
+      }
+    };
+
+    if (status === "succeeded") {
+      checkLoginStatus();
+    } else if (status === "failed") {
+      Alert.alert("Login Failed");
+    }
+  }, [status, navigation]);
 
   return (
     <Background>
