@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
-import { AsyncStorage } from "react-native";
+import {AsyncStorage} from "react-native";
+import {BASE_URL} from "../../config/api";
 
 export const addCartData = createAsyncThunk("cart/addCart", async (data) => {
   console.log(data);
@@ -23,11 +24,7 @@ export const addCartData = createAsyncThunk("cart/addCart", async (data) => {
     "Content-Type": "application/json",
   };
 
-  const response = await axios.post(
-    "https://c8d9-103-138-68-174.ngrok-free.app/carts",
-    data,
-    { headers }
-  );
+  const response = await axios.post(`${BASE_URL}/carts`, data, {headers});
 
   console.log(response.data, ">>>>>di slice register>>>>>>>>>>>>>>>>>>>>.");
   return response.data;

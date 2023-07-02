@@ -1,10 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
+import {BASE_URL} from "../../config/api";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
 export const fetchVenueData = createAsyncThunk(
   "venue/fetchData",
-  async ({ search, location, price, belowPrice = 1000000000 }) => {
-    let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/venues";
+  async ({search, location, price, belowPrice = 1000000000}) => {
+    let baseUrl = `${BASE_URL}/venues`;
 
     //  console.log(belowPrice, ">>>>");
 
@@ -74,6 +75,6 @@ export const venueSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = venueSlice.actions;
+export const {increment, decrement, incrementByAmount} = venueSlice.actions;
 
 export default venueSlice.reducer; // di import langsung menjadi namanya VenueReducer

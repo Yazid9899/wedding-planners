@@ -1,12 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
+import {BASE_URL} from "../../config/api";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
 export const fetchProductsData = createAsyncThunk(
   "products/fetchData",
   async () => {
-    const response = await axios.get(
-      " https://c8d9-103-138-68-174.ngrok-free.app/products"
-    );
+    const response = await axios.get(`${BASE_URL}/products`);
     //  console.log(response.data, ">>>>>di slice catherings>>>>>>>>>>>>>>>>>>>>.");
     return response.data;
   }
