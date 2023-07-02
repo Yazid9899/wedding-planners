@@ -109,3 +109,5 @@ const App = () => {
     // </ApolloProvider>
   );
 };
+
+export default App;

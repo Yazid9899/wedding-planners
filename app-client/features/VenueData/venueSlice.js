@@ -1,14 +1,31 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
-export const fetchVenueData = createAsyncThunk("venue/fetchData", async () => {
-  const response = await axios.get(
-    "https://fde2-103-138-68-174.ngrok-free.app/venues"
-  );
-  //   console.log(response.data, ">>>>>di slice venue>>>>>>>>>>>>>>>>>>>>.");
+export const fetchVenueData = createAsyncThunk(
+  "venue/fetchData",
+  async ({ search, location, price }) => {
+    let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/venues";
 
-  return response.data;
-});
+    const queryParams = [];
+    if (search) {
+      queryParams.push(`search=${search}`);
+    }
+    if (location) {
+      queryParams.push(`location=${location}`);
+    }
+    if (price) {
+      queryParams.push(`price=${price}`);
+    }
+
+    if (queryParams.length > 0) {
+      baseUrl += `?${queryParams.join("&")}`;
+    }
+
+    console.log(baseUrl);
+    const response = await axios.get(baseUrl);
+    return response.data;
+  }
+);
 
 const initialState = {
   value: 0,

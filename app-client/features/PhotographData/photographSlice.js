@@ -7,7 +7,7 @@ export const fetchPhotographData = createAsyncThunk(
     const response = await axios.get(
       "https://fde2-103-138-68-174.ngrok-free.app/photographies"
     );
-    console.log(response.data, ">>>>>di slice photo>>>>>>>>>>>>>>>>>>>>.");
+    //  console.log(response.data, ">>>>>di slice photo>>>>>>>>>>>>>>>>>>>>.");
     return response.data;
   }
 );

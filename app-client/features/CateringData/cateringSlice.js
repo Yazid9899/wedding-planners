@@ -7,7 +7,7 @@ export const fetchCatheringsData = createAsyncThunk(
     const response = await axios.get(
       "https://fde2-103-138-68-174.ngrok-free.app/catherings"
     );
-    console.log(response.data, ">>>>>di slice catherings>>>>>>>>>>>>>>>>>>>>.");
+    //  console.log(response.data, ">>>>>di slice catherings>>>>>>>>>>>>>>>>>>>>.");
     return response.data;
   }
 );

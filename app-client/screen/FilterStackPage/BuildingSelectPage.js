@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { Searchbar } from "react-native-paper";
+import { Searchbar, TextInput } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 //
@@ -22,34 +22,46 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchVenueData } from "../../features/VenueData/venueSlice";
 
 const BuildingSelectPage = ({ navigation }) => {
-  const [venueData, setvenueData] = useState("");
-
-  const venueStateData = useSelector((state) => state.venue.data);
-
-  //   const venue = useSelector((state) => state.venue.value);
-
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchVenueData());
-  }, [dispatch]);
+  const venueStateData = useSelector((state) => state.venue.data);
 
   //   Search
   const [searchQuery, setSearchQuery] = useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
-  //
+
   //   Location
   const [valueLoc, setValueLoc] = useState(null);
-
   const [isFocusLoc, setIsFocusLoc] = useState(false);
 
+  //   Price
+  const [valuePrice, setValuePrice] = useState(null);
+  const [isFocusPrice, setIsFocusPrice] = useState(false);
+
+  useEffect(() => {
+    console.log(searchQuery, valueLoc, valuePrice, "use effect venue page");
+    dispatch(
+      fetchVenueData({
+        search: searchQuery,
+        location: valueLoc,
+        price: valuePrice,
+      })
+    );
+  }, [dispatch, searchQuery, valueLoc, valuePrice]);
+
   const Location = [
-    { label: "Jakarta Selatan", value: "jaksel" },
-    { label: "Jakarta Utara", value: "jakut" },
-    { label: "Jakarta Timur", value: "jaktim" },
-    { label: "Jakarta Barat", value: "jakbar" },
-    { label: "Tangerang Selatan", value: "tangsel" },
+    { label: "All", value: null },
+    { label: "Jakarta Selatan", value: "Jakarta Selatan" },
+    { label: "Jakarta Utara", value: "Jakarta Utara" },
+    { label: "Jakarta Timur", value: "Jakarta Timur" },
+    { label: "Jakarta Pusat", value: "Jakarta Pusat" },
   ];
+
+  const Price = [
+    { label: "All", value: null },
+    { label: "Lowest Price", value: "lowest" },
+    { label: "Highest Price", value: "higest" },
+  ];
+
   const renderLocationDropdown = (text, dataDrop) => (
     <Dropdown
       style={[styles.dropdown, isFocusLoc && { borderColor: "blue" }]}
@@ -76,16 +88,34 @@ const BuildingSelectPage = ({ navigation }) => {
     />
   );
 
-  // NEXT PREV button
-  const nextButton = () => {
-    navigation.navigate("PhotoSelect");
-  };
-  const previousButton = () => {
-    navigation.navigate("MainFilter");
-  };
+  const renderPriceDropdown = (text, dataDrop) => (
+    <Dropdown
+      style={[styles.dropdown, isFocusPrice && { borderColor: "blue" }]}
+      placeholderStyle={styles.placeholderStyle}
+      selectedTextStyle={styles.selectedTextStyle}
+      inputSearchStyle={styles.inputSearchStyle}
+      iconStyle={styles.iconStyle}
+      data={dataDrop}
+      search
+      maxHeight={300}
+      labelField="label"
+      valueField="value"
+      placeholder={`${text}`}
+      // placeholder={!isFocus ? `${text}` : "..."}
+      searchPlaceholder="Search..."
+      value={valuePrice}
+      onFocus={() => setIsFocusPrice(true)}
+      onBlur={() => setIsFocusPrice(false)}
+      onChange={(item) => {
+        console.log(item);
+        setValuePrice(item.value);
+        setIsFocusPrice(false);
+      }}
+    />
+  );
+
   //
   return (
-    //  <ScrollView>
     <View style={styles.screen}>
       <Searchbar
         placeholder="Search Venue"
@@ -94,7 +124,17 @@ const BuildingSelectPage = ({ navigation }) => {
       />
       <View style={styles.dropdownContainer}>
         {renderLocationDropdown("Location", Location)}
+        {renderPriceDropdown("Price", Price)}
       </View>
+      {/* <TextInput
+        label="Price"
+        value={searchPrice}
+        keyboardType="numeric"
+        onChangeText={onChangePrice}
+        maxLength={10} //setting limit of input
+      /> */}
+
+      {/* <Text>{valuePrice.valueOf}</Text> */}
 
       <FlatList
         data={venueStateData}
@@ -103,17 +143,7 @@ const BuildingSelectPage = ({ navigation }) => {
         )}
         keyExtractor={(item) => item?.id}
       ></FlatList>
-
-      {/* <View style={styles.containerButton}>
-        <TouchableOpacity style={styles.button} onPress={previousButton}>
-          <Text style={styles.buttonText}>Previous</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={nextButton}>
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
-      </View> */}
     </View>
-    //  </ScrollView>
   );
 };
 
@@ -259,34 +289,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     elevation: 5,
     overflow: "hidden",
-  },
-  // Button elevated
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  //   BUTON FIX
-  containerButton: {
-    //  position: "absolute",
-    //  bottom: 20,
-    marginTop: 40,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    width: "100%",
-  },
-  button: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    backgroundColor: "lightblue",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
   },
 });
 
