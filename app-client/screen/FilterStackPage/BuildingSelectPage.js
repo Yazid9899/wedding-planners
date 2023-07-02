@@ -19,11 +19,16 @@ import axios from "axios";
 import SelectBuildingCard from "../../components/filterComponents/SelectBuildingCard";
 
 import { useDispatch, useSelector } from "react-redux";
+
 import { fetchVenueData } from "../../features/VenueData/venueSlice";
 
 const BuildingSelectPage = ({ navigation }) => {
   const dispatch = useDispatch();
   const venueStateData = useSelector((state) => state.venue.data);
+
+  const budgetData = useSelector((state) => state.inputDateBudget.budget);
+
+  console.log(budgetData, "di select building"); // Display the budget value
 
   //   Search
   const [searchQuery, setSearchQuery] = useState("");
@@ -38,7 +43,7 @@ const BuildingSelectPage = ({ navigation }) => {
   const [isFocusPrice, setIsFocusPrice] = useState(false);
 
   useEffect(() => {
-    console.log(searchQuery, valueLoc, valuePrice, "use effect venue page");
+    //  console.log(searchQuery, valueLoc, valuePrice, "use effect venue page");
     dispatch(
       fetchVenueData({
         search: searchQuery,
@@ -114,7 +119,6 @@ const BuildingSelectPage = ({ navigation }) => {
     />
   );
 
-  //
   return (
     <View style={styles.screen}>
       <Searchbar
@@ -126,15 +130,6 @@ const BuildingSelectPage = ({ navigation }) => {
         {renderLocationDropdown("Location", Location)}
         {renderPriceDropdown("Price", Price)}
       </View>
-      {/* <TextInput
-        label="Price"
-        value={searchPrice}
-        keyboardType="numeric"
-        onChangeText={onChangePrice}
-        maxLength={10} //setting limit of input
-      /> */}
-
-      {/* <Text>{valuePrice.valueOf}</Text> */}
 
       <FlatList
         data={venueStateData}

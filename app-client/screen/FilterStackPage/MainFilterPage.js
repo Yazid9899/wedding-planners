@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -15,11 +15,18 @@ import { Modal, Portal, Button, PaperProvider } from "react-native-paper";
 import DatePicker from "react-native-modern-datepicker";
 //
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setBudget,
+  setDate,
+} from "../../features/inputDateBudget/dateBudgetSlice";
+
 const MainFilterPage = ({ navigation }) => {
+  const dispatch = useDispatch();
+  //   Input Budget
   const [inputValue, setInputValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const animatedScale = useState(new Animated.Value(1))[0];
-
   const handleInputFocus = () => {
     setIsFocused(true);
     Animated.spring(animatedScale, {
@@ -27,7 +34,6 @@ const MainFilterPage = ({ navigation }) => {
       useNativeDriver: true,
     }).start();
   };
-
   const handleInputBlur = () => {
     setIsFocused(false);
     Animated.spring(animatedScale, {
@@ -35,19 +41,24 @@ const MainFilterPage = ({ navigation }) => {
       useNativeDriver: true,
     }).start();
   };
-
   const handleInputChange = (text) => {
-    // Remove non-digit characters from the input
     const cleanedText = text.replace(/[^0-9]/g, "");
     setInputValue(cleanedText);
   };
+  //
 
+  //   Input Book Date
   const [selectedDate, setSelectedDate] = useState("");
+  //
 
+  //   Next Page
   const nextButton = () => {
-    console.log(selectedDate);
+    console.log(selectedDate, inputValue, "di main filter");
+    dispatch(setBudget(inputValue));
+    dispatch(setDate(selectedDate));
     navigation.navigate("BuildingSelect");
   };
+  //
 
   return (
     <View style={styles.container}>
@@ -76,10 +87,12 @@ const MainFilterPage = ({ navigation }) => {
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           keyboardType="numeric"
-          placeholder="Enter estimated budget"
+          placeholder="Enter estimated budget (IDR)"
           placeholderTextColor="gray"
         />
       </Animated.View>
+
+      {/* <Text>{inputValue}</Text> */}
 
       <View style={{ height: 30 }} />
 
@@ -91,9 +104,6 @@ const MainFilterPage = ({ navigation }) => {
       />
 
       <View style={styles.containerButton}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Previous</Text>
-        </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={nextButton}>
           <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
@@ -138,12 +148,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   containerButton: {
-    //  position: "absolute",
-    //  bottom: 20,
     marginTop: 40,
     flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
+    justifyContent: "center", // Center the button horizontally
     width: "100%",
   },
   button: {
@@ -158,3 +165,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+{
+  /* <TouchableOpacity style={styles.button}>
+<Text style={styles.buttonText}>Previous</Text>
+</TouchableOpacity> */
+}
