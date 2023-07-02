@@ -5,11 +5,18 @@ export const fetchDetailProductsData = createAsyncThunk(
   "productsDetail/fetchDataDetail",
   async ({ eoId }) => {
     console.log(eoId, "di slice dtl");
-    const response = await axios.get(
-      `https://c8d9-103-138-68-174.ngrok-free.app/products/${eoId}`
-    );
-    console.log(response.data, ">>>>>di slice catherings>>>>>>>>>>>>>>>>>>>>.");
-    return response.data;
+    try {
+      const response = await axios.get(
+        `https://c8d9-103-138-68-174.ngrok-free.app/products/${eoId}`
+      );
+      console.log(
+        response.data,
+        ">>>>>di slice catherings>>>>>>>>>>>>>>>>>>>>."
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error, "ini erorrrrrrrrrrrr");
+    }
   }
 );
 

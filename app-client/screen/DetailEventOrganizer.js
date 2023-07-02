@@ -35,7 +35,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
   const dispatch = useDispatch();
 
   const productStateData = useSelector((state) => state.detailProduct.data);
-  // console.log(productStateData.Venue, "============");
+  console.log(productStateData.Venue, "============");
 
   // const id = route.params();
   useEffect(() => {
@@ -44,27 +44,30 @@ const EventOrganizerDetailScreen = ({ route }) => {
   }, [dispatch]);
   /// function for redirect to google Maps
 
-  const openNavigation = () => {
-    console.log(productStateData?.Venue, "hyvuyviuvyuyv");
-    const latitude = +productStateData?.Venue?.locationGoogle[0];
-    const longitude = +productStateData?.Venue?.locationGoogle[1];
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
-    Alert.alert(
-      "Open Google Maps",
-      "Do you want to open Google Maps for directions?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "Open",
-          onPress: () => Linking.openURL(url),
-        },
-      ],
-      { cancelable: true }
-    );
-  };
+  // const openNavigation = async () => {
+  //   console.log(productStateData?.Venue, "hyvuyviuvyuyv");
+  //   const latitude = +productStateData?.Venue?.locationGoogle[0];
+  //   const longitude = +productStateData?.Venue?.locationGoogle[1];
+  //   const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+  //   Alert.alert(
+  //     "Open Google Maps",
+  //     "Do you want to open Google Maps for directions?",
+  //     [
+  //       {
+  //         text: "Cancel",
+  //         style: "cancel",
+  //       },
+  //       {
+  //         text: "Open",
+  //         onPress: () => Linking.openURL(url),
+  //       },
+  //     ],
+  //     { cancelable: true }
+  //   );
+  // };
+  if (!productStateData) {
+    return <Text>Loading...</Text>; // Menampilkan pesan loading
+  }
   const formatCurrency = (value) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -144,23 +147,23 @@ const EventOrganizerDetailScreen = ({ route }) => {
   const mapHeight = windowHeight * 0.3;
 
   //use effect for permission for using GPS (current location)
-  useEffect(() => {
-    (async () => {
-      try {
-        const { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          console.log("Permission to access location was denied");
-          return;
-        }
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const { status } = await Location.requestForegroundPermissionsAsync();
+  //       if (status !== "granted") {
+  //         console.log("Permission to access location was denied");
+  //         return;
+  //       }
 
-        const location = await Location.getCurrentPositionAsync({});
-        const { latitude, longitude } = location.coords;
-        setCurrentLocation({ latitude, longitude });
-      } catch (error) {
-        console.log("Error getting location", error);
-      }
-    })();
-  }, []);
+  //       const location = await Location.getCurrentPositionAsync({});
+  //       const { latitude, longitude } = location.coords;
+  //       setCurrentLocation({ latitude, longitude });
+  //     } catch (error) {
+  //       console.log("Error getting location", error);
+  //     }
+  //   })();
+  // }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -305,11 +308,11 @@ const EventOrganizerDetailScreen = ({ route }) => {
           </View>
         </Modal>
       </View>
-      <MapView
+      {/* <MapView
         style={{ width: windowWidth, height: mapHeight, paddingRight: 20 }}
         initialRegion={{
-          latitude: +productStateData?.Venue?.locationGoogle[0],
-          longitude: +productStateData?.Venue?.locationGoogle[1],
+          latitude: parseFloat(productStateData?.Venue?.locationGoogle[0]),
+          longitude: parseFloat(productStateData?.Venue?.locationGoogle[1]),
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -332,7 +335,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
             pinColor="blue" // Customize the pin color for the current location marker
           />
         )}
-      </MapView>
+      </MapView> */}
     </ScrollView>
   );
 };
