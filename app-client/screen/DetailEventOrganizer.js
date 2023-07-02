@@ -16,9 +16,14 @@ import { Picker } from "@react-native-picker/picker";
 import { MaterialIcons } from "@expo/vector-icons";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDetailProductsData } from "../features/PackageData/PackageDetail";
 
 const EventOrganizerDetailScreen = ({ route }) => {
-  const { eo } = route.params;
+  // const { id } = route.params;
+  const { eoId } = route.params;
+
+  console.log(eoId, "ats");
   const [selectedPax, setSelectedPax] = useState(200); // Nilai pax awal
   const [showModal, setShowModal] = useState(false); // Status modal
   const paxOptions = [200, 300, 500, 700];
@@ -26,11 +31,21 @@ const EventOrganizerDetailScreen = ({ route }) => {
   ///state lokasi device
   const [currentLocation, setCurrentLocation] = useState(null);
 
+  const dispatch = useDispatch();
+
+  const productStateData = useSelector((state) => state.detailProduct.data);
+  console.log(productStateData.title);
+
+  // const id = route.params();
+  useEffect(() => {
+    console.log(eoId, "use effect dtl");
+    dispatch(fetchDetailProductsData({ eoId }));
+  }, [dispatch]);
   /// function for redirect to google Maps
+
   const openNavigation = () => {
-    console.log(eo.Venue, "hyvuyviuvyuyv");
-    const latitude = eo?.Venue.locationGoogle[0];
-    const longitude = eo?.Venue.locationGoogle[1];
+    console.log(productStateData?.Venue, "hyvuyviuvyuyv");
+    const latitude = productStateData?.Venue?.locationGoogle[0];
     const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
     Alert.alert(
       "Open Google Maps",
@@ -55,9 +70,13 @@ const EventOrganizerDetailScreen = ({ route }) => {
     }).format(value);
   };
 
-  const startingPrice = formatCurrency(eo?.price + +eo?.Venue.price);
+  const startingPrice = formatCurrency(
+    productStateData?.price + +productStateData?.Venue?.price
+  );
   const totalPrice =
-    eo?.price + +eo?.Venue.price + selectedPax * eo?.Cathering?.price;
+    productStateData?.price +
+    +productStateData?.Venue?.price +
+    selectedPax * productStateData?.Cathering?.price;
   const handlePaxChange = (value) => {
     setSelectedPax(value);
   };
@@ -82,10 +101,10 @@ const EventOrganizerDetailScreen = ({ route }) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              title: eo?.title,
-              PhotographyId: eo?.PhotographyId,
-              CatheringId: eo?.CatheringId,
-              VenueId: eo?.VenueId,
+              title: productStateData?.title,
+              PhotographyId: productStateData?.PhotographyId,
+              CatheringId: productStateData?.CatheringId,
+              VenueId: productStateData?.VenueId,
               totalPrice: totalPrice,
             }),
           }
@@ -94,7 +113,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
         if (response.ok) {
           // Cart successfully created
           navigation.navigate("Cart", {
-            eo: { ...eo, totalPrice: totalPrice },
+            productStateData: { ...productStateData, totalPrice: totalPrice },
           }); // Navigasi ke halaman keranjang
         } else {
           // Handle error response
@@ -114,7 +133,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
   const windowHeight = Dimensions.get("window").height;
   const mapHeight = windowHeight * 0.3;
 
-  // use effect for permission for using GPS (current location)
+  //use effect for permission for using GPS (current location)
   useEffect(() => {
     (async () => {
       try {
@@ -135,21 +154,23 @@ const EventOrganizerDetailScreen = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Image source={{ uri: eo?.imageUrl }} style={styles.image} />
+      <Image
+        source={{ uri: productStateData?.imageUrl }}
+        style={styles.image}
+      />
 
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>{eo?.title}</Text>
-        <Text style={styles.description}>{eo?.description}</Text>
+        <Text style={styles.title}>{productStateData?.title}</Text>
+        <Text style={styles.description}>{productStateData?.description}</Text>
 
         <View style={styles.detailsContainer}>
           <View style={styles.detailRow}>
             <MaterialIcons name="location-on" size={20} color="#555555" />
-            <Text style={styles.detailText}>{eo?.Venue.location}</Text>
+            <Text style={styles.detailText}>
+              {productStateData?.Venue?.location}
+            </Text>
           </View>
-          {/* <View style={styles.detailRow}>
-            <MaterialIcons name="access-time" size={20} color="#555555" />
-            <Text style={styles.detailText}>Experience: {eo?.experience}</Text>
-          </View> */}
+
           <View style={styles.detailRow}>
             <MaterialIcons name="attach-money" size={20} color="#555555" />
             <Text style={styles.detailText}>
@@ -159,55 +180,61 @@ const EventOrganizerDetailScreen = ({ route }) => {
           <View style={styles.detailRow}>
             <MaterialIcons name="room-service" size={20} color="#555555" />
             <Text style={styles.detailText}>
-              Price/pax: {formatCurrency(eo?.Cathering.price)}
+              Price/pax: {formatCurrency(productStateData?.Cathering?.price)}
             </Text>
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="star" size={20} color="#555555" />
-            <Text style={styles.detailText}>Rating: {eo?.rating}</Text>
+            <Text style={styles.detailText}>
+              Rating: {productStateData?.rating}
+            </Text>
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="location-city" size={20} color="#555555" />
-            <Text style={styles.detailText}>Venue: {eo?.Venue.name}</Text>
+            <Text style={styles.detailText}>
+              Venue: {productStateData?.Venue?.name}
+            </Text>
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="person" size={20} color="#555555" />
             <Text style={styles.detailText}>
-              Photographer: {eo?.Photography.name}
+              Photographer: {productStateData?.Photography?.name}
             </Text>
           </View>
           <View style={styles.detailRow}>
             <MaterialIcons name="restaurant" size={20} color="#555555" />
             <Text style={styles.detailText}>
-              Cathering: {eo?.Cathering.name}
+              Cathering: {productStateData?.Cathering?.name}
             </Text>
           </View>
         </View>
 
         {/* Venue */}
         <Text style={styles.sectionTitle}>Venue</Text>
-        {eo?.Venue?.photo?.map((url, index) => (
+        {productStateData?.Venue?.photo?.map((url, index) => (
           <Image
             key={`venue-image-${index}`}
             source={{ uri: url }}
             style={styles.sectionImage}
           />
         ))}
-        <Text style={styles.sectionDescription}>{eo?.Venue?.description}</Text>
+        <Text style={styles.sectionDescription}>
+          {productStateData?.Venue?.description}
+        </Text>
 
         {/* Cathering */}
         <Text style={styles.sectionTitle}>Cathering</Text>
         <Image
-          source={{ uri: eo?.Cathering?.imageUrl }}
+          source={{ uri: productStateData?.Cathering?.imageUrl }}
           style={styles.sectionImage}
         />
         <Text style={styles.sectionDescription}>
-          {eo?.Cathering.description}
+          {productStateData?.Cathering?.description}
         </Text>
 
         {/* Photographer */}
         <Text style={styles.sectionTitle}>Photographer</Text>
-        {eo?.Photography?.photo?.map((url, index) => (
+        {productStateData?.Photography?.photo?.map((url, index) => (
           <Image
             key={`photographer-image-${index}`}
             source={{ uri: url }}
@@ -215,7 +242,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
           />
         ))}
         <Text style={styles.sectionDescription}>
-          {eo?.Photography.description}
+          {productStateData?.Photography?.description}
         </Text>
 
         <Text>Choose total pax you want order</Text>
@@ -271,8 +298,8 @@ const EventOrganizerDetailScreen = ({ route }) => {
       <MapView
         style={{ width: windowWidth, height: mapHeight, paddingRight: 20 }}
         initialRegion={{
-          latitude: +eo?.Venue.locationGoogle[0],
-          longitude: +eo?.Venue.locationGoogle[1],
+          latitude: +productStateData?.Venue.locationGoogle[0],
+          longitude: +productStateData?.Venue.locationGoogle[1],
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -280,10 +307,10 @@ const EventOrganizerDetailScreen = ({ route }) => {
       >
         <Marker
           coordinate={{
-            latitude: +eo?.Venue.locationGoogle[0],
-            longitude: +eo?.Venue.locationGoogle[1],
+            latitude: +productStateData?.Venue.locationGoogle[0],
+            longitude: +productStateData?.Venue.locationGoogle[1],
           }}
-          title={eo?.name}
+          title={productStateData?.name}
         />
         {currentLocation && (
           <Marker
