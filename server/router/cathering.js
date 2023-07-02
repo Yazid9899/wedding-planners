@@ -6,9 +6,3 @@ router.get("/", CatheringController.getAllCathering);
 router.get("/:id", CatheringController.getCatheringById);
 module.exports = router;
 
-
-
-/**
- * get all
- * get detail
- */

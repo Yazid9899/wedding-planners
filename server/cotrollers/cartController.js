@@ -1,22 +1,26 @@
-const { Cart } = require("../models");
+const { Cart,Photography, Venue, Cathering} = require("../models");
 
-class CartControllers {
-  static async createCart(req, res, next) {
-    try {
-      // const {id} = req.additionalData
-      const { title, PhotographyId, CatheringId, VenueId, totalPrice } =
-        req.body;
+
+class CartControllers{
+  static async createCart(req, res, next){
+    try{
+      const {id} = req.additionalData
+      const {title,PhotographyId, CatheringId,  VenueId, totalPrice, pax} = req.body
+
+      console.log(pax, "<<<<<<<<<<<<");
 
       const create = await Cart.create({
         title,
-        UserId: 1,
-        PhotographyId,
-        CatheringId,
-        VenueId,
+        UserId: id,
+        PhotographyId, 
+        CatheringId,  
+        VenueId, 
+        pax,
         totalPrice,
-      });
+      })
 
-      if (create) {
+      if(create){
+
         res.status(201).json({
           message: `cart with id:${create.id} and userId:${create.UserId} was successfully created`,
         });
@@ -30,10 +34,16 @@ class CartControllers {
     try {
       // const {id} = req.additionalData
       const data = await Cart.findAll({
-        where: {
-          UserId: 1,
-        },
-      });
+        include: [
+          { model: Photography },
+          { model: Cathering },
+          { model: Venue },
+        ],
+        where:{
+          UserId:id
+        }
+      })
+
 
       if (data) {
         res.status(200).json(data);
