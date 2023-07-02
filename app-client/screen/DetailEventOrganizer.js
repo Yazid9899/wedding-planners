@@ -34,7 +34,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
   const dispatch = useDispatch();
 
   const productStateData = useSelector((state) => state.detailProduct.data);
-  console.log(productStateData.title);
+  console.log(productStateData.Venue, "============");
 
   // const id = route.params();
   useEffect(() => {
@@ -45,7 +45,8 @@ const EventOrganizerDetailScreen = ({ route }) => {
 
   const openNavigation = () => {
     console.log(productStateData?.Venue, "hyvuyviuvyuyv");
-    const latitude = productStateData?.Venue?.locationGoogle[0];
+    const latitude = +productStateData?.Venue?.locationGoogle[0];
+    const longitude = +productStateData?.Venue?.locationGoogle[1];
     const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
     Alert.alert(
       "Open Google Maps",
@@ -298,8 +299,8 @@ const EventOrganizerDetailScreen = ({ route }) => {
       <MapView
         style={{ width: windowWidth, height: mapHeight, paddingRight: 20 }}
         initialRegion={{
-          latitude: +productStateData?.Venue.locationGoogle[0],
-          longitude: +productStateData?.Venue.locationGoogle[1],
+          latitude: +productStateData?.Venue?.locationGoogle[0],
+          longitude: +productStateData?.Venue?.locationGoogle[1],
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -307,8 +308,8 @@ const EventOrganizerDetailScreen = ({ route }) => {
       >
         <Marker
           coordinate={{
-            latitude: +productStateData?.Venue.locationGoogle[0],
-            longitude: +productStateData?.Venue.locationGoogle[1],
+            latitude: +productStateData?.Venue?.locationGoogle[0],
+            longitude: +productStateData?.Venue?.locationGoogle[1],
           }}
           title={productStateData?.name}
         />

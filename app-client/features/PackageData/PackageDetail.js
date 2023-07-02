@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
 export const fetchDetailProductsData = createAsyncThunk(
-  "products/fetchDataDetail",
+  "productsDetail/fetchDataDetail",
   async ({ eoId }) => {
     console.log(eoId, "di slice dtl");
     const response = await axios.get(
-      `https://c9d4-103-138-68-174.ngrok-free.app/products/${eoId}`
+      `https://c8d9-103-138-68-174.ngrok-free.app/products/${eoId}`
     );
     console.log(response.data, ">>>>>di slice catherings>>>>>>>>>>>>>>>>>>>>.");
     return response.data;
@@ -37,6 +37,7 @@ export const detailProductsSlice = createSlice({
       .addCase(fetchDetailProductsData.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+        console.log(action.error.message, "error");
       });
   },
 });
