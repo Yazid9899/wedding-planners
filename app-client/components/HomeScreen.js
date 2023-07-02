@@ -25,22 +25,33 @@ const formatCurrency = (value) => {
   }).format(value);
 };
 
-const HomeScreen = () => {
-  const [product, setProduct] = useState([]);
+// import SelectCateringCard from "../../components/filterComponents/SelectCateringCard.js";
+import { useDispatch, useSelector } from "react-redux";
 
-  const getProduct = async () => {
-    try {
-      const { data } = await axios({
-        method: "GET",
-        url: `https://c9d4-103-138-68-174.ngrok-free.app/products`,
-      });
-      setProduct(data);
-      // console.log(data);
-      // return data;
-    } catch (error) {
-      console.log(error, "==>>>>>>>>>>>>>>>");
-    }
-  };
+import { fetchProductsData } from "../features/PackageData/packageSlice";
+
+const HomeScreen = () => {
+  const dispatch = useDispatch();
+
+  const productStateData = useSelector((state) => state.product.data);
+
+  useEffect(() => {
+    dispatch(fetchProductsData());
+  }, [dispatch]);
+
+  // const [product, setProduct] = useState([]);
+
+  // const getProduct = async () => {
+  //   try {
+  //     const { data } = await axios({
+  //       method: "GET",
+  //       url: `https://c9d4-103-138-68-174.ngrok-free.app/products`,
+  //     });
+  //     setProduct(data);
+  //   } catch (error) {
+  //     console.log(error, "==>>>>>>>>>>>>>>>");
+  //   }
+  // };
 
   const { navigate } = useNavigation();
   const handlePressVenue = () => {
@@ -49,12 +60,12 @@ const HomeScreen = () => {
   const handlePressFotografer = () => {
     navigate("DetailFotografer");
   };
-  const handlePressEO = (eo) => {
-    navigate("DetailEventOrganizer", { eo });
+  const handlePressEO = (id) => {
+    navigate("DetailEventOrganizer", { eoId: id });
   };
-  useEffect(() => {
-    getProduct();
-  }, []);
+  // useEffect(() => {
+  //   getProduct();
+  // }, []);
   return (
     <ScrollView contentContainerStyle={styles.screen}>
       {/* <Text> {JSON.stringify(product)}</Text> */}
@@ -65,12 +76,12 @@ const HomeScreen = () => {
 
       <Text style={styles.subtitle}>Available Package</Text>
       <FlatList
-        data={product}
+        data={productStateData}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2} // Set number of columns to 2
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => handlePressEO(item)}
+            onPress={() => handlePressEO(item.id)}
             style={styles.card}
           >
             <Image source={{ uri: item?.imageUrl }} style={styles.cardImage} />
