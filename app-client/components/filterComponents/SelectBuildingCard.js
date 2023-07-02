@@ -19,7 +19,7 @@ const SelectBuildingCard = ({ data, navigation }) => {
         color="white"
         style={styles.locationIcon}
       />
-      <Text style={styles.locationText}>Jakarta, Indonesia</Text>
+      <Text style={styles.locationText}>{data.location}, Indonesia</Text>
     </View>
   );
 
@@ -27,21 +27,21 @@ const SelectBuildingCard = ({ data, navigation }) => {
     <Card style={styles.cardStyle}>
       <View style={styles.imageContainer}>
         <ImageBackground
-          source={{ uri: "https://picsum.photos/700" }}
+          source={{ uri: data.photo[0] }}
           style={styles.imageBackground}
         >
           <LocationText />
         </ImageBackground>
       </View>
       <Card.Title
-        title="E1 - 2023 Three Nights Buyout Wedding"
-        subtitle="by Amanjiwo Resort - Villa / Resort"
+        title={data.name}
+        subtitle={data.description}
         titleStyle={styles.title}
         subtitleStyle={styles.subtitle}
       />
       <Card.Content style={styles.cardContent}>
         <View style={styles.rowContainer}>
-          <Text style={styles.cardPrice}>IDR 350.000.000</Text>
+          <Text style={styles.cardPrice}>IDR {data.price}</Text>
           <Button
             mode="contained"
             onPress={() => {
