@@ -48,5 +48,29 @@ class UserController {
       next(err);
     }
   }
+  static async userById(req, res, next){
+    try{
+      const {id} = req.additionalData
+
+      const data = await User.findOne({
+        where:{
+          id,
+        },
+        attributes: {
+          excludes: ['createdAt', 'updatedAt'],
+        },
+      })
+      if(!data){
+        throw{
+          name: "User Not Found"
+        }
+      }
+
+      res.status(200).json(data)
+
+    }catch(err){
+      next(err)
+    }
+  }
 }
 module.exports = UserController;
