@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {TouchableOpacity, StyleSheet, View} from "react-native";
 import {Text} from "react-native-paper";
 import Background from "../../components/loginRegisterComponent/Background";
@@ -8,26 +8,46 @@ import Button from "../../components/loginRegisterComponent/Button";
 import TextInput from "../../components/loginRegisterComponent/TextInput";
 import BackButton from "../../components/loginRegisterComponent/BackButton";
 import {theme} from "../../core/theme";
-// import { emailValidator } from '../helpers/emailValidator'
-// import { passwordValidator } from '../helpers/passwordValidator'
+import {useNavigation} from "@react-navigation/native";
+import {useDispatch, useSelector} from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {loginData} from "../../features/UserData/loginSlice";
 
 export default function LoginScreen({navigation}) {
-  // const [email, setEmail] = useState({ value: '', error: '' })
-  // const [password, setPassword] = useState({ value: '', error: '' })
+  const navigate = useNavigation();
+  // const dispatch = useDispatch();
+  const {access_token, err} = useSelector((state) => state.users);
 
-  // const onLoginPressed = () => {
-  //   const emailError = emailValidator(email.value)
-  //   const passwordError = passwordValidator(password.value)
-  //   if (emailError || passwordError) {
-  //     setEmail({ ...email, error: emailError })
-  //     setPassword({ ...password, error: passwordError })
-  //     return
-  //   }
-  //   navigation.reset({
-  //     index: 0,
-  //     routes: [{ name: 'Dashboard' }],
-  //   })
-  // }
+  useEffect(() => {
+    const getToken = async () => {
+      const token = await AsyncStorage.getItem("access_token");
+      if (token) {
+        alert("masuk");
+        navigate("Home");
+      } else if (err) {
+        console.log(err);
+      }
+    };
+
+    getToken();
+  }, [access_token, err]);
+
+  const onLogin = async (data) => {
+    // await dispatch(loginData(data));
+    await AsyncStorage.setItem("access_token", access_token);
+  };
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submitForm = (event) => {
+    event.preventDefault();
+    if (email === "" || password === "") {
+      console.log("Error: Please fill in all the required fields.");
+    } else {
+      onLogin({email, password});
+    }
+  };
 
   return (
     <Background>
@@ -37,10 +57,8 @@ export default function LoginScreen({navigation}) {
       <TextInput
         label="Email"
         returnKeyType="next"
-        // value={email.value}
-        // onChangeText={(text) => setEmail({value: text, error: ""})}
-        // error={!!email.error}
-        // errorText={email.error}
+        value={email}
+        onChangeText={setEmail}
         autoCapitalize="none"
         autoCompleteType="email"
         textContentType="emailAddress"
@@ -49,10 +67,8 @@ export default function LoginScreen({navigation}) {
       <TextInput
         label="Password"
         returnKeyType="done"
-        // value={password.value}
-        // onChangeText={(text) => setPassword({value: text, error: ""})}
-        // error={!!password.error}
-        // errorText={password.error}
+        value={password}
+        onChangeText={setPassword}
         secureTextEntry
       />
       <View style={styles.forgotPassword}>
@@ -62,8 +78,11 @@ export default function LoginScreen({navigation}) {
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <Button style={{backgroundColor: "#00bce1"}} mode="contained">
-        {/* <Button mode="contained" onPress={onLoginPressed}> */}
+      <Button
+        style={{backgroundColor: "#00bce1"}}
+        mode="contained"
+        onPress={submitForm}
+      >
         Login
       </Button>
       <View style={styles.row}>

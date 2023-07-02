@@ -1,5 +1,5 @@
 // Import React and React Native components
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   View,
   Text,
@@ -10,9 +10,9 @@ import {
   ViewPropTypes,
   TouchableOpacity,
 } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {NavigationContainer, useNavigation} from "@react-navigation/native";
+import {Ionicons} from "@expo/vector-icons";
 import axios from "axios";
 
 import Icon from "react-native-vector-icons/Ionicons";
@@ -23,7 +23,7 @@ const HomeScreen = () => {
 
   const getProduct = async () => {
     try {
-      const { data } = await axios({
+      const {data} = await axios({
         method: "GET",
         url: `https://b897-103-138-68-174.ngrok-free.app/products`,
       });
@@ -35,7 +35,7 @@ const HomeScreen = () => {
     }
   };
 
-  const { navigate } = useNavigation();
+  const {navigate} = useNavigation();
   const handlePressVenue = () => {
     navigate("DetailVenue");
   };
@@ -43,7 +43,7 @@ const HomeScreen = () => {
     navigate("DetailFotografer");
   };
   const handlePressEO = (eo) => {
-    navigate("DetailEventOrganizer", { eo });
+    navigate("DetailEventOrganizer", {eo});
   };
   useEffect(() => {
     getProduct();
@@ -61,12 +61,12 @@ const HomeScreen = () => {
         data={product}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2} // Set number of columns to 2
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <TouchableOpacity
             onPress={() => handlePressEO(item)}
             style={styles.card}
           >
-            <Image source={{ uri: item?.imageUrl }} style={styles.cardImage} />
+            <Image source={{uri: item?.imageUrl}} style={styles.cardImage} />
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>{item?.title}</Text>
               <View style={styles.cardInfo}>

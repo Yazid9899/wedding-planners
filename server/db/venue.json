@@ -2,10 +2,7 @@
   {
     "name": "The Ritz-Carlton Jakarta, Mega Kuningan",
     "location": "Jakarta Selatan",
-    "locationGoogle": [
-      "-6.229064",
-      "106.827605"
-    ],
+    "locationGoogle": ["-6.2286789182820845", "106.8273412844684"],
     "price": 55000000,
     "capacity": 600,
     "description": "The Ritz-Carlton Jakarta, Mega Kuningan is a luxurious wedding venue that offers elegance and sophistication. With a capacity of 600 guests, our ballroom provides a stunning setting for your special day. Experience impeccable service, exquisite cuisine, and create unforgettable memories at The Ritz-Carlton Jakarta, Mega Kuningan.",
@@ -16,15 +13,12 @@
     ]
   },
   {
-    "name": "Padma Hotel Bandung",
+    "name": "Balai Kartini",
     "location": "Jakarta Selatan",
-    "locationGoogle": [
-      "-6.231317",
-      "106.824981"
-    ],
-    "price": 72500000,
-    "capacity": 800,
-    "description": "Celebrate your love at Padma Hotel Bandung, a picturesque wedding venue nestled in the heart of Jakarta. With a capacity of 800 guests, our venue offers breathtaking views and a romantic ambiance for your celebration. Enjoy personalized service, delectable cuisine, and create cherished memories at Padma Hotel Bandung.",
+    "locationGoogle": ["-6.234263896857739", "106.82562347960615"],
+    "price": 90000000,
+    "capacity": 1000,
+    "description": "Balai Kartini adalah sebuah pusat konvensi dan pameran yang berlokasi di selatan Jakarta. Balai Kartini memiliki luas 45.673,71 sqm dan terdiri dari aula bergaya teater bundar, ruang pameran, ruang VIP dan lounge lobi utama yang luas, dan 6 ruang pertemuan yang dapat dikonfigurasi untuk mencocokkan persyaratan acara tertentu. Balai Kartini banyak digunakan untuk berbagai macam acara, baik untuk acara hiburan, konser musik, pameran, job fair, seminar dan simposium, serta acara pernikahan.",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=449&q=80",
@@ -33,15 +27,12 @@
     ]
   },
   {
-    "name": "The Mulia Bali",
+    "name": "Smesco Convention Hall",
     "location": "Jakarta Selatan",
-    "locationGoogle": [
-      "-6.219152",
-      "106.837345"
-    ],
-    "price": 52000000,
-    "capacity": 600,
-    "description": "The Mulia Bali is a tropical paradise in the heart of Jakarta, offering an idyllic setting for your dream wedding. With a capacity of 600 guests, our beachfront venue provides a romantic and enchanting ambiance. Experience exceptional service, breathtaking views, and create unforgettable memories at The Mulia Bali.",
+    "locationGoogle": ["-6.241807015796315", "106.83571293724376"],
+    "price": 300000000,
+    "capacity": 3000,
+    "description": "Smesco Indonesia menyediakan layanan Sewa Gedung untuk kebutuhan acara penting seperti nikahan, seminar, ataupun kegiatan penting lainnya. Dengan kapasitas tamu undangan bisa mencapai 3000 lebih.",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
@@ -49,15 +40,12 @@
     ]
   },
   {
-    "name": "Sheraton Mustika Yogyakarta Resort & Spa",
+    "name": "BRP Sovereign Plaza Ballroom",
     "location": "Jakarta Selatan",
-    "locationGoogle": [
-      "-6.227256",
-      "106.809839"
-    ],
-    "price": 57000000,
-    "capacity": 900,
-    "description": "Sheraton Mustika Yogyakarta Resort & Spa is a magnificent wedding venue that combines luxury and natural beauty. With a capacity of 900 guests, our resort offers lush gardens and elegant ballrooms for your celebration. Enjoy personalized service, exquisite cuisine, and create lifelong memories at Sheraton Mustika Yogyakarta Resort & Spa.",
+    "locationGoogle": ["-6.290976672024636", "106.80596134216694"],
+    "price": 70000000,
+    "capacity": 800,
+    "description": "BRP Ballroom @ SOVEREIGN PLAZA menyediakan pelayanan lokasi pernikahan yang eksklusif dan dengan pelayanan terbaik akan memberikan kepuasan untuk Anda. Momen pernikahan Anda akan menjadi momen yang tidak terlupakan",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
@@ -66,15 +54,12 @@
     ]
   },
   {
-    "name": "Shangri-La Hotel Surabaya",
-    "location": "Jakarta Selatan",
-    "locationGoogle": [
-      "-6.228708",
-      "106.804498"
-    ],
-    "price": 10000000,
-    "capacity": 800,
-    "description": "Experience a luxurious wedding at Shangri-La Hotel Surabaya, where opulence meets sophistication. With a capacity of 800 guests, our ballroom provides an exquisite setting for your celebration. Enjoy impeccable service, world-class amenities, and create unforgettable memories at Shangri-La Hotel Surabaya.",
+    "name": "Gedung Puspa Pesona Taman Anggrek TMII",
+    "location": "Jakarta Timur",
+    "locationGoogle": ["-6.292413676784113", "106.88243798348039"],
+    "price": 750000000,
+    "capacity": 600,
+    "description": "Experience a luxurious wedding at Gedung Puspa Pesona Taman Anggrek TMII, where opulence meets sophistication. With a capacity of 600 guests, our ballroom provides an exquisite setting for your celebration. Enjoy impeccable service, world-class amenities, and create unforgettable memories at Gedung Puspa Pesona Taman Anggrek TMII.",
     "isBooked": false,
     "photo": [
       "https://plus.unsplash.com/premium_photo-1678286769888-ef3698e72a6c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
@@ -83,15 +68,12 @@
     ]
   },
   {
-    "name": "The Westin Jakarta",
-    "location": "Jakarta Utara",
-    "locationGoogle": [
-      "-6.238652",
-      "106.821727"
-    ],
-    "price": 75000000,
-    "capacity": 700,
-    "description": "Celebrate your special day at The Westin Jakarta, a prestigious venue offering breathtaking views of Jakarta's skyline. With a capacity of 700 guests, our ballroom combines elegance and modernity for an unforgettable wedding experience. Enjoy impeccable service, exquisite cuisine, and create cherished memories at The Westin Jakarta.",
+    "name": "Graha Nandika Sucofindo",
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.251570767923228", "106.84253462440535"],
+    "price": 80000000,
+    "capacity": 1200,
+    "description": "Ruangan acara yang terkesan mewah dan eksklusif ini dapat berkapasitas hingga 1200 orang dengan setup ruangan yang dapat diatur sesuai keinginan anda. Ruangan yang mewah dan modern berlokasi strategis, tepatnya di Jalan Raya Pasar Minggu, Pancoran, Jakarta Selatan. Dengan mengusung desain ruangan yang mewah dan modern, menjadikan ruangan ini cocok untuk anda yang ingin melakukan meeting atau mengadakan acara dengan rekan bisnis atau internal perusahaan di tempat berbeda dari yang biasanya. Ditunjang dengan lokasi strategis yang dapat dijangkau dengan kendaraan umum ataupun kendaraan pribadi, dan hanya 10 menit jika berkendara dari TMP Kalibata. Ruang ini sangat cocok digunakan untuk acara seperti: Meeting, Reuni, Product Launching, Partai, Bazaar, Penggalangan Dana, Training, Seminar, Workshop, Graduation, hingga Buka Puasa Bersama. Dengan minimum bookings half day, dan harga weekend half day +40%, serta harga weekend full day +60%.",
     "isBooked": false,
     "photo": [
       "https://plus.unsplash.com/premium_photo-1678286770016-6306ad61df9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
@@ -101,11 +83,8 @@
   },
   {
     "name": "The Pallas",
-    "location": "Jakarta Utara",
-    "locationGoogle": [
-      "-6.214998",
-      "106.806938"
-    ],
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.2252088707785225", "106.80761016819585"],
     "price": 70000000,
     "capacity": 700,
     "description": "The Pallas is a trendy and sophisticated wedding venue located in the heart of Jakarta. With a capacity of 700 guests, our stylish ballroom sets the stage for a memorable celebration. Experience exceptional service, contemporary cuisine, and create unforgettable moments at The Pallas.",
@@ -117,15 +96,12 @@
     ]
   },
   {
-    "name": "The Trans Luxury Hotel",
-    "location": "Jakarta Utara",
-    "locationGoogle": [
-      "-6.217159",
-      "106.809261"
-    ],
-    "price": 77000000,
-    "capacity": 700,
-    "description": "Experience luxury and elegance at The Trans Luxury Hotel, an iconic wedding venue in Jakarta. With a capacity of 700 guests, our ballroom offers a glamorous setting for your special day. Enjoy personalized service, exquisite cuisine, and create unforgettable memories at The Trans Luxury Hotel.",
+    "name": "Grand Ballroom K-LINK Tower",
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.239783846250694", "106.83384392692966"],
+    "price": 750000000,
+    "capacity": 1300,
+    "description": "Gedung pernikahan Favorit di Jakarta, yang dapat memuat hingga 1300 tamu undangan. Terletak dijalan Gatot Subroto, Prestigious, strategic and luxury your once for a lifetime moment's Right Place",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1549895058-36748fa6c6a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
@@ -134,15 +110,12 @@
     ]
   },
   {
-    "name": "Ayana Resort and Spa",
-    "location": "Jakarta Utara",
-    "locationGoogle": [
-      "-6.234912",
-      "106.814342"
-    ],
-    "price": 810000000,
-    "capacity": 700,
-    "description": "Ayana Resort and Spa is a tropical paradise nestled in the heart of Jakarta. With a capacity of 700 guests, our resort offers stunning gardens and luxurious venues for your wedding celebration. Experience world-class service, delectable cuisine, and create lifelong memories at Ayana Resort and Spa.",
+    "name": "Yudhistira Grand Ballroom Patrajasa",
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.232866567847839", "106.82334693067844"],
+    "price": 750000000,
+    "capacity": 1500,
+    "description": "Patra Jasa Office Tower is located in a strategic location in jl. Gatot Subroto Jakarta that can be achieved through a variety of directions and close to entertainment or shopping center.The building has 23 floors with a variety of support facilities in order to optimize the company's activities. The total office space is ± 40.000 m2 of the which is primarily Occupied by Pertamina, Government offices and multi-national company. There are several bank branches and ATM Gallery, Restaurant, Clinics, Fitness & Relaxation Centre",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1586199574776-41143d41c70f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
@@ -151,15 +124,12 @@
     ]
   },
   {
-    "name": "Sheraton Surabaya Hotel & Towers",
+    "name": "Gedung Balai Samudra",
     "location": "Jakarta Utara",
-    "locationGoogle": [
-      "-6.234491",
-      "106.804834"
-    ],
-    "price": 75000000,
-    "capacity": 800,
-    "description": "Sheraton Surabaya Hotel & Towers is a sophisticated wedding venue that exudes elegance and charm. With a capacity of 800 guests, our ballroom provides a stunning backdrop for your celebration. Enjoy personalized service, delectable cuisine, and create cherished memories at Sheraton Surabaya Hotel & Towers.",
+    "locationGoogle": ["-6.154055653703846", "106.89068987654059"],
+    "price": 30000000,
+    "capacity": 300,
+    "description": "Balai Samudera adalah gedung pernikahan yang lokasinya berada di Jalan Boulevard Barat, Kelapa Gading, Jakarta Utara. Berada di kawasan elit, Balai Samudera sangat mudah ditemukan karena lokasinya yang strategis. Gedung ini menjadi favorit banyak pengantin untuk menggelar pernikahan",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1549964336-96c968e00d5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=874&q=80",
@@ -170,10 +140,7 @@
   {
     "name": "The Phoenix Hotel Yogyakarta - MGallery",
     "location": "Jakarta Timur",
-    "locationGoogle": [
-      "-6.228073",
-      "106.806243"
-    ],
+    "locationGoogle": ["-6.228073", "106.806243"],
     "price": 68000000,
     "capacity": 700,
     "description": "Experience a wedding of timeless elegance at The Phoenix Hotel Yogyakarta - MGallery. With a capacity of 700 guests, our venue offers a combination of classic charm and modern sophistication. Enjoy personalized service, exquisite cuisine, and create unforgettable memories at The Phoenix Hotel Yogyakarta - MGallery.",
@@ -185,15 +152,12 @@
     ]
   },
   {
-    "name": "Hotel Deli River",
-    "location": "Jakarta Timur",
-    "locationGoogle": [
-      "-6.225413",
-      "106.813511"
-    ],
-    "price": 75000000,
-    "capacity": 600,
-    "description": "Hotel Deli River is a hidden gem in the heart of Jakarta, offering a serene and romantic setting for your wedding. With a capacity of 600 guests, our venue features lush gardens and a tranquil riverfront. Experience warm hospitality, delicious cuisine, and create unforgettable memories at Hotel Deli River.",
+    "name": "Gedung Aldeco Octagon",
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.274324489741915", "106.83041190722031"],
+    "price": 20000000,
+    "capacity": 800,
+    "description": "Aldevco Octagon adalah gedung grade C yang lokasinya berada di jalan Warung Jati Barat Raya No. 75. Gedung ini berdekatan dengan daerah Mampang, pasar minggu, tebet dan Pancoran. Sarana transportasi umum mudah didapatkan di area gedung ini mulai dari bus kota, TransJakarta, taksi dan transportasi online.",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=898&q=80",
@@ -202,15 +166,12 @@
     ]
   },
   {
-    "name": "Four Points by Sheraton Makassar",
-    "location": "Jakarta Timur",
-    "locationGoogle": [
-      "-6.236477",
-      "106.802994"
-    ],
-    "price": 55000000,
-    "capacity": 500,
-    "description": "Celebrate your love at Four Points by Sheraton Makassar, a contemporary wedding venue in Jakarta. With a capacity of 500 guests, our ballroom offers a stylish and modern setting for your special day. Enjoy personalized service, delectable cuisine, and create unforgettable memories at Four Points by Sheraton Makassar.",
+    "name": "Gedung Antam",
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.301973741654417", "106.84375762993432"],
+    "price": 25000000,
+    "capacity": 1000,
+    "description": "Aneka Tambang Office Tower adalah bangunan perkantoran yang menempati lokasi yang strategis karena sangat dekat dengan jalan Tol Lingkar Luar Jakarta, sehingga dapat dengan mudah dijangkau dari kawasan lain di Jakarta. Akses menuju Bandara Internasional Soekarno Hatta dan Halim Perdanakusuma serta jaringan jalan Tol Trans Jawa juga dapat terhubung dengan mudah. Selain itu, Tanjung Barat adalah jalur penghubung utama antara Jakarta dan Depok.",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1577058071107-96a5a1dbe120?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
@@ -219,15 +180,12 @@
     ]
   },
   {
-    "name": "Hotel Tentrem Semarang",
+    "name": "Balai Pertemuan Bukit Permai Cibubur",
     "location": "Jakarta Timur",
-    "locationGoogle": [
-      "-6.238441",
-      "106.807597"
-    ],
-    "price": 64000000,
+    "locationGoogle": ["-6.35500566130549", "106.88574797285551"],
+    "price": 15000000,
     "capacity": 600,
-    "description": "Hotel Tentrem Semarang is a luxurious wedding venue that blends elegance and modernity. With a capacity of 600 guests, our ballroom provides a sophisticated setting for your celebration. Experience impeccable service, exquisite cuisine, and create cherished memories at Hotel Tentrem Semarang.",
+    "description": "Salah satu hal yang harus di pikirkan dalam merencanakan pesta pernikahan adalah lokasi tempat kamu menyelenggarakannya. Jika kamu berencana untuk menikah di gedung, maka daftar tempat sewa gedung dijakarta ini harus banget kamu tahu. Harganya mulai dari Rp4 jutaann!",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1572085313466-6710de8d7ba3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
@@ -236,15 +194,12 @@
     ]
   },
   {
-    "name": "Aryaduta Palembang",
-    "location": "Jakarta Timur",
-    "locationGoogle": [
-      "-6.236194",
-      "106.812976"
-    ],
-    "price": 710000000,
-    "capacity": 700,
-    "description": "Aryaduta Palembang is a stunning wedding venue located in the heart of Jakarta. With a capacity of 700 guests, our ballroom offers a grand and elegant setting for your special day. Enjoy personalized service, delectable cuisine, and create unforgettable memories at Aryaduta Palembang.",
+    "name": "GKM Green Tower",
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.302255413743805", "106.83667059141085"],
+    "price": 70000000,
+    "capacity": 500,
+    "description": "GKM Green Tower atau dikenal juga dengan nama GKM Tower, merupakan gedung perkantoran di Jl. TB. Simatupang, Pasar Minggu, Jakarta Selatan.Berdiri di atas lahan seluas 5.800 m² dengan total area 30.000 m², gedung yang dibangun pada 2011 dan beroperasi sejak 2014 ini dibangun oleh PT Lestari Kirana Persada. Rancangan gedung sendiri dibuat oleh PT Pandega Desain Weharim",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1530023367847-a683933f4172?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
@@ -253,15 +208,12 @@
     ]
   },
   {
-    "name": "The Shalimar Boutique Hotel",
-    "location": "Jakarta Utara",
-    "locationGoogle": [
-      "-6.235045",
-      "106.815647"
-    ],
-    "price": 80000000,
-    "capacity": 800,
-    "description": "The Shalimar Boutique Hotel is a charming and intimate wedding venue nestled in the heart of Jakarta. With a capacity of 800 guests, our venue offers a romantic and cozy ambiance for your celebration. Experience warm hospitality, delightful cuisine, and create lifelong memories at The Shalimar Boutique Hotel.",
+    "name": "Gedung Aneka Bhakti",
+    "location": "Jakarta Pusat",
+    "locationGoogle": ["-6.199334383307736", "106.85201720433413"],
+    "price": 750000000,
+    "capacity": 1000,
+    "description": "Gedung Aneka Bhakti Depsos merupakan salah satu favorit gedung resepsi yang terletak di daerah Jakarta Pusat yang mampu menampung sampai 1000 tamu undangan. Selain tempat parkirnya yang luas, dalam gedung ini juga terkesan luas sehingga sangat cocok untuk digunakan dalam berbagai acara resmi.",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1572040428263-14d4b4221d2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=943&q=80",
@@ -270,15 +222,12 @@
     ]
   },
   {
-    "name": "Grand Indonesia",
-    "location": "Jakarta Utara",
-    "locationGoogle": [
-      "-6.222178",
-      "106.809917"
-    ],
-    "price": 95000000,
-    "capacity": 700,
-    "description": "Celebrate your special day at Grand Indonesia, a prestigious venue in Jakarta. With a capacity of 700 guests, our ballroom offers elegance and sophistication for your wedding celebration. Enjoy impeccable service, exquisite cuisine, and create cherished memories at Grand Indonesia.",
+    "name": "Balai Makarti Muktitama",
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.2543624914881395", "106.85142908348038"],
+    "price": 20000000,
+    "capacity": 800,
+    "description": "Balai Makarti Muktitama berada di Jl. Taman Makam Pahlawan Kalibata No. 17 dan mudah diakses. Tempatnya juga sangat strategis dekat dengan stasiun, penginapan, dan plaza. Berlokasi di Kementerian Desa, Pembangunan Daerah Tertinggal dan Transmigras, gedung ini bertema Jawa yang cukup kental dan atap dari kayu-kayu, sehingga berkesan klasik.",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1572040428263-14d4b4221d2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=943&q=80",
@@ -288,11 +237,8 @@
   },
   {
     "name": "Balai Sarbini",
-    "location": "Jakarta Utara",
-    "locationGoogle": [
-      "-6.226811",
-      "106.819194"
-    ],
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.219550477094076", "106.81494476442298"],
     "price": 80000000,
     "capacity": 600,
     "description": "Balai Sarbini is an iconic wedding venue in Jakarta, known for its timeless beauty and grandeur. With a capacity of 600 guests, our ballroom provides an exquisite setting for your celebration. Experience impeccable service, delectable cuisine, and create unforgettable memories at Balai Sarbini.",
@@ -304,15 +250,12 @@
     ]
   },
   {
-    "name": "Istora Senayan",
+    "name": "Grand Ballroom LIPI",
     "location": "Jakarta Pusat",
-    "locationGoogle": [
-      "-6.223677",
-      "106.802955"
-    ],
-    "price": 82500000,
-    "capacity": 700,
-    "description": "Istora Senayan is a prestigious wedding venue located in the heart of Jakarta. With a capacity of 700 guests, our grand ballroom offers elegance and opulence for your special day. Enjoy personalized service, exquisite cuisine, and create unforgettable memories at Istora Senayan.",
+    "locationGoogle": ["-6.228279317799734", "106.81821796141465"],
+    "price": 150000000,
+    "capacity": 2000,
+    "description": "WEDDING VENUE AND ORGANIZER dengan kelengkapan ALL IN PACKAGES LIPI GRAND BALLROOM lokasi venue yang strategis, harga terjangkau, kualitas bintang 5!",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1560624052-449f5ddf0c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
@@ -321,15 +264,12 @@
     ]
   },
   {
-    "name": "Gelora Bung Karno",
-    "location": "Jakarta Pusat",
-    "locationGoogle": [
-      "-6.221623",
-      "106.805254"
-    ],
-    "price": 86000000,
+    "name": "Lippo Kuningan Grand Ballroom",
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.217075010537388", "106.83053340537609"],
+    "price": 75000000,
     "capacity": 800,
-    "description": "Celebrate your love at Gelora Bung Karno, an iconic venue in Jakarta known for its historic significance. With a capacity of 800 guests, our ballroom provides a grand and majestic setting for your wedding. Enjoy impeccable service, delectable cuisine, and create cherished memories at Gelora Bung Karno.",
+    "description": "Lippo Kuningan merupakan Fresh Ballroom, bergaya Millenial dan dome yang di desain bergaya Eropa. Lippo Kuningan telah melaksanakan Grand Launching pada 24 Oktober 2020 bersama dengan Team Lippo Group Building Management di Lippo Kuningan Grand Ballroom.  ",
     "isBooked": false,
     "photo": [
       "https://images.unsplash.com/photo-1606787947151-1c54964042e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80",
@@ -339,11 +279,8 @@
   },
   {
     "name": "The Dharmawangsa Jakarta",
-    "location": "Jakarta Pusat",
-    "locationGoogle": [
-      "-6.223233",
-      "106.823433"
-    ],
+    "location": "Jakarta Selatan",
+    "locationGoogle": ["-6.25294773359082", "106.80552469141033"],
     "price": 80000000,
     "capacity": 700,
     "description": "Experience luxury and sophistication at The Dharmawangsa Jakarta, a prestigious wedding venue in Jakarta. With a capacity of 700 guests, our ballroom offers an elegant setting for your celebration. Enjoy personalized service, exquisite cuisine, and create unforgettable memories at The Dharmawangsa Jakarta.",
