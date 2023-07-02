@@ -1,13 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
+import {BASE_URL} from "../../config/api";
 
 export const loginData = createAsyncThunk("login/fetchData", async (data) => {
   // console.log(data);
-  const response = await axios.post(
-    "https://d240-103-138-68-174.ngrok-free.app/users/login",
-    data
-  );
+  const response = await axios.post(`${BASE_URL}/users/login`, data);
   AsyncStorage.setItem("access_token", response.data.access_token);
   console.log(
     response.data.access_token,

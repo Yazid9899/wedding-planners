@@ -1,14 +1,12 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
+import {BASE_URL} from "../../config/api";
 
 export const registerData = createAsyncThunk(
   "register/fetchData",
   async (data) => {
     // console.log(data);
-    const response = await axios.post(
-      "https://d240-103-138-68-174.ngrok-free.app/users/register",
-      data
-    );
+    const response = await axios.post(`${BASE_URL}/users/register`, data);
     //   AsyncStorage.setItem("access_token", response.data.access_token);
     console.log(response.data, ">>>>>di slice register>>>>>>>>>>>>>>>>>>>>.");
     return response.data;
