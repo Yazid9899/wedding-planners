@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const loginData = createAsyncThunk("login/fetchData", async (data) => {
-  console.log(data);
+  // console.log(data);
   const response = await axios.post(
     "https://d240-103-138-68-174.ngrok-free.app/users/login",
     data

@@ -27,10 +27,11 @@ export default function LoginScreen({navigation}) {
       [name]: value,
     });
   };
-  console.log(AsyncStorage.getItem("access_token"), "access_token");
 
   const onSubmit = async () => {
     await dispatch(loginData(dataUser));
+    const access_token = await AsyncStorage.getItem("access_token");
+    console.log(access_token, "access_token");
     if (status === "failed") {
       Alert.alert("Login Failed", error);
     } else {
