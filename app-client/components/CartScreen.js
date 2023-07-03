@@ -181,8 +181,11 @@
 // // });
 
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
 import axios from "axios";
+import { getCartData } from "../features/CartData/GetCart";
+import { useDispatch, useSelector } from "react-redux";
+// import { getCartData } from "../features/CartData/GetCart";
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -191,22 +194,13 @@ const formatCurrency = (value) => {
 };
 
 const CartScreen = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchCartItems();
+    dispatch(getCartData());
   }, []);
 
-  const fetchCartItems = async () => {
-    try {
-      const response = await axios.get(
-        "https://c9d4-103-138-68-174.ngrok-free.app/carts"
-      );
-      setCartItems(response.data);
-    } catch (error) {
-      console.log("Error fetching cart items:", error);
-    }
-  };
+  const cartStateData = useSelector((state) => state.cart.data);
 
   const renderItem = ({ item }) => (
     <View style={styles.cartItem}>
@@ -217,7 +211,7 @@ const CartScreen = () => {
           Photographer: {item?.Photographer?.name}
         </Text>
         <Text style={styles.detailText}>Catering: {item?.Cathering?.name}</Text>
-        <Text style={styles.detailText}>Total Pax: {item?.totalPax}</Text>
+        <Text style={styles.detailText}>Total Pax: {item?.pax}</Text>
         <Text style={styles.detailText}>
           Total Price: {formatCurrency(item?.totalPrice)}
         </Text>
@@ -226,15 +220,19 @@ const CartScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Cart Screen</Text>
-      <FlatList
-        data={cartItems}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.cartList}
-      />
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.title}>Cart Screen</Text>
+        <Text>Halooooooooo</Text>
+        {/* <Text>{JSON.stringify(cartStateData)}</Text> */}
+        <FlatList
+          data={cartStateData}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={styles.cartList}
+        />
+      </View>
+    </ScrollView>
   );
 };
 

@@ -19,33 +19,51 @@ import MapView, { Marker } from "react-native-maps";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailProductsData } from "../features/PackageData/PackageDetail";
 import { addCartData } from "../features/CartData/AddCart";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EventOrganizerDetailScreen = ({ route }) => {
-  // const { id } = route.params;
   const { eoId } = route.params;
 
   console.log(eoId, "ats");
+
+  // Ini untuk state total price dan pax
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [dataProduct, setDataProduct] = useState({
+    pax: 0,
+  });
+
+  // Ini untuk menghitung pax dan total Price
+  const handleChange = (name, value) => {
+    setDataProduct((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    const totalPrice =
+      productStateData?.price +
+      +productStateData?.Venue?.price +
+      parseInt(value) * productStateData?.Cathering?.price;
+    setTotalPrice(totalPrice);
+  };
+
+  // Ini untuk
   const [selectedPax, setSelectedPax] = useState(200); // Nilai pax awal
   const [showModal, setShowModal] = useState(false); // Status modal
   const paxOptions = [200, 300, 500, 700];
   const navigation = useNavigation();
-  ///state lokasi device
   const [currentLocation, setCurrentLocation] = useState(null);
 
   const dispatch = useDispatch();
 
   const productStateData = useSelector((state) => state.detailProduct.data);
-  // console.log(productStateData.Venue, "============");
 
-  // const id = route.params();
+  // Ini untuk use fetch detail produk
   useEffect(() => {
-    console.log(eoId, "use effect dtl");
     dispatch(fetchDetailProductsData({ eoId }));
   }, [dispatch]);
+
   /// function for redirect to google Maps
 
   const openNavigation = () => {
-    console.log(productStateData?.Venue, "hyvuyviuvyuyv");
     const latitude = +productStateData?.Venue?.locationGoogle[0];
     const longitude = +productStateData?.Venue?.locationGoogle[1];
     const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
@@ -76,13 +94,6 @@ const EventOrganizerDetailScreen = ({ route }) => {
   const startingPrice = formatCurrency(
     productStateData?.price + +productStateData?.Venue?.price
   );
-  const totalPrice =
-    productStateData?.price +
-    +productStateData?.Venue?.price +
-    selectedPax * productStateData?.Cathering?.price;
-  const handlePaxChange = (value) => {
-    setSelectedPax(value);
-  };
   const handleAddToCart = () => {
     setShowModal(true);
   };
@@ -96,71 +107,44 @@ const EventOrganizerDetailScreen = ({ route }) => {
 
     if (confirmation === "yes") {
       // dispatch(addCartData({ eoId, selectedPax }));
-      dispatch(addCartData(productStateData));
+      console.log("masukkkkk");
+      const cartData = {
+        totalPrice: totalPrice,
+        pax: dataProduct.pax,
+      };
+      console.log(AsyncStorage.getItem("access_token"));
+      await dispatch(addCartData({ data: cartData, idProduct: eoId }));
       Alert.alert(
         "Success",
         "The product has been added to the cart successfully."
       );
+      navigation.navigate("Cart");
     }
-    // if (confirmation === "yes") {
-    //   try {
-    //     const response = await fetch(
-    //       "https://c9d4-103-138-68-174.ngrok-free.app/carts",
-    //       {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({
-    //           title: productStateData?.title,
-    //           PhotographyId: productStateData?.PhotographyId,
-    //           CatheringId: productStateData?.CatheringId,
-    //           VenueId: productStateData?.VenueId,
-    //           totalPrice: totalPrice,
-    //         }),
-    //       }
-    //     );
-
-    //     if (response.ok) {
-    //       // Cart successfully created
-    //       // navigation.navigate("Cart", {
-    //       //   productStateData: { ...productStateData, totalPrice: totalPrice },
-    //       // });
-    //       navigation.navigate("Cart");
-    //     } else {
-    //       // Handle error response
-    //       const errorData = await response.json();
-    //       console.log(errorData);
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // } else if (confirmation === "no") {
-    // }
   };
 
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const mapHeight = windowHeight * 0.3;
 
+  //Ini google Maps
   //use effect for permission for using GPS (current location)
-  useEffect(() => {
-    (async () => {
-      try {
-        const { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          console.log("Permission to access location was denied");
-          return;
-        }
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const { status } = await Location.requestForegroundPermissionsAsync();
+  //       if (status !== "granted") {
+  //         console.log("Permission to access location was denied");
+  //         return;
+  //       }
 
-        const location = await Location.getCurrentPositionAsync({});
-        const { latitude, longitude } = location.coords;
-        setCurrentLocation({ latitude, longitude });
-      } catch (error) {
-        console.log("Error getting location", error);
-      }
-    })();
-  }, []);
+  //       const location = await Location.getCurrentPositionAsync({});
+  //       const { latitude, longitude } = location.coords;
+  //       setCurrentLocation({ latitude, longitude });
+  //     } catch (error) {
+  //       console.log("Error getting location", error);
+  //     }
+  //   })();
+  // }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -261,8 +245,9 @@ const EventOrganizerDetailScreen = ({ route }) => {
           <Text style={styles.detailText}>Pax:</Text>
           <Picker
             style={styles.paxPicker}
-            selectedValue={selectedPax}
-            onValueChange={handlePaxChange}
+            name="pax"
+            selectedValue={dataProduct.pax}
+            onValueChange={(value) => handleChange("pax", value)}
           >
             {paxOptions?.map((option) => (
               <Picker.Item
@@ -305,7 +290,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
           </View>
         </Modal>
       </View>
-      <MapView
+      {/* <MapView
         style={{ width: windowWidth, height: mapHeight, paddingRight: 20 }}
         initialRegion={{
           latitude: +productStateData?.Venue?.locationGoogle[0],
@@ -332,7 +317,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
             pinColor="blue" // Customize the pin color for the current location marker
           />
         )}
-      </MapView>
+      </MapView> */}
     </ScrollView>
   );
 };
