@@ -1,4 +1,5 @@
 const { Cart, Photography, Venue, Cathering, Product } = require("../models");
+<<<<<<< HEAD
 
 class CartControllers {
   static async createCart(req, res, next) {
@@ -6,7 +7,16 @@ class CartControllers {
       const { id } = req.additionalData;
       const { title, PhotographyId, CatheringId, VenueId, totalPrice, pax } =
         req.body;
+=======
+>>>>>>> Damar
 
+class CartControllers {
+  static async createCart(req, res, next) {
+    try {
+      const { id } = req.additionalData;
+      const { title, PhotographyId, CatheringId, VenueId, totalPrice, pax } =
+        req.body;
+      console.log(req.body, "di custom cart controller");
       const create = await Cart.create({
         title,
         UserId: id,

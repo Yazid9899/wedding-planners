@@ -16,6 +16,8 @@ import addCartReducer from "../features/CartData/AddCart";
 
 import cartReducer from "../features/CartData/GetCart";
 
+import addCustomCartReducer from "../features/CartData/AddCustomerCart";
+
 export const store = configureStore({
   reducer: {
     venue: VenueReducer,
@@ -30,5 +32,6 @@ export const store = configureStore({
     inputDateBudget: inputDateBudgetReducer,
     addCart: addCartReducer,
     cart: cartReducer,
+    addCustomCart: addCustomCartReducer,
   },
 });

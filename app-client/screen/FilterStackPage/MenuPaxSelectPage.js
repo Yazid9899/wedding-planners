@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setGuestPax } from "../../features/inputDateBudget/dateBudgetSlice";
 
+import { addCustomCartData } from "../../features/CartData/AddCustomerCart";
+
 const MenuPaxSelectPage = ({ navigation }) => {
   const dispatch = useDispatch();
 
@@ -56,12 +58,35 @@ const MenuPaxSelectPage = ({ navigation }) => {
     setInputValue(cleanedText);
   };
 
+  const calculateTotalPrice = () => {
+    const venuePrice = venueData?.price || 0;
+    const photographyPrice = photographerData?.price || 0;
+    const cateringPrice = cateringData?.price || 0;
+
+    const totalPrice =
+      venuePrice + photographyPrice + cateringPrice * guestPaxData;
+
+    return totalPrice;
+  };
+  //   title,PhotographyId, CatheringId,  VenueId, totalPrice, pax
+
   const nextButton = () => {
-    navigation.navigate("BuildingSelect");
+    const cartData = {
+      title: `${venueData?.name} with ${cateringData?.name} and ${photographerData?.name} for ${guestPaxData} people`,
+      VenueId: venueData?.id,
+      CatheringId: cateringData?.id,
+      PhotographyId: photographerData?.id, // Assuming the photographyId is available in the 'data' prop
+      pax: guestPaxData,
+      totalPrice: calculateTotalPrice(), // Replace this with your own logic to calculate the total price
+    };
+    console.log(cartData, "data yg akan dikirim");
+    dispatch(addCustomCartData(cartData));
+    navigation.navigate("MainFilter");
+    navigation.navigate("Cart");
   };
-  const previousButton = () => {
-    navigation.navigate("CateringSelect");
-  };
+  //   const previousButton = () => {
+  //     navigation.navigate("CateringSelect");
+  //   };
 
   useEffect(() => {
     dispatch(setGuestPax(inputValue));
@@ -104,24 +129,25 @@ const MenuPaxSelectPage = ({ navigation }) => {
         <View>
           <Text>Your Budget: {budgetData}</Text>
           <Text>Your Book Date: {dateData}</Text>
-          <Text>Your Venue: {JSON.stringify(venueData)}</Text>
-          <Text>Your Photographer: {JSON.stringify(photographerData)}</Text>
-          <Text>Your Catering: {JSON.stringify(cateringData)}</Text>
+          <Text>Your Venue: {venueData?.name}</Text>
+          <Text>Your Photographer: {photographerData?.name}</Text>
+          <Text>Your Catering: {cateringData?.name}</Text>
           <Text>
-            Total: Venue+Photographer+ (Catering * @Pax:{" "}
-            {JSON.stringify(guestPaxData)})
+            Total: Venue+Photographer+ (Catering * @Pax: {guestPaxData})
           </Text>
         </View>
 
         <View style={{ height: 30 }} />
         <View style={styles.containerButton}>
-          <TouchableOpacity style={styles.button} onPress={previousButton}>
+          {/* <TouchableOpacity style={styles.button} onPress={previousButton}>
             <Text style={styles.buttonText}>Previous</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity style={styles.button} onPress={nextButton}>
-            <Text style={styles.buttonText}>Next</Text>
+            <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
         </View>
+
+        {}
       </View>
     </ScrollView>
   );
