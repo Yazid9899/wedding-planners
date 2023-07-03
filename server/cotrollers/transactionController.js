@@ -1,4 +1,16 @@
-const { Transaction, User, Product } = require("../models");
+const {
+  sendInvoiceEmail,
+  generateInvoicePDF,
+} = require("../helpers/generateInvoice");
+const {
+  Transaction,
+  Venue,
+  User,
+  Cathering,
+  Product,
+  Cart,
+  Photography,
+} = require("../models");
 const xendit = require("xendit-node");
 const Xendit = new xendit({
   secretKey:
@@ -7,22 +19,20 @@ const Xendit = new xendit({
 const { Invoice } = Xendit;
 const i = new Invoice();
 
-
 class TransactionController {
   static async getTransactionById(req, res, next) {
     try {
-      const { id } = req.additionalData
+      const { id } = req.additionalData;
       const data = await Transaction.findAll({
         where: { id },
       });
 
-      if(!data){
-        throw{
-          name: "Transaction Not Found"
-        }
+      if (!data) {
+        throw {
+          name: "Transaction Not Found",
+        };
       }
       res.status(200).json(data);
-
     } catch (err) {
       next(err);
     }
@@ -30,47 +40,83 @@ class TransactionController {
   static async changeStatusTransaction(req, res, next) {
     try {
       const { id } = req.params;
-
-      await Transaction.update({ status: "Paid" }, { where: { id: id } });
-  
-      res.status(200).json({
-        message: "Transaction Paid",
+      const data = await Transaction.findOne({
+        where: { id },
+        include: [
+          {
+            model: Cart,
+            include: [
+              { model: Photography },
+              { model: Cathering },
+              { model: Venue },
+            ],
+          },
+        ],
       });
+      const xendit = await i.getInvoice({ invoiceID: data.noTransaction });
+
+      if (xendit.status === "PAID") {
+        await Transaction.update({ status: "Paid" }, { where: { id } });
+
+        try {
+          const pdfBuffer = await generateInvoicePDF(data);
+          await sendInvoiceEmail("ciptandaru@gmail.com", pdfBuffer);
+          console.log("Invoice sent successfully.");
+        } catch (error) {
+          console.error("Error sending invoice:", error);
+        }
+
+        res.status(200).json({
+          message: "Transaction Paid",
+        });
+      } else {
+        res.status(200).json({
+          message: "Transaction Pending",
+          data,
+        });
+      }
     } catch (err) {
       next(err);
     }
   }
-  static async createTransaction(name, price, id, noTransaction) {
 
+  static async createTransaction(name, price, id, noTransaction, CartId) {
     await Transaction.create({
       name,
       price,
       UserId: id,
-      noTransaction
+      noTransaction,
+      CartId,
     });
   }
 
   static async payment(req, res, next) {
     try {
-      const { title, totalAmount, } = req.body
-      const { email, id } = req.additionalData
+      const { title, totalAmount, CartId } = req.body;
+      const { email, id } = req.additionalData;
+
       const data = await i.createInvoice({
         externalID: "your-external-id",
         payerEmail: email,
         description: title,
         amount: totalAmount,
       });
-      
-      const noTransaction = "TRANSACTION_" + data.id
-      
-      TransactionController.createTransaction(title, totalAmount, id, noTransaction)
+
+      const noTransaction = data.id;
+
+      TransactionController.createTransaction(
+        title,
+        totalAmount,
+        id,
+        noTransaction,
+        CartId
+      );
 
       res.status(200).json({
         statusCode: 200,
         message: "paymentGateway",
-        data,
+        invoiceUrl: data.invoice_url,
       });
-
     } catch (err) {
       next(err);
     }
@@ -85,7 +131,7 @@ class TransactionController {
         data,
       });
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 }
