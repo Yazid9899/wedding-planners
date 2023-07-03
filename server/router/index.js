@@ -15,7 +15,7 @@ router.use("/venues", venueRouter);
 router.use("/catherings", catheringRouter);
 router.use("/photographies", photographyRouter);
 router.use("/products", productRouter);
-// router.use(auth)
+router.use(auth)
 router.use("/carts", cartRouter);
 router.use("/transactions", transactionRouter);
 
