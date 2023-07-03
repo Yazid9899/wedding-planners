@@ -40,6 +40,7 @@ class TransactionController {
   static async changeStatusTransaction(req, res, next) {
     try {
       const { id } = req.params;
+      const { email } = req.additionalData;
       const data = await Transaction.findOne({
         where: { id },
         include: [
@@ -60,15 +61,14 @@ class TransactionController {
 
         try {
           const pdfBuffer = await generateInvoicePDF(data);
-          await sendInvoiceEmail("ciptandaru@gmail.com", pdfBuffer);
-          console.log("Invoice sent successfully.");
+          await sendInvoiceEmail(email, pdfBuffer);
+          res.status(200).json({
+            message: "Transaction Paid and invoice sent to you email",
+            data,
+          });
         } catch (error) {
           console.error("Error sending invoice:", error);
         }
-
-        res.status(200).json({
-          message: "Transaction Paid",
-        });
       } else {
         res.status(200).json({
           message: "Transaction Pending",
