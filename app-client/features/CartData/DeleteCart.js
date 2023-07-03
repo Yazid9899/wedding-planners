@@ -3,13 +3,13 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BASE_URL } from "../../config/api";
 
-export const getCartData = createAsyncThunk("cart/addCart", async () => {
+export const deleteCart = createAsyncThunk("cart/deleteCart", async (id) => {
   try {
-    console.log("masukkkkkkkkkk ajaaa");
+    console.log(id, "masukkkkkkkkkk ajaaa");
     const access_token = await AsyncStorage.getItem("access_token");
     console.log(access_token, "<<< TOKENNN");
     // console.log(data, "<<< ini data");
-    const response = await axios.get(`${BASE_URL}/carts`, {
+    const response = await axios.delete(`${BASE_URL}/carts/${id}`, {
       headers: {
         access_token: access_token, // Gunakan nilai token yang telah diambil
       },
@@ -34,15 +34,15 @@ export const getCart = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getCartData.pending, (state) => {
+      .addCase(deleteCart.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(getCartData.fulfilled, (state, action) => {
+      .addCase(deleteCart.fulfilled, (state, action) => {
         state.status = "succeeded";
         // console.log(action.payload, "INI PAYLOAD");
         state.data = action.payload;
       })
-      .addCase(getCartData.rejected, (state, action) => {
+      .addCase(deleteCart.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

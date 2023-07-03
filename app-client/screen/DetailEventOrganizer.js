@@ -22,7 +22,6 @@ import { addCartData } from "../features/CartData/AddCart";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EventOrganizerDetailScreen = ({ route }) => {
-  // const { id } = route.params;
   const { eoId } = route.params;
 
   console.log(eoId, "ats");
@@ -95,13 +94,6 @@ const EventOrganizerDetailScreen = ({ route }) => {
   const startingPrice = formatCurrency(
     productStateData?.price + +productStateData?.Venue?.price
   );
-  // const totalPrice =
-  //   productStateData?.price +
-  //   +productStateData?.Venue?.price +
-  //   selectedPax * productStateData?.Cathering?.price;
-  // const handlePaxChange = (value) => {
-  //   setSelectedPax(value);
-  // };
   const handleAddToCart = () => {
     setShowModal(true);
   };
@@ -126,6 +118,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
         "Success",
         "The product has been added to the cart successfully."
       );
+      navigation.navigate("Cart");
     }
   };
 

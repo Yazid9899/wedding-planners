@@ -181,8 +181,9 @@
 // // });
 
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
 import axios from "axios";
+import { getCartData } from "../features/CartData/GetCart";
 import { useDispatch, useSelector } from "react-redux";
 // import { getCartData } from "../features/CartData/GetCart";
 const formatCurrency = (value) => {
@@ -192,14 +193,12 @@ const formatCurrency = (value) => {
   }).format(value);
 };
 
-import { getCartData } from "../features/CartData/GetCart";
-
 const CartScreen = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCartData());
-  }, [dispatch]);
+  }, []);
 
   const cartStateData = useSelector((state) => state.cart.data);
 
@@ -221,16 +220,19 @@ const CartScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Cart Screen</Text>
-      <Text>Halooooooooo</Text>
-      <FlatList
-        data={cartStateData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.cartList}
-      />
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.title}>Cart Screen</Text>
+        <Text>Halooooooooo</Text>
+        {/* <Text>{JSON.stringify(cartStateData)}</Text> */}
+        <FlatList
+          data={cartStateData}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={styles.cartList}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
