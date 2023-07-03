@@ -33,11 +33,6 @@ const errorHandling = async (err, req, res, next) => {
         message: "Invalid email or password",
       });
       break;
-    case "AuthenticationError":
-      res.status(401).json({
-        message: "AuthenticationError"
-      })
-      break;
     case "JsonWebTokenError":
       res.status(401).json({
         message: "Invalid token"
