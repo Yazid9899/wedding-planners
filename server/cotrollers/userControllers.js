@@ -24,18 +24,16 @@ class UserController {
     try {
       const { email, password } = req.body;
       if (!email || !password) throw { name: "loginError" };
-
       const user = await User.findOne({ where: { email: email } });
       if (!user) throw { name: "loginError" };
-
       if (!comparePassword(password, user.password))
         throw { name: "loginError" };
-
       const access_token = signToken({
         id: user.id,
         email: user.email,
         role: user.role,
       });
+
 
       res.status(200).json({
         statusCode: 200,
@@ -43,6 +41,7 @@ class UserController {
         email: user.email,
         role: user.role,
       });
+
     } catch (err) {
       next(err);
     }
@@ -58,6 +57,7 @@ class UserController {
         attributes: {
           excludes: ["createdAt", "updatedAt"],
         },
+
       });
       if (!data) {
         throw {
@@ -68,6 +68,7 @@ class UserController {
       res.status(200).json(data);
     } catch (err) {
       next(err);
+
     }
   }
 }

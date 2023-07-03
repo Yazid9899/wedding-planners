@@ -13,10 +13,11 @@ const auth = async (req, res, next) => {
     }
 
     const payload = verifyToken(access_token)
+
     const foundUser = await User.findByPk(payload.id)
     if (!foundUser) {
       throw {
-        name: "AuthenticationError"
+        name: "User Not Found"
       }
     }
 
