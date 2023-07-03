@@ -1,4 +1,8 @@
 const {
+  sendInvoiceEmail,
+  generateInvoicePDF,
+} = require("../helpers/generateInvoice");
+const {
   Transaction,
   Venue,
   User,
@@ -53,14 +57,24 @@ class TransactionController {
 
       if (xendit.status === "PAID") {
         await Transaction.update({ status: "Paid" }, { where: { id } });
+
+        try {
+          const pdfBuffer = await generateInvoicePDF(data);
+          await sendInvoiceEmail("ciptandaru@gmail.com", pdfBuffer);
+          console.log("Invoice sent successfully.");
+        } catch (error) {
+          console.error("Error sending invoice:", error);
+        }
+
         res.status(200).json({
           message: "Transaction Paid",
         });
+      } else {
+        res.status(200).json({
+          message: "Transaction Pending",
+          data,
+        });
       }
-
-      res.status(200).json({
-        message: "Transaction Pending",
-      });
     } catch (err) {
       next(err);
     }
