@@ -58,6 +58,11 @@ const errorHandling = async (err, req, res, next) => {
         message: "Transaction Not Found",
       });
       break;
+    case "User Not Found":
+      res.status(404).json({
+        message: "User Not Found",
+      });
+      break;
     default:
       res.status(500).json({
         message: "Internal Server Error",
