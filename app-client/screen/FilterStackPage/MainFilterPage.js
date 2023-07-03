@@ -7,15 +7,17 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 
 import { Modal, Portal, Button, PaperProvider } from "react-native-paper";
 
-//
 import DatePicker from "react-native-modern-datepicker";
-//
+
+import moment from "moment";
 
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   setBudget,
   setDate,
@@ -23,6 +25,7 @@ import {
 
 const MainFilterPage = ({ navigation }) => {
   const dispatch = useDispatch();
+
   //   Input Budget
   const [inputValue, setInputValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -41,74 +44,116 @@ const MainFilterPage = ({ navigation }) => {
       useNativeDriver: true,
     }).start();
   };
+
+  //  Make it doesnt recognize any input that were text/string
   const handleInputChange = (text) => {
     const cleanedText = text.replace(/[^0-9]/g, "");
     setInputValue(cleanedText);
   };
-  //
 
-  //   Input Book Date
-  const [selectedDate, setSelectedDate] = useState("");
-  //
+  //   Input Book Date // default value is tomorrow
+  const [selectedDate, setSelectedDate] = useState(
+    moment().add(1, "day").format("YYYY-MM-DD")
+  );
+
+  // Validation
+  const [inputError, setInputError] = useState(false);
+  const [dateError, setDateError] = useState(false);
 
   //   Next Page
   const nextButton = () => {
     console.log(selectedDate, inputValue, "di main filter");
-    dispatch(setBudget(inputValue));
-    dispatch(setDate(selectedDate));
-    navigation.navigate("BuildingSelect");
+    if (inputValue === "") {
+      setInputError(true);
+    } else {
+      setInputError(false);
+    }
+
+    if (selectedDate === "") {
+      setDateError(true);
+    } else {
+      setDateError(false);
+      const today = moment().startOf("day");
+      const selected = moment(selectedDate, "YYYY-MM-DD");
+
+      if (!selected.isAfter(today)) {
+        setDateError(true);
+        return; // Stop execution if the date is not valid
+      }
+    }
+
+    if (inputValue !== "" && selectedDate !== "") {
+      dispatch(setBudget(inputValue));
+      dispatch(setDate(selectedDate));
+      navigation.navigate("BuildingSelect");
+    }
   };
-  //
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Find your ideal Wedding for your budget</Text>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          Find your ideal Wedding for your budget
+        </Text>
 
-      <View style={styles.gap} />
-      <Animated.View
-        style={[
-          styles.inputContainer,
-          {
-            transform: [
-              {
-                scale: animatedScale.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.96, 1],
-                }),
-              },
-            ],
-          },
-        ]}
-      >
-        <TextInput
-          style={styles.input}
-          value={inputValue}
-          onChangeText={handleInputChange}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          keyboardType="numeric"
-          placeholder="Enter estimated budget (IDR)"
-          placeholderTextColor="gray"
+        <View style={styles.gap} />
+        <Animated.View
+          style={[
+            styles.inputContainer,
+            {
+              transform: [
+                {
+                  scale: animatedScale,
+                },
+              ],
+            },
+          ]}
+        >
+          <TextInput
+            style={styles.input}
+            value={inputValue}
+            onChangeText={handleInputChange}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            keyboardType="numeric"
+            placeholder="Enter estimated budget (IDR)"
+            placeholderTextColor="gray"
+          />
+        </Animated.View>
+
+        {/* Render Validation */}
+        {inputError && (
+          <Text style={styles.errorText}>Please enter a budget</Text>
+        )}
+
+        <View style={{ height: 30 }} />
+
+        <Text style={styles.textDate}>Pick a Date</Text>
+
+        <DatePicker
+          selected={selectedDate} // Default value
+          onSelectedChange={(date) => setSelectedDate(date)}
+          style={[
+            styles.datePicker,
+            {
+              borderColor: dateError ? "red" : "#ccc",
+            },
+          ]}
         />
-      </Animated.View>
 
-      {/* <Text>{inputValue}</Text> */}
+        {dateError && (
+          <Text style={styles.errorText}>
+            Please select a date that is after today
+          </Text>
+        )}
 
-      <View style={{ height: 30 }} />
-
-      <Text style={styles.textDate}>Pick a Date</Text>
-
-      <DatePicker
-        onSelectedChange={(date) => setSelectedDate(date)}
-        style={{ width: containerWidth, height: 100 }}
-      />
-
-      <View style={styles.containerButton}>
-        <TouchableOpacity style={styles.button} onPress={nextButton}>
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
+        <View style={styles.containerButton}>
+          <TouchableOpacity style={styles.button} onPress={nextButton}>
+            <Text style={styles.buttonText}>Next</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -127,7 +172,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 400,
+    fontWeight: "400",
     marginBottom: 10,
   },
   gap: {
@@ -138,9 +183,10 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: containerWidth,
-    borderRadius: 6,
+    borderRadius: 20, // Make the border rounded
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "lightgray", // Change the border color
+    backgroundColor: "#fff", // Set a different background color
     padding: 10,
     marginTop: 5,
   },
@@ -148,7 +194,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   containerButton: {
-    marginTop: 40,
+    marginVertical: 20,
     flexDirection: "row",
     justifyContent: "center", // Center the button horizontally
     width: "100%",
@@ -164,6 +210,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    marginTop: 5,
+  },
+  //   datePicker: {
+  //     width: containerWidth,
+  //     height: 100,
+  //   },
 });
 
 {
