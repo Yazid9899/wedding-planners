@@ -5,21 +5,64 @@ class CartControllers {
   static async createCart(req, res, next) {
     try {
       const { id } = req.additionalData;
-      const { title, PhotographyId, CatheringId, VenueId, totalPrice, pax } =
-        req.body;
-      console.log(req.body, "di custom cart controller");
+
+      const {
+        title,
+        PhotographyId,
+        CatheringId,
+        VenueId,
+        totalPrice,
+        pax,
+        groom,
+        bride,
+        weddingDate,
+      } = req.body;
+      console.log(
+        title,
+        PhotographyId,
+        CatheringId,
+        VenueId,
+        totalPrice,
+        pax,
+        groom,
+        bride,
+        weddingDate
+      );
+      if (
+        !title ||
+        !PhotographyId ||
+        !CatheringId ||
+        !VenueId ||
+        !totalPrice ||
+        !pax ||
+        !groom ||
+        !bride ||
+        !weddingDate
+      ) {
+        throw { name: "cartError" };
+      }
+
       const create = await Cart.create({
         title,
         UserId: id,
+        groom,
+        bride,
+        weddingDate,
         PhotographyId,
         CatheringId,
         VenueId,
         pax,
         totalPrice,
 
-      })
 
-      if(create){
+      const currentDate = new Date();
+      const oneMonthAhead = new Date();
+      oneMonthAhead.setMonth(currentDate.getMonth() + 1);
+
+      if (new Date(weddingDate) < oneMonthAhead) {
+        throw { name: "Date error" };
+      }
+      if (create) {
 
         res.status(201).json({
           message: `cart with id:${create.id} and userId:${create.UserId} was successfully created`,

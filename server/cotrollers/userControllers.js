@@ -33,30 +33,42 @@ class UserController {
         email: user.email,
         role: user.role,
       });
-      res.status(201).json({
-        message: "Login Succes",
-        access_token
+
+
+      res.status(200).json({
+        statusCode: 200,
+        access_token,
+        email: user.email,
+        role: user.role,
       });
 
     } catch (err) {
       next(err);
     }
   }
-  static async userById(req, res, next){
-    try{
-      const {id} = req.additionalData
+  static async userById(req, res, next) {
+    try {
+      const { id } = req.additionalData;
 
       const data = await User.findOne({
-        where:{
+        where: {
           id,
         },
         attributes: {
-          excludes: ['createdAt', 'updatedAt'],
+          excludes: ["createdAt", "updatedAt"],
         },
-      })
-      res.status(200).json(data)
-    }catch(err){
-      next(err)
+
+      });
+      if (!data) {
+        throw {
+          name: "User Not Found",
+        };
+      }
+
+      res.status(200).json(data);
+    } catch (err) {
+      next(err);
+
     }
   }
 }
