@@ -1,14 +1,4 @@
 const { Cart, Photography, Venue, Cathering, Product } = require("../models");
-<<<<<<< HEAD
-
-class CartControllers {
-  static async createCart(req, res, next) {
-    try {
-      const { id } = req.additionalData;
-      const { title, PhotographyId, CatheringId, VenueId, totalPrice, pax } =
-        req.body;
-=======
->>>>>>> Damar
 
 class CartControllers {
   static async createCart(req, res, next) {
