@@ -9,11 +9,17 @@ import {theme} from "../../core/theme";
 
 export default function Background({children}) {
   return (
-    <ImageBackground source={{}} resizeMode="repeat" style={styles.background}>
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
-        {children}
-      </KeyboardAvoidingView>
-    </ImageBackground>
+    <ScrollView>
+      <ImageBackground
+        source={{}}
+        resizeMode="repeat"
+        style={styles.background}
+      >
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+          {children}
+        </KeyboardAvoidingView>
+      </ImageBackground>
+    </ScrollView>
   );
 }
 
@@ -21,7 +27,7 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     width: "100%",
-    backgroundColor: theme.colors.surface,
+    // backgroundColor: theme.colors.surface,
   },
   container: {
     flex: 1,
