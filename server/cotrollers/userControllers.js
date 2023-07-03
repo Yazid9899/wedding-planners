@@ -42,6 +42,7 @@ class UserController {
         statusCode: 200,
         access_token,
         email: user.email,
+        username: user.username,
         role: user.role,
       });
     } catch (err) {
