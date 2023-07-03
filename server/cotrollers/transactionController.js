@@ -1,4 +1,12 @@
-const { Transaction, User, Product } = require("../models");
+const {
+  Transaction,
+  Venue,
+  User,
+  Cathering,
+  Product,
+  Cart,
+  Photography,
+} = require("../models");
 const xendit = require("xendit-node");
 const Xendit = new xendit({
   secretKey:
@@ -28,7 +36,19 @@ class TransactionController {
   static async changeStatusTransaction(req, res, next) {
     try {
       const { id } = req.params;
-      const data = await Transaction.findOne({ where: { id } });
+      const data = await Transaction.findOne({
+        where: { id },
+        include: [
+          {
+            model: Cart,
+            include: [
+              { model: Photography },
+              { model: Cathering },
+              { model: Venue },
+            ],
+          },
+        ],
+      });
       const xendit = await i.getInvoice({ invoiceID: data.noTransaction });
 
       if (xendit.status === "PAID") {
@@ -46,18 +66,19 @@ class TransactionController {
     }
   }
 
-  static async createTransaction(name, price, id, noTransaction) {
+  static async createTransaction(name, price, id, noTransaction, CartId) {
     await Transaction.create({
       name,
       price,
       UserId: id,
       noTransaction,
+      CartId,
     });
   }
 
   static async payment(req, res, next) {
     try {
-      const { title, totalAmount } = req.body;
+      const { title, totalAmount, CartId } = req.body;
       const { email, id } = req.additionalData;
 
       const data = await i.createInvoice({
@@ -73,7 +94,8 @@ class TransactionController {
         title,
         totalAmount,
         id,
-        noTransaction
+        noTransaction,
+        CartId
       );
 
       res.status(200).json({
