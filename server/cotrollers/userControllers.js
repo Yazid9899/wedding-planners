@@ -12,8 +12,7 @@ class UserController {
         phoneNumber,
         imageUrl,
       });
-      res.status(200).json({
-        statusCode: 200,
+      res.status(201).json({
         message: "Registered",
         email: data.email,
       });
@@ -38,12 +37,11 @@ class UserController {
         role: user.role,
       });
 
-      res.status(200).json({
-        statusCode: 200,
-        access_token,
-        email: user.email,
-        role: user.role,
+      res.status(201).json({
+        message: "Login Succes",
+        access_token
       });
+      
     } catch (err) {
       next(err);
     }

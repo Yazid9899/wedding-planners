@@ -29,7 +29,7 @@ class CartControllers{
   }
   static async createCartById(req, res, next) {
     try {
-      const idProduct = req.params.idProduct;
+      const {idProduct} = req.params;
       const { id } = req.additionalData;
       const { totalPrice, pax } = req.body;
 
@@ -38,7 +38,6 @@ class CartControllers{
           id: idProduct,
         },
       });
-      console.log(data, "hahahahahahahah");
       const create = await Cart.create({
         title: data.title,
         UserId: id,
