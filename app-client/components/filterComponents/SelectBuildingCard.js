@@ -62,7 +62,7 @@ const SelectBuildingCard = ({ data, navigation }) => {
           <Text style={styles.modalText}>Location: {data?.location}</Text>
         </Modal>
       </Portal>
-
+      {/*  */}
       <Card style={styles.cardStyle}>
         <View style={styles.imageContainer}>
           <ImageBackground
@@ -166,9 +166,9 @@ const styles = StyleSheet.create({
   },
   // Modal
   showMoreButton: {
-    marginTop: -12,
-    marginBottom: 8,
-    marginLeft: 16,
+    marginTop: -13,
+    marginBottom: 10,
+    marginLeft: 17,
     alignSelf: "flex-start",
   },
   showMoreButtonText: {

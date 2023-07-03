@@ -20,6 +20,8 @@ const PhotoSelectPage = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const photographStateData = useSelector((state) => state.photograph.data);
+  const status = useSelector((state) => state.photograph.status);
+  const error = useSelector((state) => state.photograph.error);
 
   const budgetData = useSelector((state) => state.inputDateBudget.budget);
 
@@ -91,13 +93,19 @@ const PhotoSelectPage = ({ navigation }) => {
         {renderPriceDropdown("Price", Price)}
       </View>
 
-      <FlatList
-        data={photographStateData}
-        renderItem={({ item }) => (
-          <SelectPhotoCard data={item} navigation={navigation} />
-        )}
-        keyExtractor={(item) => item?.id}
-      ></FlatList>
+      {status === "loading" ? (
+        <Text>Loading...</Text>
+      ) : status === "failed" ? (
+        <Text>Error: {error}</Text>
+      ) : (
+        <FlatList
+          data={photographStateData}
+          renderItem={({ item }) => (
+            <SelectPhotoCard data={item} navigation={navigation} />
+          )}
+          keyExtractor={(item) => item?.id}
+        ></FlatList>
+      )}
     </View>
     //  </ScrollView>
   );
@@ -114,10 +122,9 @@ const styles = StyleSheet.create({
   },
   searchStyle: {
     marginBottom: 7,
+    backgroundColor: "#Bee0e8",
   },
   containerButton: {
-    //  position: "absolute",
-    //  bottom: 20,
     marginTop: 40,
     flexDirection: "row",
     justifyContent: "space-between",

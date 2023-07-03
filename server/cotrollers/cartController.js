@@ -1,4 +1,3 @@
-
 const { Cart, Photography, Venue, Cathering, Product } = require("../models");
 
 class CartControllers {
@@ -43,7 +42,7 @@ class CartControllers {
         VenueId,
         pax,
         totalPrice,
-      })
+      });
 
       const currentDate = new Date();
       const oneMonthAhead = new Date();
@@ -53,7 +52,6 @@ class CartControllers {
         throw { name: "Date error" };
       }
       if (create) {
-
         res.status(201).json({
           message: `cart with id:${create.id} and userId:${create.UserId} was successfully created`,
         });
