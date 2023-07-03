@@ -84,9 +84,8 @@ class TransactionController {
         message: "Get all invoice Success",
         data,
       });
-      console.log(data);
     } catch (err) {
-      console.log(err);
+      next(err)
     }
   }
 }
