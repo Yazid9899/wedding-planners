@@ -1,0 +1,16 @@
+[
+  {
+    "username": "Fathir",
+    "email": "fathir@gmail.com",
+    "password": "12345678",
+    "phoneNumber": "0813456789",
+    "imageUrl": "https://images.unsplash.com/photo-1616638411693-4bfa05b6ec66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2FuaXRhfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+  },
+  {
+    "username": "Ciptandaru",
+    "email": "ciptandaru@gmail.com",
+    "password": "12345678",
+    "phoneNumber": "0812987654",
+    "imageUrl": "https://images.unsplash.com/photo-1594303131980-38d2b8cc44c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGFraSUyMGxha2l8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+  }
+]
