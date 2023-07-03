@@ -1,5 +1,5 @@
 // Import React and React Native components
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   View,
   Text,
@@ -10,9 +10,9 @@ import {
   ViewPropTypes,
   TouchableOpacity,
 } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {NavigationContainer, useNavigation} from "@react-navigation/native";
+import {Ionicons} from "@expo/vector-icons";
 import axios from "axios";
 
 import Icon from "react-native-vector-icons/Ionicons";
@@ -25,36 +25,49 @@ const formatCurrency = (value) => {
   }).format(value);
 };
 
+// import SelectCateringCard from "../../components/filterComponents/SelectCateringCard.js";
+import {useDispatch, useSelector} from "react-redux";
+
+import {fetchProductsData} from "../features/PackageData/packageSlice";
+
 const HomeScreen = () => {
-  const [product, setProduct] = useState([]);
+  const dispatch = useDispatch();
 
-  const getProduct = async () => {
-    try {
-      const { data } = await axios({
-        method: "GET",
-        url: `https://c9d4-103-138-68-174.ngrok-free.app/products`,
-      });
-      setProduct(data);
-      // console.log(data);
-      // return data;
-    } catch (error) {
-      console.log(error, "==>>>>>>>>>>>>>>>");
-    }
-  };
+  const productStateData = useSelector((state) => state.product.data);
+  // console.log(productStateData);
 
-  const { navigate } = useNavigation();
+  useEffect(() => {
+    dispatch(fetchProductsData());
+    // console.log(fetchProductsData);
+  }, [dispatch]);
+
+  // const [product, setProduct] = useState([]);
+
+  // const getProduct = async () => {
+  //   try {
+  //     const { data } = await axios({
+  //       method: "GET",
+  //       url: `https://c9d4-103-138-68-174.ngrok-free.app/products`,
+  //     });
+  //     setProduct(data);
+  //   } catch (error) {
+  //     console.log(error, "==>>>>>>>>>>>>>>>");
+  //   }
+  // };
+
+  const {navigate} = useNavigation();
   const handlePressVenue = () => {
     navigate("DetailVenue");
   };
   const handlePressFotografer = () => {
     navigate("DetailFotografer");
   };
-  const handlePressEO = (eo) => {
-    navigate("DetailEventOrganizer", { eo });
+  const handlePressEO = (id) => {
+    navigate("DetailEventOrganizer", {eoId: id});
   };
-  useEffect(() => {
-    getProduct();
-  }, []);
+  // useEffect(() => {
+  //   getProduct();
+  // }, []);
   return (
     <ScrollView contentContainerStyle={styles.screen}>
       {/* <Text> {JSON.stringify(product)}</Text> */}
@@ -65,15 +78,15 @@ const HomeScreen = () => {
 
       <Text style={styles.subtitle}>Available Package</Text>
       <FlatList
-        data={product}
+        data={productStateData}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2} // Set number of columns to 2
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <TouchableOpacity
-            onPress={() => handlePressEO(item)}
+            onPress={() => handlePressEO(item.id)}
             style={styles.card}
           >
-            <Image source={{ uri: item?.imageUrl }} style={styles.cardImage} />
+            <Image source={{uri: item?.imageUrl}} style={styles.cardImage} />
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>{item?.title}</Text>
               <View style={styles.cardInfo}>

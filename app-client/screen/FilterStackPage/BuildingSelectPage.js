@@ -10,20 +10,26 @@ import {
   View,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { Searchbar, TextInput } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
-import axios from "axios";
+import { Searchbar } from "react-native-paper";
+// import { Ionicons } from "@expo/vector-icons";
+
 //
-// Component
-// import vendorCard from "../../components/filterComponents/vendorCard";
 import SelectBuildingCard from "../../components/filterComponents/SelectBuildingCard";
 
 import { useDispatch, useSelector } from "react-redux";
+
 import { fetchVenueData } from "../../features/VenueData/venueSlice";
 
 const BuildingSelectPage = ({ navigation }) => {
   const dispatch = useDispatch();
+
   const venueStateData = useSelector((state) => state.venue.data);
+  const status = useSelector((state) => state.venue.status);
+  const error = useSelector((state) => state.venue.error);
+
+  const budgetData = useSelector((state) => state.inputDateBudget.budget);
+
+  console.log(budgetData, venueStateData, "di select building"); // Display the budget value
 
   //   Search
   const [searchQuery, setSearchQuery] = useState("");
@@ -38,12 +44,13 @@ const BuildingSelectPage = ({ navigation }) => {
   const [isFocusPrice, setIsFocusPrice] = useState(false);
 
   useEffect(() => {
-    console.log(searchQuery, valueLoc, valuePrice, "use effect venue page");
+    //  console.log(searchQuery, valueLoc, valuePrice, "use effect venue page");
     dispatch(
       fetchVenueData({
         search: searchQuery,
         location: valueLoc,
         price: valuePrice,
+        belowPrice: budgetData,
       })
     );
   }, [dispatch, searchQuery, valueLoc, valuePrice]);
@@ -114,7 +121,14 @@ const BuildingSelectPage = ({ navigation }) => {
     />
   );
 
-  //
+  //   if (status === "loading") {
+  //     return <div>Loading...</div>;
+  //   }
+
+  //   if (status === "failed") {
+  //     return <div>Error: {error}</div>;
+  //   }
+
   return (
     <View style={styles.screen}>
       <Searchbar
@@ -126,23 +140,20 @@ const BuildingSelectPage = ({ navigation }) => {
         {renderLocationDropdown("Location", Location)}
         {renderPriceDropdown("Price", Price)}
       </View>
-      {/* <TextInput
-        label="Price"
-        value={searchPrice}
-        keyboardType="numeric"
-        onChangeText={onChangePrice}
-        maxLength={10} //setting limit of input
-      /> */}
 
-      {/* <Text>{valuePrice.valueOf}</Text> */}
-
-      <FlatList
-        data={venueStateData}
-        renderItem={({ item }) => (
-          <SelectBuildingCard data={item} navigation={navigation} />
-        )}
-        keyExtractor={(item) => item?.id}
-      ></FlatList>
+      {status === "loading" ? (
+        <Text>Loading...</Text>
+      ) : status === "failed" ? (
+        <Text>Error: {error}</Text>
+      ) : (
+        <FlatList
+          data={venueStateData}
+          renderItem={({ item }) => (
+            <SelectBuildingCard data={item} navigation={navigation} />
+          )}
+          keyExtractor={(item) => item?.id}
+        />
+      )}
     </View>
   );
 };
@@ -279,6 +290,7 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 16,
   },
+  //
   flatListContainer: {
     marginTop: 20,
   },

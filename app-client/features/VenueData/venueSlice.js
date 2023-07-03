@@ -1,10 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BASE_URL } from "../../config/api";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
+
+import { BASE_URL } from "../../config/api";
+
 export const fetchVenueData = createAsyncThunk(
   "venue/fetchData",
-  async ({ search, location, price }) => {
-    let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/venues";
+  async ({ search, location, price, belowPrice = 1000000000 }) => {
+    //  let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/venues";
+    let baseUrl = `${BASE_URL}/venues`;
+
+    //  console.log(belowPrice, ">>>>");
+
+    belowPrice = belowPrice * 0.6;
+
+    //  console.log(belowPrice, "<<<<<<");
 
     const queryParams = [];
     if (search) {
@@ -15,6 +26,9 @@ export const fetchVenueData = createAsyncThunk(
     }
     if (price) {
       queryParams.push(`price=${price}`);
+    }
+    if (belowPrice !== 0) {
+      queryParams.push(`belowPrice=${belowPrice}`);
     }
 
     if (queryParams.length > 0) {
@@ -37,17 +51,7 @@ const initialState = {
 export const venueSlice = createSlice({
   name: "vanueData",
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchVenueData.pending, (state) => {
@@ -65,6 +69,6 @@ export const venueSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = venueSlice.actions;
+export const {} = venueSlice.actions;
 
 export default venueSlice.reducer; // di import langsung menjadi namanya VenueReducer

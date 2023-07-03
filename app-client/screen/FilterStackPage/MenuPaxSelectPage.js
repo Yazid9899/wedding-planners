@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -7,9 +7,30 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { setGuestPax } from "../../features/inputDateBudget/dateBudgetSlice";
+
 const MenuPaxSelectPage = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  const budgetData = useSelector((state) => state.inputDateBudget.budget);
+  const dateData = useSelector((state) => state.inputDateBudget.date);
+  const venueData = useSelector((state) => state.inputDateBudget.venueId);
+  const photographerData = useSelector(
+    (state) => state.inputDateBudget.photographerId
+  );
+  const cateringData = useSelector((state) => state.inputDateBudget.cateringId);
+  //
+  const guestPaxData = useSelector((state) => state.inputDateBudget.guestPax);
+
+  //
   const [inputValue, setInputValue] = useState("");
+  //
+
   const [isFocused, setIsFocused] = useState(false);
   const animatedScale = useState(new Animated.Value(1))[0];
 
@@ -41,52 +62,68 @@ const MenuPaxSelectPage = ({ navigation }) => {
   const previousButton = () => {
     navigation.navigate("CateringSelect");
   };
+
+  useEffect(() => {
+    dispatch(setGuestPax(inputValue));
+  }, [inputValue]);
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        Enter the number of guests you intend to invite.
-      </Text>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          Enter the number of guests you intend to invite.
+        </Text>
 
-      <View style={styles.gap} />
-      <Animated.View
-        style={[
-          styles.inputContainer,
-          {
-            transform: [
-              {
-                scale: animatedScale.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.96, 1],
-                }),
-              },
-            ],
-          },
-        ]}
-      >
-        <TextInput
-          style={styles.input}
-          value={inputValue}
-          onChangeText={handleInputChange}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          keyboardType="numeric"
-          placeholder="Enter number of guest"
-          placeholderTextColor="gray"
-        />
-      </Animated.View>
+        <View style={styles.gap} />
+        <Animated.View
+          style={[
+            styles.inputContainer,
+            {
+              transform: [
+                {
+                  scale: animatedScale.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0.96, 1],
+                  }),
+                },
+              ],
+            },
+          ]}
+        >
+          <TextInput
+            style={styles.input}
+            value={inputValue}
+            onChangeText={handleInputChange}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            keyboardType="numeric"
+            placeholder="Enter number of guest"
+            placeholderTextColor="gray"
+          />
+        </Animated.View>
 
-      <View></View>
+        <View>
+          <Text>Your Budget: {budgetData}</Text>
+          <Text>Your Book Date: {dateData}</Text>
+          <Text>Your Venue: {JSON.stringify(venueData)}</Text>
+          <Text>Your Photographer: {JSON.stringify(photographerData)}</Text>
+          <Text>Your Catering: {JSON.stringify(cateringData)}</Text>
+          <Text>
+            Total: Venue+Photographer+ (Catering * @Pax:{" "}
+            {JSON.stringify(guestPaxData)})
+          </Text>
+        </View>
 
-      <View style={{ height: 30 }} />
-      <View style={styles.containerButton}>
-        <TouchableOpacity style={styles.button} onPress={previousButton}>
-          <Text style={styles.buttonText}>Previous</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={nextButton}>
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
+        <View style={{ height: 30 }} />
+        <View style={styles.containerButton}>
+          <TouchableOpacity style={styles.button} onPress={previousButton}>
+            <Text style={styles.buttonText}>Previous</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={nextButton}>
+            <Text style={styles.buttonText}>Next</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
