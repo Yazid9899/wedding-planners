@@ -5,8 +5,8 @@ class CartControllers{
   static async createCart(req, res, next){
     try{
       const {id} = req.additionalData
+      
       const {title,PhotographyId, CatheringId,  VenueId, totalPrice, pax} = req.body
-
       const create = await Cart.create({
         title,
         UserId: id,
@@ -18,7 +18,6 @@ class CartControllers{
       })
 
       if(create){
-
         res.status(201).json({
           message: `cart with id:${create.id} and userId:${create.UserId} was successfully created`,
         });
