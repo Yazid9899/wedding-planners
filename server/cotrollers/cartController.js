@@ -1,24 +1,23 @@
-const { Cart,Photography, Venue, Cathering, Product} = require("../models");
+const { Cart, Photography, Venue, Cathering, Product } = require("../models");
 
-
-class CartControllers{
-  static async createCart(req, res, next){
-    try{
-      const {id} = req.additionalData
-      const {title,PhotographyId, CatheringId,  VenueId, totalPrice, pax} = req.body
-
+class CartControllers {
+  static async createCart(req, res, next) {
+    try {
+      const { id } = req.additionalData;
+      const { title, PhotographyId, CatheringId, VenueId, totalPrice, pax } =
+        req.body;
+      console.log(req.body, "di custom cart controller");
       const create = await Cart.create({
         title,
         UserId: id,
-        PhotographyId, 
-        CatheringId,  
-        VenueId, 
+        PhotographyId,
+        CatheringId,
+        VenueId,
         pax,
         totalPrice,
-      })
+      });
 
-      if(create){
-
+      if (create) {
         res.status(201).json({
           message: `cart with id:${create.id} and userId:${create.UserId} was successfully created`,
         });
@@ -61,17 +60,17 @@ class CartControllers{
 
   static async getData(req, res, next) {
     try {
-      const {id} = req.additionalData
+      const { id } = req.additionalData;
       const data = await Cart.findAll({
         include: [
           { model: Photography },
           { model: Cathering },
           { model: Venue },
         ],
-        where:{
-          UserId:id
-        }
-      })
+        where: {
+          UserId: id,
+        },
+      });
 
       if (data) {
         res.status(200).json(data);

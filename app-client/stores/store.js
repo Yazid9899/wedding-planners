@@ -14,6 +14,8 @@ import inputDateBudgetReducer from "../features/inputDateBudget/dateBudgetSlice"
 
 import addCartReducer from "../features/CartData/AddCart";
 
+import addCustomCartReducer from "../features/CartData/AddCustomerCart";
+
 export const store = configureStore({
   reducer: {
     venue: VenueReducer,
@@ -27,5 +29,7 @@ export const store = configureStore({
     register: userRegisterReducer,
     inputDateBudget: inputDateBudgetReducer,
     addCart: addCartReducer,
+
+    addCustomCart: addCustomCartReducer,
   },
 });
