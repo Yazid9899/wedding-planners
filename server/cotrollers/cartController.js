@@ -17,17 +17,7 @@ class CartControllers {
         bride,
         weddingDate,
       } = req.body;
-      console.log(
-        title,
-        PhotographyId,
-        CatheringId,
-        VenueId,
-        totalPrice,
-        pax,
-        groom,
-        bride,
-        weddingDate
-      );
+
       if (
         !title ||
         !PhotographyId ||
@@ -53,7 +43,7 @@ class CartControllers {
         VenueId,
         pax,
         totalPrice,
-
+      })
 
       const currentDate = new Date();
       const oneMonthAhead = new Date();
@@ -77,14 +67,12 @@ class CartControllers {
       const { idProduct } = req.params;
       const { id } = req.additionalData;
       const { totalPrice, pax } = req.body;
-      console.log(idProduct, "========================");
 
       const data = await Product.findOne({
         where: {
           id: idProduct,
         },
       });
-      // console.log(data, "hahahahahahahah");
       const create = await Cart.create({
         title: data.title,
         UserId: id,
