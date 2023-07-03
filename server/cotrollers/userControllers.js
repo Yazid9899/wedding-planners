@@ -12,8 +12,7 @@ class UserController {
         phoneNumber,
         imageUrl,
       });
-      res.status(200).json({
-        statusCode: 200,
+      res.status(201).json({
         message: "Registered",
         email: data.email,
       });
@@ -42,9 +41,31 @@ class UserController {
         statusCode: 200,
         access_token,
         email: user.email,
-        username: user.username,
         role: user.role,
       });
+    } catch (err) {
+      next(err);
+    }
+  }
+  static async userById(req, res, next) {
+    try {
+      const { id } = req.additionalData;
+
+      const data = await User.findOne({
+        where: {
+          id,
+        },
+        attributes: {
+          excludes: ["createdAt", "updatedAt"],
+        },
+      });
+      if (!data) {
+        throw {
+          name: "User Not Found",
+        };
+      }
+
+      res.status(200).json(data);
     } catch (err) {
       next(err);
     }

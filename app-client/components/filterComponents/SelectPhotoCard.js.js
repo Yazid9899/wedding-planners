@@ -21,7 +21,7 @@ const SelectPhotoCard = ({ data, navigation }) => {
   return (
     <View style={styles.vendorCard}>
       <View style={styles.row}>
-        <View style={styles.column}>
+        <View style={styles.avatarContainer}>
           <Avatar.Image
             size={50}
             source={{
@@ -35,7 +35,6 @@ const SelectPhotoCard = ({ data, navigation }) => {
           <Text>{slicedDescription}</Text>
         </View>
       </View>
-
       {/* Second Row */}
       <View style={styles.row}>
         <ScrollView horizontal>
@@ -57,7 +56,7 @@ const SelectPhotoCard = ({ data, navigation }) => {
       {/* Third Row */}
       <View style={styles.row}>
         <View style={styles.rowText}>
-          <Text>IDR {data?.price}</Text>
+          <Text>IDR {Number(data.price).toLocaleString()}</Text>
         </View>
         <Button
           mode="contained"
@@ -80,13 +79,21 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
     paddingHorizontal: 10,
     marginBottom: 10,
-    //  height: 10,
   },
   rowText: {
     flexDirection: "column",
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "black",
+  },
+  avatarContainer: {
+    marginRight: 10,
+  },
+  column: {
+    flexDirection: "column",
+    flex: 1,
   },
   button: {
     width: 150, // Adjust the width to your preference
@@ -100,9 +107,10 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   vendorCardTextHead: {
-    fontWeight: 700,
+    fontWeight: "bold",
     fontSize: 16,
     color: "#147dd9",
+    marginBottom: 5,
   },
   imageListVendor: {
     flexDirection: "row",
@@ -110,42 +118,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   imageListVendorBackground: {
-    width: 100, // Adjust the desired width
-    height: 100, // Adjust the desired height
+    width: 140, // Adjust the desired width
+    height: 110, // Adjust the desired height
     marginRight: 2, // Add some spacing between images
     borderRadius: 3,
   },
 });
-
-// {/* Second Row */}
-// <View style={styles.row}>
-//   <ScrollView horizontal>
-//     <View style={styles.imageListVendor}>
-//       {/* Add your multiple images here */}
-//       <Image
-//         style={styles.imageListVendorBackground}
-//         source={{
-//           uri: data?.photo[0],
-//         }}
-//       />
-//       <Image
-//         style={styles.imageListVendorBackground}
-//         source={{
-//           uri: data?.photo[1],
-//         }}
-//       />
-//       <Image
-//         style={styles.imageListVendorBackground}
-//         source={{
-//           uri: data?.photo[2],
-//         }}
-//       />
-//       <Image
-//         style={styles.imageListVendorBackground}
-//         source={{
-//           uri: data?.photo[3],
-//         }}
-//       />
-//     </View>
-//   </ScrollView>
-// </View>

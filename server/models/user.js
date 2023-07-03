@@ -13,45 +13,42 @@ module.exports = (sequelize, DataTypes) => {
       username: {
         type: DataTypes.STRING,
         unique: {
-          args: true,
-          msg: "Username must already used",
-        },
-        validate: {
-          notEmpty: {
-            args: true,
-            msg: "Username cannot empty",
-          },
+          msg: "Username must be unique"
         },
       },
       email: {
         type: DataTypes.STRING,
+        allowNull: false,
         unique: {
-          args: true,
-          msg: "Email must be already used",
+          msg: "Email must be unique"
         },
         validate: {
-          notEmpty: {
-            args: true,
-            msg: "Email cannot empty",
-          },
           isEmail: {
-            args: true,
-            msg: "Invalid email format",
+            msg: "Invalid email format"
           },
+          notNull: {
+            msg: "Email is required"
+          },
+          notEmpty: {
+            msg: "Email is required"
+          }
         },
       },
       password: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
+          len:{
+            args:[5],
+            msg:"Minimum 5 characters required in password"
+          },
           notEmpty: {
-            args: true,
-            msg: "Password cannot empty",
+            msg: `password cant be Empty`
           },
-          min: {
-            args: [5],
-            msg: "Password minimal Character is 5",
-          },
-        },
+          notNull: {
+            msg: `password cant be Empty`
+          }
+        }
       },
       phoneNumber: DataTypes.STRING,
       imageUrl: DataTypes.STRING,

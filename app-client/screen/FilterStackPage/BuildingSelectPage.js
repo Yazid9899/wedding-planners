@@ -10,9 +10,9 @@ import {
   View,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { Searchbar, TextInput } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
-import axios from "axios";
+import { Searchbar } from "react-native-paper";
+// import { Ionicons } from "@expo/vector-icons";
+
 //
 import SelectBuildingCard from "../../components/filterComponents/SelectBuildingCard";
 
@@ -24,12 +24,12 @@ const BuildingSelectPage = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const venueStateData = useSelector((state) => state.venue.data);
+  const status = useSelector((state) => state.venue.status);
+  const error = useSelector((state) => state.venue.error);
 
   const budgetData = useSelector((state) => state.inputDateBudget.budget);
 
-  console.log(budgetData, "di select building"); // Display the budget value
-
-  console.log(venueStateData, "di select building"); // Display the budget value
+  console.log(budgetData, venueStateData, "di select building"); // Display the budget value
 
   //   Search
   const [searchQuery, setSearchQuery] = useState("");
@@ -121,6 +121,14 @@ const BuildingSelectPage = ({ navigation }) => {
     />
   );
 
+  //   if (status === "loading") {
+  //     return <div>Loading...</div>;
+  //   }
+
+  //   if (status === "failed") {
+  //     return <div>Error: {error}</div>;
+  //   }
+
   return (
     <View style={styles.screen}>
       <Searchbar
@@ -133,13 +141,19 @@ const BuildingSelectPage = ({ navigation }) => {
         {renderPriceDropdown("Price", Price)}
       </View>
 
-      <FlatList
-        data={venueStateData}
-        renderItem={({ item }) => (
-          <SelectBuildingCard data={item} navigation={navigation} />
-        )}
-        keyExtractor={(item) => item?.id}
-      ></FlatList>
+      {status === "loading" ? (
+        <Text>Loading...</Text>
+      ) : status === "failed" ? (
+        <Text>Error: {error}</Text>
+      ) : (
+        <FlatList
+          data={venueStateData}
+          renderItem={({ item }) => (
+            <SelectBuildingCard data={item} navigation={navigation} />
+          )}
+          keyExtractor={(item) => item?.id}
+        />
+      )}
     </View>
   );
 };

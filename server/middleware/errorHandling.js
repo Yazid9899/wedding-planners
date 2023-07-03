@@ -2,16 +2,31 @@ const errorHandling = async (err, req, res, next) => {
   console.log("ERRORHANDLINGGGGGG", err);
   switch (err.name) {
     case "SequelizeValidationError":
-      const sequelizeError = err.errors.map((el) => el.message);
+      let dataErr = err.errors.map((er) => {
+        return er.message
+      })
+      if (dataErr.length == 2) {
+        dataErr = dataErr[1]
+      } else {
+        dataErr = dataErr[0]
+      }
       res.status(400).json({
-        statusCode: 400,
-        message: sequelizeError,
-      });
+        message: dataErr
+      })
       break;
+
     case "SequelizeUniqueConstraintError":
+      let dataErr1 = err.errors.map((er) => {
+        return er.message
+      })
+      if (dataErr1.length == 2) {
+        dataErr1 = dataErr1[1]
+      } else {
+        dataErr1 = dataErr1[0]
+      }
       res.status(400).json({
-        message: err.errors[0].message,
-      });
+        message: dataErr1
+      })
       break;
     case "loginError":
       res.status(401).json({
@@ -56,6 +71,11 @@ const errorHandling = async (err, req, res, next) => {
     case "Transaction Not Found":
       res.status(404).json({
         message: "Transaction Not Found",
+      });
+      break;
+    case "User Not Found":
+      res.status(404).json({
+        message: "User Not Found",
       });
       break;
     default:

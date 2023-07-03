@@ -1,10 +1,24 @@
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import { Button, Card } from "react-native-paper";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import {
+  Button,
+  Card,
+  Modal,
+  Portal,
+  PaperProvider,
+  //   Text,
+} from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 
 import { useDispatch, useSelector } from "react-redux";
 
 import { setVenueId } from "../../features/inputDateBudget/dateBudgetSlice";
+import { useState } from "react";
 
 const SelectBuildingCard = ({ data, navigation }) => {
   const dispatch = useDispatch();
@@ -15,10 +29,7 @@ const SelectBuildingCard = ({ data, navigation }) => {
 
     navigation.navigate("PhotoSelect");
   };
-  //   const previousButton = () => {
-  //     navigation.navigate("MainFilter");
-  //   };
-  //
+
   const LocationText = () => (
     <View style={styles.locationContainer}>
       <Ionicons
@@ -31,37 +42,66 @@ const SelectBuildingCard = ({ data, navigation }) => {
     </View>
   );
 
+  //   Modal
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = { backgroundColor: "white", padding: 20 };
+
   return (
-    <Card style={styles.cardStyle}>
-      <View style={styles.imageContainer}>
-        <ImageBackground
-          source={{ uri: data.photo[0] }}
-          style={styles.imageBackground}
+    <PaperProvider>
+      <Portal>
+        <Modal
+          visible={visible}
+          onDismiss={hideModal}
+          contentContainerStyle={containerStyle}
         >
-          <LocationText />
-        </ImageBackground>
-      </View>
-      <Card.Title
-        title={data.name}
-        subtitle={data.description}
-        titleStyle={styles.title}
-        subtitleStyle={styles.subtitle}
-      />
-      <Card.Content style={styles.cardContent}>
-        <View style={styles.rowContainer}>
-          <Text style={styles.cardPrice}>IDR {data.price}</Text>
-          <Button
-            mode="contained"
-            onPress={() => {
-              console.log("Add to Cart");
-              nextButton();
-            }}
+          <Text style={styles.modalTitle}>{data?.name}</Text>
+          <Text style={styles.modalDescription}>{data?.description}</Text>
+          <Text style={styles.modalText}>Location: {data?.location}</Text>
+        </Modal>
+      </Portal>
+
+      <Card style={styles.cardStyle}>
+        <View style={styles.imageContainer}>
+          <ImageBackground
+            source={{ uri: data.photo[0] }}
+            style={styles.imageBackground}
           >
-            Add to Cart
-          </Button>
+            <LocationText />
+          </ImageBackground>
         </View>
-      </Card.Content>
-    </Card>
+
+        <Card.Title
+          title={data.name}
+          subtitle={data.description}
+          titleStyle={styles.title}
+          subtitleStyle={styles.subtitle}
+        />
+
+        <TouchableOpacity style={styles.showMoreButton} onPress={showModal}>
+          <Text style={styles.showMoreButtonText}>Show More</Text>
+        </TouchableOpacity>
+
+        <Card.Content style={styles.cardContent}>
+          <View style={styles.rowContainer}>
+            <Text style={styles.cardPrice}>
+              IDR {Number(data.price).toLocaleString()}
+            </Text>
+            <Button
+              mode="contained"
+              onPress={() => {
+                console.log("Add to Cart");
+                nextButton();
+              }}
+            >
+              Add to Cart
+            </Button>
+          </View>
+        </Card.Content>
+      </Card>
+    </PaperProvider>
   );
 };
 
@@ -76,6 +116,7 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     marginBottom: 5,
   },
+  //   Location
   locationContainer: {
     position: "absolute",
     bottom: 10,
@@ -94,6 +135,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 12,
   },
+  //
   imageContainer: {
     overflow: "hidden", // Ensure the rounded corners are displayed properly
     borderRadius: 8, // Add borderRadius to round the edges
@@ -122,4 +164,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
+  // Modal
+  showMoreButton: {
+    marginTop: -12,
+    marginBottom: 8,
+    marginLeft: 16,
+    alignSelf: "flex-start",
+  },
+  showMoreButtonText: {
+    fontSize: 14,
+    color: "blue",
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  modalDescription: {
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  modalText: {
+    fontSize: 12,
+    marginBottom: 5,
+  },
+  //
 });
