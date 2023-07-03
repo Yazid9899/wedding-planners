@@ -2,7 +2,6 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 import {BASE_URL} from "../../config/api";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
-import { BASE_URL } from "../../config/api";
 
 export const fetchDetailProductsData = createAsyncThunk(
   "productsDetail/fetchDataDetail",
