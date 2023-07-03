@@ -6,7 +6,9 @@ import {BASE_URL} from "../../config/api";
 export const loginData = createAsyncThunk("login/fetchData", async (data) => {
   try {
     const response = await axios.post(`${BASE_URL}/users/login`, data);
-    AsyncStorage.setItem("access_token", response.data.accessToken);
+    // console.log(response.data, "KASGDKUAGSKUDGASKUDGAS");
+    await AsyncStorage.setItem("access_token", response.data.access_token);
+    // console.log(await AsyncStorage.getItem("access_token"), "INI ACCESS TOKEN");
     return response.data;
   } catch (error) {
     throw new Error(error.message);
