@@ -1,10 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
+
+import { BASE_URL } from "../../config/api";
+
 export const fetchCatheringsData = createAsyncThunk(
   "photographies/fetchData",
   async ({ search, price, belowPrice = 1000000000 }) => {
-    let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/catherings";
+    //  let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/catherings";
+    let baseUrl = `${BASE_URL}/catherings`;
 
     belowPrice = belowPrice * 0.3;
 
