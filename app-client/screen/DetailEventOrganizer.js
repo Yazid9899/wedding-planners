@@ -19,6 +19,7 @@ import MapView, { Marker } from "react-native-maps";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailProductsData } from "../features/PackageData/PackageDetail";
 import { addCartData } from "../features/CartData/AddCart";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EventOrganizerDetailScreen = ({ route }) => {
   // const { id } = route.params;
@@ -114,6 +115,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
 
     if (confirmation === "yes") {
       // dispatch(addCartData({ eoId, selectedPax }));
+      console.log("masukkkkk");
       const cartData = {
         totalPrice: totalPrice,
         pax: dataProduct.pax,
