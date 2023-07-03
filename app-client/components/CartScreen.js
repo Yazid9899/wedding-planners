@@ -272,13 +272,12 @@ const formatCurrency = (value) => {
 };
 
 const CartScreen = () => {
+  const cartStateData = useSelector((state) => state.cart.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCartData());
   }, []);
-
-  const cartStateData = useSelector((state) => state.cart.data);
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
