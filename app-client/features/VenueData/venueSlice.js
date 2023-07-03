@@ -3,8 +3,6 @@ import axios from "axios";
 import { BASE_URL } from "../../config/api";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
 
-import { BASE_URL } from "../../config/api";
-
 export const fetchVenueData = createAsyncThunk(
   "venue/fetchData",
   async ({ search, location, price, belowPrice = 1000000000 }) => {

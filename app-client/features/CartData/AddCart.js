@@ -1,34 +1,33 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {AsyncStorage} from "react-native";
-import {BASE_URL} from "../../config/api";
+import { AsyncStorage } from "react-native";
+import { BASE_URL } from "../../config/api";
 
-export const addCartData = createAsyncThunk("cart/addCart", async (data) => {
-  console.log(data);
-  //     const response = await axios.post(
-  //       "https://c8d9-103-138-68-174.ngrok-free.app/carts",
-  //       data,
-  //       {AsyncStorage.getItem("access_token")}
-  //     );
-  //     //   AsyncStorage.setItem("access_token", response.data.access_token);
-  //     console.log(response.data, ">>>>>di slice register>>>>>>>>>>>>>>>>>>>>.");
-  //     return response.data;
+export const addCartData = createAsyncThunk(
+  "cart/addCart",
+  async ({ data, idProduct }) => {
+    try {
+      console.log(data);
+      const access_token = await AsyncStorage.getItem("access_token");
+      console.log(access_token, "<<< TOKENNN");
+      console.log(data, "<<< ini data");
 
-  //   return response.data;
-  const access_token = await AsyncStorage.getItem("access_token");
-  console.log(access_token, "?????????????????????");
-
-  // Menyiapkan objek headers dengan access_token
-  const headers = {
-    Authorization: `Bearer ${access_token}`,
-    "Content-Type": "application/json",
-  };
-
-  const response = await axios.post(`${BASE_URL}/carts`, data, {headers});
-
-  console.log(response.data, ">>>>>di slice register>>>>>>>>>>>>>>>>>>>>.");
-  return response.data;
-});
+      // Menyiapkan objek headers dengan access_token
+      const response = await axios.post(
+        `${BASE_URL}/carts/` + idProduct,
+        data,
+        {
+          headers: {
+            access_token: access_token, // Gunakan nilai token yang telah diambil
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error, "<<< error nih");
+    }
+  }
+);
 
 const initialState = {
   value: 0,
@@ -48,7 +47,7 @@ export const AddCartSlice = createSlice({
       })
       .addCase(addCartData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log(action.payload);
+        console.log(action.payload, "INI PAYLOAD");
         state.data = action.payload;
       })
       .addCase(addCartData.rejected, (state, action) => {
