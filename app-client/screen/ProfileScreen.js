@@ -51,13 +51,14 @@ const ProfileScreen = () => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.profileCard}>
+        <View style={styles.authorImg}>
+          <Image source={{uri: userData.imageUrl}} style={styles.authorImage} />
+          <Image
+            source={require("../assets/shopping-cart.svg")}
+            style={styles.cartIcon}
+          />
+        </View>
         <View style={styles.profileBody}>
-          <View style={styles.authorImg}>
-            <Image
-              source={{uri: userData.imageUrl}}
-              style={styles.authorImage}
-            />
-          </View>
           <Text style={styles.name}>{userData.username}</Text>
           <Text style={styles.intro}>Email: {userData.email}</Text>
           <Text style={styles.intro}>Nomer Telpon: {userData.phoneNumber}</Text>
@@ -89,9 +90,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 18,
     marginBottom: 20,
-    borderRadius: 10, // Menambahkan border radius
-    elevation: 4, // Menambahkan efek elevasi
-    backgroundColor: "#fff", // Mengubah latar belakang menjadi putih
+    borderRadius: 10,
+    elevation: 4,
+    backgroundColor: "#fff",
   },
   profileBody: {
     padding: 20,
@@ -107,21 +108,30 @@ const styles = StyleSheet.create({
     borderRadius: 85,
     padding: 5,
     backgroundColor: "#fff",
-    borderWidth: 3, // Menambahkan lebar border
-    borderColor: "#ccc", // Mengubah warna border
+    borderWidth: 3,
+    borderColor: "#ccc",
+  },
+  cartIcon: {
+    position: "absolute",
+    top: -15,
+    right: -15,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#fff",
   },
   name: {
     fontSize: 20,
     fontWeight: "600",
     textTransform: "uppercase",
     textAlign: "center",
-    marginBottom: 10, // Menambahkan margin bawah
+    marginBottom: 10,
   },
   intro: {
     fontSize: 14,
     fontWeight: "400",
     lineHeight: 22,
-    marginVertical: 10, // Menambahkan margin vertikal
+    marginVertical: 10,
     textAlign: "center",
   },
   logoutButton: {
@@ -132,8 +142,8 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     marginHorizontal: 20,
     marginBottom: 20,
-    borderWidth: 2, // Menambahkan lebar border
-    borderColor: "red", // Mengubah warna border
+    borderWidth: 2,
+    borderColor: "red",
   },
   logoutButtonText: {
     color: "red",
