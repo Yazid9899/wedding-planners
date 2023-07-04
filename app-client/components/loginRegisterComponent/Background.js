@@ -5,7 +5,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
-import {theme} from "../../core/theme";
+import {theme} from "../../features/core/theme";
 
 export default function Background({children}) {
   return (

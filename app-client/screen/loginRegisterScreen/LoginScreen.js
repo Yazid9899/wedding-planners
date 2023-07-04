@@ -7,7 +7,7 @@ import Header from "../../components/loginRegisterComponent/Header";
 import Button from "../../components/loginRegisterComponent/Button";
 import TextInput from "../../components/loginRegisterComponent/TextInput";
 import BackButton from "../../components/loginRegisterComponent/BackButton";
-import {theme} from "../../core/theme";
+import {theme} from "../../features/core/theme";
 import {useDispatch, useSelector} from "react-redux";
 import {loginData} from "../../features/UserData/loginSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -35,24 +35,23 @@ export default function LoginScreen({navigation}) {
       password: "",
     });
   };
-
+  console.log(access_token);
   useEffect(() => {
     const checkLoginStatus = async () => {
       const token = await AsyncStorage.getItem("access_token");
+      console.log(token, "<<<<<<<<<<<<<<<<<<<<<<");
       if (token) {
-        navigation.navigate("Home");
         Alert.alert("Login Success");
       } else {
         Alert.alert("Login Failed");
       }
     };
-
     if (status === "succeeded") {
       checkLoginStatus();
     } else if (status === "failed") {
-      Alert.alert("Login Failed");
+      Alert.alert("Login gagal");
     }
-  }, [status, navigation]);
+  }, [status]);
 
   return (
     <Background>
