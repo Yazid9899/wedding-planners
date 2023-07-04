@@ -81,56 +81,50 @@ class TransactionController {
   }
 
   static async createTransaction(name, price, id, noTransaction, CartId) {
-    await Transaction.create({
+    return await Transaction.create({
       name,
       price,
       UserId: id,
       noTransaction,
       CartId,
     });
+    return data;
   }
 
   static async payment(req, res, next) {
     try {
-      const { title, totalAmount, CartId } = req.body;
+      const { cardid } = req.params;
+      const { title, totalAmount } = req.body;
       const { email, id } = req.additionalData;
 
+      console.log(req.additionalData, "ini req body");
       const data = await i.createInvoice({
-        externalID: "your-external-id",
+        externalID: "external_id_here",
         payerEmail: email,
         description: title,
         amount: totalAmount,
       });
-
+      console.log(data, "<<<<<di trans control<<<<<<");
       const noTransaction = data.id;
 
-      TransactionController.createTransaction(
+      const dataTransaction = await TransactionController.createTransaction(
         title,
         totalAmount,
         id,
         noTransaction,
-        CartId
+        cardid
       );
 
+      console.log(dataTransaction.dataValues.id, "ini data trans");
+
       res.status(200).json({
-        statusCode: 200,
+        idTransaction: transaction.id,
         message: "paymentGateway",
         invoiceUrl: data.invoice_url,
+        idTrans: dataTransaction.dataValues.id,
       });
     } catch (err) {
-      next(err);
-    }
-  }
-
-  static async getAllInvoice(req, res, next) {
-    try {
-      const data = await i.getAllInvoices();
-      res.status(200).json({
-        statusCode: 200,
-        message: "Get all invoice Success",
-        data,
-      });
-    } catch (err) {
+      console.log(err);
       next(err);
     }
   }

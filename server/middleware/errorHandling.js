@@ -33,11 +33,6 @@ const errorHandling = async (err, req, res, next) => {
         message: "Invalid email or password",
       });
       break;
-    case "AuthenticationError":
-      res.status(401).json({
-        message: "AuthenticationError"
-      })
-      break;
     case "JsonWebTokenError":
       res.status(401).json({
         message: "Invalid token"
@@ -76,6 +71,11 @@ const errorHandling = async (err, req, res, next) => {
     case "User Not Found":
       res.status(404).json({
         message: "User Not Found",
+      });
+      break;
+    case "Date error":
+      res.status(400).json({
+        message: "Incorrect date input",
       });
       break;
     default:

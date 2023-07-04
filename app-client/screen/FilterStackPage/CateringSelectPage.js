@@ -19,6 +19,8 @@ const CateringSelectPage = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const cateringStateData = useSelector((state) => state.catering.data);
+  const status = useSelector((state) => state.catering.status);
+  const error = useSelector((state) => state.catering.error);
 
   const budgetData = useSelector((state) => state.inputDateBudget.budget);
 
@@ -84,14 +86,19 @@ const CateringSelectPage = ({ navigation }) => {
         {renderPriceDropdown("Price", Price)}
       </View>
 
-      <FlatList
-        data={cateringStateData}
-        renderItem={({ item }) => (
-          <SelectCateringCard data={item} navigation={navigation} />
-        )}
-        keyExtractor={(item) => item?.id}
-        numColumns={2}
-      ></FlatList>
+      {status === "loading" ? (
+        <Text>Loading...</Text>
+      ) : status === "failed" ? (
+        <Text>Error: {error}</Text>
+      ) : (
+        <FlatList
+          data={cateringStateData}
+          renderItem={({ item }) => (
+            <SelectCateringCard data={item} navigation={navigation} />
+          )}
+          keyExtractor={(item) => item?.id}
+        ></FlatList>
+      )}
     </View>
     //  </ScrollView>
   );
