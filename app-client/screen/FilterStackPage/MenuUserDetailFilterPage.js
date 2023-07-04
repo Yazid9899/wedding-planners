@@ -99,6 +99,7 @@ const MenuUserDetailFilterPage = ({ navigation }) => {
       // navigation.navigate("Cart");
     }
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Input detail information for this order</Text>
@@ -241,5 +242,9 @@ const styles = {
   modalButtonText: {
     fontSize: 16,
     color: "#fff",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 16,
   },
 };
