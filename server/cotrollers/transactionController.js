@@ -92,8 +92,8 @@ class TransactionController {
 
   static async payment(req, res, next) {
     try {
-      const {cardid} = req.params
-      const { title, totalAmount} = req.body;
+      const { cardid } = req.params;
+      const { title, totalAmount } = req.body;
       const { email, id } = req.additionalData;
 
       const data = await i.createInvoice({
@@ -123,7 +123,6 @@ class TransactionController {
     }
   }
 
-  
   static async getAllInvoice(req, res, next) {
     try {
       const data = await i.getAllInvoices();
