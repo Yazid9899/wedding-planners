@@ -92,16 +92,18 @@ class TransactionController {
 
   static async payment(req, res, next) {
     try {
-      const { title, totalAmount, CartId } = req.body;
+      const { cardid } = req.params;
+      const { title, totalAmount } = req.body;
       const { email, id } = req.additionalData;
 
+      console.log(req.additionalData, "ini req body");
       const data = await i.createInvoice({
-        externalID: "your-external-id",
+        externalID: "external_id_here",
         payerEmail: email,
         description: title,
         amount: totalAmount,
       });
-
+      console.log(data, "<<<<<di trans control<<<<<<");
       const noTransaction = data.id;
 
       TransactionController.createTransaction(
@@ -109,7 +111,7 @@ class TransactionController {
         totalAmount,
         id,
         noTransaction,
-        CartId
+        cardid
       );
 
       res.status(200).json({
@@ -118,6 +120,7 @@ class TransactionController {
         invoiceUrl: data.invoice_url,
       });
     } catch (err) {
+      console.log(err);
       next(err);
     }
   }

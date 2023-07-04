@@ -4,41 +4,35 @@ class CartControllers {
   static async createCart(req, res, next) {
     try {
       const { id } = req.additionalData;
+
       const {
         title,
-        PhotographyId,
-        CatheringId,
-        VenueId,
-        totalPrice,
-        pax,
-        groom,
         bride,
+        groom,
         weddingDate,
-      } = req.body;
-      console.log(
-        title,
+        contactNumber,
+        address,
         PhotographyId,
         CatheringId,
         VenueId,
         totalPrice,
         pax,
-        groom,
-        bride,
-        weddingDate
-      );
-      if (
-        !title ||
-        !PhotographyId ||
-        !CatheringId ||
-        !VenueId ||
-        !totalPrice ||
-        !pax ||
-        !groom ||
-        !bride ||
-        !weddingDate
-      ) {
-        throw { name: "cartError" };
-      }
+      } = req.body;
+
+      // if (
+      //   !title ||
+      //   !PhotographyId ||
+      //   !CatheringId ||
+      //   !VenueId ||
+      //   !totalPrice ||
+      //   !pax ||
+      //   !groom ||
+      //   !bride ||
+      //   !weddingDate
+      // ) {
+      //   throw { name: "cartError" };
+      // }
+
       const create = await Cart.create({
         title,
         UserId: id,
@@ -50,6 +44,8 @@ class CartControllers {
         VenueId,
         pax,
         totalPrice,
+        contactNumber,
+        address,
       });
 
       const currentDate = new Date();
@@ -72,15 +68,21 @@ class CartControllers {
     try {
       const { idProduct } = req.params;
       const { id } = req.additionalData;
-      const { totalPrice, pax } = req.body;
-      console.log(idProduct, "========================");
+      const {
+        totalPrice,
+        pax,
+        groom,
+        bride,
+        weddingDate,
+        contactNumber,
+        address,
+      } = req.body;
 
       const data = await Product.findOne({
         where: {
           id: idProduct,
         },
       });
-      // console.log(data, "hahahahahahahah");
       const create = await Cart.create({
         title: data.title,
         UserId: id,
@@ -89,7 +91,20 @@ class CartControllers {
         VenueId: +data.VenueId,
         pax,
         totalPrice,
+        groom,
+        bride,
+        weddingDate,
+        contactNumber,
+        address,
       });
+
+      const currentDate = new Date();
+      const oneMonthAhead = new Date();
+      oneMonthAhead.setMonth(currentDate.getMonth() + 1);
+
+      if (new Date(weddingDate) < oneMonthAhead) {
+        throw { name: "Date error" };
+      }
 
       if (create) {
         res.status(201).json({

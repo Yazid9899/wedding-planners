@@ -1,7 +1,7 @@
 import {Provider} from "react-native-paper";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
-import {theme} from "../core/theme";
+import {theme} from "../features/core/theme";
 
 import {
   StartScreen,

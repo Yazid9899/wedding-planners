@@ -7,7 +7,7 @@ export const deleteCart = createAsyncThunk("cart/deleteCart", async (id) => {
   try {
     console.log(id, "masukkkkkkkkkk ajaaa");
     const access_token = await AsyncStorage.getItem("access_token");
-    console.log(access_token, "<<< TOKENNN");
+    // console.log(access_token, "<<< TOKENNN");
     // console.log(data, "<<< ini data");
     const response = await axios.delete(`${BASE_URL}/carts/${id}`, {
       headers: {

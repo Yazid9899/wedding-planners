@@ -6,6 +6,7 @@ import BuildingSelectPage from "../screen/FilterStackPage/BuildingSelectPage";
 import PhotoSelectPage from "../screen/FilterStackPage/PhotoSelectPage";
 import CateringSelectPage from "../screen/FilterStackPage/CateringSelectPage";
 import MenuPaxSelectPage from "../screen/FilterStackPage/MenuPaxSelectPage";
+import MenuUserDetailFilterPage from "../screen/FilterStackPage/MenuUserDetailFilterPage";
 
 export default function FilterPage() {
   const FilterStack = createNativeStackNavigator();
@@ -37,6 +38,11 @@ export default function FilterPage() {
         name="MenuPaxSelect"
         component={MenuPaxSelectPage}
         options={{ title: "Select Menu Pax" }}
+      />
+      <FilterStack.Screen
+        name="MenuUserInput"
+        component={MenuUserDetailFilterPage}
+        options={{ title: "User Detail" }}
       />
     </FilterStack.Navigator>
   );

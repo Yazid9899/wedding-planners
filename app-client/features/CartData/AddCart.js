@@ -25,7 +25,7 @@ export const addCartData = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error, "<<< error nih");
+      console.log(error, "<<< error nih cart");
     }
   }
 );
