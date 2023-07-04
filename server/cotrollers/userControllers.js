@@ -34,9 +34,11 @@ class UserController {
         username: user.username,
       });
 
-      res.status(200).json({
-        statusCode: 200,
+
+
+      res.status(201).json({
         access_token,
+        message: "Login Succes",
         email: user.email,
         role: user.role,
         username: user.username,

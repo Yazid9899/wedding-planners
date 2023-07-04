@@ -1,50 +1,83 @@
 
-const { User, Venue,Product,Photography,Cathering } = require(`../models/index`);
+const { User, Venue, Product, Photography, Cathering } = require('../models/index');
+const dataUser = require('../db/user.json');
+const dataVenue = require('../db/venue.json');
+const dataPhotography = require('../db/photography.json');
+const dataCathering = require('../db/cathering.json');
+const dataProduct = require('../db/product.json');
 
-const dataUser = require(`../db/user.json`);
+// Update createdAt and updatedAt properties for each dataset
+const currentDate = new Date();
+
 const data1 = dataUser.map((el) => ({
-  ...el,
-  createdAt: new Date(),
-  updatedAt: new Date(),
+    ...el,
+    createdAt: currentDate,
+    updatedAt: currentDate,
 }));
 
-const dataVenue = require(`../db/venue.json`);
-const data2= dataVenue.map((el) => {
-    el.createdAt = el.updatedAt = new Date()
-})
-const dataPhotography = require(`../db/photography.json`);
-const data3= dataPhotography.map((el) => {
-    el.createdAt = el.updatedAt = new Date()
-})
-const dataCathering = require(`../db/cathering.json`);
-const data4= dataCathering.map((el) => {
-    el.createdAt = el.updatedAt = new Date()
-})
-const dataProduct = require(`../db/product.json`);
-const data5= dataProduct.map((el) => {
-    el.createdAt = el.updatedAt = new Date()
-})
+const data2 = dataVenue.map((el) => ({
+    ...el,
+    createdAt: currentDate,
+    updatedAt: currentDate,
+}));
 
+const data3 = dataPhotography.map((el) => ({
+    ...el,
+    createdAt: currentDate,
+    updatedAt: currentDate,
+}));
+
+const data4 = dataCathering.map((el) => ({
+    ...el,
+    createdAt: currentDate,
+    updatedAt: currentDate,
+}));
+
+const data5 = dataProduct.map((el) => ({
+    ...el,
+    createdAt: currentDate,
+    updatedAt: currentDate,
+}));
 
 const insertUser = async () => {
-    await User.bulkCreate(data1)
+    try{
+        await User.bulkCreate(data1)
+    }catch(err){
+        console.log(err);
+    }
 }
 
-const insertVenue  = async () => {
-    await Venue.bulkCreate(data2)
+const insertVenue = async () => {
+    try{
+        await Venue.bulkCreate(data2)
+    }catch(err){
+        console.log(err);
+    }
 }
 
 const insertPhotography = async () => {
-    await Photography.bulkCreate(data3)
+    try{
+        await Photography.bulkCreate(data3)
+    }catch(err){
+        console.log(err);
+    }
 }
 
 const insertCathering = async () => {
-    await Cathering.bulkCreate(data4)
+    try{
+        await Cathering.bulkCreate(data4)
+    }catch(err){
+        console.log(err);
+    }
 }
 
 const insertProduct = async () => {
-    await Product.bulkCreate(data5)
+    try{
+        await Product.bulkCreate(data5)
+    }catch(err){
+        console.log(err);
+    }
 }
 
 
-module.exports = { insertUser, insertVenue,insertPhotography,insertCathering,insertProduct }
+module.exports = { insertUser, insertVenue, insertPhotography, insertCathering, insertProduct }

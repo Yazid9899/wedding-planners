@@ -8,7 +8,6 @@ beforeAll(async () => {
   insertPhotography()
   insertCathering()
   insertProduct()
-
 })
 
 afterAll(async () => {
