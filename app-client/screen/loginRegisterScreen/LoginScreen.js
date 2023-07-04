@@ -35,11 +35,9 @@ export default function LoginScreen({navigation}) {
       password: "",
     });
   };
-  console.log(access_token);
   useEffect(() => {
     const checkLoginStatus = async () => {
       const token = await AsyncStorage.getItem("access_token");
-      console.log(token, "<<<<<<<<<<<<<<<<<<<<<<");
       if (token) {
         Alert.alert("Login Success");
       } else {
