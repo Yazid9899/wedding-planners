@@ -15,7 +15,7 @@ import { getCartData } from "../features/CartData/GetCart";
 import { addTransactionData } from "../features/Transaction/PostTransaction";
 import { WebView } from "react-native-webview";
 import { changeStatusTransaction } from "../features/Transaction/ChangeStatus";
-
+import { useFocusEffect } from "@react-navigation/native";
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -57,10 +57,10 @@ const CartScreen = () => {
     setSelectedInvoiceUrl(url);
   };
 
-  useEffect(() => {
+  useFocusEffect(() => {
     dispatch(getCartData());
     // console.log(transStateData, "-------------------");
-  }, [cartStateData]);
+  });
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);

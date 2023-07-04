@@ -1,13 +1,13 @@
 // import React, { useEffect, useState } from "react";
-// import {
-//   View,
-//   Text,
-//   Image,
-//   StyleSheet,
-//   TextInput,
-//   Button,
-//   FlatList,
-// } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TextInput,
+  Button,
+  FlatList,
+} from "react-native";
 // import * as TalkRn from "@talkjs/expo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
