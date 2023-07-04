@@ -59,8 +59,8 @@ const CartScreen = () => {
 
   useEffect(() => {
     dispatch(getCartData());
-    console.log(transStateData, "-------------------");
-  }, [transStateData]);
+    // console.log(transStateData, "-------------------");
+  }, [cartStateData]);
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -102,7 +102,7 @@ const CartScreen = () => {
 
     dispatch(addTransactionData(transactionData))
       .then(() => {
-        console.log(transStateData.id, "ini kah yang dicari???????");
+        console.log(transStateData, "ini kah yang dicari???????");
         openInvoiceWebView(transStateData.invoiceUrl);
         setShowSuccessModal(true);
         // Transaksi berhasil, Anda dapat menampilkan modal sukses atau melakukan tindakan lainnya
