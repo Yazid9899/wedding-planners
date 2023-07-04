@@ -67,15 +67,8 @@ class CartControllers {
         bride,
         weddingDate,
         contactNumber,
-<<<<<<<<< Temporary merge branch 1
         address,
       } = req.body;
-      const currentDate = new Date();
-      const oneMonthAhead = new Date();
-      oneMonthAhead.setMonth(currentDate.getMonth() + 1);
-=========
-        address } = req.body;
->>>>>>>>> Temporary merge branch 2
 
       const data = await Product.findOne({
         where: {
