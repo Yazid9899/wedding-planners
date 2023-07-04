@@ -121,20 +121,13 @@ const BuildingSelectPage = ({ navigation }) => {
     />
   );
 
-  //   if (status === "loading") {
-  //     return <div>Loading...</div>;
-  //   }
-
-  //   if (status === "failed") {
-  //     return <div>Error: {error}</div>;
-  //   }
-
   return (
     <View style={styles.screen}>
       <Searchbar
         placeholder="Search Venue"
         onChangeText={onChangeSearch}
         value={searchQuery}
+        style={styles.searchStyle}
       />
       <View style={styles.dropdownContainer}>
         {renderLocationDropdown("Location", Location)}
@@ -165,6 +158,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginVertical: 10,
+  },
+  //
+  searchStyle: {
+    marginBottom: 7,
+    backgroundColor: "#Bee0e8",
   },
   //
   cardContent: {

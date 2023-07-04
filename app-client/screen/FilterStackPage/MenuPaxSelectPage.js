@@ -32,6 +32,8 @@ const MenuPaxSelectPage = ({ navigation }) => {
   //
   const [inputValue, setInputValue] = useState("");
   //
+  const [budgetError, setBudgetError] = useState(null);
+  //
 
   const [isFocused, setIsFocused] = useState(false);
   const animatedScale = useState(new Animated.Value(1))[0];
@@ -58,19 +60,32 @@ const MenuPaxSelectPage = ({ navigation }) => {
     setInputValue(cleanedText);
   };
 
+  let cateringPrice = 0; // taro di sini biar bisa dipake di calTotalPrice dan di nextButton
   const calculateTotalPrice = () => {
     const venuePrice = venueData?.price || 0;
     const photographyPrice = photographerData?.price || 0;
-    const cateringPrice = cateringData?.price || 0;
-
+    cateringPrice = cateringData?.price || 0;
     const totalPrice =
       venuePrice + photographyPrice + cateringPrice * guestPaxData;
-
     return totalPrice;
   };
   //   title,PhotographyId, CatheringId,  VenueId, totalPrice, pax
 
   const nextButton = () => {
+    const totalPrice = calculateTotalPrice();
+
+    console.log(
+      Number(inputValue) + Math.floor((budgetData - totalPrice) / cateringPrice)
+    );
+
+    if (totalPrice > budgetData) {
+      const maxGuestPax =
+        Number(inputValue) +
+        Math.floor((budgetData - totalPrice) / cateringPrice);
+      setBudgetError(maxGuestPax);
+      return;
+    }
+
     const cartData = {
       title: `${venueData?.name} with ${cateringData?.name} and ${photographerData?.name} for ${guestPaxData} people`,
       VenueId: venueData?.id,
@@ -80,17 +95,15 @@ const MenuPaxSelectPage = ({ navigation }) => {
       totalPrice: calculateTotalPrice(), // Replace this with your own logic to calculate the total price
     };
     console.log(cartData, "data yg akan dikirim");
-    dispatch(addCustomCartData(cartData));
-    navigation.navigate("MainFilter");
-    navigation.navigate("Cart");
+    //  dispatch(addCustomCartData(cartData));
+    //  navigation.navigate("MainFilter");
+    navigation.navigate("MenuUserInput");
   };
-  //   const previousButton = () => {
-  //     navigation.navigate("CateringSelect");
-  //   };
 
   useEffect(() => {
     dispatch(setGuestPax(inputValue));
   }, [inputValue]);
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -126,15 +139,19 @@ const MenuPaxSelectPage = ({ navigation }) => {
           />
         </Animated.View>
 
+        {budgetError !== null && (
+          <Text style={styles.errorText}>
+            Total price exceeds budget! Maximum number of guests: {budgetError}
+          </Text>
+        )}
+
         <View>
           <Text>Your Budget: {budgetData}</Text>
           <Text>Your Book Date: {dateData}</Text>
           <Text>Your Venue: {venueData?.name}</Text>
           <Text>Your Photographer: {photographerData?.name}</Text>
           <Text>Your Catering: {cateringData?.name}</Text>
-          <Text>
-            Total: Venue+Photographer+ (Catering * @Pax: {guestPaxData})
-          </Text>
+          <Text>Total: {calculateTotalPrice()}</Text>
         </View>
 
         <View style={{ height: 30 }} />
@@ -204,5 +221,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  errorText: {
+    color: "red",
+    marginTop: 5,
+    fontSize: 14,
   },
 });
