@@ -1,39 +1,39 @@
-import React, {useEffect, useState} from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TextInput,
-  Button,
-  FlatList,
-} from "react-native";
+// import React, { useEffect, useState } from "react";
+// import {
+//   View,
+//   Text,
+//   Image,
+//   StyleSheet,
+//   TextInput,
+//   Button,
+//   FlatList,
+// } from "react-native";
 // import * as TalkRn from "@talkjs/expo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const ChatScreen = () => {
-  const [name, setName] = useState("");
-  const [user, setUser] = useState(null);
-  const [admin, setAdmin] = useState(null);
-  useEffect(() => {
-    AsyncStorage.getItem("username").then((res) => {
-      console.log(res);
-      if (res === "Ciptandaru") {
-        setAdmin({
-          id: 2,
-          name: "Admin",
-          role: "admin",
-        });
-        setUser({
-          id: 1,
-          name: name,
-          role: "default",
-        });
-      } else {
-        setName(res);
-      }
-    });
-  }, []);
+// const ChatScreen = () => {
+//   const [name, setName] = useState("");
+//   const [user, setUser] = useState(null);
+//   const [admin, setAdmin] = useState(null);
+//   useEffect(() => {
+//     AsyncStorage.getItem("username").then((res) => {
+//       console.log(res);
+//       if (res === "Ciptandaru") {
+//         setAdmin({
+//           id: 2,
+//           name: "Admin",
+//           role: "admin",
+//         });
+//         setUser({
+//           id: 1,
+//           name: name,
+//           role: "default",
+//         });
+//       } else {
+//         setName(res);
+//       }
+//     });
+//   }, []);
 
   const me = admin || {
     id: 1,
