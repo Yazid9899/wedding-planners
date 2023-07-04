@@ -7,12 +7,14 @@ class VenueControllers {
     try {
       const { location, search, price, belowPrice } = req.query
 
-      let where = {
-        price: {
-          [Op.lt]: belowPrice,
+      let where = {}
+      if (belowPrice) {
+        where = {
+          price: {
+            [Op.lt]: belowPrice,
+          }
         }
-      } 
-      
+      }
       if (location) {
         where = {
           ...where,
@@ -28,10 +30,10 @@ class VenueControllers {
         };
       }
       let filter = [["id", "ASC"]]
-      if(price){
-        if(price === "lowest"){
+      if (price) {
+        if (price === "lowest") {
           filter = [["price", "ASC"]]
-        }else if(price === "higest"){
+        } else if (price === "higest") {
           filter = [["price", "DESC"]]
         }
       }

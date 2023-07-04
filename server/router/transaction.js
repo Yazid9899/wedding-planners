@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.get("/", TransactionController.getTransactionById);
 router.patch("/update/:id", TransactionController.changeStatusTransaction);
-router.post("/payment", TransactionController.payment)
+router.post("/payment/:cardid", TransactionController.payment)
 
 module.exports = router;
