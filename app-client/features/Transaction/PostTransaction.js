@@ -9,12 +9,12 @@ export const addTransactionData = createAsyncThunk(
     try {
       // console.log(data, "<<<< ini data?");
       const access_token = await AsyncStorage.getItem("access_token");
-      console.log(access_token, "<<< TOKENNN");
-      console.log(data, "<<< ini data");
+      // console.log(access_token, "<<< TOKENNN");
+      // console.log(data, "<<< ini data");
 
       // Menyiapkan objek headers dengan access_token
       const response = await axios.post(
-        `${BASE_URL}/transactions/payment`,
+        `${BASE_URL}/transactions/payment/${data.CartId}`,
         data,
         {
           headers: {
@@ -22,6 +22,8 @@ export const addTransactionData = createAsyncThunk(
           },
         }
       );
+
+      console.log(response.data, "POST TRANSAKSI==========");
       return response.data;
     } catch (error) {
       console.log(error, "<<< error nih");

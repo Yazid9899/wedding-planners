@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCart } from "../features/CartData/DeleteCart";
 import { getCartData } from "../features/CartData/GetCart";
 import { addTransactionData } from "../features/Transaction/PostTransaction";
+import { WebView } from "react-native-webview";
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("id-ID", {
@@ -21,39 +22,44 @@ const formatCurrency = (value) => {
   }).format(value);
 };
 
+const InvoiceWebView = ({ url }) => {
+  return (
+    <View style={styles.container}>
+      <WebView source={{ uri: url }} />
+    </View>
+  );
+};
+
 const CartScreen = () => {
   const cartStateData = useSelector((state) => state.cart.data);
+  const transStateData = useSelector((state) => state.transaction.data);
   const dispatch = useDispatch();
+  const [selectedInvoiceUrl, setSelectedInvoiceUrl] = useState(null);
+  // const [showInvoiceWebView, setShowInvoiceWebView] = useState(false);
+  // const [invoiceUrl, setInvoiceUrl] = useState("");
 
-  const postTransactionItem = (item) => {
-    setSelectedItem(item);
-    setShowModal(true);
+  // const postTransactionItem = (item) => {
+  //   setSelectedItem(item);
+  //   setShowModal(true);
+  // };
+
+  // {
+  //   showInvoiceWebView && <InvoiceWebView url={invoiceUrl} />;
+  // }
+  const openInvoiceWebView = (url) => {
+    setSelectedInvoiceUrl(url);
   };
 
   useEffect(() => {
     dispatch(getCartData());
-  }, []);
+    console.log(transStateData, "-------------------");
+  }, [transStateData]);
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-
-  // const deleteCartItem = (id) => {
-  //   dispatch(deleteCart(id))
-  //     .then(() => {
-  //       // Item successfully deleted, you can update the cart data here
-  //       dispatch(getCartData());
-  //       setShowModal(false);
-  //       setShowSuccessModal(true);
-  //     })
-  //     .catch((error) => {
-  //       // Handle error
-  //       console.log(error);
-  //       setShowModal(false);
-  //     });
-  // };
 
   const deleteCartItem = (id) => {
     dispatch(deleteCart(id))
@@ -88,7 +94,9 @@ const CartScreen = () => {
 
     dispatch(addTransactionData(transactionData))
       .then(() => {
-        console.log("berhasillllll");
+        // console.log(transactionData, "ini kah yang dicari???????");
+        openInvoiceWebView(transStateData.invoiceUrl);
+        setShowSuccessModal(true);
         // Transaksi berhasil, Anda dapat menampilkan modal sukses atau melakukan tindakan lainnya
         setShowSuccessModal(true);
       })
@@ -98,28 +106,6 @@ const CartScreen = () => {
         console.log(error);
       });
   };
-
-  // const handlePaymentConfirmation = () => {
-  //   setShowModal(false);
-
-  //   // Lakukan tindakan yang diperlukan untuk memproses pembayaran
-  //   const id = selectedItem.id;
-  //   const transactionData = {
-  //     // Menyesuaikan data yang diperlukan untuk transaksi
-  //     orderId: selectedItem.id,
-  //     // ...
-  //   };
-
-  //   dispatch(addTransactionData(transactionData))
-  //     .then(() => {
-  //       // Transaksi berhasil, Anda dapat menampilkan modal sukses atau melakukan tindakan lainnya
-  //       setShowSuccessModal(true);
-  //     })
-  //     .catch((error) => {
-  //       // Penanganan kesalahan saat melakukan transaksi
-  //       console.log(error);
-  //     });
-  // };
 
   const renderItem = ({ item }) => (
     <View style={styles.cartItem}>
@@ -159,68 +145,41 @@ const CartScreen = () => {
         >
           <Text style={styles.deleteButtonText}>Delete</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={[styles.deleteButton, { backgroundColor: "red" }]}
-          onPress={() => {
-            setSelectedItem(item.id);
-            setShowModal(true);
-          }}
-        >
-          <Text style={styles.deleteButtonText}>Delete</Text>
-        </TouchableOpacity> */}
         <TouchableOpacity
           style={[styles.deleteButton, { backgroundColor: "#00bce1" }]}
           onPress={() => {
-            console.log(item.id, "ini item IDDDDDD");
+            // console.log(item.id, "ini item IDDDDDD");
             setSelectedItem(item);
             setShowPaymentModal(true);
+            // openInvoiceWebView(item.invoice_url);
           }}
         >
           <Text style={styles.deleteButtonText}>Bayar</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={[styles.deleteButton, { backgroundColor: "#00bce1" }]}
-          onPress={() => postTransactionItem(item)}
-        >
-          <Text style={styles.deleteButtonText}>Bayar</Text>
-        </TouchableOpacity> */}
       </View>
     </View>
   );
 
   return (
     <View style={styles.container}>
+      {selectedInvoiceUrl && (
+        <Modal
+          visible={showSuccessModal}
+          animationType="slide"
+          transparent={false}
+          onRequestClose={() => setShowSuccessModal(false)}
+        >
+          <InvoiceWebView url={selectedInvoiceUrl} />
+        </Modal>
+      )}
       <Text style={styles.title}>Cart Screen</Text>
-      {/* <Modal
-        visible={showSuccessModal}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setShowSuccessModal(false)}
-      >
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>
-            Order has been deleted successfully
-          </Text>
-          <TouchableOpacity
-            style={styles.modalButton}
-            onPress={() => setShowSuccessModal(false)}
-          >
-            <Text style={styles.modalButtonText}>OK</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal> */}
       <FlatList
         data={cartStateData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.cartList}
       />
-      {/* <Modal
-        visible={showModal}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setShowModal(false)}
-      > */}
+
       <Modal
         visible={showDeleteModal}
         animationType="slide"

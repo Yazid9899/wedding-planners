@@ -103,7 +103,7 @@ class TransactionController {
         description: title,
         amount: totalAmount,
       });
-      console.log(data, "<<<<<<<<<<<");
+      console.log(data, "<<<<<di trans control<<<<<<");
       const noTransaction = data.id;
 
       TransactionController.createTransaction(
