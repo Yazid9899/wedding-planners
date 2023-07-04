@@ -1,7 +1,17 @@
 import { useState } from "react";
-import { Text, View } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  Modal,
+  Alert,
+  Linking,
+} from "react-native";
 
-import { TextInput } from "react-native-paper";
+// import { TextInput } from "react-native-paper";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 const MenuUserDetailFilterPage = ({ navigation }) => {
   const [groomData, setGroomData] = useState("");
   const [brideData, setBrideData] = useState("");
-  const [userContacts, setUserContacts] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
   const [data4, setData4] = useState("");
   const [data5, setData5] = useState("");
 
@@ -25,43 +35,97 @@ const MenuUserDetailFilterPage = ({ navigation }) => {
   //
   const guestPaxData = useSelector((state) => state.inputDateBudget.guestPax);
 
+  //
+  const [showModal, setShowModal] = useState(false);
+  const handleSubmit = () => {
+    setShowModal(true);
+  };
+
+  const handleConfirmation = async (confirmation) => {
+    setShowModal(false);
+
+    //  title,PhotographyId,CatheringId,VenueId,totalPrice,pax,groom,bride,weddingDate,
+    if (confirmation === "yes") {
+      // Lakukan tindakan yang diperlukan dengan data yang diisi pengguna
+      const completeData = {
+        title: "xx",
+        PhotographyId: 1,
+        CatheringId: 1,
+        VenueId: 1,
+        totalPrice: 12,
+        pax: 1,
+        groom: groomData,
+        bride: brideData,
+        weddingDate: dateData,
+        // contactNumber: contactNumber,
+      };
+      console.log("Data Form:", { selectedDate, groom, bride, contactNumber });
+
+      // await dispatch(addCartData({ data: completeData }));
+      Alert.alert(
+        "Success",
+        "The product has been added to the cart successfully."
+      );
+      // Navigasi ke halaman berikutnya
+      navigation.navigate("Cart");
+    }
+  };
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Input detail information for this order</Text>
+
+      <Text style={styles.label}>Nama Pengantin Pria:</Text>
       <TextInput
-        label="Data 1"
-        value={data1}
-        onChangeText={setData1}
-        mode="outlined"
         style={styles.input}
+        placeholder="Masukkan Nama Pengantin Pria"
+        value={groomData}
+        onChangeText={(text) => setGroomData(text)}
       />
+
+      <Text style={styles.label}>Nama Pengantin Wanita:</Text>
       <TextInput
-        label="Data 2"
-        value={data2}
-        onChangeText={setData2}
-        mode="outlined"
         style={styles.input}
+        placeholder="Masukkan Nama Pengantin Wanita"
+        value={brideData}
+        onChangeText={(text) => setBrideData(text)}
       />
+
+      <Text style={styles.label}>Nomor Kontak:</Text>
       <TextInput
-        label="Data 3"
-        value={data3}
-        onChangeText={setData3}
-        mode="outlined"
         style={styles.input}
+        placeholder="Masukkan Nomor Kontak"
+        value={contactNumber}
+        onChangeText={(text) => setContactNumber(text)}
+        keyboardType="phone-pad"
       />
-      <TextInput
-        label="Data 4"
-        value={data4}
-        onChangeText={setData4}
-        mode="outlined"
-        style={styles.input}
-      />
-      <TextInput
-        label="Data 5"
-        value={data5}
-        onChangeText={setData5}
-        mode="outlined"
-        style={styles.input}
-      />
+
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Pesan</Text>
+      </TouchableOpacity>
+
+      <Modal visible={showModal} animationType="slide" transparent={true}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>
+              Are you sure for this detail information?
+            </Text>
+            <View style={styles.modalButtonContainer}>
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={() => handleConfirmation("yes")}
+              >
+                <Text style={styles.modalButtonText}>Yes</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={() => handleConfirmation("no")}
+              >
+                <Text style={styles.modalButtonText}>No</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -74,5 +138,67 @@ const styles = {
   },
   input: {
     marginBottom: 10,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  input: {
+    height: 40,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+  },
+  button: {
+    backgroundColor: "#007AFF",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignItems: "center",
+    height: 50,
+    marginBottom: 40,
+  },
+  buttonText: {
+    fontSize: 16,
+    color: "#fff",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  modalButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  modalButton: {
+    backgroundColor: "#007AFF",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignItems: "center",
+    marginHorizontal: 10,
+  },
+  modalButtonText: {
+    fontSize: 16,
+    color: "#fff",
   },
 };

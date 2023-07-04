@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   },
   showMoreButtonText: {
     fontSize: 14,
-    color: "blue",
+    color: "#3174cc",
   },
   modalTitle: {
     fontSize: 18,

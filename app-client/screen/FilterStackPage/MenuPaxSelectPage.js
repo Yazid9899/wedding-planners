@@ -34,6 +34,8 @@ const MenuPaxSelectPage = ({ navigation }) => {
   //
   const [budgetError, setBudgetError] = useState(null);
   //
+  const [inputError, setInputError] = useState(false);
+  //
 
   const [isFocused, setIsFocused] = useState(false);
   const animatedScale = useState(new Animated.Value(1))[0];
@@ -57,7 +59,13 @@ const MenuPaxSelectPage = ({ navigation }) => {
   const handleInputChange = (text) => {
     // Remove non-digit characters from the input
     const cleanedText = text.replace(/[^0-9]/g, "");
-    setInputValue(cleanedText);
+
+    // Check if the input is not empty and not equal to 0
+    if (cleanedText !== "" && cleanedText !== "0") {
+      setInputValue(cleanedText);
+    } else {
+      setInputValue("");
+    }
   };
 
   let cateringPrice = 0; // taro di sini biar bisa dipake di calTotalPrice dan di nextButton
@@ -72,6 +80,12 @@ const MenuPaxSelectPage = ({ navigation }) => {
   //   title,PhotographyId, CatheringId,  VenueId, totalPrice, pax
 
   const nextButton = () => {
+    if (inputValue === "") {
+      setInputError(true);
+      return;
+    }
+    setInputError(false);
+
     const totalPrice = calculateTotalPrice();
 
     console.log(
@@ -139,19 +153,45 @@ const MenuPaxSelectPage = ({ navigation }) => {
           />
         </Animated.View>
 
+        {inputError && (
+          <Text style={styles.errorText}>Input cannot be empty</Text>
+        )}
+
         {budgetError !== null && (
           <Text style={styles.errorText}>
             Total price exceeds budget! Maximum number of guests: {budgetError}
           </Text>
         )}
 
-        <View>
-          <Text>Your Budget: {budgetData}</Text>
-          <Text>Your Book Date: {dateData}</Text>
-          <Text>Your Venue: {venueData?.name}</Text>
-          <Text>Your Photographer: {photographerData?.name}</Text>
-          <Text>Your Catering: {cateringData?.name}</Text>
-          <Text>Total: {calculateTotalPrice()}</Text>
+        <View style={styles.tableContainer}>
+          <View style={styles.row}>
+            <Text style={styles.label}>Your Budget:</Text>
+            <Text style={styles.value}>
+              IDR {Number(budgetData).toLocaleString()}
+            </Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Your Book Date:</Text>
+            <Text style={styles.value}>{dateData}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Your Venue:</Text>
+            <Text style={styles.value}>{venueData?.name}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Your Photographer:</Text>
+            <Text style={styles.value}>{photographerData?.name}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Your Catering:</Text>
+            <Text style={styles.value}>{cateringData?.name}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Total:</Text>
+            <Text style={styles.value}>
+              IDR {Number(calculateTotalPrice()).toLocaleString()}
+            </Text>
+          </View>
         </View>
 
         <View style={{ height: 30 }} />
@@ -163,8 +203,6 @@ const MenuPaxSelectPage = ({ navigation }) => {
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
         </View>
-
-        {}
       </View>
     </ScrollView>
   );
@@ -173,7 +211,7 @@ const MenuPaxSelectPage = ({ navigation }) => {
 export default MenuPaxSelectPage;
 
 const { width, height } = Dimensions.get("window");
-const containerWidth = width * 0.8; // Set the container width to 80% of the screen width
+const containerWidth = width * 0.9; // Set the container width to 80% of the screen width
 const containerHeight = height * 0.3; // Set the container width to 80% of the screen width
 
 const styles = StyleSheet.create({
@@ -187,6 +225,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 400,
     marginBottom: 10,
+    width: containerWidth,
   },
   gap: {
     height: 10,
@@ -226,5 +265,28 @@ const styles = StyleSheet.create({
     color: "red",
     marginTop: 5,
     fontSize: 14,
+  },
+  //   Table
+  tableContainer: {
+    width: containerWidth,
+    borderWidth: 1,
+    borderColor: "transparent",
+    marginTop: 20,
+    marginBottom: 30,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: "transparent",
+  },
+  label: {
+    fontWeight: "bold",
+    marginRight: 10,
+  },
+  value: {
+    flex: 1,
   },
 });
