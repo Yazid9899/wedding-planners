@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 
@@ -94,7 +95,7 @@ const PhotoSelectPage = ({ navigation }) => {
       </View>
 
       {status === "loading" ? (
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" />
       ) : status === "failed" ? (
         <Text>Error: {error}</Text>
       ) : (

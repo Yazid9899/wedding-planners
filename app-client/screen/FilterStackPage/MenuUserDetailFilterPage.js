@@ -15,13 +15,17 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { addCustomCartData } from "../../features/CartData/AddCustomerCart";
+
 // title,PhotographyId, CatheringId, VenueId,  totalPrice, pax,  groom,  bride, weddingDate,
 const MenuUserDetailFilterPage = ({ navigation }) => {
   const [groomData, setGroomData] = useState("");
   const [brideData, setBrideData] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const [data4, setData4] = useState("");
+  const [addressData, setAddressData] = useState("");
   const [data5, setData5] = useState("");
+  //
+  const [inputError, setInputError] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -32,13 +36,32 @@ const MenuUserDetailFilterPage = ({ navigation }) => {
     (state) => state.inputDateBudget.photographerId
   );
   const cateringData = useSelector((state) => state.inputDateBudget.cateringId);
-  //
   const guestPaxData = useSelector((state) => state.inputDateBudget.guestPax);
 
   //
   const [showModal, setShowModal] = useState(false);
   const handleSubmit = () => {
+    if (
+      groomData === "" ||
+      brideData === "" ||
+      contactNumber === "" ||
+      addressData === ""
+    ) {
+      setInputError(true);
+      return;
+    }
+    setInputError(false);
     setShowModal(true);
+  };
+
+  let cateringPrice = 0; // taro di sini biar bisa dipake di calTotalPrice dan di nextButton
+  const calculateTotalPrice = () => {
+    const venuePrice = venueData?.price || 0;
+    const photographyPrice = photographerData?.price || 0;
+    cateringPrice = cateringData?.price || 0;
+    const totalPrice =
+      venuePrice + photographyPrice + cateringPrice * guestPaxData;
+    return totalPrice;
   };
 
   const handleConfirmation = async (confirmation) => {
@@ -48,26 +71,32 @@ const MenuUserDetailFilterPage = ({ navigation }) => {
     if (confirmation === "yes") {
       // Lakukan tindakan yang diperlukan dengan data yang diisi pengguna
       const completeData = {
-        title: "xx",
-        PhotographyId: 1,
-        CatheringId: 1,
-        VenueId: 1,
-        totalPrice: 12,
-        pax: 1,
+        title: `${venueData?.name} with ${cateringData?.name} and ${photographerData?.name} for ${guestPaxData} people`,
         groom: groomData,
         bride: brideData,
         weddingDate: dateData,
+        contactNumber: contactNumber,
+        address: addressData,
+        PhotographyId: photographerData?.id,
+        CatheringId: cateringData?.id,
+        VenueId: venueData?.id,
+        totalPrice: calculateTotalPrice(),
+        pax: guestPaxData,
         // contactNumber: contactNumber,
       };
-      console.log("Data Form:", { selectedDate, groom, bride, contactNumber });
+      console.log("Data Form:", completeData);
 
-      // await dispatch(addCartData({ data: completeData }));
+      await dispatch(addCustomCartData(completeData));
+
+      navigation.navigate("MainFilter");
+      navigation.navigate("Cart");
+
       Alert.alert(
         "Success",
         "The product has been added to the cart successfully."
       );
       // Navigasi ke halaman berikutnya
-      navigation.navigate("Cart");
+      // navigation.navigate("Cart");
     }
   };
   return (
@@ -98,6 +127,18 @@ const MenuUserDetailFilterPage = ({ navigation }) => {
         onChangeText={(text) => setContactNumber(text)}
         keyboardType="phone-pad"
       />
+
+      <Text style={styles.label}>Adress:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Adress"
+        value={addressData}
+        onChangeText={(text) => setAddressData(text)}
+      />
+
+      {inputError && (
+        <Text style={styles.errorText}>Please fill in all fields</Text>
+      )}
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Pesan</Text>

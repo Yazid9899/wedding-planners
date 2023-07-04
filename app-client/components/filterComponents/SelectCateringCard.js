@@ -61,6 +61,7 @@ const SelectCateringCard = ({ data, navigation }) => {
             style={styles.imageBackground}
           ></ImageBackground>
         </View>
+
         {/*  */}
         <Card.Title
           title={data?.name}
@@ -76,8 +77,9 @@ const SelectCateringCard = ({ data, navigation }) => {
         <Card.Content style={styles.cardContent}>
           <View style={styles.rowContainer}>
             <Text style={styles.cardPrice}>
-              IDR {Number(data?.price).toLocaleString()}
+              IDR {Number(data?.price).toLocaleString()} /Pax
             </Text>
+
             <Button
               mode="contained"
               onPress={() => {
