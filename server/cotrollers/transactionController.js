@@ -104,7 +104,7 @@ class TransactionController {
         description: title,
         amount: totalAmount,
       });
-      console.log(data, "<<<<<di trans control<<<<<<");
+      
       const noTransaction = data.id;
 
       const transaction = await TransactionController.createTransaction(
