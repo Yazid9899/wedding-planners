@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/", CartControllers.getData)
 router.post("/", CartControllers.createCart)
 router.post("/:idProduct", CartControllers.createCartById)
-router.delete("/", CartControllers.deleteAllCart )
+router.delete("/:id", CartControllers.deleteById )
 router.patch("/:cartid", CartControllers.updateStatusById)
 
 
