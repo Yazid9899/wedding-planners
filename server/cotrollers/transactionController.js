@@ -40,6 +40,7 @@ class TransactionController {
   static async changeStatusTransaction(req, res, next) {
     try {
       const { id } = req.params;
+      const { email } = req.additionalData;
       const data = await Transaction.findOne({
         where: { id },
         include: [
@@ -60,15 +61,14 @@ class TransactionController {
 
         try {
           const pdfBuffer = await generateInvoicePDF(data);
-          await sendInvoiceEmail("ciptandaru@gmail.com", pdfBuffer);
-          console.log("Invoice sent successfully.");
+          await sendInvoiceEmail(email, pdfBuffer);
+          res.status(200).json({
+            message: "Transaction Paid and invoice sent to you email",
+            data,
+          });
         } catch (error) {
           console.error("Error sending invoice:", error);
         }
-
-        res.status(200).json({
-          message: "Transaction Paid",
-        });
       } else {
         res.status(200).json({
           message: "Transaction Pending",
@@ -92,17 +92,18 @@ class TransactionController {
 
   static async payment(req, res, next) {
     try {
-      const {cardid} = req.params
-      const { title, totalAmount} = req.body;
+      const { cardid } = req.params;
+      const { title, totalAmount } = req.body;
       const { email, id } = req.additionalData;
 
+      console.log(req.additionalData, "ini req body");
       const data = await i.createInvoice({
-        externalID: "your-external-id",
+        externalID: "external_id_here",
         payerEmail: email,
         description: title,
         amount: totalAmount,
       });
-
+      console.log(data, "<<<<<di trans control<<<<<<");
       const noTransaction = data.id;
 
       TransactionController.createTransaction(
@@ -119,11 +120,11 @@ class TransactionController {
         invoiceUrl: data.invoice_url,
       });
     } catch (err) {
+      console.log(err);
       next(err);
     }
   }
 
-  
   static async getAllInvoice(req, res, next) {
     try {
       const data = await i.getAllInvoices();

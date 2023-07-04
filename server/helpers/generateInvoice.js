@@ -1,12 +1,9 @@
 const pdfkit = require("pdfkit");
 const nodemailer = require("nodemailer");
 
-// Create a function to generate the invoice PDF
 async function generateInvoicePDF(data) {
-  // Create an instance of the PDF document
   const doc = new pdfkit();
 
-  // Generate the content of the PDF document
   doc.text("Invoice", { align: "center", fontSize: 20 });
   doc.moveDown();
   doc.text(`Invoice ID: ${data.id}`);
@@ -26,9 +23,7 @@ async function generateInvoicePDF(data) {
   doc.text("Photography Details:");
   doc.text(`Name: ${data.Cart.Photography.name}`);
   doc.text(`Price: ${data.Cart.Photography.price}`);
-  // Add more details as needed
 
-  // Generate a buffer from the PDF document
   return new Promise((resolve, reject) => {
     const buffers = [];
     doc.on("data", (buffer) => buffers.push(buffer));
@@ -40,12 +35,8 @@ async function generateInvoicePDF(data) {
   });
 }
 
-// Create a function to send the email with the invoice PDF attached
 async function sendInvoiceEmail(email, pdfBuffer) {
-  // Create a Nodemailer transporter
   const transporter = nodemailer.createTransport({
-    // Configure your email service provider details here
-    // For example, if you are using Gmail, you can use the SMTP settings like this:
     service: "gmail",
     auth: {
       user: "kobonagara@gmail.com",
@@ -53,7 +44,6 @@ async function sendInvoiceEmail(email, pdfBuffer) {
     },
   });
 
-  // Set up the email content
   const mailOptions = {
     from: "your-email@gmail.com",
     to: email,
@@ -67,7 +57,6 @@ async function sendInvoiceEmail(email, pdfBuffer) {
     ],
   };
 
-  // Send the email
   return transporter.sendMail(mailOptions);
 }
 

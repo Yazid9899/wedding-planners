@@ -7,7 +7,7 @@ import Header from "../../components/loginRegisterComponent/Header";
 import Button from "../../components/loginRegisterComponent/Button";
 import TextInput from "../../components/loginRegisterComponent/TextInput";
 import BackButton from "../../components/loginRegisterComponent/BackButton";
-import {theme} from "../../core/theme";
+import {theme} from "../../features/core/theme";
 import {useDispatch, useSelector} from "react-redux";
 import {registerData} from "../../features/RegisterData/registerSlice";
 import {Alert} from "react-native";

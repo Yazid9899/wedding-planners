@@ -32,8 +32,7 @@ class CartControllers {
         totalPrice,
         contactNumber,
         address,
-      })
-
+      });
 
       const currentDate = new Date();
       const oneMonthAhead = new Date();
@@ -74,6 +73,7 @@ class CartControllers {
             name: "Product Not Found"
           }
         }
+
       const create = await Cart.create({
         title: data.title,
         UserId: id,

@@ -6,7 +6,7 @@ import { BASE_URL } from "../../config/api";
 export const getCartData = createAsyncThunk("cart/addCart", async () => {
   try {
     const access_token = await AsyncStorage.getItem("access_token");
-    console.log(access_token, "<<< TOKENNN");
+    // console.log(access_token, "<<< TOKENNN");
     const response = await axios.get(`${BASE_URL}/carts`, {
       headers: {
         access_token: access_token, // Gunakan nilai token yang telah diambil
