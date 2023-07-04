@@ -11,7 +11,7 @@ export const fetchCatheringsData = createAsyncThunk(
 
     belowPrice = belowPrice * 0.3;
 
-    console.log(belowPrice, search, price, "photo slice<<<<<<");
+    console.log(belowPrice, search, price, "catering slice<<<2<<");
 
     const queryParams = [];
     if (search) {

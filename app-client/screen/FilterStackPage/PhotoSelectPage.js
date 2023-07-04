@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 
@@ -33,7 +34,7 @@ const PhotoSelectPage = ({ navigation }) => {
   const [valuePrice, setValuePrice] = useState(null);
   const [isFocusPrice, setIsFocusPrice] = useState(false);
 
-  console.log(budgetData, searchQuery, "di select photo"); // Display the budget value
+  //   console.log(budgetData, searchQuery, "di select photo"); // Display the budget value
 
   useEffect(() => {
     dispatch(
@@ -94,7 +95,7 @@ const PhotoSelectPage = ({ navigation }) => {
       </View>
 
       {status === "loading" ? (
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" />
       ) : status === "failed" ? (
         <Text>Error: {error}</Text>
       ) : (
@@ -117,12 +118,12 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     marginTop: 1,
-    paddingVertical: 20,
+    paddingVertical: 10,
     paddingHorizontal: 8,
   },
   searchStyle: {
-    marginBottom: 7,
-    backgroundColor: "#Bee0e8",
+    //  marginBottom: 7,
+    backgroundColor: "#dff1f5",
   },
   containerButton: {
     marginTop: 40,
@@ -147,7 +148,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 1,
-    marginVertical: 20,
+    marginTop: 10,
+    marginBottom: 4,
   },
   dropdown: {
     flex: 1,
@@ -157,6 +159,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 20,
     marginHorizontal: 2,
+    backgroundColor: "#fff",
   },
   placeholderStyle: {
     fontSize: 16,

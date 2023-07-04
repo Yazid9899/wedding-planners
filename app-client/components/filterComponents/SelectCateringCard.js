@@ -61,6 +61,7 @@ const SelectCateringCard = ({ data, navigation }) => {
             style={styles.imageBackground}
           ></ImageBackground>
         </View>
+
         {/*  */}
         <Card.Title
           title={data?.name}
@@ -76,14 +77,16 @@ const SelectCateringCard = ({ data, navigation }) => {
         <Card.Content style={styles.cardContent}>
           <View style={styles.rowContainer}>
             <Text style={styles.cardPrice}>
-              IDR {Number(data?.price).toLocaleString()}
+              IDR {Number(data?.price).toLocaleString()} /Pax
             </Text>
+
             <Button
               mode="contained"
               onPress={() => {
                 console.log("Add to Cart");
                 nextButton();
               }}
+              style={{ backgroundColor: "#00bce1" }}
             >
               Add to Cart
             </Button>
@@ -271,7 +274,7 @@ const styles = StyleSheet.create({
   },
   showMoreButtonText: {
     fontSize: 14,
-    color: "blue",
+    color: "#3174cc",
   },
   modalTitle: {
     fontSize: 18,

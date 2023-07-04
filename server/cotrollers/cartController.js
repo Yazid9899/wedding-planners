@@ -139,7 +139,6 @@ class CartControllers {
       const { cartid } = req.params;
       const { id } = req.additionalData;
 
-      console.log(cartid, "<<<<<<<<<<<<");
       const data = await Cart.findAll({
         where: {
           id: cartid,
@@ -173,23 +172,32 @@ class CartControllers {
     }
   }
 
-  static async deleteAllCart(req, res, next) {
+  static async deleteById(req, res, next) {
     try {
+      const { cartid } = req.params;
       const { id } = req.additionalData;
       const data = await Cart.findAll({
         where: {
+          id: cartid,
           UserId: id,
         },
       });
 
+      if (data.length == 0) {
+        throw {
+          name: "Cart Not Found",
+        };
+      }
+
       await Cart.destroy({
         where: {
+          id: cartid,
           UserId: id,
         },
       });
 
       res.status(201).json({
-        message: `Cart has been successfully deleted`,
+        message: `Cart id ${id}has been successfully deleted`,
       });
     } catch (err) {
       next(err);

@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 
@@ -87,7 +88,7 @@ const CateringSelectPage = ({ navigation }) => {
       </View>
 
       {status === "loading" ? (
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" />
       ) : status === "failed" ? (
         <Text>Error: {error}</Text>
       ) : (
@@ -110,11 +111,12 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     marginTop: 1,
-    paddingVertical: 20,
+    paddingVertical: 10,
     paddingHorizontal: 8,
   },
   searchStyle: {
-    marginBottom: 7,
+    //  marginBottom: 7,
+    backgroundColor: "#dff1f5",
   },
   cardContainer: {
     flexDirection: "column",
@@ -148,7 +150,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 1,
-    marginVertical: 20,
+    marginTop: 10,
+    marginBottom: 4,
   },
   dropdown: {
     flex: 1,
