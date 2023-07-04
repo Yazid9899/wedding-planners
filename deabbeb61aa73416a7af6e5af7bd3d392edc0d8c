@@ -1,0 +1,64 @@
+[33m24d539b2fb5764ee165f2217cd87eda796ec1b3c[m[33m ([m[1;36mHEAD -> [m[1;32mDamar[m[33m, [m[1;32mdev[m[33m)[m HEAD@{0}: checkout: moving from dev to Damar
+[33m24d539b2fb5764ee165f2217cd87eda796ec1b3c[m[33m ([m[1;36mHEAD -> [m[1;32mDamar[m[33m, [m[1;32mdev[m[33m)[m HEAD@{1}: commit (merge): feat: f
+[33m28f8b2c2075340f0052a521fc428452a0a9c3bce[m HEAD@{2}: checkout: moving from Damar to dev
+[33mdeabbeb61aa73416a7af6e5af7bd3d392edc0d8c[m HEAD@{3}: commit: feat: f
+[33m28f8b2c2075340f0052a521fc428452a0a9c3bce[m HEAD@{4}: checkout: moving from dev to Damar
+[33m28f8b2c2075340f0052a521fc428452a0a9c3bce[m HEAD@{5}: commit (merge): feat: filter merge with dev
+[33m3bede31408d62c1b99949ec007981e5863dd8d5e[m HEAD@{6}: pull origin dev: Fast-forward
+[33m48a04c0ab84a5f3f30a00b137fd1f6571cf33de4[m HEAD@{7}: checkout: moving from Damar to dev
+[33m83817713d2eb95a5968c92a5b3fd2b335bfd396d[m[33m ([m[1;31morigin/Damar[m[33m)[m HEAD@{8}: commit: feat: changes filter
+[33m48a04c0ab84a5f3f30a00b137fd1f6571cf33de4[m HEAD@{9}: checkout: moving from dev to Damar
+[33m48a04c0ab84a5f3f30a00b137fd1f6571cf33de4[m HEAD@{10}: commit (merge): f
+[33m9684276cc11ee3437ad6cfe8df726fbd74e3bb29[m HEAD@{11}: pull origin dev: Fast-forward
+[33m73e89be3f4a7bc9fa082ec73c53a519d91e473d9[m HEAD@{12}: checkout: moving from Damar to dev
+[33mdcda1c6ea09d8e39b1846482f3f149943c92145a[m HEAD@{13}: commit: feat: filter
+[33mfcd8dbb6606b96ec5e738c49b352c8c4189d5763[m HEAD@{14}: commit: feat: changes filter
+[33m73e89be3f4a7bc9fa082ec73c53a519d91e473d9[m HEAD@{15}: checkout: moving from dev to Damar
+[33m73e89be3f4a7bc9fa082ec73c53a519d91e473d9[m HEAD@{16}: commit (merge): feat: changes filter
+[33mf47ce3a061063b187ec9a5552c3bb3e758612160[m HEAD@{17}: pull origin dev: Fast-forward
+[33m6a11142e275f8cde32b0523dc89f49921f309abf[m HEAD@{18}: checkout: moving from Damar to dev
+[33m400cd7c87d0e2262ca1a27122962f618b3712869[m HEAD@{19}: commit: feat: changes
+[33m6a11142e275f8cde32b0523dc89f49921f309abf[m HEAD@{20}: checkout: moving from dev to Damar
+[33m6a11142e275f8cde32b0523dc89f49921f309abf[m HEAD@{21}: pull origin dev: Fast-forward
+[33m284da562f0cbf8c09b5e69027ddec61a2277e102[m HEAD@{22}: checkout: moving from Damar to dev
+[33md4efb0fc780ff982fdced90b05fda553205b1a77[m HEAD@{23}: commit: feat: changes
+[33m284da562f0cbf8c09b5e69027ddec61a2277e102[m HEAD@{24}: checkout: moving from dev to Damar
+[33m284da562f0cbf8c09b5e69027ddec61a2277e102[m HEAD@{25}: checkout: moving from Damar to dev
+[33m284da562f0cbf8c09b5e69027ddec61a2277e102[m HEAD@{26}: checkout: moving from dev to Damar
+[33m284da562f0cbf8c09b5e69027ddec61a2277e102[m HEAD@{27}: commit (merge): feat: chase to push
+[33m1fe94b4e5349c8cd4d0b54a6f2d909c6c06cb34a[m HEAD@{28}: pull origin dev: Fast-forward
+[33m4d45e03fddd15f7a0f0273a888145c5d0a7e4e62[m HEAD@{29}: checkout: moving from Damar to dev
+[33m7cbe3983f87e57f489af011e3ce5673b38d61fc5[m HEAD@{30}: commit: feat: filter changes
+[33m4d45e03fddd15f7a0f0273a888145c5d0a7e4e62[m HEAD@{31}: checkout: moving from dev to Damar
+[33m4d45e03fddd15f7a0f0273a888145c5d0a7e4e62[m HEAD@{32}: merge Damar: Merge made by the 'ort' strategy.
+[33m556bbff82a893e7956c480ca9a7a226771f10cb3[m HEAD@{33}: pull origin dev: Fast-forward
+[33mdab863ed63db20cc1b75366a58a2565e521e2e31[m HEAD@{34}: checkout: moving from Damar to dev
+[33m8a1f4f2a8719986ac4ca2eabc8fba4a3ba7e2359[m HEAD@{35}: commit: feat: filter tinggal add cart dan styling, validasi
+[33m985faf31ea0a38dc5b4a7fb6229c08abd43f140a[m HEAD@{36}: commit: feat: filter get 90% done
+[33mdab863ed63db20cc1b75366a58a2565e521e2e31[m HEAD@{37}: checkout: moving from dev to Damar
+[33mdab863ed63db20cc1b75366a58a2565e521e2e31[m HEAD@{38}: checkout: moving from Damar to dev
+[33mdab863ed63db20cc1b75366a58a2565e521e2e31[m HEAD@{39}: checkout: moving from dev to Damar
+[33mdab863ed63db20cc1b75366a58a2565e521e2e31[m HEAD@{40}: checkout: moving from Damar to dev
+[33mdab863ed63db20cc1b75366a58a2565e521e2e31[m HEAD@{41}: checkout: moving from dev to Damar
+[33mdab863ed63db20cc1b75366a58a2565e521e2e31[m HEAD@{42}: commit (merge): feat: merge changes
+[33m690a299d62cd9d0baf8167cee6c9855c55aaeb2c[m HEAD@{43}: pull origin dev: Fast-forward
+[33m23d5142d229a86caf1616f370c4fc0e266be99a7[m HEAD@{44}: checkout: moving from Damar to dev
+[33mef4d45246d3c9168c5e5fa83034ef2fef98d2caa[m HEAD@{45}: commit: feat: rtk changes
+[33m23d5142d229a86caf1616f370c4fc0e266be99a7[m HEAD@{46}: checkout: moving from dev to Damar
+[33m23d5142d229a86caf1616f370c4fc0e266be99a7[m HEAD@{47}: merge Damar: Merge made by the 'ort' strategy.
+[33m8944e4b191442b5e837c2a0b56d322d51c682352[m HEAD@{48}: pull origin dev: Fast-forward
+[33mc430ae0228be0a9fabd26645344a150d1b7b2c83[m HEAD@{49}: checkout: moving from Damar to dev
+[33me30337d209ff8aaaf77afe30868be84ef0600532[m HEAD@{50}: commit: feat: rtk changes
+[33mc430ae0228be0a9fabd26645344a150d1b7b2c83[m HEAD@{51}: checkout: moving from Damar to Damar
+[33mc430ae0228be0a9fabd26645344a150d1b7b2c83[m HEAD@{52}: checkout: moving from dev to Damar
+[33mc430ae0228be0a9fabd26645344a150d1b7b2c83[m HEAD@{53}: pull origin dev: Fast-forward
+[33m927355fbab5fd771889db3f685b57a31355e98ee[m HEAD@{54}: checkout: moving from Damar2 to dev
+[33m927355fbab5fd771889db3f685b57a31355e98ee[m HEAD@{55}: checkout: moving from dev to Damar2
+[33m927355fbab5fd771889db3f685b57a31355e98ee[m HEAD@{56}: pull origin dev: Fast-forward
+[33m4a4bac594f28068d93cc19a2f0bd03582b9ee8fe[m HEAD@{57}: checkout: moving from Damar to dev
+[33m598bd5eddbb936c31b122d4e1766849335443262[m HEAD@{58}: commit: feat: ngilangin button di catering
+[33m2863f620a1b4b00794245d1d58b2544ff7451267[m HEAD@{59}: commit: feat: filter lagi
+[33mb449617991c06a1d2cf570fe2a9fea9ba331f2c6[m HEAD@{60}: commit: feat: filter
+[33m4a4bac594f28068d93cc19a2f0bd03582b9ee8fe[m HEAD@{61}: checkout: moving from dev to Damar
+[33m4a4bac594f28068d93cc19a2f0bd03582b9ee8fe[m HEAD@{62}: checkout: moving from main to dev
+[33m4b3976e254537d3394f3b9a3380797b9606ad729[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{63}: clone: from https://github.com/Yazid9899/wedding-planners.git
