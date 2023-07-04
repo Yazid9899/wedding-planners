@@ -39,7 +39,7 @@ const ProfileScreen = () => {
     try {
       await AsyncStorage.clear();
       Alert.alert("Logout berhasil");
-      navigation.navigate("StartScreen");
+      // navigation.navigate("StartScreen");
       // Navigasi ke layar LoginRegister setelah logout;
 
       // Tambahkan logika lain yang diperlukan untuk logout
