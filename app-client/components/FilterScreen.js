@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import {View, Text, StyleSheet, Image} from "react-native";
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import MainFilterPage from "../screen/FilterStackPage/MainFilterPage";
 import BuildingSelectPage from "../screen/FilterStackPage/BuildingSelectPage";
 import PhotoSelectPage from "../screen/FilterStackPage/PhotoSelectPage";
@@ -17,32 +17,32 @@ export default function FilterPage() {
       <FilterStack.Screen
         name="MainFilter"
         component={MainFilterPage}
-        options={{ title: "Main Filter" }}
+        options={{title: "Main Filter", headerShown: false}}
       />
       <FilterStack.Screen
         name="BuildingSelect"
         component={BuildingSelectPage}
-        options={{ title: "Select Building" }}
+        options={{title: "Select Building", headerShown: false}}
       />
       <FilterStack.Screen
         name="PhotoSelect"
         component={PhotoSelectPage}
-        options={{ title: "Select Photo" }}
+        options={{title: "Select Photo", headerShown: false}}
       />
       <FilterStack.Screen
         name="CateringSelect"
         component={CateringSelectPage}
-        options={{ title: "Select Catering" }}
+        options={{title: "Select Catering", headerShown: false}}
       />
       <FilterStack.Screen
         name="MenuPaxSelect"
         component={MenuPaxSelectPage}
-        options={{ title: "Select Menu Pax" }}
+        options={{title: "Select Menu Pax", headerShown: false}}
       />
       <FilterStack.Screen
         name="MenuUserInput"
         component={MenuUserDetailFilterPage}
-        options={{ title: "User Detail" }}
+        options={{title: "User Detail", headerShown: false}}
       />
     </FilterStack.Navigator>
   );

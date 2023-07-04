@@ -4,14 +4,13 @@ import React, {useEffect, useState} from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {NavigationContainer} from "@react-navigation/native";
 import {Ionicons} from "@expo/vector-icons";
-import FilterScreen from "../components/FilterScreen";
 import ChatScreen from "../components/ChatScreen";
 import LoginRegister from "./LoginRegister";
 import HomeStack from "./HomeStack";
-import CartScreen from "../components/CartScreen.js";
 import {shadow} from "react-native-paper";
 import ProfileScreen from "./ProfileScreen.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import HalamanUtama from "./HalamanUtama";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +23,7 @@ const TabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Homes"
         component={HomeStack}
         options={{
           tabBarIcon: ({color, size}) => (
@@ -33,7 +32,7 @@ const TabNavigator = () => {
           headerShown: false,
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Filter"
         component={FilterScreen}
         options={{
@@ -52,7 +51,7 @@ const TabNavigator = () => {
           ),
           headerShown: false,
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Chat"
         component={ChatScreen}

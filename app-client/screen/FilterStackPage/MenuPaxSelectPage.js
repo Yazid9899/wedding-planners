@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
   Text,
   View,
@@ -10,13 +10,13 @@ import {
   ScrollView,
 } from "react-native";
 
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
-import { setGuestPax } from "../../features/inputDateBudget/dateBudgetSlice";
+import {setGuestPax} from "../../features/inputDateBudget/dateBudgetSlice";
 
-import { addCustomCartData } from "../../features/CartData/AddCustomerCart";
+import {addCustomCartData} from "../../features/CartData/AddCustomerCart";
 
-const MenuPaxSelectPage = ({ navigation }) => {
+const MenuPaxSelectPage = ({navigation}) => {
   const dispatch = useDispatch();
 
   const budgetData = useSelector((state) => state.inputDateBudget.budget);
@@ -26,17 +26,12 @@ const MenuPaxSelectPage = ({ navigation }) => {
     (state) => state.inputDateBudget.photographerId
   );
   const cateringData = useSelector((state) => state.inputDateBudget.cateringId);
-  //
+
   const guestPaxData = useSelector((state) => state.inputDateBudget.guestPax);
 
-  //
   const [inputValue, setInputValue] = useState("");
-  //
   const [budgetError, setBudgetError] = useState(null);
-  //
   const [inputError, setInputError] = useState(false);
-  //
-
   const [isFocused, setIsFocused] = useState(false);
   const animatedScale = useState(new Animated.Value(1))[0];
 
@@ -57,10 +52,8 @@ const MenuPaxSelectPage = ({ navigation }) => {
   };
 
   const handleInputChange = (text) => {
-    // Remove non-digit characters from the input
     const cleanedText = text.replace(/[^0-9]/g, "");
 
-    // Check if the input is not empty and not equal to 0
     if (cleanedText !== "" && cleanedText !== "0") {
       setInputValue(cleanedText);
     } else {
@@ -68,7 +61,8 @@ const MenuPaxSelectPage = ({ navigation }) => {
     }
   };
 
-  let cateringPrice = 0; // taro di sini biar bisa dipake di calTotalPrice dan di nextButton
+  let cateringPrice = 0;
+
   const calculateTotalPrice = () => {
     const venuePrice = venueData?.price || 0;
     const photographyPrice = photographerData?.price || 0;
@@ -77,7 +71,6 @@ const MenuPaxSelectPage = ({ navigation }) => {
       venuePrice + photographyPrice + cateringPrice * guestPaxData;
     return totalPrice;
   };
-  //   title,PhotographyId, CatheringId,  VenueId, totalPrice, pax
 
   const nextButton = () => {
     if (inputValue === "") {
@@ -87,10 +80,6 @@ const MenuPaxSelectPage = ({ navigation }) => {
     setInputError(false);
 
     const totalPrice = calculateTotalPrice();
-
-    console.log(
-      Number(inputValue) + Math.floor((budgetData - totalPrice) / cateringPrice)
-    );
 
     if (totalPrice > budgetData) {
       const maxGuestPax =
@@ -104,13 +93,13 @@ const MenuPaxSelectPage = ({ navigation }) => {
       title: `${venueData?.name} with ${cateringData?.name} and ${photographerData?.name} for ${guestPaxData} people`,
       VenueId: venueData?.id,
       CatheringId: cateringData?.id,
-      PhotographyId: photographerData?.id, // Assuming the photographyId is available in the 'data' prop
+      PhotographyId: photographerData?.id,
       pax: guestPaxData,
-      totalPrice: calculateTotalPrice(), // Replace this with your own logic to calculate the total price
+      totalPrice: calculateTotalPrice(),
     };
     console.log(cartData, "data yg akan dikirim");
-    //  dispatch(addCustomCartData(cartData));
-    //  navigation.navigate("MainFilter");
+    // dispatch(addCustomCartData(cartData));
+    // navigation.navigate("MainFilter");
     navigation.navigate("MenuUserInput");
   };
 
@@ -148,7 +137,7 @@ const MenuPaxSelectPage = ({ navigation }) => {
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
             keyboardType="numeric"
-            placeholder="Enter number of guest"
+            placeholder="Enter number of guests"
             placeholderTextColor="gray"
           />
         </Animated.View>
@@ -194,15 +183,13 @@ const MenuPaxSelectPage = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={{ height: 30 }} />
-        <View style={styles.containerButton}>
-          {/* <TouchableOpacity style={styles.button} onPress={previousButton}>
-            <Text style={styles.buttonText}>Previous</Text>
-          </TouchableOpacity> */}
-          <TouchableOpacity style={styles.button} onPress={nextButton}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
-        </View>
+        <View style={{height: 30}} />
+        <TouchableOpacity
+          style={[styles.button, {width: "100%"}]}
+          onPress={nextButton}
+        >
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -210,9 +197,9 @@ const MenuPaxSelectPage = ({ navigation }) => {
 
 export default MenuPaxSelectPage;
 
-const { width, height } = Dimensions.get("window");
-const containerWidth = width * 0.9; // Set the container width to 80% of the screen width
-const containerHeight = height * 0.3; // Set the container width to 80% of the screen width
+const {width, height} = Dimensions.get("window");
+const containerWidth = width * 0.9;
+const containerHeight = height * 0.3;
 
 const styles = StyleSheet.create({
   container: {
@@ -223,7 +210,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 400,
+    fontWeight: "400",
     marginBottom: 10,
     width: containerWidth,
   },
@@ -241,32 +228,25 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 16,
   },
-  containerButton: {
-    //  position: "absolute",
-    //  bottom: 20,
-    marginTop: 40,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    width: "100%",
-  },
   button: {
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 20,
-    backgroundColor: "lightblue",
+    borderRadius: 50,
+    backgroundColor: "#00bce1",
+    marginTop: 20,
+    marginVertical: 50,
   },
   buttonText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
+    textAlign: "center",
   },
   errorText: {
     color: "red",
     marginTop: 5,
     fontSize: 14,
   },
-  //   Table
   tableContainer: {
     width: containerWidth,
     borderWidth: 1,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import {
   View,
   Text,
@@ -13,12 +13,12 @@ import {
 
 // import { TextInput } from "react-native-paper";
 
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
-import { addCustomCartData } from "../../features/CartData/AddCustomerCart";
+import {addCustomCartData} from "../../features/CartData/AddCustomerCart";
 
 // title,PhotographyId, CatheringId, VenueId,  totalPrice, pax,  groom,  bride, weddingDate,
-const MenuUserDetailFilterPage = ({ navigation }) => {
+const MenuUserDetailFilterPage = ({navigation}) => {
   const [groomData, setGroomData] = useState("");
   const [brideData, setBrideData] = useState("");
   const [contactNumber, setContactNumber] = useState("");
@@ -198,10 +198,10 @@ const styles = {
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: "#007AFF",
+    backgroundColor: "#00bce1",
     paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: 50,
     alignItems: "center",
     height: 50,
     marginBottom: 40,

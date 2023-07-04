@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {
   Text,
   View,
@@ -16,14 +16,14 @@ import DatePicker from "react-native-modern-datepicker";
 
 import moment from "moment";
 
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import {
   setBudget,
   setDate,
 } from "../../features/inputDateBudget/dateBudgetSlice";
 
-const MainFilterPage = ({ navigation }) => {
+const MainFilterPage = ({navigation}) => {
   const dispatch = useDispatch();
 
   //   Input Budget
@@ -135,7 +135,7 @@ const MainFilterPage = ({ navigation }) => {
           <Text style={styles.errorText}>Please enter a budget</Text>
         )}
 
-        <View style={{ height: 30 }} />
+        <View style={{height: 30}} />
 
         <Text style={styles.textDate}>Pick a Date</Text>
 
@@ -169,7 +169,7 @@ const MainFilterPage = ({ navigation }) => {
 
 export default MainFilterPage;
 
-const { width, height } = Dimensions.get("window");
+const {width, height} = Dimensions.get("window");
 const containerWidth = width * 0.8; // Set the container width to 80% of the screen width
 const containerHeight = height * 0.3; // Set the container width to 80% of the screen width
 
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
-    backgroundColor: "lightblue",
+    backgroundColor: "#00bce1",
   },
   buttonText: {
     color: "white",
