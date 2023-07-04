@@ -59,8 +59,8 @@ const CartScreen = () => {
 
   useEffect(() => {
     dispatch(getCartData());
-    console.log(transStateData, "-------------------");
-  }, [transStateData]);
+    // console.log(transStateData, "-------------------");
+  }, [cartStateData]);
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
