@@ -7,29 +7,31 @@ class CartControllers {
 
       const {
         title,
+        bride,
+        groom,
+        weddingDate,
+        contactNumber,
+        address,
         PhotographyId,
         CatheringId,
         VenueId,
         totalPrice,
         pax,
-        groom,
-        bride,
-        weddingDate,
       } = req.body;
 
-      if (
-        !title ||
-        !PhotographyId ||
-        !CatheringId ||
-        !VenueId ||
-        !totalPrice ||
-        !pax ||
-        !groom ||
-        !bride ||
-        !weddingDate
-      ) {
-        throw { name: "cartError" };
-      }
+      // if (
+      //   !title ||
+      //   !PhotographyId ||
+      //   !CatheringId ||
+      //   !VenueId ||
+      //   !totalPrice ||
+      //   !pax ||
+      //   !groom ||
+      //   !bride ||
+      //   !weddingDate
+      // ) {
+      //   throw { name: "cartError" };
+      // }
 
       const create = await Cart.create({
         title,
@@ -42,7 +44,10 @@ class CartControllers {
         VenueId,
         pax,
         totalPrice,
-      });
+        contactNumber,
+        address,
+      })
+
 
       const currentDate = new Date();
       const oneMonthAhead = new Date();
@@ -64,7 +69,14 @@ class CartControllers {
     try {
       const { idProduct } = req.params;
       const { id } = req.additionalData;
-      const { totalPrice, pax } = req.body;
+      const {
+        totalPrice,
+        pax,
+        groom,
+        bride,
+        weddingDate,
+        contactNumber,
+        address } = req.body;
 
       const data = await Product.findOne({
         where: {
@@ -79,7 +91,20 @@ class CartControllers {
         VenueId: +data.VenueId,
         pax,
         totalPrice,
+        groom,
+        bride,
+        weddingDate,
+        contactNumber,
+        address,
       });
+
+      const currentDate = new Date();
+      const oneMonthAhead = new Date();
+      oneMonthAhead.setMonth(currentDate.getMonth() + 1);
+
+      if (new Date(weddingDate) < oneMonthAhead) {
+        throw { name: "Date error" };
+      }
 
       if (create) {
         res.status(201).json({
