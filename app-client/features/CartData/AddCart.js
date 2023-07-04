@@ -10,7 +10,7 @@ export const addCartData = createAsyncThunk(
       // console.log("masukkkkkkkkkk");
       console.log(data);
       const access_token = await AsyncStorage.getItem("access_token");
-      // console.log(access_token, "<<< TOKENNN");
+      console.log(access_token, "<<< TOKENNN");
       // console.log(data, "<<< ini data");
 
       // Menyiapkan objek headers dengan access_token

@@ -95,22 +95,23 @@ class TransactionController {
       const { title, totalAmount, CartId } = req.body;
       const { email, id } = req.additionalData;
 
+      console.log(req.additionalData, "ini req body");
       const data = await i.createInvoice({
-        externalID: "your-external-id",
+        externalID: "external_id_here",
         payerEmail: email,
         description: title,
         amount: totalAmount,
       });
-
+      console.log(data, "<<<<<<<<<<<");
       const noTransaction = data.id;
 
-      TransactionController.createTransaction(
-        title,
-        totalAmount,
-        id,
-        noTransaction,
-        CartId
-      );
+      // TransactionController.createTransaction(
+      //   title,
+      //   totalAmount,
+      //   id,
+      //   noTransaction,
+      //   CartId
+      // );
 
       res.status(200).json({
         statusCode: 200,
@@ -118,6 +119,7 @@ class TransactionController {
         invoiceUrl: data.invoice_url,
       });
     } catch (err) {
+      console.log(err);
       next(err);
     }
   }
