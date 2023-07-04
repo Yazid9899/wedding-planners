@@ -92,17 +92,18 @@ class TransactionController {
 
   static async payment(req, res, next) {
     try {
-      const {cardid} = req.params
-      const { title, totalAmount} = req.body;
+      const { cardid } = req.params;
+      const { title, totalAmount } = req.body;
       const { email, id } = req.additionalData;
 
+      console.log(req.additionalData, "ini req body");
       const data = await i.createInvoice({
-        externalID: "your-external-id",
+        externalID: "external_id_here",
         payerEmail: email,
         description: title,
         amount: totalAmount,
       });
-
+      console.log(data, "<<<<<<<<<<<");
       const noTransaction = data.id;
 
       TransactionController.createTransaction(
@@ -119,11 +120,11 @@ class TransactionController {
         invoiceUrl: data.invoice_url,
       });
     } catch (err) {
+      console.log(err);
       next(err);
     }
   }
 
-  
   static async getAllInvoice(req, res, next) {
     try {
       const data = await i.getAllInvoices();

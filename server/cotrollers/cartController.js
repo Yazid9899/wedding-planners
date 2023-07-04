@@ -46,8 +46,7 @@ class CartControllers {
         totalPrice,
         contactNumber,
         address,
-      })
-
+      });
 
       const currentDate = new Date();
       const oneMonthAhead = new Date();
@@ -76,7 +75,8 @@ class CartControllers {
         bride,
         weddingDate,
         contactNumber,
-        address } = req.body;
+        address,
+      } = req.body;
 
       const data = await Product.findOne({
         where: {

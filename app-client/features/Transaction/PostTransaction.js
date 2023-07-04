@@ -3,19 +3,18 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BASE_URL } from "../../config/api";
 
-export const addCartData = createAsyncThunk(
-  "cart/addCart",
-  async ({ data, idProduct }) => {
+export const addTransactionData = createAsyncThunk(
+  "transaction/addTransaction",
+  async (data) => {
     try {
-      // console.log("masukkkkkkkkkk");
-      console.log(data);
+      // console.log(data, "<<<< ini data?");
       const access_token = await AsyncStorage.getItem("access_token");
       console.log(access_token, "<<< TOKENNN");
-      // console.log(data, "<<< ini data");
+      console.log(data, "<<< ini data");
 
       // Menyiapkan objek headers dengan access_token
       const response = await axios.post(
-        `${BASE_URL}/carts/` + idProduct,
+        `${BASE_URL}/transactions/payment`,
         data,
         {
           headers: {
@@ -38,20 +37,20 @@ const initialState = {
 };
 
 export const AddCartSlice = createSlice({
-  name: "AddCartData",
+  name: "AddTransactionData",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addCartData.pending, (state) => {
+      .addCase(addTransactionData.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(addCartData.fulfilled, (state, action) => {
+      .addCase(addTransactionData.fulfilled, (state, action) => {
         state.status = "succeeded";
         // console.log(action.payload, "INI PAYLOAD");
         state.data = action.payload;
       })
-      .addCase(addCartData.rejected, (state, action) => {
+      .addCase(addTransactionData.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

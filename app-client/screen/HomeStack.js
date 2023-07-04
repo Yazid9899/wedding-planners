@@ -16,11 +16,13 @@ import HomeScreen from "../components/HomeScreen";
 import DetailFotografer from "./DetailFotografer";
 import DetailVenue from "./DetailVenue";
 import DetailEventOrganizer from "./DetailEventOrganizer";
+import DetailOrder from "./DetailOrder";
 const Stack = createStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="DetailOrder" component={DetailOrder} />
       <Stack.Screen name="DetailFotografer" component={DetailFotografer} />
       <Stack.Screen
         name="DetailEventOrganizer"

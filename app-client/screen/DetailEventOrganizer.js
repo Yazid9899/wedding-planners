@@ -24,7 +24,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const EventOrganizerDetailScreen = ({ route }) => {
   const { eoId } = route.params;
 
-  console.log(eoId, "ats");
+  console.log(eoId, "+++++++++++++++++++++++++");
 
   // Ini untuk state total price dan pax
   const [totalPrice, setTotalPrice] = useState(0);
@@ -112,13 +112,17 @@ const EventOrganizerDetailScreen = ({ route }) => {
         totalPrice: totalPrice,
         pax: dataProduct.pax,
       };
-      console.log(AsyncStorage.getItem("access_token"));
-      await dispatch(addCartData({ data: cartData, idProduct: eoId }));
-      Alert.alert(
-        "Success",
-        "The product has been added to the cart successfully."
-      );
-      navigation.navigate("Cart");
+      // const id = eoId;
+      // console.log(AsyncStorage.getItem("access_token"));
+      // await dispatch(addCartData({ data: cartData, idProduct: eoId }));
+      // Alert.alert(
+      //   "Success",
+      //   "The product has been added to the cart successfully."
+      // );
+      navigation.navigate("DetailOrder", {
+        cartData: cartData,
+        eoId: eoId,
+      });
     }
   };
 
@@ -262,15 +266,15 @@ const EventOrganizerDetailScreen = ({ route }) => {
           Total price for this order is {formatCurrency(totalPrice)}
         </Text>
         <TouchableOpacity style={styles.addButton} onPress={handleAddToCart}>
-          <Text style={styles.addButtonText}>Add this order to cart</Text>
+          <Text style={styles.addButtonText}>Next</Text>
         </TouchableOpacity>
 
         <Modal visible={showModal} animationType="slide" transparent={true}>
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={styles.modalText}>
-                Your total order is Rp {totalPrice}, are you sure to add this to
-                cart?
+                Your total order is {formatCurrency(totalPrice)}. are you sure
+                to next step for create detail information?
               </Text>
               <View style={styles.modalButtonContainer}>
                 <TouchableOpacity
