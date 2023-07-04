@@ -14,6 +14,7 @@ import { deleteCart } from "../features/CartData/DeleteCart";
 import { getCartData } from "../features/CartData/GetCart";
 import { addTransactionData } from "../features/Transaction/PostTransaction";
 import { WebView } from "react-native-webview";
+import { changeStatusTransaction } from "../features/Transaction/ChangeStatus";
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("id-ID", {
@@ -29,6 +30,12 @@ const InvoiceWebView = ({ url }) => {
     </View>
   );
 };
+
+function formatDate(date) {
+  const options = { month: "2-digit", day: "2-digit", year: "numeric" };
+  const formattedDate = new Date(date).toLocaleDateString("en-US", options);
+  return formattedDate;
+}
 
 const CartScreen = () => {
   const cartStateData = useSelector((state) => state.cart.data);
@@ -64,10 +71,11 @@ const CartScreen = () => {
   const deleteCartItem = (id) => {
     dispatch(deleteCart(id))
       .then(() => {
+        console.log(`hapusssss cart dengan id =  ${id}`);
         // Item successfully deleted, you can update the cart data here
         dispatch(getCartData());
         setShowDeleteModal(false);
-        setShowSuccessModal(true);
+        // setShowSuccessModal(true);
       })
       .catch((error) => {
         // Handle error
@@ -94,10 +102,11 @@ const CartScreen = () => {
 
     dispatch(addTransactionData(transactionData))
       .then(() => {
-        // console.log(transactionData, "ini kah yang dicari???????");
+        console.log(transStateData.id, "ini kah yang dicari???????");
         openInvoiceWebView(transStateData.invoiceUrl);
         setShowSuccessModal(true);
         // Transaksi berhasil, Anda dapat menampilkan modal sukses atau melakukan tindakan lainnya
+        dispatch(changeStatusTransaction(transStateData.idTrans));
         setShowSuccessModal(true);
       })
       .catch((error) => {
@@ -112,7 +121,8 @@ const CartScreen = () => {
       <Text style={[styles.itemTitle]}>{item?.title}</Text>
       <View style={styles.itemDetails}>
         <Text style={styles.detailText}>
-          <Text style={styles.detailKey}>Date:</Text> {item?.weddingDate}
+          <Text style={styles.detailKey}>Date:</Text>{" "}
+          {formatDate(item?.weddingDate)}
         </Text>
         <Text style={styles.detailText}>
           <Text style={styles.detailKey}>Venue:</Text> {item?.Venue?.name}
@@ -221,7 +231,7 @@ const CartScreen = () => {
               style={styles.modalButton}
               onPress={() => {
                 handlePaymentConfirmation(selectedItem.id);
-                console.log(selectedItem, "di modal selected");
+                // console.log(selectedItem, "di modal selected");
               }}
             >
               <Text style={styles.modalButtonText}>Yes</Text>
@@ -243,7 +253,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F2F2F2",
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingTop: 40,
   },
   title: {

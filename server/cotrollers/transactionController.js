@@ -81,14 +81,14 @@ class TransactionController {
   }
 
   static async createTransaction(name, price, id, noTransaction, CartId) {
-    const data = await Transaction.create({
+    return await Transaction.create({
       name,
       price,
       UserId: id,
       noTransaction,
       CartId,
     });
-    return data
+    return data;
   }
 
   static async payment(req, res, next) {
@@ -107,7 +107,7 @@ class TransactionController {
       console.log(data, "<<<<<di trans control<<<<<<");
       const noTransaction = data.id;
 
-      const transaction = await TransactionController.createTransaction(
+      const dataTransaction = await TransactionController.createTransaction(
         title,
         totalAmount,
         id,
@@ -115,17 +115,19 @@ class TransactionController {
         cardid
       );
 
+      console.log(dataTransaction.dataValues.id, "ini data trans");
+
       res.status(200).json({
         idTransaction: transaction.id,
         message: "paymentGateway",
         invoiceUrl: data.invoice_url,
+        idTrans: dataTransaction.dataValues.id,
       });
     } catch (err) {
       console.log(err);
       next(err);
     }
   }
-  
 }
 
 module.exports = TransactionController;
