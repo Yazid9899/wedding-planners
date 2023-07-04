@@ -60,7 +60,15 @@ class CartControllers {
     try {
       const { idProduct } = req.params;
       const { id } = req.additionalData;
-      const { totalPrice, pax } = req.body;
+      const {
+        totalPrice,
+        pax,
+        groom,
+        bride,
+        weddingDate,
+        contactNumber,
+        address,
+      } = req.body;
       console.log(idProduct, "========================");
 
       const data = await Product.findOne({

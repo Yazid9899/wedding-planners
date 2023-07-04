@@ -47,7 +47,7 @@ const WeddingForm = ({ route, navigation }) => {
         contactNumber: contactNumber,
         weddingDate: selectedDate,
       };
-      // console.log("Data Form:", { selectedDate, groom, bride, contactNumber });
+      console.log("Data Form:", { selectedDate, groom, bride, contactNumber });
 
       await dispatch(addCartData({ data: completeData, idProduct: id }));
       Alert.alert(
