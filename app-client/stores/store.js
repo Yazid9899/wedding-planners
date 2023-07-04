@@ -18,6 +18,8 @@ import cartReducer from "../features/CartData/GetCart";
 
 import addCustomCartReducer from "../features/CartData/AddCustomerCart";
 
+import transactionReduver from "../features/Transaction/PostTransaction";
+
 import fetchUserReducer from "../features/UserData/fetchUserSlice";
 export const store = configureStore({
   reducer: {
@@ -34,7 +36,7 @@ export const store = configureStore({
     addCart: addCartReducer,
     cart: cartReducer,
     addCustomCart: addCustomCartReducer,
-
+    transaction: transactionReduver,
     fetchUser: fetchUserReducer,
   },
 });

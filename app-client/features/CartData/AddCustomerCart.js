@@ -44,7 +44,7 @@ export const AddCustomCartSlice = createSlice({
       })
       .addCase(addCustomCartData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log(action.payload, "INI PAYLOAD");
+        // console.log(action.payload, "INI PAYLOAD");
         state.data = action.payload;
       })
       .addCase(addCustomCartData.rejected, (state, action) => {

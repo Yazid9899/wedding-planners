@@ -9,57 +9,56 @@ import {
   FlatList,
 } from "react-native";
 // import * as TalkRn from "@talkjs/expo";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ChatScreen = () => {
-  //   const [name, setName] = useState("");
-  //   const [user, setUser] = useState(null);
-  //   const [admin, setAdmin] = useState(null);
-  //   useEffect(() => {
-  //     AsyncStorage.getItem("username").then((res) => {
-  //       console.log(res);
-  //       if (res === "Ciptandaru") {
-  //         setAdmin({
-  //           id: 2,
-  //           name: "Admin",
-  //           role: "admin",
-  //         });
-  //         setUser({
-  //           id: 1,
-  //           name: name,
-  //           role: "default",
-  //         });
-  //       } else {
-  //         setName(res);
-  //       }
-  //     });
-  //   }, []);
+  const [name, setName] = useState("");
+  const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
+  useEffect(() => {
+    AsyncStorage.getItem("username").then((res) => {
+      console.log(res);
+      if (res === "Ciptandaru") {
+        setAdmin({
+          id: 2,
+          name: "Admin",
+          role: "admin",
+        });
+        setUser({
+          id: 1,
+          name: name,
+          role: "default",
+        });
+      } else {
+        setName(res);
+      }
+    });
+  }, []);
 
-  //   const me = admin || {
-  //     id: 1,
-  //     name: name,
-  //     role: "default",
-  //   };
-  //   const other = user || {
-  //     id: 2,
-  //     name: "Admin",
-  //     email: "EMAIL",
-  //     welcomeMessage: "Ada yang bisa saya bantu?",
-  //     role: "admin",
-  //   };
+  const me = admin || {
+    id: 1,
+    name: name,
+    role: "default",
+  };
+  const other = user || {
+    id: 2,
+    name: "Admin",
+    email: "EMAIL",
+    welcomeMessage: "Ada yang bisa saya bantu?",
+    role: "admin",
+  };
 
-  //   const conversationBuilder = TalkRn.getConversationBuilder(
-  //     TalkRn.oneOnOneId(me, other)
-  //   );
+  const conversationBuilder = TalkRn.getConversationBuilder(
+    TalkRn.oneOnOneId(me, other)
+  );
 
-  //   conversationBuilder.setParticipant(me);
-  //   conversationBuilder.setParticipant(other);
+  conversationBuilder.setParticipant(me);
+  conversationBuilder.setParticipant(other);
   return (
     <View style={styles.container}>
-      <Text>test</Text>
-      {/* <TalkRn.Session appId="tuqylOOF" me={me}>
+      <TalkRn.Session appId="tuqylOOF" me={me}>
         <TalkRn.Chatbox conversationBuilder={conversationBuilder} />
-      </TalkRn.Session> */}
+      </TalkRn.Session>
     </View>
   );
 };
