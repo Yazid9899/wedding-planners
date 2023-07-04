@@ -84,6 +84,7 @@ const SelectCateringCard = ({ data, navigation }) => {
                 console.log("Add to Cart");
                 nextButton();
               }}
+              style={{ backgroundColor: "#00bce1" }}
             >
               Add to Cart
             </Button>
@@ -271,7 +272,7 @@ const styles = StyleSheet.create({
   },
   showMoreButtonText: {
     fontSize: 14,
-    color: "blue",
+    color: "#3174cc",
   },
   modalTitle: {
     fontSize: 18,

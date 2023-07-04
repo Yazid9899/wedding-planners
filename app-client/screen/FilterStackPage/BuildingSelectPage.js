@@ -29,7 +29,7 @@ const BuildingSelectPage = ({ navigation }) => {
 
   const budgetData = useSelector((state) => state.inputDateBudget.budget);
 
-  console.log(budgetData, venueStateData, "di select building"); // Display the budget value
+  //   console.log(budgetData, venueStateData, "di select building"); // Display the budget value
 
   //   Search
   const [searchQuery, setSearchQuery] = useState("");
@@ -161,8 +161,8 @@ const styles = StyleSheet.create({
   },
   //
   searchStyle: {
-    marginBottom: 7,
-    backgroundColor: "#Bee0e8",
+    //  marginBottom: 0,
+    backgroundColor: "#dff1f5",
   },
   //
   cardContent: {
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     marginTop: 1,
-    paddingVertical: 20,
+    paddingVertical: 10,
     paddingHorizontal: 8,
   },
   button: {
@@ -263,7 +263,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 1,
-    marginVertical: 20,
+    marginTop: 10,
+    marginBottom: 4,
   },
   dropdown: {
     flex: 1,

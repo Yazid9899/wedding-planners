@@ -95,6 +95,7 @@ const SelectBuildingCard = ({ data, navigation }) => {
                 console.log("Add to Cart");
                 nextButton();
               }}
+              style={[styles.buttonCart, { backgroundColor: "#00bce1" }]}
             >
               Add to Cart
             </Button>
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
   },
   showMoreButtonText: {
     fontSize: 14,
-    color: "blue",
+    color: "#3174cc",
   },
   modalTitle: {
     fontSize: 18,
@@ -189,4 +190,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   //
+  buttonCart: {
+    color: "#3174cc",
+  },
 });
