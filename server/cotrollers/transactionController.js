@@ -96,18 +96,16 @@ class TransactionController {
       const { cardid } = req.params;
       const { title, totalAmount } = req.body;
       const { email, id } = req.additionalData;
-
-      console.log(req.additionalData, "ini req body");
       const data = await i.createInvoice({
         externalID: "external_id_here",
         payerEmail: email,
         description: title,
         amount: totalAmount,
       });
-      
+
       const noTransaction = data.id;
 
-      const transaction = await TransactionController.createTransaction(
+      const dataTransaction = await TransactionController.createTransaction(
         title,
         totalAmount,
         id,
@@ -116,16 +114,16 @@ class TransactionController {
       );
 
       res.status(200).json({
-        idTransaction: transaction.id,
+        statusCode: 200,
         message: "paymentGateway",
         invoiceUrl: data.invoice_url,
+        idTrans: dataTransaction.dataValues.id,
       });
     } catch (err) {
       console.log(err);
       next(err);
     }
   }
-  
 }
 
 module.exports = TransactionController;
