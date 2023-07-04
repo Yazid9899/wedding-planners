@@ -6,11 +6,14 @@ class PhotographyController {
     try {
       const { search, price, belowPrice } = req.query
 
-      let where = {
-        price: {
-          [Op.lt]: belowPrice,
+      let where = {}
+      if(belowPrice){
+        where = {
+          price: {
+            [Op.lt]: belowPrice,
+          }
         }
-      } 
+      }
       if (search) {
         where = {
           ...where,

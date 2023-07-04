@@ -39,10 +39,9 @@ class TransactionController {
   }
   static async changeStatusTransaction(req, res, next) {
     try {
-      const { id } = req.params;
-      const { email } = req.additionalData;
+      const { id: noTransaction, status } = req.body;
       const data = await Transaction.findOne({
-        where: { id },
+        where: { noTransaction },
         include: [
           {
             model: Cart,
@@ -52,16 +51,21 @@ class TransactionController {
               { model: Venue },
             ],
           },
+          {
+            model: User,
+          },
         ],
       });
-      const xendit = await i.getInvoice({ invoiceID: data.noTransaction });
 
-      if (xendit.status === "PAID") {
-        await Transaction.update({ status: "Paid" }, { where: { id } });
+      if (status === "PAID") {
+        await Transaction.update(
+          { status: "Paid" },
+          { where: { noTransaction } }
+        );
 
         try {
           const pdfBuffer = await generateInvoicePDF(data);
-          await sendInvoiceEmail(email, pdfBuffer);
+          await sendInvoiceEmail(data.User.email, pdfBuffer);
           res.status(200).json({
             message: "Transaction Paid and invoice sent to you email",
             data,
@@ -69,11 +73,6 @@ class TransactionController {
         } catch (error) {
           console.error("Error sending invoice:", error);
         }
-      } else {
-        res.status(200).json({
-          message: "Transaction Pending",
-          data,
-        });
       }
     } catch (err) {
       next(err);
@@ -92,7 +91,8 @@ class TransactionController {
 
   static async payment(req, res, next) {
     try {
-      const { title, totalAmount, CartId } = req.body;
+      const { cardid } = req.params;
+      const { title, totalAmount } = req.body;
       const { email, id } = req.additionalData;
 
       const data = await i.createInvoice({
@@ -109,7 +109,7 @@ class TransactionController {
         totalAmount,
         id,
         noTransaction,
-        CartId
+        cardid
       );
 
       res.status(200).json({

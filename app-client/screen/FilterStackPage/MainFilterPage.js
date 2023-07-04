@@ -10,7 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 
-import { Modal, Portal, Button, PaperProvider } from "react-native-paper";
+// import { Modal, Portal, Button, PaperProvider } from "react-native-paper";
 
 import DatePicker from "react-native-modern-datepicker";
 
@@ -51,10 +51,13 @@ const MainFilterPage = ({ navigation }) => {
     setInputValue(cleanedText);
   };
 
-  //   Input Book Date // default value is tomorrow
+  //   Input Book Date // default value is a month from today
   const [selectedDate, setSelectedDate] = useState(
-    moment().add(1, "day").format("YYYY-MM-DD")
+    moment().add(1, "month").format("YYYY-MM-DD")
   );
+
+  //
+  const minSelectableDate = moment().add(1, "month").format("YYYY-MM-DD");
 
   // Validation
   const [inputError, setInputError] = useState(false);
@@ -74,7 +77,13 @@ const MainFilterPage = ({ navigation }) => {
     } else {
       setDateError(false);
       const today = moment().startOf("day");
-      const selected = moment(selectedDate, "YYYY-MM-DD");
+      const minSelectableDate = moment().add(1, "month").startOf("day"); // Minimum selectable date (1 month from today)
+      const selected = moment(selectedDate, "YYYY-MM-DD").startOf("day");
+
+      if (selected.isBefore(minSelectableDate)) {
+        setDateError(true);
+        return; // Stop execution if the date is not valid
+      }
 
       if (!selected.isAfter(today)) {
         setDateError(true);
@@ -139,11 +148,12 @@ const MainFilterPage = ({ navigation }) => {
               borderColor: dateError ? "red" : "#ccc",
             },
           ]}
+          minDate={minSelectableDate} // Set the minimum selectable date
         />
 
         {dateError && (
           <Text style={styles.errorText}>
-            Please select a date that is after today
+            Please select a date that is after a month from today
           </Text>
         )}
 
@@ -215,14 +225,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 5,
   },
-  //   datePicker: {
-  //     width: containerWidth,
-  //     height: 100,
-  //   },
 });
-
-{
-  /* <TouchableOpacity style={styles.button}>
-<Text style={styles.buttonText}>Previous</Text>
-</TouchableOpacity> */
-}

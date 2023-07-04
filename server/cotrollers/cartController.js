@@ -4,17 +4,8 @@ class CartControllers {
   static async createCart(req, res, next) {
     try {
       const { id } = req.additionalData;
-      const {
-        title,
-        PhotographyId,
-        CatheringId,
-        VenueId,
-        totalPrice,
-        pax,
-        groom,
-        bride,
-        weddingDate,
-      } = req.body;
+
+      const { title, bride, groom, weddingDate } = req.body;
       console.log(
         title,
         PhotographyId,
@@ -42,9 +33,6 @@ class CartControllers {
       const create = await Cart.create({
         title,
         UserId: id,
-        groom,
-        bride,
-        weddingDate,
         PhotographyId,
         CatheringId,
         VenueId,
@@ -75,12 +63,14 @@ class CartControllers {
       const { totalPrice, pax } = req.body;
       console.log(idProduct, "========================");
 
+      if (new Date(weddingDate) < oneMonthAhead) {
+        throw { name: "Date error" };
+      }
       const data = await Product.findOne({
         where: {
           id: idProduct,
         },
       });
-      // console.log(data, "hahahahahahahah");
       const create = await Cart.create({
         title: data.title,
         UserId: id,
@@ -89,7 +79,20 @@ class CartControllers {
         VenueId: +data.VenueId,
         pax,
         totalPrice,
+        groom,
+        bride,
+        weddingDate,
+        contactNumber,
+        address,
       });
+
+      const currentDate = new Date();
+      const oneMonthAhead = new Date();
+      oneMonthAhead.setMonth(currentDate.getMonth() + 1);
+
+      if (new Date(weddingDate) < oneMonthAhead) {
+        throw { name: "Date error" };
+      }
 
       if (create) {
         res.status(201).json({
