@@ -88,9 +88,13 @@ const CateringSelectPage = ({ navigation }) => {
       </View>
 
       {status === "loading" ? (
-        <ActivityIndicator size="large" />
+        <View style={styles.centerContainer}>
+          <ActivityIndicator size="large" />
+        </View>
       ) : status === "failed" ? (
-        <Text>Error: {error}</Text>
+        <View style={styles.centerContainer}>
+          <Text style={styles.errorText}>Error: {error}</Text>
+        </View>
       ) : (
         <FlatList
           data={cateringStateData}
@@ -177,6 +181,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   //
+  centerContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 16,
+  },
 });
 
 {
