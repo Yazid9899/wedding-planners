@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { Searchbar } from "react-native-paper";
@@ -135,7 +136,7 @@ const BuildingSelectPage = ({ navigation }) => {
       </View>
 
       {status === "loading" ? (
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" />
       ) : status === "failed" ? (
         <Text>Error: {error}</Text>
       ) : (

@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 
@@ -87,7 +88,7 @@ const CateringSelectPage = ({ navigation }) => {
       </View>
 
       {status === "loading" ? (
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" />
       ) : status === "failed" ? (
         <Text>Error: {error}</Text>
       ) : (
