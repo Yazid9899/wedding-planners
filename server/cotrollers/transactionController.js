@@ -92,7 +92,8 @@ class TransactionController {
 
   static async payment(req, res, next) {
     try {
-      const { title, totalAmount, CartId } = req.body;
+      const {cardid} = req.params
+      const { title, totalAmount} = req.body;
       const { email, id } = req.additionalData;
 
       const data = await i.createInvoice({
@@ -109,7 +110,7 @@ class TransactionController {
         totalAmount,
         id,
         noTransaction,
-        CartId
+        cardid
       );
 
       res.status(200).json({
@@ -122,6 +123,7 @@ class TransactionController {
     }
   }
 
+  
   static async getAllInvoice(req, res, next) {
     try {
       const data = await i.getAllInvoices();
