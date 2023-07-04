@@ -158,7 +158,7 @@ class CartControllers {
       } });
 
 
-      res.status(201).json({
+      res.status(200).json({
         message: `Cart with id${cartid} has been successfully update`,
       });
     } catch (err) {
