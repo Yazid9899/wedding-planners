@@ -1,13 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
-import { BASE_URL } from "../../config/api";
+import {BASE_URL} from "../../config/api";
 
 export const loginData = createAsyncThunk("login/fetchData", async (data) => {
   try {
     const response = await axios.post(`${BASE_URL}/users/login`, data);
-    AsyncStorage.setItem("access_token", response.data.access_token);
-    AsyncStorage.setItem("username", response.data.username);
+    await AsyncStorage.setItem("access_token", response.data.access_token);
+    await AsyncStorage.setItem("username", response.data.username);
+
     return response.data;
   } catch (error) {
     throw new Error(error.message);
@@ -32,8 +33,7 @@ export const loginSlice = createSlice({
       })
       .addCase(loginData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log(action.payload);
-        state.access_token = action.payload;
+        state.access_token = action.payload.access_token; // Update access_token
       })
       .addCase(loginData.rejected, (state, action) => {
         state.status = "failed";

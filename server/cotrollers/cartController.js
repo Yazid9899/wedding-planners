@@ -19,20 +19,6 @@ class CartControllers {
         pax,
       } = req.body;
 
-      // if (
-      //   !title ||
-      //   !PhotographyId ||
-      //   !CatheringId ||
-      //   !VenueId ||
-      //   !totalPrice ||
-      //   !pax ||
-      //   !groom ||
-      //   !bride ||
-      //   !weddingDate
-      // ) {
-      //   throw { name: "cartError" };
-      // }
-
       const create = await Cart.create({
         title,
         UserId: id,
@@ -75,14 +61,19 @@ class CartControllers {
         bride,
         weddingDate,
         contactNumber,
-        address,
-      } = req.body;
+        address } = req.body;
+        
+        const data = await Product.findOne({
+          where: {
+            id: +idProduct,
+          },
+        });
+        if(!data){
+          throw{
+            name: "Product Not Found"
+          }
+        }
 
-      const data = await Product.findOne({
-        where: {
-          id: idProduct,
-        },
-      });
       const create = await Cart.create({
         title: data.title,
         UserId: id,
@@ -112,6 +103,7 @@ class CartControllers {
         });
       }
     } catch (err) {
+      console.log(err, "<<<<<<<<<<<<<");
       next(err);
     }
   }
@@ -127,6 +119,7 @@ class CartControllers {
         ],
         where: {
           UserId: id,
+          status: "unpaid"
         },
       });
 
@@ -138,11 +131,12 @@ class CartControllers {
     }
   }
 
-  static async deleteByid(req, res, next) {
+  static async updateStatusById(req, res, next) {
     try {
       const { cartid } = req.params;
       const { id } = req.additionalData;
-
+      
+      console.log(cartid, "<<<<<<<<<<<<");
       const data = await Cart.findAll({
         where: {
           id: cartid,
@@ -156,15 +150,17 @@ class CartControllers {
         };
       }
 
-      await Cart.destroy({
-        where: {
-          id: cartid,
-          UserId: id,
-        },
-      });
+      const dataUpdate = await Cart.update({ 
+        status: "paid" 
+      }, { 
+        where: {  
+        id: cartid,
+        UserId: id,
+      } });
+
 
       res.status(201).json({
-        message: `Cart with id${cartid} has been successfully deleted`,
+        message: `Cart with id${cartid} has been successfully update`,
       });
     } catch (err) {
       next(err);
@@ -179,12 +175,6 @@ class CartControllers {
           UserId: id,
         },
       });
-
-      if (data.length == 0) {
-        throw {
-          name: "Cart Not Found",
-        };
-      }
 
       await Cart.destroy({
         where: {

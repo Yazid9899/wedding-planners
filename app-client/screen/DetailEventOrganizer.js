@@ -24,7 +24,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const EventOrganizerDetailScreen = ({ route }) => {
   const { eoId } = route.params;
 
-  console.log(eoId, "+++++++++++++++++++++++++");
+  // console.log(eoId, "+++++++++++++++++++++++++");
 
   // Ini untuk state total price dan pax
   const [totalPrice, setTotalPrice] = useState(0);

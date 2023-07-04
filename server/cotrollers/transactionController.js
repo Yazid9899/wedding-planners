@@ -40,6 +40,7 @@ class TransactionController {
   static async changeStatusTransaction(req, res, next) {
     try {
       const { id } = req.params;
+      const { email } = req.additionalData;
       const data = await Transaction.findOne({
         where: { id },
         include: [
@@ -60,15 +61,14 @@ class TransactionController {
 
         try {
           const pdfBuffer = await generateInvoicePDF(data);
-          await sendInvoiceEmail("ciptandaru@gmail.com", pdfBuffer);
-          console.log("Invoice sent successfully.");
+          await sendInvoiceEmail(email, pdfBuffer);
+          res.status(200).json({
+            message: "Transaction Paid and invoice sent to you email",
+            data,
+          });
         } catch (error) {
           console.error("Error sending invoice:", error);
         }
-
-        res.status(200).json({
-          message: "Transaction Paid",
-        });
       } else {
         res.status(200).json({
           message: "Transaction Pending",
@@ -81,13 +81,14 @@ class TransactionController {
   }
 
   static async createTransaction(name, price, id, noTransaction, CartId) {
-    await Transaction.create({
+    return await Transaction.create({
       name,
       price,
       UserId: id,
       noTransaction,
       CartId,
     });
+    return data;
   }
 
   static async payment(req, res, next) {
@@ -103,10 +104,10 @@ class TransactionController {
         description: title,
         amount: totalAmount,
       });
-      console.log(data, "<<<<<<<<<<<");
+      console.log(data, "<<<<<di trans control<<<<<<");
       const noTransaction = data.id;
 
-      TransactionController.createTransaction(
+      const dataTransaction = await TransactionController.createTransaction(
         title,
         totalAmount,
         id,
@@ -114,26 +115,16 @@ class TransactionController {
         cardid
       );
 
+      console.log(dataTransaction.dataValues.id, "ini data trans");
+
       res.status(200).json({
-        statusCode: 200,
+        idTransaction: transaction.id,
         message: "paymentGateway",
         invoiceUrl: data.invoice_url,
+        idTrans: dataTransaction.dataValues.id,
       });
     } catch (err) {
       console.log(err);
-      next(err);
-    }
-  }
-
-  static async getAllInvoice(req, res, next) {
-    try {
-      const data = await i.getAllInvoices();
-      res.status(200).json({
-        statusCode: 200,
-        message: "Get all invoice Success",
-        data,
-      });
-    } catch (err) {
       next(err);
     }
   }

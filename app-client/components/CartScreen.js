@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCart } from "../features/CartData/DeleteCart";
 import { getCartData } from "../features/CartData/GetCart";
 import { addTransactionData } from "../features/Transaction/PostTransaction";
+import { WebView } from "react-native-webview";
+import { changeStatusTransaction } from "../features/Transaction/ChangeStatus";
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("id-ID", {
@@ -21,18 +23,44 @@ const formatCurrency = (value) => {
   }).format(value);
 };
 
+const InvoiceWebView = ({ url }) => {
+  return (
+    <View style={styles.container}>
+      <WebView source={{ uri: url }} />
+    </View>
+  );
+};
+
+function formatDate(date) {
+  const options = { month: "2-digit", day: "2-digit", year: "numeric" };
+  const formattedDate = new Date(date).toLocaleDateString("en-US", options);
+  return formattedDate;
+}
+
 const CartScreen = () => {
   const cartStateData = useSelector((state) => state.cart.data);
+  const transStateData = useSelector((state) => state.transaction.data);
   const dispatch = useDispatch();
+  const [selectedInvoiceUrl, setSelectedInvoiceUrl] = useState(null);
+  // const [showInvoiceWebView, setShowInvoiceWebView] = useState(false);
+  // const [invoiceUrl, setInvoiceUrl] = useState("");
 
-  const postTransactionItem = (item) => {
-    setSelectedItem(item);
-    setShowModal(true);
+  // const postTransactionItem = (item) => {
+  //   setSelectedItem(item);
+  //   setShowModal(true);
+  // };
+
+  // {
+  //   showInvoiceWebView && <InvoiceWebView url={invoiceUrl} />;
+  // }
+  const openInvoiceWebView = (url) => {
+    setSelectedInvoiceUrl(url);
   };
 
   useEffect(() => {
     dispatch(getCartData());
-  }, []);
+    console.log(transStateData, "-------------------");
+  }, [transStateData]);
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -40,28 +68,14 @@ const CartScreen = () => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  // const deleteCartItem = (id) => {
-  //   dispatch(deleteCart(id))
-  //     .then(() => {
-  //       // Item successfully deleted, you can update the cart data here
-  //       dispatch(getCartData());
-  //       setShowModal(false);
-  //       setShowSuccessModal(true);
-  //     })
-  //     .catch((error) => {
-  //       // Handle error
-  //       console.log(error);
-  //       setShowModal(false);
-  //     });
-  // };
-
   const deleteCartItem = (id) => {
     dispatch(deleteCart(id))
       .then(() => {
+        console.log(`hapusssss cart dengan id =  ${id}`);
         // Item successfully deleted, you can update the cart data here
         dispatch(getCartData());
         setShowDeleteModal(false);
-        setShowSuccessModal(true);
+        // setShowSuccessModal(true);
       })
       .catch((error) => {
         // Handle error
@@ -88,8 +102,11 @@ const CartScreen = () => {
 
     dispatch(addTransactionData(transactionData))
       .then(() => {
-        console.log("berhasillllll");
+        console.log(transStateData.id, "ini kah yang dicari???????");
+        openInvoiceWebView(transStateData.invoiceUrl);
+        setShowSuccessModal(true);
         // Transaksi berhasil, Anda dapat menampilkan modal sukses atau melakukan tindakan lainnya
+        dispatch(changeStatusTransaction(transStateData.idTrans));
         setShowSuccessModal(true);
       })
       .catch((error) => {
@@ -99,34 +116,13 @@ const CartScreen = () => {
       });
   };
 
-  // const handlePaymentConfirmation = () => {
-  //   setShowModal(false);
-
-  //   // Lakukan tindakan yang diperlukan untuk memproses pembayaran
-  //   const id = selectedItem.id;
-  //   const transactionData = {
-  //     // Menyesuaikan data yang diperlukan untuk transaksi
-  //     orderId: selectedItem.id,
-  //     // ...
-  //   };
-
-  //   dispatch(addTransactionData(transactionData))
-  //     .then(() => {
-  //       // Transaksi berhasil, Anda dapat menampilkan modal sukses atau melakukan tindakan lainnya
-  //       setShowSuccessModal(true);
-  //     })
-  //     .catch((error) => {
-  //       // Penanganan kesalahan saat melakukan transaksi
-  //       console.log(error);
-  //     });
-  // };
-
   const renderItem = ({ item }) => (
     <View style={styles.cartItem}>
       <Text style={[styles.itemTitle]}>{item?.title}</Text>
       <View style={styles.itemDetails}>
         <Text style={styles.detailText}>
-          <Text style={styles.detailKey}>Date:</Text> {item?.weddingDate}
+          <Text style={styles.detailKey}>Date:</Text>{" "}
+          {formatDate(item?.weddingDate)}
         </Text>
         <Text style={styles.detailText}>
           <Text style={styles.detailKey}>Venue:</Text> {item?.Venue?.name}
@@ -159,68 +155,41 @@ const CartScreen = () => {
         >
           <Text style={styles.deleteButtonText}>Delete</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={[styles.deleteButton, { backgroundColor: "red" }]}
-          onPress={() => {
-            setSelectedItem(item.id);
-            setShowModal(true);
-          }}
-        >
-          <Text style={styles.deleteButtonText}>Delete</Text>
-        </TouchableOpacity> */}
         <TouchableOpacity
           style={[styles.deleteButton, { backgroundColor: "#00bce1" }]}
           onPress={() => {
-            console.log(item.id, "ini item IDDDDDD");
+            // console.log(item.id, "ini item IDDDDDD");
             setSelectedItem(item);
             setShowPaymentModal(true);
+            // openInvoiceWebView(item.invoice_url);
           }}
         >
           <Text style={styles.deleteButtonText}>Bayar</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={[styles.deleteButton, { backgroundColor: "#00bce1" }]}
-          onPress={() => postTransactionItem(item)}
-        >
-          <Text style={styles.deleteButtonText}>Bayar</Text>
-        </TouchableOpacity> */}
       </View>
     </View>
   );
 
   return (
     <View style={styles.container}>
+      {selectedInvoiceUrl && (
+        <Modal
+          visible={showSuccessModal}
+          animationType="slide"
+          transparent={false}
+          onRequestClose={() => setShowSuccessModal(false)}
+        >
+          <InvoiceWebView url={selectedInvoiceUrl} />
+        </Modal>
+      )}
       <Text style={styles.title}>Cart Screen</Text>
-      {/* <Modal
-        visible={showSuccessModal}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setShowSuccessModal(false)}
-      >
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>
-            Order has been deleted successfully
-          </Text>
-          <TouchableOpacity
-            style={styles.modalButton}
-            onPress={() => setShowSuccessModal(false)}
-          >
-            <Text style={styles.modalButtonText}>OK</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal> */}
       <FlatList
         data={cartStateData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.cartList}
       />
-      {/* <Modal
-        visible={showModal}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setShowModal(false)}
-      > */}
+
       <Modal
         visible={showDeleteModal}
         animationType="slide"
@@ -262,7 +231,7 @@ const CartScreen = () => {
               style={styles.modalButton}
               onPress={() => {
                 handlePaymentConfirmation(selectedItem.id);
-                console.log(selectedItem, "di modal selected");
+                // console.log(selectedItem, "di modal selected");
               }}
             >
               <Text style={styles.modalButtonText}>Yes</Text>
@@ -284,7 +253,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F2F2F2",
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingTop: 40,
   },
   title: {

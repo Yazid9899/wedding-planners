@@ -1,110 +1,3 @@
-// import React, { useState } from "react";
-// import {
-//   View,
-//   Text,
-//   TextInput,
-//   TouchableOpacity,
-//   StyleSheet,
-//   ScrollView,
-// } from "react-native";
-// import { Calendar } from "react-native-calendars";
-// const WeddingForm = ({ route }) => {
-//   const { cartData, eoId } = route.params;
-//   const [selectedDate, setSelectedDate] = useState("");
-
-//   const handleDateSelect = (date) => {
-//     setSelectedDate(date.dateString);
-//   };
-//   const [groom, setGroom] = useState("");
-//   const [bride, setBride] = useState("");
-//   const [contactNumber, setContactNumber] = useState("");
-
-//   const handleSubmit = () => {
-//     // Lakukan tindakan yang diperlukan dengan data yang diisi pengguna
-//     console.log("Data Form:", { date, groom, bride, contactNumber });
-//   };
-
-//   return (
-//     <ScrollView style={styles.container}>
-//       <Text style={styles.title}>Input detail information for this order</Text>
-
-//       <Text style={styles.label}>Tanggal:</Text>
-//       <Calendar
-//         onDayPress={handleDateSelect}
-//         markedDates={{
-//           [selectedDate]: { selected: true },
-//         }}
-//       />
-
-//       <Text style={styles.label}>Nama Pengantin Pria:</Text>
-//       <TextInput
-//         style={styles.input}
-//         placeholder="Masukkan Nama Pengantin Pria"
-//         value={groom}
-//         onChangeText={(text) => setGroom(text)}
-//       />
-
-//       <Text style={styles.label}>Nama Pengantin Wanita:</Text>
-//       <TextInput
-//         style={styles.input}
-//         placeholder="Masukkan Nama Pengantin Wanita"
-//         value={bride}
-//         onChangeText={(text) => setBride(text)}
-//       />
-
-//       <Text style={styles.label}>Nomor Kontak:</Text>
-//       <TextInput
-//         style={styles.input}
-//         placeholder="Masukkan Nomor Kontak"
-//         value={contactNumber}
-//         onChangeText={(text) => setContactNumber(text)}
-//         keyboardType="phone-pad"
-//       />
-
-//       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-//         <Text style={styles.buttonText}>Pesan</Text>
-//       </TouchableOpacity>
-//     </ScrollView>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 20,
-//     backgroundColor: "#fff",
-//   },
-//   title: {
-//     fontSize: 18,
-//     fontWeight: "bold",
-//     marginBottom: 20,
-//   },
-//   label: {
-//     fontSize: 16,
-//     marginBottom: 5,
-//   },
-//   input: {
-//     height: 40,
-//     borderColor: "#ccc",
-//     borderWidth: 1,
-//     marginBottom: 20,
-//     paddingHorizontal: 10,
-//   },
-//   button: {
-//     backgroundColor: "#007AFF",
-//     paddingVertical: 12,
-//     paddingHorizontal: 20,
-//     borderRadius: 5,
-//     alignItems: "center",
-//   },
-//   buttonText: {
-//     fontSize: 16,
-//     color: "#fff",
-//   },
-// });
-
-// export default WeddingForm;
-
 import React, { useState } from "react";
 import {
   View,
@@ -126,6 +19,7 @@ const WeddingForm = ({ route, navigation }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [groom, setGroom] = useState("");
   const [bride, setBride] = useState("");
+  const [address, setAddress] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
@@ -149,6 +43,7 @@ const WeddingForm = ({ route, navigation }) => {
         pax: cartData.pax,
         groom: groom,
         bride: bride,
+        address: address,
         contactNumber: contactNumber,
         weddingDate: selectedDate,
       };
@@ -199,6 +94,15 @@ const WeddingForm = ({ route, navigation }) => {
         value={contactNumber}
         onChangeText={(text) => setContactNumber(text)}
         keyboardType="phone-pad"
+      />
+
+      <Text style={styles.label}>Address:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Masukkan Alamat Lengkap"
+        value={address}
+        onChangeText={(text) => setAddress(text)}
+        // keyboardType="phone-pad"
       />
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>

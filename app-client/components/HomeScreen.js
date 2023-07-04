@@ -24,19 +24,30 @@ const formatCurrency = (value) => {
     currency: "IDR",
   }).format(value);
 };
-
 // import SelectCateringCard from "../../components/filterComponents/SelectCateringCard.js";
 import {useDispatch, useSelector} from "react-redux";
 
 import {fetchProductsData} from "../features/PackageData/packageSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
 
   const productStateData = useSelector((state) => state.product.data);
   // console.log(productStateData);
-
+  const [accessToken, setAccessToken] = useState("");
   useEffect(() => {
+    const getAccessToken = async () => {
+      try {
+        const token = await AsyncStorage.getItem("access_token");
+        setAccessToken(token);
+        console.log(token);
+      } catch (error) {
+        console.log("Error getting access token:", error);
+      }
+    };
+
+    getAccessToken();
     dispatch(fetchProductsData());
     // console.log(fetchProductsData);
   }, [dispatch]);
