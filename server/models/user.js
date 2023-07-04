@@ -61,7 +61,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.beforeCreate((user) => {
     user.dataValues.password = hashPassword(user.dataValues.password);
-    user.dataValues.role = "Customer";
+    user.dataValues.role = "Customer"
+    user.dataValues.imageUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   });
   return User;
 };
