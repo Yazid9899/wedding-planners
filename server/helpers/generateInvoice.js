@@ -13,7 +13,7 @@ function formatCurrency(amount) {
 }
 // const logoPath = "./logo.png";
 const link =
-  "https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2021/08/24074930/717px-Joko_Widodo_2014_official_portrait-239x300.jpg";
+  "https://media.discordapp.net/attachments/1121758461127045232/1125187019526643722/IMG_3578-transformed_3-fotor-bg-remover-202307035749.png?width=670&height=551";
 
 async function fetchImage(src) {
   const image = await axios.get(src, {
