@@ -12,6 +12,8 @@ import {
 
 import { format, addMonths, isBefore } from "date-fns";
 
+import { Calendar } from "react-native-calendars";
+
 import DatePicker from "react-native-modern-datepicker";
 
 import moment from "moment";
@@ -23,19 +25,19 @@ import {
   setDate,
 } from "../../features/inputDateBudget/dateBudgetSlice";
 
-// Mengatur tanggal akhir yang dapat dipilih (sebulan ke depan)
-const maxDate = format(addMonths(new Date(), 1), "yyyy-MM-dd");
-
-const [selectedDate, setSelectedDate] = useState("");
-
-const handleDateSelect = (date) => {
-  setSelectedDate(date.dateString);
-};
-
-//   =======================================
-
 const MainFilterPage = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  // Mengatur tanggal akhir yang dapat dipilih (sebulan ke depan)
+  const maxDate = format(addMonths(new Date(), 1), "yyyy-MM-dd");
+
+  const [selectedDate, setSelectedDate] = useState("");
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date.dateString);
+  };
+
+  //   =======================================
 
   //   Input Budget
   const [inputValue, setInputValue] = useState("");
