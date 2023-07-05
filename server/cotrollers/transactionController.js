@@ -24,8 +24,8 @@ class TransactionController {
     try {
       const { id } = req.additionalData;
       const data = await Transaction.findAll({
-        where: { 
-          UserId:id 
+        where: {
+          UserId: id,
         },
       });
 
@@ -41,7 +41,6 @@ class TransactionController {
   }
   static async changeStatusTransaction(req, res, next) {
     try {
-
       const { id: noTransaction, status } = req.body;
       const data = await Transaction.findOne({
         where: { noTransaction },
@@ -65,7 +64,7 @@ class TransactionController {
           { status: "Paid" },
           { where: { noTransaction } }
         );
-
+        await Cart.update({ status: "paid" }, { where: { id: data.Cart.id } });
 
         try {
           const pdfBuffer = await generateInvoicePDF(data);
@@ -104,7 +103,7 @@ class TransactionController {
         description: title,
         amount: totalAmount,
       });
-      
+
       // console.log(data, "<<<<<<<<<<<<<<< data id");
       const noTransaction = data.id;
 
@@ -127,4 +126,4 @@ class TransactionController {
   }
 }
 
-module.exports = TransactionController
+module.exports = TransactionController;
