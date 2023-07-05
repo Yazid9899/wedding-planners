@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailProductsData } from "../features/PackageData/PackageDetail";
 import { addCartData } from "../features/CartData/AddCart";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BASE_URL } from "../config/api";
 
 const EventOrganizerDetailScreen = ({ route }) => {
   const { eoId } = route.params;
@@ -96,9 +97,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
     React.useCallback(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(
-            `https://we-go.zuru.site/products/${eoId}`
-          );
+          const response = await fetch(`${BASE_URL}/products/${eoId}`);
           const data = await response.json();
 
           setGoogle(data);
