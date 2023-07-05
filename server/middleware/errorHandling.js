@@ -73,11 +73,6 @@ const errorHandling = async (err, req, res, next) => {
         message: "User Not Found",
       });
       break;
-    case "Date error":
-      res.status(400).json({
-        message: "Incorrect date input",
-      });
-      break;
     default:
       res.status(500).json({
         message: "Internal Server Error",

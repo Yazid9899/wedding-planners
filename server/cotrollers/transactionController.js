@@ -24,10 +24,12 @@ class TransactionController {
     try {
       const { id } = req.additionalData;
       const data = await Transaction.findAll({
-        where: { id },
+        where: { 
+          UserId:id 
+        },
       });
 
-      if (!data) {
+      if (data.length == 0) {
         throw {
           name: "Transaction Not Found",
         };
@@ -40,6 +42,7 @@ class TransactionController {
   static async changeStatusTransaction(req, res, next) {
     try {
       const { id } = req.params;
+      // const {status} = req.body
       const { email } = req.additionalData;
       const data = await Transaction.findOne({
         where: { id },
@@ -54,9 +57,16 @@ class TransactionController {
           },
         ],
       });
+
+      if(!data){
+        throw{
+          name: "Transaction Not Found"
+        }
+      }
       const xendit = await i.getInvoice({ invoiceID: data.noTransaction });
 
       if (xendit.status === "PAID") {
+      // if (status === "PAID") {
         await Transaction.update({ status: "Paid" }, { where: { id } });
 
         try {
@@ -88,7 +98,6 @@ class TransactionController {
       noTransaction,
       CartId,
     });
-    return data;
   }
 
   static async payment(req, res, next) {
@@ -102,7 +111,8 @@ class TransactionController {
         description: title,
         amount: totalAmount,
       });
-
+      
+      // console.log(data, "<<<<<<<<<<<<<<< data id");
       const noTransaction = data.id;
 
       const dataTransaction = await TransactionController.createTransaction(
@@ -113,19 +123,15 @@ class TransactionController {
         cardid
       );
 
-      console.log(dataTransaction.dataValues.id, "ini data trans");
-
-      res.status(200).json({
-        statusCode: 200,
+      res.status(201).json({
         message: "paymentGateway",
         invoiceUrl: data.invoice_url,
         idTrans: dataTransaction.dataValues.id,
       });
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
 }
 
-module.exports = TransactionController;
+module.exports = TransactionController
