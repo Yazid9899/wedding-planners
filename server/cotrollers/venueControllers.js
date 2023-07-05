@@ -6,7 +6,7 @@ class VenueControllers {
     try {
       const { location, search, price, belowPrice, weddingDate } = req.query;
 
-      console.log(req.query);
+      console.log(req.query, "<<<<<<<<<<<<<<<<<<<<<,");
 
       let where = {};
       if (belowPrice) {
@@ -57,10 +57,12 @@ class VenueControllers {
         };
       }
 
+      console.log(where, "<<<<<<<<<where controller>>>>>>>>>");
+
       const data = await Venue.findAll({
         order: filter,
         where,
-        include: [{ model: VenueSchedule }],
+        //   include: [{ model: VenueSchedule }],
       });
 
       if (data) {
