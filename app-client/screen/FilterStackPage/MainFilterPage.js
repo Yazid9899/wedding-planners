@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {
   Text,
   View,
@@ -9,23 +9,17 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-
-import { format, addMonths, isBefore } from "date-fns";
-
-import { Calendar } from "react-native-calendars";
-
-import DatePicker from "react-native-modern-datepicker";
-
+import {format, addMonths, isBefore} from "date-fns";
+import {Calendar} from "react-native-calendars";
 import moment from "moment";
-
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch} from "react-redux";
 
 import {
   setBudget,
   setDate,
 } from "../../features/inputDateBudget/dateBudgetSlice";
 
-const MainFilterPage = ({ navigation }) => {
+const MainFilterPage = ({navigation}) => {
   const dispatch = useDispatch();
 
   // Mengatur tanggal akhir yang dapat dipilih (sebulan ke depan)
@@ -37,8 +31,6 @@ const MainFilterPage = ({ navigation }) => {
     console.log(date);
     setSelectedDate(date.dateString);
   };
-
-  //   =======================================
 
   //   Input Budget
   const [inputValue, setInputValue] = useState("");
@@ -150,14 +142,14 @@ const MainFilterPage = ({ navigation }) => {
           <Text style={styles.errorText}>Please enter a budget</Text>
         )}
 
-        <View style={{ height: 30 }} />
+        <View style={{height: 30}} />
 
         <Text style={styles.textDate}>Pick a Date</Text>
 
         <Calendar
           onDayPress={handleDateSelect}
           markedDates={{
-            [selectedDate]: { selected: true },
+            [selectedDate]: {selected: true},
           }}
           minDate={maxDate}
           // maxDate={maxDate}
@@ -188,7 +180,7 @@ const MainFilterPage = ({ navigation }) => {
 
 export default MainFilterPage;
 
-const { width, height } = Dimensions.get("window");
+const {width, height} = Dimensions.get("window");
 const containerWidth = width * 0.8; // Set the container width to 80% of the screen width
 const containerHeight = height * 0.3; // Set the container width to 80% of the screen width
 

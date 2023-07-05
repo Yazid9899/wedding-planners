@@ -1,8 +1,4 @@
-import {
-  combineReducers,
-  createAsyncThunk,
-  createSlice,
-} from "@reduxjs/toolkit";
+import {combineReducers, createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
 
@@ -33,6 +29,7 @@ const inputDateBudgetSlice = createSlice({
       console.log("Venue ID:", state.venueId);
     },
     setPhotographerId: (state, action) => {
+      console.log("MASULKK STATEZ");
       state.photographerId = action.payload;
       console.log("Photographer ID:", state.photographerId);
     },

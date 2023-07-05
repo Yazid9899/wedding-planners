@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
   View,
   Text,
@@ -10,13 +10,13 @@ import {
 } from "react-native";
 import axios from "axios";
 
-import { useDispatch, useSelector } from "react-redux";
-import { deleteCart } from "../features/CartData/DeleteCart";
-import { getCartData } from "../features/CartData/GetCart";
-import { addTransactionData } from "../features/Transaction/PostTransaction";
-import { WebView } from "react-native-webview";
-import { changeStatusTransaction } from "../features/Transaction/ChangeStatus";
-import { useFocusEffect } from "@react-navigation/native";
+import {useDispatch, useSelector} from "react-redux";
+import {deleteCart} from "../features/CartData/DeleteCart";
+import {getCartData} from "../features/CartData/GetCart";
+import {addTransactionData} from "../features/Transaction/PostTransaction";
+import {WebView} from "react-native-webview";
+import {changeStatusTransaction} from "../features/Transaction/ChangeStatus";
+import {useFocusEffect} from "@react-navigation/native";
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -25,16 +25,16 @@ const formatCurrency = (value) => {
 };
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const InvoiceWebView = ({ url }) => {
+const InvoiceWebView = ({url}) => {
   return (
     <View style={styles.container}>
-      <WebView source={{ uri: url }} />
+      <WebView source={{uri: url}} />
     </View>
   );
 };
 
 function formatDate(date) {
-  const options = { month: "2-digit", day: "2-digit", year: "numeric" };
+  const options = {month: "2-digit", day: "2-digit", year: "numeric"};
   const formattedDate = new Date(date).toLocaleDateString("en-US", options);
   return formattedDate;
 }
@@ -51,7 +51,6 @@ const CartScreen = () => {
 
   useFocusEffect(() => {
     dispatch(getCartData());
-    // console.log(transStateData, "-------------------");
   });
 
   const [selectedItem, setSelectedItem] = useState(null);
@@ -104,23 +103,14 @@ const CartScreen = () => {
       });
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}) => (
     <View style={styles.cartItem}>
       <Text style={[styles.itemTitle]}>{item?.title}</Text>
       <View style={styles.itemDetails}>
         <View style={styles.photosContainer}>
-          <Image
-            source={{ uri: item?.Venue?.photo?.[0] }}
-            style={styles.photo}
-          />
-          <Image
-            source={{ uri: item?.Venue?.photo?.[1] }}
-            style={styles.photo}
-          />
-          <Image
-            source={{ uri: item?.Venue?.photo?.[2] }}
-            style={styles.photo}
-          />
+          <Image source={{uri: item?.Venue?.photo?.[0]}} style={styles.photo} />
+          <Image source={{uri: item?.Venue?.photo?.[1]}} style={styles.photo} />
+          <Image source={{uri: item?.Venue?.photo?.[2]}} style={styles.photo} />
         </View>
         <Text style={styles.detailText}>
           <Text style={styles.detailKey}>Date:</Text>{" "}
@@ -151,7 +141,7 @@ const CartScreen = () => {
         <TouchableOpacity
           style={[
             styles.deleteButton,
-            { backgroundColor: "#00bce1", width: "100%" },
+            {backgroundColor: "#00bce1", width: "100%"},
           ]}
           onPress={() => {
             setSelectedItem(item);
@@ -185,7 +175,6 @@ const CartScreen = () => {
           <InvoiceWebView url={selectedInvoiceUrl} />
         </Modal>
       )}
-      <Text style={styles.title}>Cart Screen</Text>
       <FlatList
         data={cartStateData}
         renderItem={renderItem}

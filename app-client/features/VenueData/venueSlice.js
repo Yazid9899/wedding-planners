@@ -13,14 +13,14 @@ export const fetchVenueData = createAsyncThunk(
 
     belowPrice = belowPrice * 0.6;
 
-    const formattedDate = weddingDate.split(" ")[0].replace(/\//g, "-");
+    // const formattedDate = weddingDate.split(" ")[0].replace(/\//g, "-");
 
     //  console.log(formattedDate, "<<<<<<");
 
     const queryParams = [];
-    if (weddingDate) {
-      queryParams.push(`weddingDate=${formattedDate}`);
-    }
+    // if (weddingDate) {
+    //   queryParams.push(`weddingDate=${weddingDate}`);
+    // }
     if (search) {
       queryParams.push(`search=${search}`);
     }
