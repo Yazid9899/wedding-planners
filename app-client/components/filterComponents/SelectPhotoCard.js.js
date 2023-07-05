@@ -57,7 +57,7 @@ const SelectPhotoCard = ({ data, navigation }) => {
             <Avatar.Image
               size={50}
               source={{
-                uri: "https://areatopik.com/wp-content/uploads/2022/10/Kobo-Nangis.jpg",
+                uri: data?.photo[0],
               }}
               style={{ marginTop: 5 }}
             />

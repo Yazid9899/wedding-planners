@@ -57,6 +57,7 @@ const WeddingForm = ({ route, navigation }) => {
 
     if (confirmation === "yes") {
       // Lakukan tindakan yang diperlukan dengan data yang diisi pengguna
+      console.log(cartData.totalPrice, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..");
       const id = eoId;
       const completeData = {
         totalPrice: cartData.totalPrice,
