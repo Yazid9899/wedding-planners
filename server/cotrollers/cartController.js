@@ -5,33 +5,39 @@ class CartControllers {
     try {
       const { id } = req.additionalData;
 
-      const {
+      const { title, bride, groom, weddingDate } = req.body;
+      console.log(
         title,
-        bride,
-        groom,
-        weddingDate,
-        contactNumber,
-        address,
         PhotographyId,
         CatheringId,
         VenueId,
         totalPrice,
         pax,
-      } = req.body;
-
+        groom,
+        bride,
+        weddingDate
+      );
+      if (
+        !title ||
+        !PhotographyId ||
+        !CatheringId ||
+        !VenueId ||
+        !totalPrice ||
+        !pax ||
+        !groom ||
+        !bride ||
+        !weddingDate
+      ) {
+        throw { name: "cartError" };
+      }
       const create = await Cart.create({
         title,
         UserId: id,
-        groom,
-        bride,
-        weddingDate,
         PhotographyId,
         CatheringId,
         VenueId,
         pax,
         totalPrice,
-        contactNumber,
-        address,
       });
 
       const currentDate = new Date();
@@ -75,6 +81,7 @@ class CartControllers {
         };
       }
 
+      // console.log(data, "hahahahahahahah");
       const create = await Cart.create({
         title: data.title,
         UserId: id,
@@ -150,7 +157,7 @@ class CartControllers {
         };
       }
 
-      await Cart.update(
+      const dataUpdate = await Cart.update(
         {
           status: "paid",
         },
@@ -162,7 +169,7 @@ class CartControllers {
         }
       );
 
-      res.status(201).json({
+      res.status(200).json({
         message: `Cart with id${cartid} has been successfully update`,
       });
     } catch (err) {
@@ -198,6 +205,7 @@ class CartControllers {
         message: `Cart id ${id}has been successfully deleted`,
       });
     } catch (err) {
+      console.log(err, "<<<<<<<<<<<<<<<");
       next(err);
     }
   }

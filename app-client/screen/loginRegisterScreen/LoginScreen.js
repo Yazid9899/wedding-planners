@@ -1,20 +1,20 @@
-import React, {useEffect, useState} from "react";
-import {TouchableOpacity, StyleSheet, View, Alert} from "react-native";
-import {Text} from "react-native-paper";
+import React, { useEffect, useState } from "react";
+import { TouchableOpacity, StyleSheet, View, Alert } from "react-native";
+import { Text } from "react-native-paper";
 import Background from "../../components/loginRegisterComponent/Background";
 import Logo from "../../components/loginRegisterComponent/Logo";
 import Header from "../../components/loginRegisterComponent/Header";
 import Button from "../../components/loginRegisterComponent/Button";
 import TextInput from "../../components/loginRegisterComponent/TextInput";
 import BackButton from "../../components/loginRegisterComponent/BackButton";
-import {theme} from "../../features/core/theme";
-import {useDispatch, useSelector} from "react-redux";
-import {loginData} from "../../features/UserData/loginSlice";
+import { theme } from "../../features/core/theme";
+import { useDispatch, useSelector } from "react-redux";
+import { loginData } from "../../features/UserData/loginSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
-  const {access_token, status, error} = useSelector((state) => state.users);
+  const { access_token, status, error } = useSelector((state) => state.users);
 
   const [dataUser, setDataUser] = useState({
     email: "",
@@ -83,7 +83,7 @@ export default function LoginScreen({navigation}) {
         </TouchableOpacity>
       </View>
       <Button
-        style={{backgroundColor: "#00bce1"}}
+        style={{ backgroundColor: "#00bce1" }}
         mode="contained"
         onPress={onSubmit}
       >
