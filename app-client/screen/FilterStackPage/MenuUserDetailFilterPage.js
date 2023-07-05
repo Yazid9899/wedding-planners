@@ -86,7 +86,7 @@ const MenuUserDetailFilterPage = ({ navigation }) => {
       };
       console.log("Data Form:", completeData);
 
-      await dispatch(addCustomCartData(completeData));
+      dispatch(addCustomCartData(completeData));
 
       navigation.navigate("MainFilter");
       navigation.navigate("Cart");

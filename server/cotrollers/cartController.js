@@ -61,18 +61,19 @@ class CartControllers {
         bride,
         weddingDate,
         contactNumber,
-        address } = req.body;
-        
-        const data = await Product.findOne({
-          where: {
-            id: +idProduct,
-          },
-        });
-        if(!data){
-          throw{
-            name: "Product Not Found"
-          }
-        }
+        address,
+      } = req.body;
+
+      const data = await Product.findOne({
+        where: {
+          id: +idProduct,
+        },
+      });
+      if (!data) {
+        throw {
+          name: "Product Not Found",
+        };
+      }
 
       const create = await Cart.create({
         title: data.title,
@@ -119,7 +120,7 @@ class CartControllers {
         ],
         where: {
           UserId: id,
-          status: "unpaid"
+          status: "unpaid",
         },
       });
 
@@ -135,7 +136,7 @@ class CartControllers {
     try {
       const { cartid } = req.params;
       const { id } = req.additionalData;
-      
+
       const data = await Cart.findAll({
         where: {
           id: cartid,
@@ -149,14 +150,17 @@ class CartControllers {
         };
       }
 
-     await Cart.update({ 
-        status: "paid" 
-      }, { 
-        where: {  
-        id: cartid,
-        UserId: id,
-      } });
-
+      await Cart.update(
+        {
+          status: "paid",
+        },
+        {
+          where: {
+            id: cartid,
+            UserId: id,
+          },
+        }
+      );
 
       res.status(201).json({
         message: `Cart with id${cartid} has been successfully update`,
@@ -189,7 +193,7 @@ class CartControllers {
           UserId: id,
         },
       });
-      
+
       res.status(201).json({
         message: `Cart id ${id}has been successfully deleted`,
       });

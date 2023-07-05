@@ -6,10 +6,7 @@ import { BASE_URL } from "../../config/api";
 export const addCustomCartData = createAsyncThunk(
   "cart/addCart",
   async (data) => {
-    console.log(data, "slice cart cust atas");
     try {
-      // title,PhotographyId, CatheringId,  VenueId, totalPrice, pax
-
       console.log(data, "di slice cart custom");
       const access_token = await AsyncStorage.getItem("access_token");
 
@@ -44,7 +41,7 @@ export const AddCustomCartSlice = createSlice({
       })
       .addCase(addCustomCartData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        // console.log(action.payload, "INI PAYLOAD");
+        console.log(action.payload, "INI PAYLOAD carts");
         state.data = action.payload;
       })
       .addCase(addCustomCartData.rejected, (state, action) => {
