@@ -34,6 +34,7 @@ const MainFilterPage = ({ navigation }) => {
   const [selectedDate, setSelectedDate] = useState("");
 
   const handleDateSelect = (date) => {
+    console.log(date);
     setSelectedDate(date.dateString);
   };
 
@@ -163,8 +164,8 @@ const MainFilterPage = ({ navigation }) => {
           disableArrowLeft={false}
           disableArrowRight={false}
           theme={{
-            arrowColor: "#007AFF",
-            selectedDayBackgroundColor: "#007AFF",
+            arrowColor: "#00bce1",
+            selectedDayBackgroundColor: "#00bce1",
             selectedDayTextColor: "#ffffff",
           }}
         />
@@ -230,15 +231,18 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   button: {
+    width: "50%",
+    marginHorizontal: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
-    backgroundColor: "lightblue",
+    backgroundColor: "#00bce1",
   },
   buttonText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
+    textAlign: "center",
   },
   errorText: {
     color: "red",

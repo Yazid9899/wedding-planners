@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {
   FlatList,
   ScrollView,
@@ -8,16 +8,16 @@ import {
   View,
   ActivityIndicator,
 } from "react-native";
-import { Searchbar } from "react-native-paper";
+import {Searchbar} from "react-native-paper";
 
 import SelectPhotoCard from "../../components/filterComponents/SelectPhotoCard.js";
 
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
-import { fetchPhotographData } from "../../features/PhotographData/photographSlice.js";
-import { Dropdown } from "react-native-element-dropdown";
+import {fetchPhotographData} from "../../features/PhotographData/photographSlice.js";
+import {Dropdown} from "react-native-element-dropdown";
 
-const PhotoSelectPage = ({ navigation }) => {
+const PhotoSelectPage = ({navigation}) => {
   const dispatch = useDispatch();
 
   const photographStateData = useSelector((state) => state.photograph.data);
@@ -50,13 +50,13 @@ const PhotoSelectPage = ({ navigation }) => {
   //
 
   const Price = [
-    { label: "All", value: null },
-    { label: "Lowest Price", value: "lowest" },
-    { label: "Highest Price", value: "higest" },
+    {label: "All", value: null},
+    {label: "Lowest Price", value: "lowest"},
+    {label: "Highest Price", value: "higest"},
   ];
   const renderPriceDropdown = (text, dataDrop) => (
     <Dropdown
-      style={[styles.dropdown, isFocusPrice && { borderColor: "blue" }]}
+      style={[styles.dropdown, isFocusPrice && {borderColor: "blue"}]}
       placeholderStyle={styles.placeholderStyle}
       selectedTextStyle={styles.selectedTextStyle}
       inputSearchStyle={styles.inputSearchStyle}
@@ -105,7 +105,7 @@ const PhotoSelectPage = ({ navigation }) => {
       ) : (
         <FlatList
           data={photographStateData}
-          renderItem={({ item }) => (
+          renderItem={({item}) => (
             <SelectPhotoCard data={item} navigation={navigation} />
           )}
           keyExtractor={(item) => item?.id}
@@ -126,8 +126,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   searchStyle: {
-    //  marginBottom: 7,
+    //  marginBottom: 0,
     backgroundColor: "#dff1f5",
+    borderWidth: 0.5,
+    borderColor: "grey",
   },
   containerButton: {
     marginTop: 40,

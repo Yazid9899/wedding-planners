@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {
   Text,
   View,
@@ -10,13 +10,13 @@ import {
   ScrollView,
 } from "react-native";
 
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
-import { setGuestPax } from "../../features/inputDateBudget/dateBudgetSlice";
+import {setGuestPax} from "../../features/inputDateBudget/dateBudgetSlice";
 
-import { addCustomCartData } from "../../features/CartData/AddCustomerCart";
+import {addCustomCartData} from "../../features/CartData/AddCustomerCart";
 
-const MenuPaxSelectPage = ({ navigation }) => {
+const MenuPaxSelectPage = ({navigation}) => {
   const dispatch = useDispatch();
 
   const budgetData = useSelector((state) => state.inputDateBudget.budget);
@@ -194,12 +194,15 @@ const MenuPaxSelectPage = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={{ height: 30 }} />
+        <View />
         <View style={styles.containerButton}>
           {/* <TouchableOpacity style={styles.button} onPress={previousButton}>
             <Text style={styles.buttonText}>Previous</Text>
           </TouchableOpacity> */}
-          <TouchableOpacity style={styles.button} onPress={nextButton}>
+          <TouchableOpacity
+            style={[styles.button, {flex: 1}]}
+            onPress={nextButton}
+          >
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
         </View>
@@ -210,7 +213,7 @@ const MenuPaxSelectPage = ({ navigation }) => {
 
 export default MenuPaxSelectPage;
 
-const { width, height } = Dimensions.get("window");
+const {width, height} = Dimensions.get("window");
 const containerWidth = width * 0.9; // Set the container width to 80% of the screen width
 const containerHeight = height * 0.3; // Set the container width to 80% of the screen width
 
@@ -244,7 +247,7 @@ const styles = StyleSheet.create({
   containerButton: {
     //  position: "absolute",
     //  bottom: 20,
-    marginTop: 40,
+    marginTop: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
@@ -254,12 +257,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
-    backgroundColor: "lightblue",
+    backgroundColor: "#00bce1",
   },
   buttonText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
+    textAlign: "center",
   },
   errorText: {
     color: "red",

@@ -4,12 +4,9 @@ import React, {useEffect, useState} from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {NavigationContainer} from "@react-navigation/native";
 import {Ionicons} from "@expo/vector-icons";
-import FilterScreen from "../components/FilterScreen";
 import ChatScreen from "../components/ChatScreen";
 import LoginRegister from "./LoginRegister";
 import HomeStack from "./HomeStack";
-import CartScreen from "../components/CartScreen.js";
-import {shadow} from "react-native-paper";
 import ProfileScreen from "./ProfileScreen.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -24,31 +21,11 @@ const TabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Homes"
         component={HomeStack}
         options={{
           tabBarIcon: ({color, size}) => (
             <Ionicons name="home" color={color} size={size} />
-          ),
-          headerShown: false,
-        }}
-      />
-      <Tab.Screen
-        name="Filter"
-        component={FilterScreen}
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="options" color={color} size={size} />
-          ),
-          headerShown: false,
-        }}
-      />
-      <Tab.Screen
-        name="Cart"
-        component={CartScreen}
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="cart" color={color} size={size} />
           ),
           headerShown: false,
         }}

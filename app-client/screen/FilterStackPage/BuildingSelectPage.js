@@ -1,5 +1,5 @@
 //
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {
   FlatList,
   ImageBackground,
@@ -10,18 +10,18 @@ import {
   View,
   ActivityIndicator,
 } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
-import { Searchbar } from "react-native-paper";
+import {Dropdown} from "react-native-element-dropdown";
+import {Searchbar} from "react-native-paper";
 // import { Ionicons } from "@expo/vector-icons";
 
 //
 import SelectBuildingCard from "../../components/filterComponents/SelectBuildingCard";
 
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
-import { fetchVenueData } from "../../features/VenueData/venueSlice";
+import {fetchVenueData} from "../../features/VenueData/venueSlice";
 
-const BuildingSelectPage = ({ navigation }) => {
+const BuildingSelectPage = ({navigation}) => {
   const dispatch = useDispatch();
 
   const venueStateData = useSelector((state) => state.venue.data);
@@ -59,22 +59,22 @@ const BuildingSelectPage = ({ navigation }) => {
   }, [dispatch, searchQuery, valueLoc, valuePrice, dateData]);
 
   const Location = [
-    { label: "All", value: null },
-    { label: "Jakarta Selatan", value: "Jakarta Selatan" },
-    { label: "Jakarta Utara", value: "Jakarta Utara" },
-    { label: "Jakarta Timur", value: "Jakarta Timur" },
-    { label: "Jakarta Pusat", value: "Jakarta Pusat" },
+    {label: "All", value: null},
+    {label: "Jakarta Selatan", value: "Jakarta Selatan"},
+    {label: "Jakarta Utara", value: "Jakarta Utara"},
+    {label: "Jakarta Timur", value: "Jakarta Timur"},
+    {label: "Jakarta Pusat", value: "Jakarta Pusat"},
   ];
 
   const Price = [
-    { label: "All", value: null },
-    { label: "Lowest Price", value: "lowest" },
-    { label: "Highest Price", value: "higest" },
+    {label: "All", value: null},
+    {label: "Lowest Price", value: "lowest"},
+    {label: "Highest Price", value: "higest"},
   ];
 
   const renderLocationDropdown = (text, dataDrop) => (
     <Dropdown
-      style={[styles.dropdown, isFocusLoc && { borderColor: "blue" }]}
+      style={[styles.dropdown, isFocusLoc && {borderColor: "blue"}]}
       placeholderStyle={styles.placeholderStyle}
       selectedTextStyle={styles.selectedTextStyle}
       inputSearchStyle={styles.inputSearchStyle}
@@ -100,7 +100,7 @@ const BuildingSelectPage = ({ navigation }) => {
 
   const renderPriceDropdown = (text, dataDrop) => (
     <Dropdown
-      style={[styles.dropdown, isFocusPrice && { borderColor: "blue" }]}
+      style={[styles.dropdown, isFocusPrice && {borderColor: "blue"}]}
       placeholderStyle={styles.placeholderStyle}
       selectedTextStyle={styles.selectedTextStyle}
       inputSearchStyle={styles.inputSearchStyle}
@@ -148,7 +148,7 @@ const BuildingSelectPage = ({ navigation }) => {
       ) : (
         <FlatList
           data={venueStateData}
-          renderItem={({ item }) => (
+          renderItem={({item}) => (
             <SelectBuildingCard data={item} navigation={navigation} />
           )}
           keyExtractor={(item) => item?.id}
@@ -170,6 +170,8 @@ const styles = StyleSheet.create({
   searchStyle: {
     //  marginBottom: 0,
     backgroundColor: "#dff1f5",
+    borderWidth: 0.5,
+    borderColor: "grey",
   },
   //
   cardContent: {

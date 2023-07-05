@@ -21,7 +21,6 @@ export default function RegisterScreen({navigation}) {
     email: "",
     password: "",
     phoneNumber: "",
-    imageUrl: "",
   });
 
   const handleChange = (name, value) => {
@@ -83,13 +82,6 @@ export default function RegisterScreen({navigation}) {
         name="phoneNumber"
         value={dataUser.phoneNumber}
         onChangeText={(value) => handleChange("phoneNumber", value)}
-      />
-      <TextInput
-        label="Picture"
-        returnKeyType="done"
-        name="imageUrl"
-        value={dataUser.imageUrl}
-        onChangeText={(value) => handleChange("imageUrl", value)}
       />
       <Button
         mode="contained"
