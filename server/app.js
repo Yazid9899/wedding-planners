@@ -18,8 +18,8 @@ app.use(router);
 
 app.use(errorHandling);
 
-// app.listen(PORT, () => {
-//   console.log(`Example app listening on port ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
+});
 
-module.exports = app;
+// module.exports = app;
