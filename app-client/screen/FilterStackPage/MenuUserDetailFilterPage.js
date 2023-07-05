@@ -72,8 +72,8 @@ const MenuUserDetailFilterPage = ({ navigation }) => {
     if (confirmation === "yes") {
       const completeData = {
         title: `${venueData?.name} with ${cateringData?.name} and ${photographerData?.name} for ${guestPaxData} people`,
-        groom: groomData,
         bride: brideData,
+        groom: groomData,
         weddingDate: dateData,
         contactNumber: contactNumber,
         address: addressData,
