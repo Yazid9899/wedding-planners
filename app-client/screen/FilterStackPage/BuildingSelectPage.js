@@ -29,6 +29,7 @@ const BuildingSelectPage = ({ navigation }) => {
   const error = useSelector((state) => state.venue.error);
 
   const budgetData = useSelector((state) => state.inputDateBudget.budget);
+  const dateData = useSelector((state) => state.inputDateBudget.date);
 
   //   console.log(budgetData, venueStateData, "di select building"); // Display the budget value
 
@@ -52,9 +53,10 @@ const BuildingSelectPage = ({ navigation }) => {
         location: valueLoc,
         price: valuePrice,
         belowPrice: budgetData,
+        weddingDate: dateData,
       })
     );
-  }, [dispatch, searchQuery, valueLoc, valuePrice]);
+  }, [dispatch, searchQuery, valueLoc, valuePrice, dateData]);
 
   const Location = [
     { label: "All", value: null },

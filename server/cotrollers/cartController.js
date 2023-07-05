@@ -72,9 +72,15 @@ class CartControllers {
 
       const data = await Product.findOne({
         where: {
-          id: idProduct,
+          id: +idProduct,
         },
       });
+      if (!data) {
+        throw {
+          name: "Product Not Found",
+        };
+      }
+
       // console.log(data, "hahahahahahahah");
       const create = await Cart.create({
         title: data.title,
@@ -199,6 +205,7 @@ class CartControllers {
         message: `Cart id ${id}has been successfully deleted`,
       });
     } catch (err) {
+      console.log(err, "<<<<<<<<<<<<<<<");
       next(err);
     }
   }

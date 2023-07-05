@@ -1,19 +1,20 @@
-const { Venue } = require("../models/index");
-const { Op } = require('sequelize');
+const { Venue, VenueSchedule, sequelize } = require("../models/index");
+const { Op, literal, fn, col } = require("sequelize");
 
 class VenueControllers {
-
   static async getAll(req, res, next) {
     try {
-      const { location, search, price, belowPrice } = req.query
+      const { location, search, price, belowPrice, weddingDate } = req.query;
 
-      let where = {}
+      console.log(req.query, "<<<<<<<<<<<<<<<<<<<<<,");
+
+      let where = {};
       if (belowPrice) {
         where = {
           price: {
             [Op.lt]: belowPrice,
-          }
-        }
+          },
+        };
       }
       if (location) {
         where = {
@@ -29,46 +30,87 @@ class VenueControllers {
           },
         };
       }
-      let filter = [["id", "ASC"]]
+      let filter = [["id", "ASC"]];
       if (price) {
         if (price === "lowest") {
-          filter = [["price", "ASC"]]
+          filter = [["price", "ASC"]];
         } else if (price === "higest") {
-          filter = [["price", "DESC"]]
+          filter = [["price", "DESC"]];
         }
       }
+
+      // const data = await Venue.findAll({
+      //   order: filter,
+      //   where,
+      // });
+
+      let filterVenueSchedule = {};
+
+      if (weddingDate) {
+        where = {
+          ...where,
+          id: {
+            [Op.notIn]: literal(
+              `(SELECT "VenueId" FROM "VenueSchedules" WHERE TO_CHAR("weddingDate", 'yyyy-MM-dd') = '${weddingDate}')`
+            ),
+          },
+        };
+      }
+
+      console.log(where, "<<<<<<<<<where controller>>>>>>>>>");
 
       const data = await Venue.findAll({
         order: filter,
         where,
-      })
+        //   include: [{ model: VenueSchedule }],
+      });
 
       if (data) {
-        res.status(200).json(data)
+        res.status(200).json(data);
       }
-
     } catch (err) {
-      next(err)
+      console.log(err, "<<< errror");
+      next(err);
     }
   }
 
   static async getDetail(req, res, next) {
     try {
-      const { id } = req.params
+      const { id } = req.params;
 
-      const data = await Venue.findOne({ where: { id } })
+      const data = await Venue.findOne({ where: { id } });
 
       if (!data) {
         throw {
-          name: "Venue Not Found"
-        }
+          name: "Venue Not Found",
+        };
       }
 
-      res.status(200).json(data)
+      res.status(200).json(data);
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 }
 
 module.exports = VenueControllers;
+
+// const data = await Venue.findAll({
+//   order: filter,
+//   where,
+//   include: [
+//     {
+//       model: VenueSchedule,
+//       where: {
+//         weddingDate: {
+//           [Op.eq]: new Date(weddingDate),
+//         },
+//       },
+//       required: false,
+//     },
+//   ],
+//   group: ["Venue.id"], // Include the primary key column of the Venue model
+//   having: literal('COUNT("VenueSchedules"."id") = 0'),
+// });
+
+// console.log(data, "data>>>>>>>>>>>>>");

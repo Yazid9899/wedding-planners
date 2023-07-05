@@ -14,7 +14,11 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { MaterialIcons } from "@expo/vector-icons";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  useFocusEffect,
+  useNavigation,
+} from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailProductsData } from "../features/PackageData/PackageDetail";
@@ -41,6 +45,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
     const totalPrice =
       productStateData?.price +
       +productStateData?.Venue?.price +
+      +productStateData?.Photography?.price +
       parseInt(value) * productStateData?.Cathering?.price;
     setTotalPrice(totalPrice);
   };
@@ -83,6 +88,28 @@ const EventOrganizerDetailScreen = ({ route }) => {
       { cancelable: true }
     );
   };
+
+  //FETCH MANUAL
+  const [google, setGoogle] = useState([]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `https://ebc9-27-50-29-117.ngrok-free.app/products/${eoId}`
+          );
+          const data = await response.json();
+
+          setGoogle(data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchData();
+    }, [])
+  );
+
   const formatCurrency = (value) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -131,24 +158,24 @@ const EventOrganizerDetailScreen = ({ route }) => {
   const mapHeight = windowHeight * 0.3;
 
   //Ini google Maps
-  //use effect for permission for using GPS (current location)
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const { status } = await Location.requestForegroundPermissionsAsync();
-  //       if (status !== "granted") {
-  //         console.log("Permission to access location was denied");
-  //         return;
-  //       }
+  // use effect for permission for using GPS (current location)
+  useEffect(() => {
+    (async () => {
+      try {
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          console.log("Permission to access location was denied");
+          return;
+        }
 
-  //       const location = await Location.getCurrentPositionAsync({});
-  //       const { latitude, longitude } = location.coords;
-  //       setCurrentLocation({ latitude, longitude });
-  //     } catch (error) {
-  //       console.log("Error getting location", error);
-  //     }
-  //   })();
-  // }, []);
+        const location = await Location.getCurrentPositionAsync({});
+        const { latitude, longitude } = location.coords;
+        setCurrentLocation({ latitude, longitude });
+      } catch (error) {
+        console.log("Error getting location", error);
+      }
+    })();
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -269,6 +296,8 @@ const EventOrganizerDetailScreen = ({ route }) => {
           <Text style={styles.addButtonText}>Next</Text>
         </TouchableOpacity>
 
+        {/* <Text>{JSON.stringify(+google?.Venue?.locationGoogle?.[0] || [])}</Text> */}
+
         <Modal visible={showModal} animationType="slide" transparent={true}>
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
@@ -294,34 +323,36 @@ const EventOrganizerDetailScreen = ({ route }) => {
           </View>
         </Modal>
       </View>
-      {/* <MapView
-        style={{ width: windowWidth, height: mapHeight, paddingRight: 20 }}
-        initialRegion={{
-          latitude: +productStateData?.Venue?.locationGoogle[0],
-          longitude: +productStateData?.Venue?.locationGoogle[1],
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        onPress={openNavigation}
-      >
-        <Marker
-          coordinate={{
-            latitude: +productStateData?.Venue?.locationGoogle[0],
-            longitude: +productStateData?.Venue?.locationGoogle[1],
+      {google?.Venue?.locationGoogle && (
+        <MapView
+          style={{ width: windowWidth, height: mapHeight, paddingRight: 20 }}
+          initialRegion={{
+            latitude: +google?.Venue?.locationGoogle?.[0],
+            longitude: +google?.Venue?.locationGoogle?.[1],
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
           }}
-          title={productStateData?.name}
-        />
-        {currentLocation && (
+          onPress={openNavigation}
+        >
           <Marker
             coordinate={{
-              latitude: currentLocation.latitude,
-              longitude: currentLocation.longitude,
+              latitude: +google?.Venue?.locationGoogle?.[0],
+              longitude: +google?.Venue?.locationGoogle?.[1],
             }}
-            title="Current Location"
-            pinColor="blue" // Customize the pin color for the current location marker
+            title={google?.name}
           />
-        )}
-      </MapView> */}
+          {currentLocation && (
+            <Marker
+              coordinate={{
+                latitude: currentLocation.latitude,
+                longitude: currentLocation.longitude,
+              }}
+              title="Current Location"
+              pinColor="blue" // Customize the pin color for the current location marker
+            />
+          )}
+        </MapView>
+      )}
     </ScrollView>
   );
 };

@@ -5,7 +5,7 @@ import { BASE_URL } from "../../config/api";
 
 export const fetchVenueData = createAsyncThunk(
   "venue/fetchData",
-  async ({ search, location, price, belowPrice = 1000000000 }) => {
+  async ({ search, location, price, belowPrice = 1000000000, weddingDate }) => {
     //  let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/venues";
     let baseUrl = `${BASE_URL}/venues`;
 
@@ -13,9 +13,14 @@ export const fetchVenueData = createAsyncThunk(
 
     belowPrice = belowPrice * 0.6;
 
-    //  console.log(belowPrice, "<<<<<<");
+    const formattedDate = weddingDate.split(" ")[0].replace(/\//g, "-");
+
+    //  console.log(formattedDate, "<<<<<<");
 
     const queryParams = [];
+    if (weddingDate) {
+      queryParams.push(`weddingDate=${formattedDate}`);
+    }
     if (search) {
       queryParams.push(`search=${search}`);
     }

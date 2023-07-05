@@ -24,10 +24,12 @@ class TransactionController {
     try {
       const { id } = req.additionalData;
       const data = await Transaction.findAll({
-        where: { id },
+        where: {
+          UserId: id,
+        },
       });
 
-      if (!data) {
+      if (data.length == 0) {
         throw {
           name: "Transaction Not Found",
         };
@@ -63,6 +65,10 @@ class TransactionController {
           { where: { noTransaction } }
         );
         await Cart.update({ status: "paid" }, { where: { id: data.Cart.id } });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 897b58fcdd83ff1c9a0530fef834353972f09e2d
         try {
           const pdfBuffer = await generateInvoicePDF(data);
           await sendInvoiceEmail(data.User.email, pdfBuffer);
@@ -87,7 +93,6 @@ class TransactionController {
       noTransaction,
       CartId,
     });
-    return data;
   }
 
   static async payment(req, res, next) {
@@ -102,6 +107,7 @@ class TransactionController {
         amount: totalAmount,
       });
 
+      // console.log(data, "<<<<<<<<<<<<<<< data id");
       const noTransaction = data.id;
 
       const dataTransaction = await TransactionController.createTransaction(
@@ -112,26 +118,10 @@ class TransactionController {
         cardid
       );
 
-      console.log(dataTransaction.dataValues.id, "ini data trans");
-
-      res.status(200).json({
-        statusCode: 200,
+      res.status(201).json({
         message: "paymentGateway",
         invoiceUrl: data.invoice_url,
         idTrans: dataTransaction.dataValues.id,
-      });
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  static async getAllInvoice(req, res, next) {
-    try {
-      const data = await i.getAllInvoices();
-      res.status(200).json({
-        statusCode: 200,
-        message: "Get all invoice Success",
-        data,
       });
     } catch (err) {
       next(err);

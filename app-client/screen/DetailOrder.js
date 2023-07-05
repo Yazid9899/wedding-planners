@@ -13,6 +13,7 @@ import {
 import { Calendar } from "react-native-calendars";
 import { addCartData } from "../features/CartData/AddCart";
 import { useDispatch, useSelector } from "react-redux";
+import { format, addMonths, isBefore } from "date-fns";
 
 const WeddingForm = ({ route, navigation }) => {
   const { cartData, eoId } = route.params;
@@ -29,6 +30,12 @@ const WeddingForm = ({ route, navigation }) => {
   const handleDateSelect = (date) => {
     setSelectedDate(date.dateString);
   };
+
+  // Mengatur tanggal awal yang dapat dipilih
+  const minDate = format(new Date(), "yyyy-MM-dd");
+
+  // Mengatur tanggal akhir yang dapat dipilih (sebulan ke depan)
+  const maxDate = format(addMonths(new Date(), 1), "yyyy-MM-dd");
 
   const handleSubmit = () => {
     if (
@@ -80,6 +87,15 @@ const WeddingForm = ({ route, navigation }) => {
         onDayPress={handleDateSelect}
         markedDates={{
           [selectedDate]: { selected: true },
+        }}
+        minDate={maxDate}
+        // maxDate={maxDate}
+        disableArrowLeft={false}
+        disableArrowRight={false}
+        theme={{
+          arrowColor: "#007AFF",
+          selectedDayBackgroundColor: "#007AFF",
+          selectedDayTextColor: "#ffffff",
         }}
       />
 
