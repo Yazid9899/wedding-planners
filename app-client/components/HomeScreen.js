@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   View,
   Text,
@@ -7,12 +7,12 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
+import {NavigationContainer, useNavigation} from "@react-navigation/native";
+import {Ionicons} from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
-import { fetchProductsData } from "../features/PackageData/packageSlice";
+import {fetchProductsData} from "../features/PackageData/packageSlice";
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("id-ID", {
@@ -44,16 +44,16 @@ const HomeScreen = () => {
   const navigation = useNavigation();
 
   const handlePressEO = (id) => {
-    navigation.navigate("Detail", { eoId: id });
+    navigation.navigate("Detail", {eoId: id});
   };
 
   return (
     <ScrollView contentContainerStyle={styles.screen}>
-      <Text style={styles.title}>Weddingku</Text>
+      {/* <Text style={styles.title}>Weddingku</Text>
       <Text style={styles.promo}>
         Book now discount <Text style={styles.promoDiscount}>5%</Text>
       </Text>
-      <Text style={styles.subtitle}>Available Package</Text>
+      <Text style={styles.subtitle}>Available Package</Text> */}
       <View style={styles.cardList}>
         {productStateData?.map((item, index) => (
           <TouchableOpacity
@@ -61,7 +61,7 @@ const HomeScreen = () => {
             onPress={() => handlePressEO(item.id)}
             style={styles.card}
           >
-            <Image source={{ uri: item?.imageUrl }} style={styles.cardImage} />
+            <Image source={{uri: item?.imageUrl}} style={styles.cardImage} />
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>{item?.title}</Text>
               <View style={styles.cardInfo}>

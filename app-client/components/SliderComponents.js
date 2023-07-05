@@ -21,15 +21,7 @@ const SliderComponents = () => {
     navigation.navigate("DetailVenue", { venue });
   };
   useEffect(() => {
-    dispatch(
-      fetchVenueData({
-        search: "",
-        location: null,
-        price: null,
-        belowPrice: "100000000",
-        weddingDate: "2023/12/07",
-      })
-    );
+    // dispatch(fetchVenueData());
     console.log("><><><><><.,", status);
   }, [dispatch]);
 

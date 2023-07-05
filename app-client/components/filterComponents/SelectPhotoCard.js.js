@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {
   Image,
   ScrollView,
@@ -16,11 +16,11 @@ import {
   PaperProvider,
 } from "react-native-paper";
 
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
-import { setPhotographerId } from "../../features/inputDateBudget/dateBudgetSlice";
+import {setPhotographerId} from "../../features/inputDateBudget/dateBudgetSlice";
 
-const SelectPhotoCard = ({ data, navigation }) => {
+const SelectPhotoCard = ({data, navigation}) => {
   const dispatch = useDispatch();
 
   //   console.log(data, "data foto card");
@@ -28,7 +28,7 @@ const SelectPhotoCard = ({ data, navigation }) => {
     //  console.log(data, "data phot");
 
     dispatch(setPhotographerId(data));
-
+    console.log(setPhotographerId(data), "<<<<<<<<<<<<<<<<<<<<<<<<<<");
     navigation.navigate("CateringSelect");
     //  navigation.navigate("BuildingSelect");
   };
@@ -40,7 +40,7 @@ const SelectPhotoCard = ({ data, navigation }) => {
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-  const containerStyle = { backgroundColor: "white", padding: 20 };
+  const containerStyle = {backgroundColor: "white", padding: 20};
 
   //   console.log(data, ">>>>>>>>>>>photo>>>>>>>>>");
   return (
@@ -63,7 +63,7 @@ const SelectPhotoCard = ({ data, navigation }) => {
               source={{
                 uri: "https://areatopik.com/wp-content/uploads/2022/10/Kobo-Nangis.jpg",
               }}
-              style={{ marginTop: 5 }}
+              style={{marginTop: 5}}
             />
           </View>
           <View style={styles.column}>

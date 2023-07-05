@@ -21,7 +21,7 @@ const TabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Homes"
+        name="Rumah"
         component={HomeStack}
         options={{
           tabBarIcon: ({color, size}) => (

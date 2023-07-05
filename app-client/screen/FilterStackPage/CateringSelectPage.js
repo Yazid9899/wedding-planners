@@ -33,6 +33,7 @@ const CateringSelectPage = ({ navigation }) => {
   const [isFocusPrice, setIsFocusPrice] = useState(false);
 
   useEffect(() => {
+    console.log("MASUK USEEFFECT<<<<<<<<<<<<<<<<<<<<<<<<<");
     dispatch(
       fetchCatheringsData({
         belowPrice: budgetData,
