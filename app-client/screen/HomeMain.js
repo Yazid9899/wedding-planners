@@ -1,15 +1,15 @@
-import {Provider, useSelector} from "react-redux";
+import { Provider, useSelector } from "react-redux";
 // Import React and React Native
-import React, {useEffect, useState} from "react";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {NavigationContainer} from "@react-navigation/native";
-import {Ionicons} from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 import FilterScreen from "../components/FilterScreen";
 import ChatScreen from "../components/ChatScreen";
 import LoginRegister from "./LoginRegister";
 import HomeStack from "./HomeStack";
 import CartScreen from "../components/CartScreen.js";
-import {shadow} from "react-native-paper";
+import { shadow } from "react-native-paper";
 import ProfileScreen from "./ProfileScreen.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -27,7 +27,7 @@ const TabNavigator = () => {
         name="Home"
         component={HomeStack}
         options={{
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
           ),
           headerShown: false,
@@ -37,7 +37,7 @@ const TabNavigator = () => {
         name="Filter"
         component={FilterScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="options" color={color} size={size} />
           ),
           headerShown: false,
@@ -47,7 +47,7 @@ const TabNavigator = () => {
         name="Cart"
         component={CartScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="cart" color={color} size={size} />
           ),
           headerShown: false,
@@ -57,7 +57,7 @@ const TabNavigator = () => {
         name="Chat"
         component={ChatScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="chatbubble-ellipses" color={color} size={size} />
           ),
         }}
@@ -66,7 +66,7 @@ const TabNavigator = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" color={color} size={size} />
           ),
           headerShown: true,
@@ -78,7 +78,7 @@ const TabNavigator = () => {
 
 const HomeMain = () => {
   const [hasAccessToken, setHasAccessToken] = useState(false);
-  const {access_token} = useSelector((state) => state.users);
+  const { access_token } = useSelector((state) => state.users);
 
   useEffect(() => {
     const checkAccessToken = async () => {

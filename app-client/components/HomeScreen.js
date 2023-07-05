@@ -289,5 +289,28 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#777",
   },
+
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  row: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  row1: {
+    flex: 2,
+  },
+  row2: {
+    flex: 3,
+  },
+  column: {
+    flex: 1,
+    padding: 5,
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+  },
 });
 export default HomeScreen;

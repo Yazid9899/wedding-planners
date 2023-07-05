@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Modal,
+  Image,
 } from "react-native";
 import axios from "axios";
 
@@ -22,6 +23,7 @@ const formatCurrency = (value) => {
     currency: "IDR",
   }).format(value);
 };
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const InvoiceWebView = ({ url }) => {
   return (
@@ -42,17 +44,7 @@ const CartScreen = () => {
   const transStateData = useSelector((state) => state.transaction.data);
   const dispatch = useDispatch();
   const [selectedInvoiceUrl, setSelectedInvoiceUrl] = useState(null);
-  // const [showInvoiceWebView, setShowInvoiceWebView] = useState(false);
-  // const [invoiceUrl, setInvoiceUrl] = useState("");
 
-  // const postTransactionItem = (item) => {
-  //   setSelectedItem(item);
-  //   setShowModal(true);
-  // };
-
-  // {
-  //   showInvoiceWebView && <InvoiceWebView url={invoiceUrl} />;
-  // }
   const openInvoiceWebView = (url) => {
     setSelectedInvoiceUrl(url);
   };
@@ -86,10 +78,6 @@ const CartScreen = () => {
 
   const handlePaymentConfirmation = (item) => {
     setShowPaymentModal(false);
-
-    // Lakukan tindakan yang diperlukan untuk memproses pembayaran
-    // const id = selectedItem.id;
-    // console.log(item.id, "isjidjieefiejfiefifjie");
     const transactionData = {
       // Menyesuaikan data yang diperlukan untuk transaksi
       CartId: selectedItem.id,
@@ -120,6 +108,20 @@ const CartScreen = () => {
     <View style={styles.cartItem}>
       <Text style={[styles.itemTitle]}>{item?.title}</Text>
       <View style={styles.itemDetails}>
+        <View style={styles.photosContainer}>
+          <Image
+            source={{ uri: item?.Venue?.photo?.[0] }}
+            style={styles.photo}
+          />
+          <Image
+            source={{ uri: item?.Venue?.photo?.[1] }}
+            style={styles.photo}
+          />
+          <Image
+            source={{ uri: item?.Venue?.photo?.[2] }}
+            style={styles.photo}
+          />
+        </View>
         <Text style={styles.detailText}>
           <Text style={styles.detailKey}>Date:</Text>{" "}
           {formatDate(item?.weddingDate)}
@@ -147,24 +149,25 @@ const CartScreen = () => {
           {item?.contactNumber}
         </Text>
         <TouchableOpacity
-          style={[styles.deleteButton, { backgroundColor: "red" }]}
+          style={[
+            styles.deleteButton,
+            { backgroundColor: "#00bce1", width: "100%" },
+          ]}
+          onPress={() => {
+            setSelectedItem(item);
+            setShowPaymentModal(true);
+          }}
+        >
+          <Text style={styles.deleteButtonText}>Bayar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.deleteButtonIcon}
           onPress={() => {
             setSelectedItem(item.id);
             setShowDeleteModal(true);
           }}
         >
-          <Text style={styles.deleteButtonText}>Delete</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.deleteButton, { backgroundColor: "#00bce1" }]}
-          onPress={() => {
-            // console.log(item.id, "ini item IDDDDDD");
-            setSelectedItem(item);
-            setShowPaymentModal(true);
-            // openInvoiceWebView(item.invoice_url);
-          }}
-        >
-          <Text style={styles.deleteButtonText}>Bayar</Text>
+          <Icon name="trash" size={25} color="red" />
         </TouchableOpacity>
       </View>
     </View>
@@ -207,7 +210,7 @@ const CartScreen = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.modalButton}
-              onPress={() => setShowModal(false)}
+              onPress={() => setShowDeleteModal(false)}
             >
               <Text style={styles.modalButtonText}>No</Text>
             </TouchableOpacity>
@@ -238,7 +241,7 @@ const CartScreen = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.modalButton}
-              onPress={() => setShowModal(false)}
+              onPress={() => setShowPaymentModal(false)}
             >
               <Text style={styles.modalButtonText}>No</Text>
             </TouchableOpacity>
@@ -256,6 +259,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingTop: 40,
   },
+  photosContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  photo: {
+    width: 100,
+    height: 100,
+    borderRadius: 8,
+    marginHorizontal: 5,
+  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
@@ -272,6 +287,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     backgroundColor: "white",
   },
+  deleteButtonIcon: {
+    alignItems: "flex-end",
+    marginTop: 8,
+  },
   itemTitle: {
     fontSize: 18,
     fontWeight: "bold",
@@ -283,7 +302,7 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 16,
-    marginBottom: 4,
+    marginVertical: 5,
   },
   detailKey: {
     fontWeight: "bold",
@@ -297,8 +316,9 @@ const styles = StyleSheet.create({
   },
   deleteButtonText: {
     color: "white",
-    fontSize: 14,
+    fontSize: 17,
     fontWeight: "bold",
+    textAlign: "center",
   },
   modalContainer: {
     flex: 1,
