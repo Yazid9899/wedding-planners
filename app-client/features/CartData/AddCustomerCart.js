@@ -15,7 +15,7 @@ export const addCustomCartData = createAsyncThunk(
           access_token: access_token, // Gunakan nilai token yang telah diambil
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error, "<<< error nih");
@@ -41,7 +41,7 @@ export const AddCustomCartSlice = createSlice({
       })
       .addCase(addCustomCartData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log(action.payload, "INI PAYLOAD carts");
+        //   console.log(action.payload, "INI PAYLOAD carts");
         state.data = action.payload;
       })
       .addCase(addCustomCartData.rejected, (state, action) => {

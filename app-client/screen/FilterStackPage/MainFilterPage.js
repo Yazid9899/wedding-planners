@@ -10,7 +10,9 @@ import {
   ScrollView,
 } from "react-native";
 
-// import { Modal, Portal, Button, PaperProvider } from "react-native-paper";
+import { format, addMonths, isBefore } from "date-fns";
+
+import { Calendar } from "react-native-calendars";
 
 import DatePicker from "react-native-modern-datepicker";
 
@@ -25,6 +27,17 @@ import {
 
 const MainFilterPage = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  // Mengatur tanggal akhir yang dapat dipilih (sebulan ke depan)
+  const maxDate = format(addMonths(new Date(), 1), "yyyy-MM-dd");
+
+  const [selectedDate, setSelectedDate] = useState("");
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date.dateString);
+  };
+
+  //   =======================================
 
   //   Input Budget
   const [inputValue, setInputValue] = useState("");
@@ -52,9 +65,10 @@ const MainFilterPage = ({ navigation }) => {
   };
 
   //   Input Book Date // default value is a month from today
-  const [selectedDate, setSelectedDate] = useState(
-    moment().add(1, "month").format("YYYY-MM-DD")
-  );
+
+  //   const [selectedDate, setSelectedDate] = useState(
+  //     moment().add(1, "month").format("YYYY-MM-DD")
+  //   );
 
   //
   const minSelectableDate = moment().add(1, "month").format("YYYY-MM-DD");
@@ -139,7 +153,7 @@ const MainFilterPage = ({ navigation }) => {
 
         <Text style={styles.textDate}>Pick a Date</Text>
 
-        <DatePicker
+        {/* <DatePicker
           selected={selectedDate} // Default value
           onSelectedChange={(date) => setSelectedDate(date)}
           style={[
@@ -149,6 +163,23 @@ const MainFilterPage = ({ navigation }) => {
             },
           ]}
           minDate={minSelectableDate} // Set the minimum selectable date
+          //  minDate={maxDate} // Set the minimum selectable date
+        /> */}
+
+        <Calendar
+          onDayPress={handleDateSelect}
+          markedDates={{
+            [selectedDate]: { selected: true },
+          }}
+          minDate={maxDate}
+          // maxDate={maxDate}
+          disableArrowLeft={false}
+          disableArrowRight={false}
+          theme={{
+            arrowColor: "#007AFF",
+            selectedDayBackgroundColor: "#007AFF",
+            selectedDayTextColor: "#ffffff",
+          }}
         />
 
         {dateError && (
