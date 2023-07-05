@@ -17,7 +17,6 @@ const Photographer = () => {
   useEffect(() => {
     dispatch(fetchPhotographData());
   }, [dispatch]);
-  console.log(data, "potogra");
 
   const renderItem = ({item}) => {
     return (

@@ -1,15 +1,7 @@
 import React, {useState, useEffect} from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {View, Text, StyleSheet, ScrollView} from "react-native";
 import {NavigationContainer, useNavigation} from "@react-navigation/native";
-
+import Ionicons from "@expo/vector-icons/Ionicons";
 import {SegmentedButtons} from "react-native-paper";
 import SliderComponents from "../components/SliderComponents";
 import WeddingIdea from "../components/WeddingIdea";
@@ -61,6 +53,23 @@ const HalamanUtama = () => {
   );
 };
 
+export const HeaderRight = ({navigation}) => {
+  const goToCart = () => {
+    navigation.navigate("Cart"); // Navigasi ke halaman "Cart"
+  };
+  return (
+    <View style={styles.iconContainer}>
+      <Ionicons
+        name="cart-outline"
+        size={24}
+        color="black"
+        onPress={goToCart}
+        style={{marginRight: 15}}
+      />
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -68,12 +77,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   segmentedButtonsContainer: {
-    marginBottom: 10,
+    marginBottom: 30,
   },
   subtitle: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 10,
+  },
+  iconContainer: {
+    marginRight: 10,
   },
 });
 

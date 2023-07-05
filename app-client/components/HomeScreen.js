@@ -49,7 +49,7 @@ const HomeScreen = () => {
   const navigation = useNavigation();
 
   const handlePressEO = (id) => {
-    navigation.navigate("DetailEventOrganizer", {eoId: id});
+    navigation.navigate("Detail", {eoId: id});
   };
 
   return (
