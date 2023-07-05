@@ -199,6 +199,7 @@ class CartControllers {
         message: `Cart id ${id}has been successfully deleted`,
       });
     } catch (err) {
+      console.log(err, "<<<<<<<<<<<<<<<");
       next(err);
     }
   }

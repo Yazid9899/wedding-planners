@@ -28,6 +28,8 @@ module.exports = {
           model: "Carts",
           key: "id",
         },
+        onDelete: "cascade",
+        onUpdate: "cascade"
       },
       noTransaction: {
         type: Sequelize.STRING,
