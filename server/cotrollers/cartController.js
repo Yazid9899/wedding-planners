@@ -5,7 +5,20 @@ class CartControllers {
     try {
       const { id } = req.additionalData;
 
-      const { title, bride, groom, weddingDate } = req.body;
+      const {
+        title,
+        bride,
+        groom,
+        weddingDate,
+        PhotographyId,
+        CatheringId,
+        VenueId,
+        totalPrice,
+        contactNumber,
+        address,
+        pax,
+      } = req.body;
+
       console.log(
         title,
         PhotographyId,
@@ -17,6 +30,7 @@ class CartControllers {
         bride,
         weddingDate
       );
+
       if (
         !title ||
         !PhotographyId ||
@@ -31,13 +45,18 @@ class CartControllers {
         throw { name: "cartError" };
       }
       const create = await Cart.create({
-        title,
         UserId: id,
+        title,
+        bride,
+        groom,
+        weddingDate,
         PhotographyId,
         CatheringId,
         VenueId,
-        pax,
         totalPrice,
+        contactNumber,
+        address,
+        pax,
       });
 
       const currentDate = new Date();

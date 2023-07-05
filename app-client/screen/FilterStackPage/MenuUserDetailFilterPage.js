@@ -59,6 +59,7 @@ const MenuUserDetailFilterPage = ({ navigation }) => {
     const venuePrice = venueData?.price || 0;
     const photographyPrice = photographerData?.price || 0;
     cateringPrice = cateringData?.price || 0;
+
     const totalPrice =
       venuePrice + photographyPrice + cateringPrice * guestPaxData;
     return totalPrice;
@@ -69,11 +70,10 @@ const MenuUserDetailFilterPage = ({ navigation }) => {
 
     //  title,PhotographyId,CatheringId,VenueId,totalPrice,pax,groom,bride,weddingDate,
     if (confirmation === "yes") {
-      // Lakukan tindakan yang diperlukan dengan data yang diisi pengguna
       const completeData = {
         title: `${venueData?.name} with ${cateringData?.name} and ${photographerData?.name} for ${guestPaxData} people`,
-        groom: groomData,
         bride: brideData,
+        groom: groomData,
         weddingDate: dateData,
         contactNumber: contactNumber,
         address: addressData,
@@ -84,12 +84,14 @@ const MenuUserDetailFilterPage = ({ navigation }) => {
         pax: guestPaxData,
         // contactNumber: contactNumber,
       };
+
       console.log("Data Form:", completeData);
 
       dispatch(addCustomCartData(completeData));
 
       navigation.navigate("MainFilter");
-      navigation.navigate("Cart");
+
+      navigation.navigate("Home");
 
       Alert.alert(
         "Success",
