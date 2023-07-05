@@ -11,7 +11,7 @@ export const fetchPhotographData = createAsyncThunk(
 
     belowPrice = belowPrice * 0.1;
 
-    console.log(belowPrice, search, price, "photo slice<<<<<<");
+    console.log(belowPrice, search, price, "photo slice<4<<<1<<");
 
     const queryParams = [];
     if (search) {
