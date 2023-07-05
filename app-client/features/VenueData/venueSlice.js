@@ -1,11 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
-import { BASE_URL } from "../../config/api";
+import {BASE_URL} from "../../config/api";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
 
 export const fetchVenueData = createAsyncThunk(
   "venue/fetchData",
-  async ({ search, location, price, belowPrice = 1000000000, weddingDate }) => {
+  async ({search, location, price, belowPrice = 1000000000, weddingDate}) => {
     //  let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/venues";
     let baseUrl = `${BASE_URL}/venues`;
 
@@ -40,6 +40,7 @@ export const fetchVenueData = createAsyncThunk(
 
     console.log(baseUrl);
     const response = await axios.get(baseUrl);
+    console.log(response.data);
     return response.data;
   }
 );

@@ -44,7 +44,7 @@ const HomeScreen = () => {
   const navigation = useNavigation();
 
   const handlePressEO = (id) => {
-    navigation.navigate("Detail", {eoId: id});
+    navigation.navigate("DetailOrder", {eoId: id});
   };
 
   return (

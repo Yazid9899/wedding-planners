@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {
   Text,
   View,
@@ -10,22 +10,22 @@ import {
   ScrollView,
 } from "react-native";
 
-import { format, addMonths, isBefore } from "date-fns";
+import {format, addMonths, isBefore} from "date-fns";
 
-import { Calendar } from "react-native-calendars";
+import {Calendar} from "react-native-calendars";
 
 import DatePicker from "react-native-modern-datepicker";
 
 import moment from "moment";
 
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import {
   setBudget,
   setDate,
 } from "../../features/inputDateBudget/dateBudgetSlice";
 
-const MainFilterPage = ({ navigation }) => {
+const MainFilterPage = ({navigation}) => {
   const dispatch = useDispatch();
 
   // Mengatur tanggal akhir yang dapat dipilih (sebulan ke depan)
@@ -34,6 +34,7 @@ const MainFilterPage = ({ navigation }) => {
   const [selectedDate, setSelectedDate] = useState("");
 
   const handleDateSelect = (date) => {
+    console.log(date);
     setSelectedDate(date.dateString);
   };
 
@@ -149,7 +150,7 @@ const MainFilterPage = ({ navigation }) => {
           <Text style={styles.errorText}>Please enter a budget</Text>
         )}
 
-        <View style={{ height: 30 }} />
+        <View style={{height: 30}} />
 
         <Text style={styles.textDate}>Pick a Date</Text>
 
@@ -169,15 +170,15 @@ const MainFilterPage = ({ navigation }) => {
         <Calendar
           onDayPress={handleDateSelect}
           markedDates={{
-            [selectedDate]: { selected: true },
+            [selectedDate]: {selected: true},
           }}
           minDate={maxDate}
           // maxDate={maxDate}
           disableArrowLeft={false}
           disableArrowRight={false}
           theme={{
-            arrowColor: "#007AFF",
-            selectedDayBackgroundColor: "#007AFF",
+            arrowColor: "#00bce1",
+            selectedDayBackgroundColor: "#00bce1",
             selectedDayTextColor: "#ffffff",
           }}
         />
@@ -200,27 +201,28 @@ const MainFilterPage = ({ navigation }) => {
 
 export default MainFilterPage;
 
-const { width, height } = Dimensions.get("window");
+const {width, height} = Dimensions.get("window");
 const containerWidth = width * 0.8; // Set the container width to 80% of the screen width
 const containerHeight = height * 0.3; // Set the container width to 80% of the screen width
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingTop: 20,
+    padding: 20,
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 18,
     fontWeight: "400",
     marginBottom: 10,
+    paddingLeft: 25,
   },
   gap: {
     height: 10,
   },
   textDate: {
     height: 30,
+    paddingLeft: 140,
   },
   inputContainer: {
     width: containerWidth,
@@ -230,6 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff", // Set a different background color
     padding: 10,
     marginTop: 5,
+    marginLeft: 20,
   },
   input: {
     fontSize: 16,
@@ -241,15 +244,18 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   button: {
+    width: "50%",
+    marginHorizontal: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
-    backgroundColor: "lightblue",
+    backgroundColor: "#00bce1",
   },
   buttonText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
+    textAlign: "center",
   },
   errorText: {
     color: "red",
