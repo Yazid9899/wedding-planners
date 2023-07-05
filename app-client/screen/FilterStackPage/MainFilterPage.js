@@ -153,19 +153,6 @@ const MainFilterPage = ({ navigation }) => {
 
         <Text style={styles.textDate}>Pick a Date</Text>
 
-        {/* <DatePicker
-          selected={selectedDate} // Default value
-          onSelectedChange={(date) => setSelectedDate(date)}
-          style={[
-            styles.datePicker,
-            {
-              borderColor: dateError ? "red" : "#ccc",
-            },
-          ]}
-          minDate={minSelectableDate} // Set the minimum selectable date
-          //  minDate={maxDate} // Set the minimum selectable date
-        /> */}
-
         <Calendar
           onDayPress={handleDateSelect}
           markedDates={{
@@ -207,20 +194,21 @@ const containerHeight = height * 0.3; // Set the container width to 80% of the s
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingTop: 20,
+    padding: 20,
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 18,
     fontWeight: "400",
     marginBottom: 10,
+    paddingLeft: 20,
   },
   gap: {
     height: 10,
   },
   textDate: {
     height: 30,
+    paddingLeft: 140,
   },
   inputContainer: {
     width: containerWidth,
@@ -230,6 +218,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff", // Set a different background color
     padding: 10,
     marginTop: 5,
+    marginLeft: 20,
   },
   input: {
     fontSize: 16,
@@ -257,3 +246,18 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 });
+
+{
+  /* <DatePicker
+          selected={selectedDate} // Default value
+          onSelectedChange={(date) => setSelectedDate(date)}
+          style={[
+            styles.datePicker,
+            {
+              borderColor: dateError ? "red" : "#ccc",
+            },
+          ]}
+          minDate={minSelectableDate} // Set the minimum selectable date
+          //  minDate={maxDate} // Set the minimum selectable date
+        /> */
+}

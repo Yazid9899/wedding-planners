@@ -24,17 +24,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailProductsData } from "../features/PackageData/PackageDetail";
 import { addCartData } from "../features/CartData/AddCart";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BASE_URL } from "../config/api";
 
 const EventOrganizerDetailScreen = ({ route }) => {
   const { eoId } = route.params;
 
-  // console.log(eoId, "+++++++++++++++++++++++++");
-
   // Ini untuk state total price dan pax
+  const productStateData = useSelector((state) => state.detailProduct.data);
+
+  const paxOptions = [200, 300, 500, 700];
+
   const [totalPrice, setTotalPrice] = useState(0);
+
   const [dataProduct, setDataProduct] = useState({
-    pax: 0,
+    pax: 200,
   });
 
   // Ini untuk menghitung pax dan total Price
@@ -43,24 +45,75 @@ const EventOrganizerDetailScreen = ({ route }) => {
       ...prevData,
       [name]: value,
     }));
-    const totalPrice =
-      productStateData?.price +
-      +productStateData?.Venue?.price +
-      +productStateData?.Photography?.price +
-      parseInt(value) * productStateData?.Cathering?.price;
-    setTotalPrice(totalPrice);
   };
 
+  // Ini untuk use fetch detail produk
+  useEffect(() => {
+    dispatch(fetchDetailProductsData({ eoId }));
+  }, [dispatch]);
+
+  // Recalculate total price when productStateData or dataProduct.pax changes
+  useEffect(() => {
+    if (productStateData) {
+      const totalPrice =
+        productStateData.price +
+        +productStateData.Venue?.price +
+        +productStateData.Photography?.price +
+        parseInt(dataProduct.pax) * productStateData.Cathering?.price;
+      setTotalPrice(totalPrice);
+    }
+  }, [productStateData, dataProduct.pax]);
+
+  //   =====================================================
+
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [showCatering, setCatering] = useState(false);
+  const [showPhoto, setPhoto] = useState(false);
+
+  const MAX_DESCRIPTION_LINES = 4;
+
+  const toggleShowFullDescription = () => {
+    setShowFullDescription((prevValue) => !prevValue);
+  };
+  const toggleCatering = () => {
+    setCatering((prevValue) => !prevValue);
+  };
+  const togglePhoto = () => {
+    setPhoto((prevValue) => !prevValue);
+  };
+
+  // console.log(eoId, "+++++++++++++++++++++++++");
+
+  // Ini untuk state total price dan pax
+  //   const [totalPrice, setTotalPrice] = useState(0);
+  //   const [dataProduct, setDataProduct] = useState({
+  //     pax: 0,
+  //   });
+
+  // Ini untuk menghitung pax dan total Price
+  //   const handleChange = (name, value) => {
+  //     setDataProduct((prevData) => ({
+  //       ...prevData,
+  //       [name]: value,
+  //     }));
+  //     const totalPrice =
+  //       productStateData?.price +
+  //       +productStateData?.Venue?.price +
+  //       +productStateData?.Photography?.price +
+  //       parseInt(value) * productStateData?.Cathering?.price;
+  //     setTotalPrice(totalPrice);
+  //   };
+
   // Ini untuk
-  const [selectedPax, setSelectedPax] = useState(200); // Nilai pax awal
+  //   const [selectedPax, setSelectedPax] = useState(200); // Nilai pax awal
   const [showModal, setShowModal] = useState(false); // Status modal
-  const paxOptions = [200, 300, 500, 700];
+  //   const paxOptions = [200, 300, 500, 700];
   const navigation = useNavigation();
   const [currentLocation, setCurrentLocation] = useState(null);
 
   const dispatch = useDispatch();
 
-  const productStateData = useSelector((state) => state.detailProduct.data);
+  //   const productStateData = useSelector((state) => state.detailProduct.data);
 
   // Ini untuk use fetch detail produk
   useEffect(() => {
@@ -97,7 +150,9 @@ const EventOrganizerDetailScreen = ({ route }) => {
     React.useCallback(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(`${BASE_URL}/products/${eoId}`);
+          const response = await fetch(
+            `https://we-go.zuru.site/products/${eoId}`
+          );
           const data = await response.json();
 
           setGoogle(data);
@@ -243,7 +298,19 @@ const EventOrganizerDetailScreen = ({ route }) => {
           />
         ))}
         <Text style={styles.sectionDescription}>
-          {productStateData?.Venue?.description}
+          {showFullDescription
+            ? productStateData?.Venue?.description
+            : productStateData?.Venue?.description?.substring(0, 150)}
+          {productStateData?.description?.length > 150 &&
+            !showFullDescription && (
+              <Text
+                style={styles.readMoreLink}
+                onPress={toggleShowFullDescription}
+              >
+                ... Baca Selengkapnya
+              </Text>
+            )}
+          {/* {productStateData?.Venue?.description} */}
         </Text>
 
         {/* Cathering */}
@@ -253,7 +320,15 @@ const EventOrganizerDetailScreen = ({ route }) => {
           style={styles.sectionImage}
         />
         <Text style={styles.sectionDescription}>
-          {productStateData?.Cathering?.description}
+          {showCatering
+            ? productStateData?.Cathering?.description
+            : productStateData?.Cathering?.description?.substring(0, 150)}
+          {productStateData?.description?.length > 150 && !showCatering && (
+            <Text style={styles.readMoreLink} onPress={toggleCatering}>
+              ... Baca Selengkapnya
+            </Text>
+          )}
+          {/* {productStateData?.Cathering?.description} */}
         </Text>
 
         {/* Photographer */}
@@ -266,10 +341,20 @@ const EventOrganizerDetailScreen = ({ route }) => {
           />
         ))}
         <Text style={styles.sectionDescription}>
-          {productStateData?.Photography?.description}
+          {/* {productStateData?.Photography?.description} */}
+          {showPhoto
+            ? productStateData?.Photography?.description
+            : productStateData?.Photography?.description?.substring(0, 150)}
+          {productStateData?.description?.length > 150 && !showPhoto && (
+            <Text style={styles.readMoreLink} onPress={togglePhoto}>
+              ... Baca Selengkapnya
+            </Text>
+          )}
         </Text>
 
-        <Text>Choose total pax you want order</Text>
+        <Text style={{ fontWeight: "bold", marginTop: 15, fontSize: 15 }}>
+          Choose total pax you want order
+        </Text>
         <View style={styles.detailRow}>
           <MaterialIcons name="group" size={20} color="#555555" />
           <Text style={styles.detailText}>Pax:</Text>
@@ -454,7 +539,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    marginTop: 20,
+    marginTop: 10,
   },
   sectionImage: {
     width: "100%",
@@ -463,7 +548,12 @@ const styles = StyleSheet.create({
   },
   sectionDescription: {
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 5,
+  },
+  readMoreLink: {
+    color: "blue",
+    textDecorationLine: "underline",
+    marginTop: 5,
   },
 });
 

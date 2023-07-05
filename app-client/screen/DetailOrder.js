@@ -42,7 +42,8 @@ const WeddingForm = ({ route, navigation }) => {
       groom === "" ||
       bride === "" ||
       contactNumber === "" ||
-      address === ""
+      address === "" ||
+      selectedDate === ""
     ) {
       setInputError(true);
       return;
@@ -235,6 +236,10 @@ const styles = StyleSheet.create({
   modalButtonText: {
     fontSize: 16,
     color: "#fff",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 16,
   },
 });
 
