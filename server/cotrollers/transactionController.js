@@ -41,11 +41,10 @@ class TransactionController {
   }
   static async changeStatusTransaction(req, res, next) {
     try {
-      const { id } = req.params;
-      // const {status} = req.body
-      const { email } = req.additionalData;
+
+      const { id: noTransaction, status } = req.body;
       const data = await Transaction.findOne({
-        where: { id },
+        where: { noTransaction },
         include: [
           {
             model: Cart,
@@ -55,23 +54,22 @@ class TransactionController {
               { model: Venue },
             ],
           },
+          {
+            model: User,
+          },
         ],
       });
 
-      if(!data){
-        throw{
-          name: "Transaction Not Found"
-        }
-      }
-      const xendit = await i.getInvoice({ invoiceID: data.noTransaction });
+      if (status === "PAID") {
+        await Transaction.update(
+          { status: "Paid" },
+          { where: { noTransaction } }
+        );
 
-      if (xendit.status === "PAID") {
-      // if (status === "PAID") {
-        await Transaction.update({ status: "Paid" }, { where: { id } });
 
         try {
           const pdfBuffer = await generateInvoicePDF(data);
-          await sendInvoiceEmail(email, pdfBuffer);
+          await sendInvoiceEmail(data.User.email, pdfBuffer);
           res.status(200).json({
             message: "Transaction Paid and invoice sent to you email",
             data,
@@ -79,11 +77,6 @@ class TransactionController {
         } catch (error) {
           console.error("Error sending invoice:", error);
         }
-      } else {
-        res.status(200).json({
-          message: "Transaction Pending",
-          data,
-        });
       }
     } catch (err) {
       next(err);

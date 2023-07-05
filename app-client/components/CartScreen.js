@@ -15,7 +15,7 @@ import { getCartData } from "../features/CartData/GetCart";
 import { addTransactionData } from "../features/Transaction/PostTransaction";
 import { WebView } from "react-native-webview";
 import { changeStatusTransaction } from "../features/Transaction/ChangeStatus";
-
+import { useFocusEffect } from "@react-navigation/native";
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -57,10 +57,10 @@ const CartScreen = () => {
     setSelectedInvoiceUrl(url);
   };
 
-  useEffect(() => {
+  useFocusEffect(() => {
     dispatch(getCartData());
-    console.log(transStateData, "-------------------");
-  }, [transStateData]);
+    // console.log(transStateData, "-------------------");
+  });
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -102,7 +102,7 @@ const CartScreen = () => {
 
     dispatch(addTransactionData(transactionData))
       .then(() => {
-        console.log(transStateData.id, "ini kah yang dicari???????");
+        console.log(transStateData, "ini kah yang dicari???????");
         openInvoiceWebView(transStateData.invoiceUrl);
         setShowSuccessModal(true);
         // Transaksi berhasil, Anda dapat menampilkan modal sukses atau melakukan tindakan lainnya

@@ -5,33 +5,39 @@ class CartControllers {
     try {
       const { id } = req.additionalData;
 
-      const {
+      const { title, bride, groom, weddingDate } = req.body;
+      console.log(
         title,
-        bride,
-        groom,
-        weddingDate,
-        contactNumber,
-        address,
         PhotographyId,
         CatheringId,
         VenueId,
         totalPrice,
         pax,
-      } = req.body;
-
+        groom,
+        bride,
+        weddingDate
+      );
+      if (
+        !title ||
+        !PhotographyId ||
+        !CatheringId ||
+        !VenueId ||
+        !totalPrice ||
+        !pax ||
+        !groom ||
+        !bride ||
+        !weddingDate
+      ) {
+        throw { name: "cartError" };
+      }
       const create = await Cart.create({
         title,
         UserId: id,
-        groom,
-        bride,
-        weddingDate,
         PhotographyId,
         CatheringId,
         VenueId,
         pax,
         totalPrice,
-        contactNumber,
-        address,
       });
 
       const currentDate = new Date();
@@ -61,19 +67,15 @@ class CartControllers {
         bride,
         weddingDate,
         contactNumber,
-        address } = req.body;
-        
-        const data = await Product.findOne({
-          where: {
-            id: +idProduct,
-          },
-        });
-        if(!data){
-          throw{
-            name: "Product Not Found"
-          }
-        }
+        address,
+      } = req.body;
 
+      const data = await Product.findOne({
+        where: {
+          id: idProduct,
+        },
+      });
+      // console.log(data, "hahahahahahahah");
       const create = await Cart.create({
         title: data.title,
         UserId: id,
@@ -119,7 +121,7 @@ class CartControllers {
         ],
         where: {
           UserId: id,
-          status: "unpaid"
+          status: "unpaid",
         },
       });
 
@@ -135,7 +137,7 @@ class CartControllers {
     try {
       const { cartid } = req.params;
       const { id } = req.additionalData;
-      
+
       const data = await Cart.findAll({
         where: {
           id: cartid,
@@ -149,14 +151,17 @@ class CartControllers {
         };
       }
 
-     await Cart.update({ 
-        status: "paid" 
-      }, { 
-        where: {  
-        id: cartid,
-        UserId: id,
-      } });
-
+      const dataUpdate = await Cart.update(
+        {
+          status: "paid",
+        },
+        {
+          where: {
+            id: cartid,
+            UserId: id,
+          },
+        }
+      );
 
       res.status(200).json({
         message: `Cart with id${cartid} has been successfully update`,
@@ -189,7 +194,7 @@ class CartControllers {
           UserId: id,
         },
       });
-      
+
       res.status(201).json({
         message: `Cart id ${id}has been successfully deleted`,
       });

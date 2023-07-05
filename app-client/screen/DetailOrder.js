@@ -24,11 +24,23 @@ const WeddingForm = ({ route, navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
+  const [inputError, setInputError] = useState(false);
+
   const handleDateSelect = (date) => {
     setSelectedDate(date.dateString);
   };
 
   const handleSubmit = () => {
+    if (
+      groom === "" ||
+      bride === "" ||
+      contactNumber === "" ||
+      address === ""
+    ) {
+      setInputError(true);
+      return;
+    }
+    setInputError(false);
     setShowModal(true);
   };
 
@@ -47,7 +59,7 @@ const WeddingForm = ({ route, navigation }) => {
         contactNumber: contactNumber,
         weddingDate: selectedDate,
       };
-      // console.log("Data Form:", { selectedDate, groom, bride, contactNumber });
+      console.log("Data Form:", { selectedDate, groom, bride, contactNumber });
 
       await dispatch(addCartData({ data: completeData, idProduct: id }));
       Alert.alert(
@@ -104,6 +116,10 @@ const WeddingForm = ({ route, navigation }) => {
         onChangeText={(text) => setAddress(text)}
         // keyboardType="phone-pad"
       />
+
+      {inputError && (
+        <Text style={styles.errorText}>Please fill in all fields</Text>
+      )}
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Pesan</Text>
