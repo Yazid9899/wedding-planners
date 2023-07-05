@@ -36,6 +36,7 @@ const MainFilterPage = ({ navigation }) => {
   const handleDateSelect = (date) => {
     console.log(date);
     setSelectedDate(date.dateString);
+    console.log(date.dateString, "calender >>>>>>>>>>>..");
   };
 
   //   =======================================
@@ -63,6 +64,7 @@ const MainFilterPage = ({ navigation }) => {
   const handleInputChange = (text) => {
     const cleanedText = text.replace(/[^0-9]/g, "");
     setInputValue(cleanedText);
+    //  console.log(cleanedText, "calender >>>>>>>>>>>>>>>>>>>>..");
   };
 
   //   Input Book Date // default value is a month from today

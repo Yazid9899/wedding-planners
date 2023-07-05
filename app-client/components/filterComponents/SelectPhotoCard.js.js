@@ -23,10 +23,14 @@ import { setPhotographerId } from "../../features/inputDateBudget/dateBudgetSlic
 const SelectPhotoCard = ({ data, navigation }) => {
   const dispatch = useDispatch();
 
+  //   console.log(data, "data foto card");
   const nextButton = () => {
+    //  console.log(data, "data phot");
+
     dispatch(setPhotographerId(data));
 
     navigation.navigate("CateringSelect");
+    //  navigation.navigate("BuildingSelect");
   };
 
   const slicedDescription = data?.description?.slice(0, 40);
@@ -38,7 +42,7 @@ const SelectPhotoCard = ({ data, navigation }) => {
   const hideModal = () => setVisible(false);
   const containerStyle = { backgroundColor: "white", padding: 20 };
 
-  //   console.log(data.photo);
+  //   console.log(data, ">>>>>>>>>>>photo>>>>>>>>>");
   return (
     <PaperProvider>
       <Portal>
@@ -57,7 +61,7 @@ const SelectPhotoCard = ({ data, navigation }) => {
             <Avatar.Image
               size={50}
               source={{
-                uri: data?.photo[0],
+                uri: "https://areatopik.com/wp-content/uploads/2022/10/Kobo-Nangis.jpg",
               }}
               style={{ marginTop: 5 }}
             />

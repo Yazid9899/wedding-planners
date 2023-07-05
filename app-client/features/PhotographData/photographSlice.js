@@ -1,36 +1,41 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {BASE_URL} from "../../config/api";
+import { BASE_URL } from "../../config/api";
 // DOCS: https://redux-toolkit.js.org/api/createAsyncThunk
 
 export const fetchPhotographData = createAsyncThunk(
   "photographies/fetchData",
-  async ({search, price, belowPrice = 1000000000}) => {
-    //  let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/photographies";
-    let baseUrl = `${BASE_URL}/photographies`;
+  async ({ search, price, belowPrice = 1000000000 }) => {
+    try {
+      //  let baseUrl = "https://fde2-103-138-68-174.ngrok-free.app/photographies";
+      let baseUrl = `${BASE_URL}/photographies`;
 
-    belowPrice = belowPrice * 0.1;
+      belowPrice = belowPrice * 0.1;
 
-    console.log(belowPrice, search, price, "photo slice<4<<<1<<");
+      console.log(belowPrice, search, price, "photo slice<4<<<1<<");
 
-    const queryParams = [];
-    if (search) {
-      queryParams.push(`search=${search}`);
+      const queryParams = [];
+      if (search) {
+        queryParams.push(`search=${search}`);
+      }
+      if (price) {
+        queryParams.push(`price=${price}`);
+      }
+      if (belowPrice !== 0) {
+        queryParams.push(`belowPrice=${belowPrice}`);
+      }
+
+      if (queryParams.length > 0) {
+        baseUrl += `?${queryParams.join("&")}`;
+      }
+
+      const response = await axios.get(baseUrl);
+      //  console.log(response.data, ">>>>>di slice photo>>>>>>>>>>>>>>>>>>>>.");
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching photograph data:", error.message);
+      throw error;
     }
-    if (price) {
-      queryParams.push(`price=${price}`);
-    }
-    if (belowPrice !== 0) {
-      queryParams.push(`belowPrice=${belowPrice}`);
-    }
-
-    if (queryParams.length > 0) {
-      baseUrl += `?${queryParams.join("&")}`;
-    }
-
-    const response = await axios.get(baseUrl);
-    console.log(response.data, ">>>>>di slice photo>>>>>>>>>>>>>>>>>>>>.");
-    return response.data;
   }
 );
 

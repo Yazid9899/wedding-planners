@@ -13,14 +13,14 @@ import {
   PaperProvider,
   //   Text,
 } from "react-native-paper";
-import {Ionicons} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import {setVenueId} from "../../features/inputDateBudget/dateBudgetSlice";
-import {useState} from "react";
+import { setVenueId } from "../../features/inputDateBudget/dateBudgetSlice";
+import { useState } from "react";
 
-const SelectBuildingCard = ({data, navigation}) => {
+const SelectBuildingCard = ({ data, navigation }) => {
   const dispatch = useDispatch();
 
   // NEXT PREV button
@@ -28,6 +28,7 @@ const SelectBuildingCard = ({data, navigation}) => {
     dispatch(setVenueId(data));
 
     navigation.navigate("PhotoSelect");
+    //  navigation.navigate("CateringSelect");
   };
 
   const LocationText = () => (
@@ -47,7 +48,7 @@ const SelectBuildingCard = ({data, navigation}) => {
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-  const containerStyle = {backgroundColor: "white", padding: 20};
+  const containerStyle = { backgroundColor: "white", padding: 20 };
 
   return (
     <PaperProvider>
@@ -66,7 +67,7 @@ const SelectBuildingCard = ({data, navigation}) => {
       <Card style={styles.cardStyle}>
         <View style={styles.imageContainer}>
           <ImageBackground
-            source={{uri: data.photo[0]}}
+            source={{ uri: data.photo[0] }}
             style={styles.imageBackground}
           >
             <LocationText />
@@ -95,7 +96,7 @@ const SelectBuildingCard = ({data, navigation}) => {
                 console.log("Add to Cart");
                 nextButton();
               }}
-              style={[styles.buttonCart, {backgroundColor: "#00bce1"}]}
+              style={[styles.buttonCart, { backgroundColor: "#00bce1" }]}
             >
               Add to Cart
             </Button>

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Image,
@@ -7,18 +7,18 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchVenueData} from "../features/VenueData/venueSlice";
-import {Ionicons} from "@expo/vector-icons";
-import {useNavigation} from "@react-navigation/native";
-import {ActivityIndicator} from "react-native-paper";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchVenueData } from "../features/VenueData/venueSlice";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { ActivityIndicator } from "react-native-paper";
 
 const SliderComponents = () => {
   const dispatch = useDispatch();
-  const {data, status, error} = useSelector((state) => state.venue);
+  const { data, status, error } = useSelector((state) => state.venue);
   const navigation = useNavigation();
   const detailVenue = (venue) => {
-    navigation.navigate("DetailVenue", {venue});
+    navigation.navigate("DetailVenue", { venue });
   };
   useEffect(() => {
     dispatch(
@@ -57,10 +57,10 @@ const SliderComponents = () => {
             onPress={() => detailVenue(data[item.id - 1])}
           >
             <View style={styles.itemContainer}>
-              <Image source={{uri: item.photo[0]}} style={styles.image} />
+              <Image source={{ uri: item.photo[0] }} style={styles.image} />
               <View style={styles.locationContainer}>
                 <Ionicons name="location" size={20} color="white" />
-                <Text style={{color: "white"}}>
+                <Text style={{ color: "white" }}>
                   {" "}
                   {item.location}, Indonesia
                 </Text>
@@ -71,22 +71,6 @@ const SliderComponents = () => {
           </TouchableOpacity>
         ))
       )}
-      {/* {randomData.map((item) => (
-        <TouchableOpacity
-          key={item.id}
-          onPress={() => detailVenue(data[item.id - 1])}
-        >
-          <View style={styles.itemContainer}>
-            <Image source={{uri: item.photo[0]}} style={styles.image} />
-            <View style={styles.locationContainer}>
-              <Ionicons name="location" size={20} color="white" />
-              <Text style={{color: "white"}}> {item.location}, Indonesia</Text>
-            </View>
-            <Text style={styles.title}>{item.name}</Text>
-            <Text style={styles.subtitle}>{item.subtitle}</Text>
-          </View>
-        </TouchableOpacity>
-      ))} */}
     </ScrollView>
   );
 };
