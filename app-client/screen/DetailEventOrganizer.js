@@ -97,7 +97,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            `https://ebc9-27-50-29-117.ngrok-free.app/products/${eoId}`
+            `https://we-go.zuru.site/products/${eoId}`
           );
           const data = await response.json();
 
