@@ -62,7 +62,7 @@ class TransactionController {
           { status: "Paid" },
           { where: { noTransaction } }
         );
-
+        await Cart.update({ status: "paid" }, { where: { id: data.Cart.id } });
         try {
           const pdfBuffer = await generateInvoicePDF(data);
           await sendInvoiceEmail(data.User.email, pdfBuffer);

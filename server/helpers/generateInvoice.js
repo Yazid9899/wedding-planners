@@ -52,7 +52,7 @@ async function generateInvoicePDF(data) {
     .text(`${data.Cart.bride} & ${data.Cart.groom}`, 300, 200)
     .font("Helvetica")
     .text(data.Cart.address, 300, 200 + 15)
-    .text(`Invoice Status: ${data.status}`, 300, 200 + 30)
+    .text(`Invoice Status: PAID`, 300, 200 + 30)
     .moveDown()
     .fontSize(10)
     .text("Service", 70, 300)
