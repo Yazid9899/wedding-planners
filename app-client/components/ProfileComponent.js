@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import {Octicons} from "@expo/vector-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchDataUser} from "../features/UserData/fetchUserSlice";
@@ -45,15 +47,114 @@ const ProfileComponent = () => {
   };
 
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.profileCard}>
-        <View style={styles.profileBody}>
-          <Text style={styles.name}>{userData.username}</Text>
-          <Text style={styles.intro}>Email: {userData.email}</Text>
-          <Text style={styles.intro}>Nomer Telpon: {userData.phoneNumber}</Text>
-          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-            <Text style={styles.logoutButtonText}>Logout</Text>
-          </TouchableOpacity>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#00bce1",
+      }}
+    >
+      <View
+        style={{
+          width: 350,
+          borderRadius: 20,
+          padding: 10,
+          textAlign: "center",
+          backgroundColor: "#ededed",
+        }}
+      >
+        <View style={{margin: 15}}>
+          <Image
+            source={{uri: "https://i.postimg.cc/bryMmCQB/profile-image.jpg"}}
+            style={{
+              width: 120,
+              height: 120,
+              borderRadius: 60,
+              alignSelf: "center",
+              marginBottom: 5,
+            }}
+          />
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              letterSpacing: 1,
+              marginTop: 10,
+              textAlign: "center",
+            }}
+          >
+            {userData.username}
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              fontWeight: "bold",
+              color: "gray",
+              textAlign: "center",
+            }}
+          >
+            {userData.email}
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              color: "gray",
+              margin: 10,
+              textAlign: "center",
+            }}
+          >
+            {userData.phoneNumber}
+          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              margin: 10,
+            }}
+          >
+            <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
+              <View style={styles.container}>
+                <Ionicons name="cart-outline" size={32} color="#00bce1" />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("History")}>
+              <View style={styles.container}>
+                <Octicons name="log" size={25} color="#00bce1" />
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              margin: 20,
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                width: 130,
+                height: 40,
+                borderRadius: 10,
+                backgroundColor: "#ededed",
+                justifyContent: "center",
+                marginLeft: 10,
+                borderWidth: 1,
+                borderColor: "red",
+              }}
+              onPress={handleLogout}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  color: "red",
+                }}
+              >
+                Logout
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>

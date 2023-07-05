@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import * as Location from "expo-location";
 import {
   View,
@@ -12,22 +12,22 @@ import {
   Alert,
   Linking,
 } from "react-native";
-import { Picker } from "@react-native-picker/picker";
-import { MaterialIcons } from "@expo/vector-icons";
+import {Picker} from "@react-native-picker/picker";
+import {MaterialIcons} from "@expo/vector-icons";
 import {
   NavigationContainer,
   useFocusEffect,
   useNavigation,
 } from "@react-navigation/native";
-import MapView, { Marker } from "react-native-maps";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchDetailProductsData } from "../features/PackageData/PackageDetail";
-import { addCartData } from "../features/CartData/AddCart";
+import MapView, {Marker} from "react-native-maps";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchDetailProductsData} from "../features/PackageData/PackageDetail";
+import {addCartData} from "../features/CartData/AddCart";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BASE_URL } from "../config/api";
+import {BASE_URL} from "../config/api";
 
-const EventOrganizerDetailScreen = ({ route }) => {
-  const { eoId } = route.params;
+const EventOrganizerDetailScreen = ({route}) => {
+  const {eoId} = route.params;
 
   // Ini untuk state total price dan pax
   const productStateData = useSelector((state) => state.detailProduct.data);
@@ -50,7 +50,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
 
   // Ini untuk use fetch detail produk
   useEffect(() => {
-    dispatch(fetchDetailProductsData({ eoId }));
+    dispatch(fetchDetailProductsData({eoId}));
   }, [dispatch]);
 
   // Recalculate total price when productStateData or dataProduct.pax changes
@@ -118,7 +118,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
 
   // Ini untuk use fetch detail produk
   useEffect(() => {
-    dispatch(fetchDetailProductsData({ eoId }));
+    dispatch(fetchDetailProductsData({eoId}));
   }, [dispatch]);
 
   /// function for redirect to google Maps
@@ -140,7 +140,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
           onPress: () => Linking.openURL(url),
         },
       ],
-      { cancelable: true }
+      {cancelable: true}
     );
   };
 
@@ -172,7 +172,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
     }).format(value);
   };
 
-  const { status, error } = useSelector((state) => state.addCart);
+  const {status, error} = useSelector((state) => state.addCart);
   const startingPrice = formatCurrency(
     productStateData?.price + +productStateData?.Venue?.price
   );
@@ -201,7 +201,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
       //   "Success",
       //   "The product has been added to the cart successfully."
       // );
-      navigation.navigate("DetailOrder", {
+      navigation.navigate("Detail Order", {
         cartData: cartData,
         eoId: eoId,
       });
@@ -217,15 +217,15 @@ const EventOrganizerDetailScreen = ({ route }) => {
   useEffect(() => {
     (async () => {
       try {
-        const { status } = await Location.requestForegroundPermissionsAsync();
+        const {status} = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") {
           console.log("Permission to access location was denied");
           return;
         }
 
         const location = await Location.getCurrentPositionAsync({});
-        const { latitude, longitude } = location.coords;
-        setCurrentLocation({ latitude, longitude });
+        const {latitude, longitude} = location.coords;
+        setCurrentLocation({latitude, longitude});
       } catch (error) {
         console.log("Error getting location", error);
       }
@@ -234,10 +234,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Image
-        source={{ uri: productStateData?.imageUrl }}
-        style={styles.image}
-      />
+      <Image source={{uri: productStateData?.imageUrl}} style={styles.image} />
 
       <View style={styles.contentContainer}>
         <Text style={styles.title}>{productStateData?.title}</Text>
@@ -294,7 +291,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
         {productStateData?.Venue?.photo?.map((url, index) => (
           <Image
             key={`venue-image-${index}`}
-            source={{ uri: url }}
+            source={{uri: url}}
             style={styles.sectionImage}
           />
         ))}
@@ -317,7 +314,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
         {/* Cathering */}
         <Text style={styles.sectionTitle}>Cathering</Text>
         <Image
-          source={{ uri: productStateData?.Cathering?.imageUrl }}
+          source={{uri: productStateData?.Cathering?.imageUrl}}
           style={styles.sectionImage}
         />
         <Text style={styles.sectionDescription}>
@@ -337,7 +334,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
         {productStateData?.Photography?.photo?.map((url, index) => (
           <Image
             key={`photographer-image-${index}`}
-            source={{ uri: url }}
+            source={{uri: url}}
             style={styles.sectionImage}
           />
         ))}
@@ -353,7 +350,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
           )}
         </Text>
 
-        <Text style={{ fontWeight: "bold", marginTop: 15, fontSize: 15 }}>
+        <Text style={{fontWeight: "bold", marginTop: 15, fontSize: 15}}>
           Choose total pax you want order
         </Text>
         <View style={styles.detailRow}>
@@ -410,7 +407,7 @@ const EventOrganizerDetailScreen = ({ route }) => {
       </View>
       {google?.Venue?.locationGoogle && (
         <MapView
-          style={{ width: windowWidth, height: mapHeight, paddingRight: 20 }}
+          style={{width: windowWidth, height: mapHeight, paddingRight: 20}}
           initialRegion={{
             latitude: +google?.Venue?.locationGoogle?.[0],
             longitude: +google?.Venue?.locationGoogle?.[1],
@@ -489,7 +486,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: "#00bce1",
-    borderRadius: 8,
+    borderRadius: 50,
     paddingVertical: 12,
     marginTop: 10,
   },
@@ -523,7 +520,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#00bce1",
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 8,
+    borderRadius: 50,
   },
   modalButtonText: {
     color: "white",

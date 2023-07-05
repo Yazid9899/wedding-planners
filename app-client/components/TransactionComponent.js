@@ -64,7 +64,6 @@ const TransactionComponent = () => {
 
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.history}>History Transaction</Text>
       {/* <Text>{JSON.stringify(transaksi)}</Text> */}
       <FlatList
         data={transaksi}
@@ -84,6 +83,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
+    marginTop: 20,
   },
   statusButton: {
     paddingHorizontal: 10,
@@ -141,3 +141,34 @@ const styles = StyleSheet.create({
 });
 
 export default TransactionComponent;
+
+{
+  /* Content-2 */
+}
+{
+  /* <View style={{ width: 350, borderRadius: 20, padding: 10, textAlign: 'center', backgroundColor: '#ededed', marginTop: 50, marginBottom: 10 }}>
+  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+    <Image source={{ uri: 'https://i.postimg.cc/bryMmCQB/profile-image.jpg' }} style={{ width: 80, height: 80 }} />
+    <View>
+      <View>
+        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>28</Text>
+        <Text style={{ fontSize: 12 }}>Posts</Text>
+      </View>
+      <View>
+       <Text style={{ fontWeight: 'bold', fontSize: 16 }}>678</Text>
+        <Text style={{ fontSize: 12 }}>Followers</Text>
+      </View>
+      <View>
+        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>120</Text>
+        <Text style={{ fontSize: 12 }}>Following</Text>
+      </View>
+    </View>
+  </View>
+  <View style={{ textAlign: 'left' }}>
+    <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Ethan Rivers</Text>
+    <Text style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 10 }}>UI / UX Designer</Text>
+    <Text style={{ fontSize: 14 }}>About</Text>
+    <Text style={{ fontSize: 14, color: 'gray' }}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores, placeat obcaecati. Eaque fugit eveniet error voluptates totam enim molestias vitae, amet aliquid deleniti ipsa ea.</Text>
+  </View>
+</View> */
+}

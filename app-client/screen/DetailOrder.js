@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
@@ -10,13 +10,13 @@ import {
   Alert,
   Linking,
 } from "react-native";
-import { Calendar } from "react-native-calendars";
-import { addCartData } from "../features/CartData/AddCart";
-import { useDispatch, useSelector } from "react-redux";
-import { format, addMonths, isBefore } from "date-fns";
+import {Calendar} from "react-native-calendars";
+import {addCartData} from "../features/CartData/AddCart";
+import {useDispatch, useSelector} from "react-redux";
+import {format, addMonths, isBefore} from "date-fns";
 
-const WeddingForm = ({ route, navigation }) => {
-  const { cartData, eoId } = route.params;
+const WeddingForm = ({route, navigation}) => {
+  const {cartData, eoId} = route.params;
   const [selectedDate, setSelectedDate] = useState("");
   const [groom, setGroom] = useState("");
   const [bride, setBride] = useState("");
@@ -68,9 +68,9 @@ const WeddingForm = ({ route, navigation }) => {
         contactNumber: contactNumber,
         weddingDate: selectedDate,
       };
-      console.log("Data Form:", { selectedDate, groom, bride, contactNumber });
+      console.log("Data Form:", {selectedDate, groom, bride, contactNumber});
 
-      await dispatch(addCartData({ data: completeData, idProduct: id }));
+      await dispatch(addCartData({data: completeData, idProduct: id}));
       Alert.alert(
         "Success",
         "The product has been added to the cart successfully."
@@ -88,15 +88,15 @@ const WeddingForm = ({ route, navigation }) => {
       <Calendar
         onDayPress={handleDateSelect}
         markedDates={{
-          [selectedDate]: { selected: true },
+          [selectedDate]: {selected: true},
         }}
         minDate={maxDate}
         // maxDate={maxDate}
         disableArrowLeft={false}
         disableArrowRight={false}
         theme={{
-          arrowColor: "#007AFF",
-          selectedDayBackgroundColor: "#007AFF",
+          arrowColor: "#00bce1",
+          selectedDayBackgroundColor: "#00bce1",
           selectedDayTextColor: "#ffffff",
         }}
       />
@@ -193,10 +193,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: "#007AFF",
+    backgroundColor: "#00bce1",
     paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: 50,
     alignItems: "center",
     height: 50,
     marginBottom: 40,
@@ -227,10 +227,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   modalButton: {
-    backgroundColor: "#007AFF",
+    backgroundColor: "#00bce1",
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: 50,
     alignItems: "center",
     marginHorizontal: 10,
   },
