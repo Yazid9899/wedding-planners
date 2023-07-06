@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,13 +10,13 @@ import {
 } from "react-native";
 import axios from "axios";
 
-import {useDispatch, useSelector} from "react-redux";
-import {deleteCart} from "../features/CartData/DeleteCart";
-import {getCartData} from "../features/CartData/GetCart";
-import {addTransactionData} from "../features/Transaction/PostTransaction";
-import {WebView} from "react-native-webview";
-import {changeStatusTransaction} from "../features/Transaction/ChangeStatus";
-import {useFocusEffect} from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCart } from "../features/CartData/DeleteCart";
+import { getCartData } from "../features/CartData/GetCart";
+import { addTransactionData } from "../features/Transaction/PostTransaction";
+import { WebView } from "react-native-webview";
+import { changeStatusTransaction } from "../features/Transaction/ChangeStatus";
+import { useFocusEffect } from "@react-navigation/native";
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -25,16 +25,16 @@ const formatCurrency = (value) => {
 };
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const InvoiceWebView = ({url}) => {
+const InvoiceWebView = ({ url }) => {
   return (
     <View style={styles.container}>
-      <WebView source={{uri: url}} />
+      <WebView source={{ uri: url }} />
     </View>
   );
 };
 
 function formatDate(date) {
-  const options = {month: "2-digit", day: "2-digit", year: "numeric"};
+  const options = { month: "2-digit", day: "2-digit", year: "numeric" };
   const formattedDate = new Date(date).toLocaleDateString("en-US", options);
   return formattedDate;
 }
@@ -103,14 +103,23 @@ const CartScreen = () => {
       });
   };
 
-  const renderItem = ({item}) => (
+  const renderItem = ({ item }) => (
     <View style={styles.cartItem}>
       <Text style={[styles.itemTitle]}>{item?.title}</Text>
       <View style={styles.itemDetails}>
         <View style={styles.photosContainer}>
-          <Image source={{uri: item?.Venue?.photo?.[0]}} style={styles.photo} />
-          <Image source={{uri: item?.Venue?.photo?.[1]}} style={styles.photo} />
-          <Image source={{uri: item?.Venue?.photo?.[2]}} style={styles.photo} />
+          <Image
+            source={{ uri: item?.Venue?.photo?.[0] }}
+            style={styles.photo}
+          />
+          <Image
+            source={{ uri: item?.Venue?.photo?.[1] }}
+            style={styles.photo}
+          />
+          <Image
+            source={{ uri: item?.Venue?.photo?.[2] }}
+            style={styles.photo}
+          />
         </View>
         <Text style={styles.detailText}>
           <Text style={styles.detailKey}>Date:</Text>{" "}
@@ -138,27 +147,26 @@ const CartScreen = () => {
           <Text style={styles.detailKey}>Contact Person:</Text>{" "}
           {item?.contactNumber}
         </Text>
-        <TouchableOpacity
-          style={[
-            styles.deleteButton,
-            {backgroundColor: "#00bce1", width: "100%"},
-          ]}
-          onPress={() => {
-            setSelectedItem(item);
-            setShowPaymentModal(true);
-          }}
-        >
-          <Text style={styles.deleteButtonText}>Bayar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.deleteButtonIcon}
-          onPress={() => {
-            setSelectedItem(item.id);
-            setShowDeleteModal(true);
-          }}
-        >
-          <Icon name="trash" size={25} color="red" />
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={[styles.deleteButton, { backgroundColor: "#00bce1" }]}
+            onPress={() => {
+              setSelectedItem(item);
+              setShowPaymentModal(true);
+            }}
+          >
+            <Text style={styles.deleteButtonText}>Bayar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.deleteButtonIcon}
+            onPress={() => {
+              setSelectedItem(item.id);
+              setShowDeleteModal(true);
+            }}
+          >
+            <Icon name="trash" size={30} color="red" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -181,6 +189,7 @@ const CartScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.cartList}
       />
+      {/*  */}
 
       <Modal
         visible={showDeleteModal}
@@ -189,24 +198,56 @@ const CartScreen = () => {
         onRequestClose={() => setShowDeleteModal(false)}
       >
         <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>Delete this order from cart?</Text>
-          <View style={styles.modalButtonContainer}>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={() => deleteCartItem(selectedItem)}
-            >
-              <Text style={styles.modalButtonText}>Yes</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={() => setShowDeleteModal(false)}
-            >
-              <Text style={styles.modalButtonText}>No</Text>
-            </TouchableOpacity>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Delete this order from cart?</Text>
+            <View style={styles.modalButtonContainer}>
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={() => deleteCartItem(selectedItem)}
+              >
+                <Text style={styles.modalButtonText}>Yes</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={() => setShowDeleteModal(false)}
+              >
+                <Text style={styles.modalButtonText}>No</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
+      {/*  */}
       <Modal
+        visible={showPaymentModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowPaymentModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>
+              Are you sure to process this order's payment?
+            </Text>
+            <View style={styles.modalButtonContainer}>
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={() => handlePaymentConfirmation(selectedItem.id)}
+              >
+                <Text style={styles.modalButtonText}>Yes</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={() => setShowPaymentModal(false)}
+              >
+                <Text style={styles.modalButtonText}>No</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+      {/*  */}
+      {/* <Modal
         visible={showPaymentModal}
         animationType="slide"
         transparent={true}
@@ -236,7 +277,7 @@ const CartScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-      </Modal>
+      </Modal> */}
     </View>
   );
 };
@@ -279,6 +320,7 @@ const styles = StyleSheet.create({
   deleteButtonIcon: {
     alignItems: "flex-end",
     marginTop: 8,
+    marginRight: 20,
   },
   itemTitle: {
     fontSize: 18,
@@ -299,9 +341,9 @@ const styles = StyleSheet.create({
   deleteButton: {
     marginTop: 8,
     paddingVertical: 6,
-    paddingHorizontal: 12,
     borderRadius: 8,
-    alignSelf: "flex-end",
+    alignSelf: "flex-start",
+    width: 250,
   },
   deleteButtonText: {
     color: "white",
@@ -335,6 +377,74 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
   },
+  //
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 8,
+  },
+  //   new Modal
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 8,
+    width: "80%",
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  modalButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  modalButton: {
+    backgroundColor: "#00bce1",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+  },
+  modalButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
 });
 
 export default CartScreen;
+
+{
+  /* <Modal
+        visible={showDeleteModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowDeleteModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalText}>Delete this order from cart?</Text>
+          <View style={styles.modalButtonContainer}>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => deleteCartItem(selectedItem)}
+            >
+              <Text style={styles.modalButtonText}>Yes</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.modalButton}
+              onPress={() => setShowDeleteModal(false)}
+            >
+              <Text style={styles.modalButtonText}>No</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal> */
+}
