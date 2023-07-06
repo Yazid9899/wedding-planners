@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -10,13 +10,13 @@ import {
   ScrollView,
 } from "react-native";
 
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import {setGuestPax} from "../../features/inputDateBudget/dateBudgetSlice";
+import { setGuestPax } from "../../features/inputDateBudget/dateBudgetSlice";
 
-import {addCustomCartData} from "../../features/CartData/AddCustomerCart";
+// import { addCustomCartData } from "../../features/CartData/AddCustomerCart";
 
-const MenuPaxSelectPage = ({navigation}) => {
+const MenuPaxSelectPage = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const budgetData = useSelector((state) => state.inputDateBudget.budget);
@@ -78,6 +78,12 @@ const MenuPaxSelectPage = ({navigation}) => {
     return totalPrice;
   };
   //   title,PhotographyId, CatheringId,  VenueId, totalPrice, pax
+  const totalPrice = calculateTotalPrice();
+  let totPaxToShow = Math.floor((budgetData - totalPrice) / cateringPrice);
+  //   console.log(
+  //     Math.floor((budgetData - totalPrice) / cateringPrice),
+  //     ">>>>>>>>> math floor"
+  //   );
 
   const nextButton = () => {
     if (inputValue === "") {
@@ -88,9 +94,11 @@ const MenuPaxSelectPage = ({navigation}) => {
 
     const totalPrice = calculateTotalPrice();
 
-    console.log(
-      Number(inputValue) + Math.floor((budgetData - totalPrice) / cateringPrice)
-    );
+    let maxGuestToShow =
+      Number(inputValue) +
+      Math.floor((budgetData - totalPrice) / cateringPrice);
+
+    console.log(maxGuestToShow, "calc");
 
     if (totalPrice > budgetData) {
       const maxGuestPax =
@@ -126,6 +134,10 @@ const MenuPaxSelectPage = ({navigation}) => {
         </Text>
 
         <View style={styles.gap} />
+
+        <View>
+          <Text>Number of Guest to Invite by Budget: {totPaxToShow}</Text>
+        </View>
         <Animated.View
           style={[
             styles.inputContainer,
@@ -200,7 +212,7 @@ const MenuPaxSelectPage = ({navigation}) => {
             <Text style={styles.buttonText}>Previous</Text>
           </TouchableOpacity> */}
           <TouchableOpacity
-            style={[styles.button, {flex: 1}]}
+            style={[styles.button, { flex: 1 }]}
             onPress={nextButton}
           >
             <Text style={styles.buttonText}>Submit</Text>
@@ -213,7 +225,7 @@ const MenuPaxSelectPage = ({navigation}) => {
 
 export default MenuPaxSelectPage;
 
-const {width, height} = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 const containerWidth = width * 0.9; // Set the container width to 80% of the screen width
 const containerHeight = height * 0.3; // Set the container width to 80% of the screen width
 
