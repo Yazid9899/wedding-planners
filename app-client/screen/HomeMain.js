@@ -40,13 +40,13 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name="Account"
         component={ProfileScreen}
         options={{
           tabBarIcon: ({color, size}) => (
             <Ionicons name="person" color={color} size={size} />
           ),
-          headerShown: true,
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

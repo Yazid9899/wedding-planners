@@ -35,7 +35,7 @@ const HomeStack = () => {
           headerRight: () => <HeaderRight navigation={navigation} />,
         }}
       />
-      <Stack.Screen name="DetailOrder" component={DetailOrder} />
+      <Stack.Screen name="Detail Order" component={DetailOrder} />
       <Stack.Screen name="DetailFotografer" component={DetailFotografer} />
       <Stack.Screen name="Detail" component={DetailEventOrganizer} />
       <Stack.Screen name="DetailVenue" component={DetailVenue} />

@@ -10,11 +10,12 @@ import {
 } from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProductsData} from "../features/PackageData/packageSlice";
+import {ActivityIndicator} from "react-native-paper";
 
 const WeddingIdea = () => {
   const dispatch = useDispatch();
 
-  const data = useSelector((state) => state.product.data);
+  const {data, status} = useSelector((state) => state.product);
 
   useEffect(() => {
     dispatch(fetchProductsData({}));
@@ -29,15 +30,25 @@ const WeddingIdea = () => {
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.scrollContentContainer}
     >
-      {randomData.map((item) => (
-        <TouchableOpacity key={item.id}>
-          <View style={styles.itemContainer}>
-            <Image source={{uri: item.imageUrl}} style={styles.image} />
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.subtitle}>{item.subtitle}</Text>
-          </View>
-        </TouchableOpacity>
-      ))}
+      {status === "loading" ? (
+        <View style={styles.centerContainer}>
+          <ActivityIndicator size="large" />
+        </View>
+      ) : status === "failed" ? (
+        <View style={styles.centerContainer}>
+          <Text style={styles.errorText}>Error: {error}</Text>
+        </View>
+      ) : (
+        randomData.map((item) => (
+          <TouchableOpacity key={item.id}>
+            <View style={styles.itemContainer}>
+              <Image source={{uri: item.imageUrl}} style={styles.image} />
+              <Text style={styles.title}>{item.title}</Text>
+              <Text style={styles.subtitle}>{item.subtitle}</Text>
+            </View>
+          </TouchableOpacity>
+        ))
+      )}
     </ScrollView>
   );
 };

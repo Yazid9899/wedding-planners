@@ -3,6 +3,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 import HomeScreen from "../components/HomeScreen";
 import HalamanUtama, {HeaderRight} from "./HalamanUtama";
 import ProfileComponent from "../components/ProfileComponent";
+import TransactionComponent from "../components/TransactionComponent";
 
 const Stack = createStackNavigator();
 
@@ -14,12 +15,12 @@ const ProfileScreen = () => {
         name="Profile"
         component={ProfileComponent}
         options={{
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Stack.Screen
-        name="Product"
-        component={HomeScreen}
+        name="History"
+        component={TransactionComponent}
         options={{
           headerShown: true,
           headerRight: () => <HeaderRight navigation={navigation} />,

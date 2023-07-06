@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, {useState} from "react";
+import {View, Text, StyleSheet, ScrollView} from "react-native";
+import {useNavigation} from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { SegmentedButtons } from "react-native-paper";
+import {SegmentedButtons} from "react-native-paper";
 import SliderComponents from "../components/SliderComponents";
 import WeddingIdea from "../components/WeddingIdea";
 // import Photographer from "../components/Photographer";
@@ -53,7 +53,7 @@ const HalamanUtama = () => {
   );
 };
 
-export const HeaderRight = ({ navigation }) => {
+export const HeaderRight = ({navigation}) => {
   const goToCart = () => {
     navigation.navigate("Cart"); // Navigasi ke halaman "Cart"
   };
@@ -64,7 +64,7 @@ export const HeaderRight = ({ navigation }) => {
         size={24}
         color="black"
         onPress={goToCart}
-        style={{ marginRight: 15 }}
+        style={{marginRight: 15}}
       />
     </View>
   );
